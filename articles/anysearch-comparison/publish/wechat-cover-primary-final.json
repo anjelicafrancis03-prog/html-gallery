@@ -1,0 +1,110 @@
+{
+  "final": {
+    "hasCover": false,
+    "leftStyle": "background-image:url('');",
+    "coverStyle": "display: none; background-image: url(\"\");",
+    "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+    "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+    "textLength": 1883,
+    "imgCount": 6,
+    "primary": [],
+    "coverItemClass": "",
+    "dialogs": 4,
+    "tail": "README、官方 doc 、GitHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 any earch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 doc  / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n\n拖拽或选择封面\n0/120\n原创\n声明原创成功后将获得平台著作权保护，并有可能得到推荐\n未声明\n赞赏\n声明原创后才可开启\n留言\n留言自动精选公开\n合集\n未添加\nicon\n原文链接\n未添加\nicon\n创作来源\n未添加\nicon\n平台推荐\n已开启\nicon\n16:27已保存\n正文字数1211\n回到顶部\n一键排版\n发表\n预览\n保存为草稿\n问题反馈\nCDP Bridge"
+  },
+  "logs": [
+    {
+      "i": 0,
+      "stage": "before",
+      "s": {
+        "hasCover": false,
+        "leftStyle": "background-image:url('');",
+        "coverStyle": "display: none; background-image: url(\"\");",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "imgCount": 6,
+        "primary": [
+          {
+            "text": "",
+            "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+            "disabled": false,
+            "visible": true,
+            "rect": {
+              "x": 1276,
+              "y": 80,
+              "w": 16,
+              "h": 16,
+              "cx": 1284,
+              "cy": 88
+            }
+          },
+          {
+            "text": "下一步",
+            "cls": "weui-desktop-btn weui-desktop-btn_primary",
+            "disabled": false,
+            "visible": true,
+            "rect": {
+              "x": 740,
+              "y": 689,
+              "w": 96,
+              "h": 36,
+              "cx": 788,
+              "cy": 707
+            }
+          },
+          {
+            "text": "取消",
+            "cls": "weui-desktop-btn weui-desktop-btn_default",
+            "disabled": false,
+            "visible": true,
+            "rect": {
+              "x": 852,
+              "y": 690,
+              "w": 96,
+              "h": 36,
+              "cx": 900,
+              "cy": 707
+            }
+          }
+        ],
+        "coverItemClass": "weui-desktop-img-picker__item selected",
+        "dialogs": 5,
+        "tail": "又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n\n拖拽或选择封面\n0/120\n原创\n声明原创成功后将获得平台著作权保护，并有可能得到推荐\n未声明\n赞赏\n声明原创后才可开启\n留言\n留言自动精选公开\n合集\n未添加\nicon\n原文链接\n未添加\nicon\n创作来源\n未添加\nicon\n平台推荐\n已开启\nicon\n16:27已保存\n正文字数1211\n回到顶部\n一键排版\n发表\n预览\n保存为草稿\n选择图片\n最近使用 (91)\n我的图片 (147)\n未分组 (88)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover-image2.png\n粘贴图片_20260522162659.png\n粘贴图片_20260522162652.png\n粘贴图片_20260522162645.png\n粘贴图片_20260522161707.png\n粘贴图片_20260522161700.png\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n1 / 13 下一页  跳转\n下一步 取消\n问题反馈\nCDP Bridge"
+      }
+    },
+    {
+      "i": 1,
+      "stage": "before",
+      "s": {
+        "hasCover": false,
+        "leftStyle": "background-image:url('');",
+        "coverStyle": "display: none; background-image: url(\"\");",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "imgCount": 6,
+        "primary": [],
+        "coverItemClass": "",
+        "dialogs": 4,
+        "tail": "README、官方 doc 、GitHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 any earch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 doc  / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n\n拖拽或选择封面\n0/120\n原创\n声明原创成功后将获得平台著作权保护，并有可能得到推荐\n未声明\n赞赏\n声明原创后才可开启\n留言\n留言自动精选公开\n合集\n未添加\nicon\n原文链接\n未添加\nicon\n创作来源\n未添加\nicon\n平台推荐\n已开启\nicon\n16:27已保存\n正文字数1211\n回到顶部\n一键排版\n发表\n预览\n保存为草稿\n问题反馈\nCDP Bridge"
+      }
+    },
+    {
+      "stage": "final",
+      "s": {
+        "hasCover": false,
+        "leftStyle": "background-image:url('');",
+        "coverStyle": "display: none; background-image: url(\"\");",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "imgCount": 6,
+        "primary": [],
+        "coverItemClass": "",
+        "dialogs": 4,
+        "tail": "README、官方 doc 、GitHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 any earch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 doc  / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n\n拖拽或选择封面\n0/120\n原创\n声明原创成功后将获得平台著作权保护，并有可能得到推荐\n未声明\n赞赏\n声明原创后才可开启\n留言\n留言自动精选公开\n合集\n未添加\nicon\n原文链接\n未添加\nicon\n创作来源\n未添加\nicon\n平台推荐\n已开启\nicon\n16:27已保存\n正文字数1211\n回到顶部\n一键排版\n发表\n预览\n保存为草稿\n问题反馈\nCDP Bridge"
+      }
+    }
+  ]
+}

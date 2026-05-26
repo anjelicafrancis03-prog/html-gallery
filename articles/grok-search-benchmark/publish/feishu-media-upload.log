@@ -1,0 +1,128 @@
+{
+  "label": "insert-main-image",
+  "cwd": "C:/html/articles/grok-search-benchmark",
+  "args": [
+    "docs",
+    "+media-insert",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--file",
+    "assets/grok-search-benchmark-full.png",
+    "--caption",
+    "原 HTML 主 dashboard 全页截图",
+    "--align",
+    "center",
+    "--type",
+    "image",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcnNMBpZVE0pI2U9Wie25PuUu\",\n    \"document_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"file_token\": \"KSaPbZ2PnoKA23xdwDUcNAIlnuh\",\n    \"type\": \"image\"\n  }\n}\n",
+  "stderr": "Inserting: grok-search-benchmark-full.png -> document XwRj...inGh\nRoot block ready: XwRjdHPB4obHRsxuXDmcznIinGh (32 children)\nCreating block at index 32\nBlock created: doxcnNMBpZVE0pI2U9Wie25PuUu\nFile uploaded: KSaPbZ2PnoKA23xdwDUcNAIlnuh\nBinding uploaded media to block doxcnNMBpZVE0pI2U9Wie25PuUu\n"
+}
+{
+  "label": "append-video-section",
+  "cwd": "C:/html/articles/grok-search-benchmark",
+  "args": [
+    "docs",
+    "+update",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--mode",
+    "append",
+    "--markdown",
+    "---\n\n## Grok MCP 视频生成实测\n\n### 参数\n\n| 参数 | 值 |\n|---|---|\n| 工具 | `grok-video` |\n| 分辨率 | 480p，省额度草稿模式 |\n| 时长 | 6 秒 |\n| 比例 | 16:9 |\n| 耗时 | 约 28.5 秒 |\n| 模型 | `grok-imagine-video` |\n\n> 结论：Grok MCP 的视频生成链路已跑通，可以用于报告素材、短视频草稿和后续 10 秒分段扩展测试。\n\n下面插入视频实测截图，并在其后附上本地 MP4 文件。\n",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"doc_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"log_id\": \"20260526183111CF9E01440193AAA09B6B\",\n    \"message\": \"文档更新成功（append模式）\",\n    \"mode\": \"append\",\n    \"success\": true\n  }\n}\n",
+  "stderr": ""
+}
+{
+  "label": "insert-video-image",
+  "cwd": "C:/html/articles/grok-search-benchmark",
+  "args": [
+    "docs",
+    "+media-insert",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--file",
+    "assets/grok-search-benchmark-video-full.png",
+    "--caption",
+    "Grok MCP 视频生成实测截图",
+    "--align",
+    "center",
+    "--type",
+    "image",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcngsbvicm4m4PgM9ainOouyf\",\n    \"document_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"file_token\": \"IAJEbw9dMosa0exmiQTctvxJn2e\",\n    \"type\": \"image\"\n  }\n}\n",
+  "stderr": "Inserting: grok-search-benchmark-video-full.png -> document XwRj...inGh\nRoot block ready: XwRjdHPB4obHRsxuXDmcznIinGh (39 children)\nCreating block at index 39\nBlock created: doxcngsbvicm4m4PgM9ainOouyf\nFile uploaded: IAJEbw9dMosa0exmiQTctvxJn2e\nBinding uploaded media to block doxcngsbvicm4m4PgM9ainOouyf\n"
+}
+{
+  "label": "insert-video-file",
+  "cwd": "C:/html/articles/grok-search-benchmark",
+  "args": [
+    "docs",
+    "+media-insert",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--file",
+    "assets/grok-mcp-test-video-480p-6s.mp4",
+    "--caption",
+    "Grok MCP 生成视频 MP4 原文件",
+    "--type",
+    "file",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcn04NM7pRLZgb0tC4U4KOzmg\",\n    \"document_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"file_token\": \"BIBIbmA2NoSxTNxqKDGcHxMLn0b\",\n    \"type\": \"file\"\n  }\n}\n",
+  "stderr": "Inserting: grok-mcp-test-video-480p-6s.mp4 -> document XwRj...inGh\nRoot block ready: XwRjdHPB4obHRsxuXDmcznIinGh (40 children)\nCreating block at index 40\nBlock created: doxcn04NM7pRLZgb0tC4U4KOzmg\nResolved file block targets: upload=doxcnuFqg6bg4EMzR6C91GX0wpb replace=doxcnuFqg6bg4EMzR6C91GX0wpb\nFile uploaded: BIBIbmA2NoSxTNxqKDGcHxMLn0b\nBinding uploaded media to block doxcnuFqg6bg4EMzR6C91GX0wpb\n"
+}
+{
+  "label": "append-final-grayops",
+  "cwd": "C:/html/articles/grok-search-benchmark",
+  "args": [
+    "docs",
+    "+update",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--mode",
+    "append",
+    "--markdown",
+    "---\n\n## 最终建议\n\n| 任务类型 | 推荐组合 | 理由 |\n|---|---|---|\n| 中文平台规则核验 | Bright Data + 内置搜索 | 优先找官方帮助中心、政府网站、微信开放社区、飞书文档等可核验来源。 |\n| AI 工具链与 Agent 圈动态 | Grok MCP + Bright Data | Grok 对 X 语境更敏感，Bright Data 负责用 GitHub、博客、文档核验。 |\n| 灰度运营经验收集 | Grok MCP + Tavily | Grok 给经验总结，Tavily 快速补网页候选，最后人工筛风险。 |\n| 正式报告和可引用结论 | Bright Data + 内置搜索 + Grok 解释 | 先证据、后解释。Grok 的口吻好，但不能单独当事实底座。 |\n\n---\n\n## 专题：灰度运营经验收集\n\n### 定义边界\n\n这里的“灰度运营经验”指平台规则边缘、非官方但广泛流传的实操经验，例如限流判断、批量发布节奏、账号权重、合作报备、工具链自动化。它只能作为线索，不能直接当成合规建议。\n\n> 红线：不要收集、沉淀或执行绕过风控、...<1444 chars>",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"doc_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"log_id\": \"2026052618311764794E5427EE53CAC26C\",\n    \"message\": \"文档更新成功（append模式）\",\n    \"mode\": \"append\",\n    \"success\": true\n  }\n}\n",
+  "stderr": ""
+}
+{
+  "label": "insert-grayops-image",
+  "cwd": "C:/html/articles/grok-search-benchmark",
+  "args": [
+    "docs",
+    "+media-insert",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--file",
+    "assets/grok-search-benchmark-grayops-full.png",
+    "--caption",
+    "灰度运营经验收集专题截图",
+    "--align",
+    "center",
+    "--type",
+    "image",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"block_id\": \"doxcnp4Regj07LJUzuwAddgEQ5g\",\n    \"document_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"file_token\": \"L9gkbboKuoOVs8xwgNwcK7mNngd\",\n    \"type\": \"image\"\n  }\n}\n",
+  "stderr": "Inserting: grok-search-benchmark-grayops-full.png -> document XwRj...inGh\nRoot block ready: XwRjdHPB4obHRsxuXDmcznIinGh (61 children)\nCreating block at index 61\nBlock created: doxcnp4Regj07LJUzuwAddgEQ5g\nFile uploaded: L9gkbboKuoOVs8xwgNwcK7mNngd\nBinding uploaded media to block doxcnp4Regj07LJUzuwAddgEQ5g\n"
+}

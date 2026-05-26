@@ -1,0 +1,240 @@
+{
+  "href": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779447099704&type=77&appmsgid=100000277&token=941781265&lang=zh_CN",
+  "title": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测",
+  "hasCover": false,
+  "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+  "coverText": "拖拽或选择封面",
+  "dialogText": "未授权使用切换账号能力，请退出后扫码登录其他账号。登录时需勾选「 允许切换登录我的其他公众号、服务号、小程序」，才能切换账号。 退出登录 我知道了",
+  "buttons": [
+    {
+      "text": "服务号",
+      "rect": {
+        "x": 30,
+        "y": 12,
+        "w": 116,
+        "h": 32
+      },
+      "disabled": false
+    },
+    {
+      "text": "文档导入",
+      "rect": {
+        "x": 1478,
+        "y": 55,
+        "w": 64,
+        "h": 24
+      },
+      "disabled": false
+    },
+    {
+      "text": "从正文选择可选视频封面",
+      "rect": {
+        "x": 655,
+        "y": 413,
+        "w": 116,
+        "h": 42
+      },
+      "disabled": false
+    },
+    {
+      "text": "从图片库选择",
+      "rect": {
+        "x": 655,
+        "y": 455,
+        "w": 116,
+        "h": 42
+      },
+      "disabled": false
+    },
+    {
+      "text": "微信扫码上传",
+      "rect": {
+        "x": 655,
+        "y": 498,
+        "w": 116,
+        "h": 42
+      },
+      "disabled": false
+    },
+    {
+      "text": "AI 配图",
+      "rect": {
+        "x": 655,
+        "y": 540,
+        "w": 116,
+        "h": 42
+      },
+      "disabled": false
+    },
+    {
+      "text": "回到顶部",
+      "rect": {
+        "x": 1288,
+        "y": 684,
+        "w": 106,
+        "h": 36
+      },
+      "disabled": false
+    },
+    {
+      "text": "发表",
+      "rect": {
+        "x": 1151,
+        "y": 761,
+        "w": 98,
+        "h": 34
+      },
+      "disabled": false
+    },
+    {
+      "text": "预览",
+      "rect": {
+        "x": 1042,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      },
+      "disabled": false
+    },
+    {
+      "text": "保存为草稿",
+      "rect": {
+        "x": 932,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      },
+      "disabled": false
+    },
+    {
+      "text": "",
+      "rect": {
+        "x": 1276,
+        "y": 80,
+        "w": 16,
+        "h": 16
+      },
+      "disabled": false
+    },
+    {
+      "text": "最近使用 (117)",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      },
+      "disabled": false
+    },
+    {
+      "text": "我的图片 (173)",
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      },
+      "disabled": false
+    },
+    {
+      "text": "未分组 (114)",
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      },
+      "disabled": false
+    },
+    {
+      "text": "文章配图 (59)",
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      },
+      "disabled": false
+    },
+    {
+      "text": "新建分组",
+      "rect": {
+        "x": 396,
+        "y": 628,
+        "w": 56,
+        "h": 18
+      },
+      "disabled": false
+    },
+    {
+      "text": "AI 配图",
+      "rect": {
+        "x": 843,
+        "y": 144,
+        "w": 46,
+        "h": 18
+      },
+      "disabled": false
+    },
+    {
+      "text": "上传文件",
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      },
+      "disabled": false
+    },
+    {
+      "text": "下一页",
+      "rect": {
+        "x": 1186,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "disabled": false
+    },
+    {
+      "text": "跳转",
+      "rect": {
+        "x": 1280,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "disabled": false
+    },
+    {
+      "text": "下一步",
+      "rect": {
+        "x": 740,
+        "y": 689,
+        "w": 96,
+        "h": 36
+      },
+      "disabled": false
+    },
+    {
+      "text": "取消",
+      "rect": {
+        "x": 852,
+        "y": 690,
+        "w": 96,
+        "h": 36
+      },
+      "disabled": false
+    },
+    {
+      "text": "CDP Bridge",
+      "rect": {
+        "x": 1574,
+        "y": 767,
+        "w": 99,
+        "h": 29
+      },
+      "disabled": false
+    }
+  ]
+}

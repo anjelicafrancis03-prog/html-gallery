@@ -1,0 +1,240 @@
+{
+  "buttons": [
+    {
+      "text": "服务号",
+      "cls": "weui-desktop-service-logo__inner",
+      "disabled": false,
+      "rect": {
+        "x": 30,
+        "y": 12,
+        "w": 116,
+        "h": 32
+      },
+      "visible": true,
+      "outer": "<a href=\"/\" title=\"服务号\" class=\"weui-desktop-service-logo__inner\"></a>"
+    },
+    {
+      "text": "回到顶部",
+      "cls": "tool_bar__fold-btn",
+      "disabled": false,
+      "rect": {
+        "x": 1288,
+        "y": 684,
+        "w": 106,
+        "h": 36
+      },
+      "visible": true,
+      "outer": "<a data-type=\"2\" class=\"tool_bar__fold-btn\">\n  \n  回到顶部\n  \n  </a>"
+    },
+    {
+      "text": "发表",
+      "cls": "mass_send",
+      "disabled": false,
+      "rect": {
+        "x": 1151,
+        "y": 761,
+        "w": 98,
+        "h": 34
+      },
+      "visible": true,
+      "outer": "<button class=\"mass_send\" type=\"button\"><span class=\"send_wording\">发表</span></button>"
+    },
+    {
+      "text": "预览",
+      "cls": "",
+      "disabled": false,
+      "rect": {
+        "x": 1042,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      },
+      "visible": true,
+      "outer": "<button type=\"button\"><span class=\"send_wording\">预览</span></button>"
+    },
+    {
+      "text": "保存为草稿",
+      "cls": "",
+      "disabled": false,
+      "rect": {
+        "x": 932,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      },
+      "visible": true,
+      "outer": "<button type=\"button\"><span class=\"send_wording\">保存为草稿</span></button>"
+    },
+    {
+      "text": "",
+      "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+      "disabled": false,
+      "rect": {
+        "x": 1276,
+        "y": 80,
+        "w": 16,
+        "h": 16
+      },
+      "visible": true,
+      "outer": "<button class=\"weui-desktop-icon-btn weui-desktop-dialog__close-btn\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10.01 8.996l7.922-7.922c.086-.086.085-.21.008-.289l-.73-.73c-.075-.074-.208-.075-.29.007L9 7.984 1.077.062C.995-.02.863-.019.788.055l-.73."
+    },
+    {
+      "text": "最近使用 (56)",
+      "cls": "weui-desktop-menu__link",
+      "disabled": false,
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(56)</em></a>"
+    },
+    {
+      "text": "我的图片 (114)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link_current",
+      "disabled": false,
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(114)</em></a>"
+    },
+    {
+      "text": "未分组 (55)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "disabled": false,
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</strong> <em class=\"weui-desktop-img-category__size\">(55)</em></a>"
+    },
+    {
+      "text": "文章配图 (59)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "disabled": false,
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">文章配图</strong> <em class=\"weui-desktop-img-category__size\">(59)</em></a>"
+    },
+    {
+      "text": "新建分组",
+      "cls": "",
+      "disabled": false,
+      "rect": {
+        "x": 396,
+        "y": 628,
+        "w": 56,
+        "h": 18
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\">新建分组</a>"
+    },
+    {
+      "text": "AI 配图",
+      "cls": "",
+      "disabled": false,
+      "rect": {
+        "x": 843,
+        "y": 144,
+        "w": 46,
+        "h": 18
+      },
+      "visible": true,
+      "outer": "<a style=\"cursor: pointer;\">AI 配图</a>"
+    },
+    {
+      "text": "上传文件",
+      "cls": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "disabled": false,
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" id=\"upload_0.8281380082559996\" class=\"weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick\"><span>上传文件</span> <!----></a>"
+    },
+    {
+      "text": "下一页",
+      "cls": "weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini",
+      "disabled": false,
+      "rect": {
+        "x": 1186,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini\">下一页</a>"
+    },
+    {
+      "text": "跳转",
+      "cls": "weui-desktop-link",
+      "disabled": false,
+      "rect": {
+        "x": 1280,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-link\">跳转</a>"
+    },
+    {
+      "text": "下一步",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled",
+      "disabled": true,
+      "rect": {
+        "x": 740,
+        "y": 689,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "outer": "<button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled\">下一步</button>"
+    },
+    {
+      "text": "取消",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "disabled": false,
+      "rect": {
+        "x": 852,
+        "y": 690,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "outer": "<button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_default\">取消</button>"
+    },
+    {
+      "text": "CDP Bridge",
+      "cls": "",
+      "disabled": false,
+      "rect": {
+        "x": 1574,
+        "y": 767,
+        "w": 99,
+        "h": 29
+      },
+      "visible": true,
+      "outer": "<div id=\"ljq-ind\" role=\"button\" aria-label=\"CDP Bridge connected\" title=\"CDP Bridge 已连接\"><span class=\"ljq-ind-dot\"></span><span class=\"ljq-ind-text\">CDP Bridge</span></div>"
+    }
+  ],
+  "body": "章\n3\n补图解\n4\n落 HTML\n\n配图：最稳的用法是把四个  kill 当成工序，而不是让它们互相抢主导权。\n\n这不是“四个模板轮流试”，而是把四个能力拼成一条文章生产线。\n\nhandoff promptcopy-ready\n\n请用四个 HTML  kill 配合完成一篇图文长文：\n1. claude-de ign：先定视觉系统和版式约束。\n2. article-magazine：作为文章主骨架，按杂志/公众号长文排版。\n3. html-vi ual：为关键对比、流程、决策树做交互图解。\n4. html-anything：最终输出单文件 HTML，落盘并验证可打开。\n题材：四个 HTML 写作/视觉  kill 的横向对比与使用策略。\n不知道用哪个？按目标选。\n\n下面这个小模块可以直接给其他线程看：点目标，就知道谁做主、谁辅助。\n\n写文章做图解要高级感要成品交付\n\n写文章：`article-magazine` 做主\n\n主线用 `article-magazine`。开头用 `claude-de ign` 定视觉，遇到复杂说明时让 `html-vi ual` 插图解，最后让 `html-anything` 收口成单文件。\n\n展开：推荐保留策略\n\n保留全部。只把职责写清楚：`article-magazine` 是文章主模板，`claude-de ign` 是审美前置，`html-vi ual` 是图解组件，`html-anything` 是最终交付器。以后“专门写文章”默认走这条链路。\n\n最后怎么保留配合？\n\n我建议不要删，也不要合并成一个大而全  kill。大而全的结果通常是边界变模糊，线程不知道该听谁的。\n\n更好的做法是给其他线程一句固定规则：\n\n写专门文章时，`article-magazine` 为主；追求设计质量时，先过 `claude-de ign`；需要图解互动时，插入 `html-vi ual`；最终落盘交付时，用 `html-anything` 收口。\n一句话版\n\n这四个  kill 的关系不是竞品，而是工序。把它们当成“设计总监、主笔、图解编辑、出版打包”四个角色，就不会混用。\n\n\n\n拖拽或选择封面\n44/120\n原创\n声明原创成功后将获得平台著作权保护，并有可能得到推荐\n未声明\n赞赏\n声明原创后才可开启\n留言\n留言自动精选公开\n合集\n未添加\nicon\n原文链接\n未添加\nicon\n创作来源\n未添加\nicon\n平台推荐\n已开启\nicon\n09:34已保存\n正文字数1919\n回到顶部\n一键排版\n发表\n预览\n保存为草稿\n选择图片\n最近使用 (56)\n我的图片 (114)\n未分组 (55)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522034739.png\n粘贴图片_20260522034603.png\n粘贴图片_20260522034556.png\n粘贴图片_20260522034549.png\n粘贴图片_20260522034542.png\n粘贴图片_20260521112237.png\n粘贴图片_20260521112143.png\n粘贴图片_20260521112137.png\n粘贴图片_20260521112131.png\n粘贴图片_20260521112124.png\n粘贴图片_20260521111802.png\n1 / 10 下一页  跳转\n下一步 取消\n问题反馈\nCDP Bridge",
+  "leftThumb": "background-image:url('');"
+}

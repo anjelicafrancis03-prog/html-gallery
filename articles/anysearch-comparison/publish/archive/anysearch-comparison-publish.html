@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AnySearch / Tavily / Brave 实测：以后技术检索该怎么用</title>
+  <meta name="description" content="基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。">
+  <style>
+body{margin:0;background:#fffdf8;color:#182226;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;}
+section{box-sizing:border-box;max-width:760px;margin:0 auto 22px;padding:0 4px;}
+h1{margin:0 0 22px;font-size:32px;line-height:1.18;font-weight:800;color:#182226;}
+h2{margin:34px 0 14px;font-size:23px;line-height:1.35;font-weight:800;color:#0f6f68;}
+h3{margin:24px 0 10px;font-size:18px;line-height:1.45;font-weight:800;color:#182226;}
+p{margin:0 0 16px;font-size:16px;line-height:1.86;color:#2f3a40;}
+strong,b{font-weight:800;color:#182226;}
+figure{max-width:760px;margin:24px auto;padding:0;}
+figcaption{margin:8px 0 0;font-size:13px;line-height:1.7;color:#657078;text-align:center;}
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;line-height:1.65;background:#fff;}
+th,td{border:1px solid #ddd6c9;padding:10px 8px;vertical-align:top;text-align:left;}
+th{background:#eef5f3;color:#0f6f68;font-weight:800;}
+pre{white-space:pre-wrap;word-break:break-word;margin:16px 0;padding:14px;border-radius:4px;background:#152225;color:#f4f1e8;font-size:13px;line-height:1.7;}
+code{font-family:Consolas,"SFMono-Regular",monospace;}
+img{max-width:100%;height:auto;object-fit:contain;}
+.wrap{max-width:760px;margin:0 auto;padding:26px 16px 44px;background:#fffdf8;}
+</style>
+</head>
+<body>
+  <section class="wrap" id="wechat-output">
+    <section>
+      <p>Search Benchmark / Local Test</p>
+      <h1>AnySearch / Tavily / Brave 实测：以后技术检索该怎么用</h1>
+      <p>这不是“谁最聪明”的抽象排名，而是一次面向本地 Agent 工作流的检索测试：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更可靠，谁适合作第二来源，谁暂时只能放进待接入名单。</p>
+      
+    </section>
+    
+  
+    <section>
+      <section>
+        <section>01 / verdict</section>
+        <h2>结论很明确：技术检索优先 AnySearch，Tavily 做第二搜索源。</h2>
+      </section>
+      <p>AnySearch 在这轮测试里最适合拿来找原始出处，尤其是 GitHub README、官方文档、benchmark 数字、参数表和开源工具说明。Tavily 的结构化结果更规整，适合补充和交叉验证，但遇到重名项目时会被带偏。Brave 这次本机没有完整 API key，网页版又出现 429，所以只能列为“可接入，但未完整实测”。DeepSeek Chat API 不应该当搜索引擎用，它适合解释、压缩和总结，不适合负责找出处。</p>
+      <section>
+        <section>
+          <b>AnySearch：主搜索源</b>
+          <p>优先用于技术检索、README、docs、GitHub 项目、benchmark、参数表。它的价值在于更容易把 agent 带到原始页面。</p>
+        </section>
+        <section>
+          <b>Tavily：第二搜索源</b>
+          <p>结构化 JSON 好处理，适合做补充证据、网页摘要和 RAG 入口。但不能无脑相信 answer，必须看 URL 是否对题。</p>
+        </section>
+        <section>
+          <b>Brave / DeepSeek：边界清晰</b>
+          <p>Brave 需要 API key 和限流处理；DeepSeek 只做理解和归纳，不承担搜索职责。</p>
+        </section>
+      </section>
+      <section>
+        <p>以后不是“搜一下”，而是“先 AnySearch 找原始出处，再 Tavily 做交叉验证，最后让模型解释”。</p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <section>02 / matrix</section>
+        <h2>四种方式的角色，不应该混在一起。</h2>
+      </section>
+      <section>
+        <table>
+          <thead>
+            <tr>
+              <th>工具</th>
+              <th>适合做什么</th>
+              <th>这次暴露的问题</th>
+              <th>建议位置</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span>AnySearch</span></td>
+              <td>GitHub README、官方文档、开源项目说明、benchmark、参数表、URL extract。</td>
+              <td>中文结果有时会混入低质量页面；重名项目仍需指定仓库、作者或 URL。</td>
+              <td>技术检索第一搜索源。</td>
+            </tr>
+            <tr>
+              <td><span>Tavily</span></td>
+              <td>API 化搜索、结构化结果、网页摘要、agent RAG 的第二来源。</td>
+              <td>CodeGraph 样本里被另一个同名项目带偏，answer 看起来完整但不一定命中目标。</td>
+              <td>第二搜索源和交叉验证。</td>
+            </tr>
+            <tr>
+              <td><span>Brave Search</span></td>
+              <td>通用网页搜索，本来适合补齐搜索生态。</td>
+              <td>本机没有 API key，网页版出现 429，无法完整实测。</td>
+              <td>等 `BRAVE_SEARCH_API_KEY` 接好后再进主流程。</td>
+            </tr>
+            <tr>
+              <td><span>DeepSeek Chat API</span></td>
+              <td>解释搜索结果、压缩长文、总结差异、生成最终判断。</td>
+              <td>不能访问实时网页，不应被当成搜索工具。</td>
+              <td>搜索后的理解层。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <section>03 / evidence</section>
+        <h2>关键样本里，AnySearch 的优势主要体现在“命中原始出处”。</h2>
+      </section>
+      <figure>
+        <img src="C:\html\articles\anysearch-comparison\assets\card-02-samples.png" alt="AnySearch Tavily Brave 样本对比卡片" style="display:block;width:100%;height:auto;object-fit:contain;margin:18px auto;border:1px solid #ddd6c9;border-radius:4px;">
+        <figcaption>样本卡：把 CodeGraph、CVE、OpenAI GPT Image 2、ngrok 等不同类型查询放在一起看。</figcaption>
+      </figure>
+      <section>
+        <section>
+          <strong>CodeGraph benchmark</strong>
+          <p>AnySearch 命中 `colbymchenry/codegraph` README，并直接带出关键表格：VS Code 样本从 52 calls / 1m37s 降到 3 calls / 17s。Tavily 则优先返回了 Visual Studio Marketplace 上另一个 CodeGraph，语义相关但项目对象偏了。</p>
+        </section>
+        <section>
+          <strong>CodeGraph 语言/框架支持</strong>
+          <p>AnySearch 和 Tavily 都能找到 CodeGraph 相关结果，但重名项目问题很明显。结论是：搜技术项目必须带仓库名、作者名或精确 URL，否则“看起来相关”的结果会把 agent 带偏。</p>
+        </section>
+        <section>
+          <strong>CVE-2024-3094</strong>
+          <p>AnySearch 命中了 OpenSSF、JFrog、NVD 等安全出处；Tavily 命中了 Datadog、OpenSSF、JFrog。安全类查询的正确用法不是只看一个 summary，而是优先抓官方/安全机构/供应商公告。</p>
+        </section>
+        <section>
+          <strong>ngrok free static domain</strong>
+          <p>AnySearch 先找到 Stack Overflow 和 InfoQ，Tavily 命中 ngrok 官方博客与 docs。这个样本说明 Tavily 很适合作补官方文档，尤其是 query 明确指向产品功能时。</p>
+        </section>
+        <section>
+          <strong>OpenAI GPT Image 2 docs</strong>
+          <p>AnySearch 和 Tavily 都能命中 OpenAI 文档、社区发布、API reference。涉及 OpenAI 产品时，最终仍应优先回到官方文档确认。</p>
+        </section>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <section>04 / workflow</section>
+        <h2>以后直接按这个工作流跑，不要把搜索、解释、发布混成一锅。</h2>
+      </section>
+      <figure>
+        <img src="C:\html\articles\anysearch-comparison\assets\card-03-how-to-use.png" alt="AnySearch Tavily 对比搜索使用方法卡片" style="display:block;width:100%;height:auto;object-fit:contain;margin:18px auto;border:1px solid #ddd6c9;border-radius:4px;">
+        <figcaption>用法卡：给其他线程最容易执行的口令和流程。</figcaption>
+      </figure>
+      <section>
+        <section>
+          <b>先用 AnySearch 找原始出处</b>
+          <p>目标是 README、官方 docs、GitHub、NVD、厂商公告、参数表，而不是先要模型总结。</p>
+        </section>
+        <section>
+          <b>再用 Tavily 做交叉验证</b>
+          <p>看结构化结果和摘要是否支持同一结论，重点检查 URL 是否命中同一个项目或同一份文档。</p>
+        </section>
+        <section>
+          <b>最后用模型解释</b>
+          <p>让模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。</p>
+        </section>
+      </section>
+      <pre><code>用 anysearch + tavily 对比搜索：&lt;你的问题&gt;
+优先找原始出处，输出 AnySearch / Tavily 命中差异、关键 URL、最终建议。</code></pre>
+      <p>如果主题是 GitHub 项目，查询里最好带上仓库名或作者名；如果主题是官方产品，查询里最好带 `docs`、`pricing`、`api reference`、`official` 这类限定词。</p>
+    </section>
+
+    <section>
+      <section>
+        <section>05 / limits</section>
+        <h2>这次测试也暴露了几个不能忽略的坑。</h2>
+      </section>
+      <section>
+        <table>
+          <thead>
+            <tr>
+              <th>问题</th>
+              <th>影响</th>
+              <th>处理办法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>重名项目</td>
+              <td>CodeGraph 这种名字容易命中多个项目，摘要会看起来都对。</td>
+              <td>查询中加入 `owner/repo`、GitHub URL、包名或关键 benchmark 数字。</td>
+            </tr>
+            <tr>
+              <td>Brave 未完整实测</td>
+              <td>本机缺 API key，网页版出现 429，无法严肃比较。</td>
+              <td>接入 `BRAVE_SEARCH_API_KEY` 后重新跑同一套样本。</td>
+            </tr>
+            <tr>
+              <td>Chat API 不是搜索</td>
+              <td>DeepSeek 可以解释，但不能保证实时出处。</td>
+              <td>把 Chat API 放在“结果解释层”，不要放在“找出处层”。</td>
+            </tr>
+            <tr>
+              <td>旧报告存在编码损坏</td>
+              <td>部分标题和标签已经变成乱码占位符，直接转 HTML 会污染成品。</td>
+              <td>成品文章重写正文，只复用可确认的原始结果和截图。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <h2>给其他 Agent 的最短交代</h2>
+      <p>以后你可以直接发下面这句话：</p>
+      <pre><code>用 anysearch + tavily 对比搜索：&lt;主题&gt;
+要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。</code></pre>
+      <p>如果是非常具体的技术对象，再补一句：</p>
+      <pre><code>注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。</code></pre>
+      <p>原始产物保留在 `F:\codex\reports\anysearch-comparison\`；本 HTML 成品与图片资产已归档到 `C:\html\articles\anysearch-comparison\`。</p>
+    </section>
+  </section>
+</body>
+</html>

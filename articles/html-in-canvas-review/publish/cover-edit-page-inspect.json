@@ -1,0 +1,722 @@
+{
+  "url": "https://mp.weixin.qq.com/cgi-bin/masssendmodify?action=edit_new&appmsgid=2247483878&idx=1&msgid=2247483878&modify_version=1&open_from=https%3A%2F%2Fmp.weixin.qq.com%2Fcgi-bin%2Fappmsgpublish%3Fsub%3Dlist%26begin%3D0%26count%3D10%26token%3D941781265%26lang%3Dzh_CN%26_%3D1779430178221&token=941781265&lang=zh_CN",
+  "title": "服务号",
+  "bodyLen": 3951,
+  "hasCoverText": true,
+  "coverish": [
+    {
+      "i": 0,
+      "tag": "HTML",
+      "id": "",
+      "cls": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1687.272705078125,
+        "h": 860.165283203125
+      }
+    },
+    {
+      "i": 1,
+      "tag": "BODY",
+      "id": "",
+      "cls": "zh_CN weui-desktop-page_simple page_appmsg_modify",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "overflow: hidden;",
+      "bg": "none",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1687.272705078125,
+        "h": 10021.33203125
+      }
+    },
+    {
+      "i": 14,
+      "tag": "DIV",
+      "id": "body",
+      "cls": "mp-body ",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1687.272705078125,
+        "h": 10021.33203125
+      }
+    },
+    {
+      "i": 15,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-layout weui-desktop-layout_global",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 0,
+        "y": 87.99586486816406,
+        "w": 1687.272705078125,
+        "h": 9869.3388671875
+      }
+    },
+    {
+      "i": 16,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-layout__main",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 0,
+        "y": 88.98760223388672,
+        "w": 1687.272705078125,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 17,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-layout__main__area",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 0,
+        "y": 88.98760223388672,
+        "w": 1687.272705078125,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 18,
+      "tag": "DIV",
+      "id": "",
+      "cls": "js_main_inner weui-desktop-layout__main__inner",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 168.72933959960938,
+        "y": 88.98760223388672,
+        "w": 1349.81396484375,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 19,
+      "tag": "DIV",
+      "id": "js_appmsg_modify",
+      "cls": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 168.72933959960938,
+        "y": 88.98760223388672,
+        "w": 1349.81396484375,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 20,
+      "tag": "DIV",
+      "id": "",
+      "cls": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 168.72933959960938,
+        "y": 88.98760223388672,
+        "w": 1349.81396484375,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 21,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-layout__main__hd",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 168.72933959960938,
+        "y": 88.98760223388672,
+        "w": 1349.81396484375,
+        "h": 56.39462661743164
+      }
+    },
+    {
+      "i": 23,
+      "tag": "P",
+      "id": "",
+      "cls": "page_desc",
+      "text": "每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 168.72933959960938,
+        "y": 122.98553466796875,
+        "w": 1349.81396484375,
+        "h": 22.39669418334961
+      }
+    },
+    {
+      "i": 74,
+      "tag": "IMG",
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "text": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4zjJAVj5yDyicDXmepGcO1YiczWXQKqsL9ib8ffkOOzXEvj8LxMH3eS5DBrs2SNMmTMegvH1jW1Qah7p5O9fAacqJKYZ7YGc6PEk/640?wx_fmt=png&from=appmsg",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8140563964844,
+        "y": 343.718994140625,
+        "w": 676.97314453125,
+        "h": 287.7169494628906
+      }
+    },
+    {
+      "i": 1393,
+      "tag": "IMG",
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "text": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf7UVkBSfvxmUm5YNKahAMbib82D0ibeJZ9MpFe7r9iaApibSVHqXovbt0EOErUGD5KUeGiarmtqS1ahFBmDgszWZa7EQCyzk1WYy9EA/640?wx_fmt=png&from=appmsg",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8140563964844,
+        "y": 2279.896728515625,
+        "w": 676.97314453125,
+        "h": 346.01239013671875
+      }
+    },
+    {
+      "i": 2073,
+      "tag": "SECTION",
+      "id": "",
+      "cls": "",
+      "text": "逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World",
+      "src": "",
+      "style": "color: rgb(31, 45, 61); font-family: -apple-system, BlinkMacSystemFont, \"PingFang SC\", \"Microsoft YaHei\", Arial, sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 10px; pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3239.4111328125,
+        "w": 676.9937744140625,
+        "h": 307.3140563964844
+      }
+    },
+    {
+      "i": 2101,
+      "tag": "P",
+      "id": "",
+      "cls": "",
+      "text": "下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。",
+      "src": "",
+      "style": "font-size: 16px; line-height: 1.88; margin: 0px 0px 16px; color: rgb(38, 56, 77); pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3284.855224609375,
+        "w": 676.9937744140625,
+        "h": 60.165287017822266
+      }
+    },
+    {
+      "i": 2102,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "",
+      "text": "下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。",
+      "src": "",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3288.822265625,
+        "w": 674.2561645507812,
+        "h": 51.23966979980469
+      }
+    },
+    {
+      "i": 2103,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "",
+      "text": "下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3288.822265625,
+        "w": 674.2561645507812,
+        "h": 51.23966979980469
+      }
+    },
+    {
+      "i": 2176,
+      "tag": "H3",
+      "id": "",
+      "cls": "",
+      "text": "1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了",
+      "src": "",
+      "style": "font-size: 18px; line-height: 1.55; color: rgb(16, 32, 51); margin: 26px 0px 12px; font-weight: 800; pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3371.012451171875,
+        "w": 676.9937744140625,
+        "h": 27.892560958862305
+      }
+    },
+    {
+      "i": 2177,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "",
+      "text": "1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了",
+      "src": "",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3372.995849609375,
+        "w": 512.2623901367188,
+        "h": 23.801652908325195
+      }
+    },
+    {
+      "i": 2178,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "",
+      "text": "1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3372.995849609375,
+        "w": 512.2623901367188,
+        "h": 23.801652908325195
+      }
+    },
+    {
+      "i": 2212,
+      "tag": "P",
+      "id": "",
+      "cls": "",
+      "text": "这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。",
+      "src": "",
+      "style": "font-size: 16px; line-height: 1.88; margin: 0px 0px 16px; color: rgb(38, 56, 77); pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3410.898681640625,
+        "w": 676.9937744140625,
+        "h": 90.90908813476562
+      }
+    },
+    {
+      "i": 2213,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "",
+      "text": "这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由",
+      "src": "",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3414.86572265625,
+        "w": 674.1528930664062,
+        "h": 51.23966979980469
+      }
+    },
+    {
+      "i": 2214,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "",
+      "text": "这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3414.86572265625,
+        "w": 674.1528930664062,
+        "h": 51.23966979980469
+      }
+    },
+    {
+      "i": 2346,
+      "tag": "IMG",
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "text": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf60jFwOfh1eYrgyRpY8hk7L7tSkBnXicWzJic43x7YXziaW7P1lUbSolhJHljxUy9ibSuLDrBZqicUpyaEMrRkn5PiaEDsO4D5273scE/640?wx_fmt=png&from=appmsg",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 3572.716796875,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 2551,
+      "tag": "IMG",
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "text": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf64TxBQQTBqD7WKNibZ9wUib9SqNWVQibpSHL7NcgcNv8k17iavn6dvbhm7hmFYwuLFibSOicUwhT5VHIP9nJ0jjgooKNDogfxPoBI58/640?wx_fmt=png&from=appmsg",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 4605.8369140625,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 2757,
+      "tag": "IMG",
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "text": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf56WNmfr9mdNmrY9cuEZv8YlibGWBKb7CqMZUTs6PdsiaYJjtU2vvMvhG1xuaw1qNhAPyGKvat0wYibPeiaAmIkgZA8xTNAkvRvm7c/640?wx_fmt=png&from=appmsg",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 5637.63427734375,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 2925,
+      "tag": "IMG",
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "text": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5CDVNUOhSo3uNMx20uWSnV4TSgbiaryyuiazGaibRbz708Gf4aEgnlyKrtq3C3BPicEADToyup2y2PnD9r9x2ancV6uvudxYLg7b0/640?wx_fmt=png&from=appmsg",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 6639.34912109375,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 3162,
+      "tag": "IMG",
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "text": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5Ww1NL8eeS4E0yYBndicJ50TiaVCwtghMHK9fAicSjGt21BTdAvjkwc5FxuFMVhE9tuOP0bbcN3LXH0FvObia7siaiaOZ5tvcxvP4RY/640?wx_fmt=png&from=appmsg",
+      "style": "pointer-events: initial;",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 7642.38623046875,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 3897,
+      "tag": "DIV",
+      "id": "",
+      "cls": "appmsg_modify_cd",
+      "text": "封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 9494.3486328125,
+        "w": 676.9937744140625,
+        "h": 252.98553466796875
+      }
+    },
+    {
+      "i": 3898,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "appmsg_modify_cd__text",
+      "text": "封面和摘要",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 324.8037109375,
+        "y": 9535.3408203125,
+        "w": 69.98966979980469,
+        "h": 20
+      }
+    },
+    {
+      "i": 3900,
+      "tag": "SECTION",
+      "id": "",
+      "cls": "appmsg_modify_cd__cover is_first_msg has_digest",
+      "text": "",
+      "src": "",
+      "style": "background-image: url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf6HQK8Imia4yAmW9zuibkmbsx4ibv6VftJszudMFpcsoPpUHhEWUaMdwBBKGrq6usRwGeH6XHhmJrfVWtxYQDMEOibTtsFPLznVsxo/0?wx_fmt=jpeg\");",
+      "bg": "url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf6HQK8Imia4yAmW9zuibkmbsx4ibv6VftJszudMFpcsoPpUHhEWUaMdwBBKGrq6usRwGeH6XHhmJrfVWtxYQDMEOibTtsFPLznVsxo/0?wx_fmt=jpeg\")",
+      "box": {
+        "x": 324.8037109375,
+        "y": 9567.3349609375,
+        "w": 235,
+        "h": 100
+      }
+    },
+    {
+      "i": 4027,
+      "tag": "DIV",
+      "id": "",
+      "cls": "back-to-top-wrapper",
+      "text": "修改封面和摘要",
+      "src": "",
+      "style": "left: 1178.54px;",
+      "bg": "none",
+      "box": {
+        "x": 1178.5433349609375,
+        "y": 697.7685546875,
+        "w": 144.96900939941406,
+        "h": 42.39669418334961
+      }
+    },
+    {
+      "i": 4028,
+      "tag": "DIV",
+      "id": "",
+      "cls": "back-to-top-btn back-top-btn",
+      "text": "修改封面和摘要",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 1178.5433349609375,
+        "y": 697.7685546875,
+        "w": 144.96900939941406,
+        "h": 42.39669418334961
+      }
+    },
+    {
+      "i": 4029,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "",
+      "text": "修改封面和摘要",
+      "src": "",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 1201.5391845703125,
+        "y": 709.0908813476562,
+        "w": 105.98139953613281,
+        "h": 18.51239585876465
+      }
+    },
+    {
+      "i": 4047,
+      "tag": "IMG",
+      "id": "",
+      "cls": "",
+      "text": "",
+      "src": "https://mmbiz.qpic.cn/sz_mmbiz_png/rfsTNXEld3RhbjosibegfLz5JPvRVFxO9x4M1UMez6dNLLVpUNqTdsGzj9RsWdDKvWiaFaX2LI7EvGJGNxuZEibsA/0",
+      "style": "",
+      "bg": "none",
+      "box": {
+        "x": 919.638427734375,
+        "y": 316.1466979980469,
+        "w": 348.0061950683594,
+        "h": 195.85743713378906
+      }
+    }
+  ],
+  "imgs": [
+    {
+      "i": 0,
+      "id": "",
+      "cls": "weui-desktop-account__thumb",
+      "alt": "",
+      "src": "https://wx.qlogo.cn/mmopen/aNJZ1Dtu57sXwR8GlcdkDnARz2J2RqgLrzo4pVQnzeehsCAGXbCicaQicMObiaA1NCjhaHjT5uKFVuQWNFnzhPW51A0ydIy8zJF/64",
+      "naturalWidth": 64,
+      "naturalHeight": 64,
+      "box": {
+        "x": 1582.96484375,
+        "y": 11.99380111694336,
+        "w": 31.99380111694336,
+        "h": 31.99380111694336
+      }
+    },
+    {
+      "i": 1,
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "alt": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4zjJAVj5yDyicDXmepGcO1YiczWXQKqsL9ib8ffkOOzXEvj8LxMH3eS5DBrs2SNMmTMegvH1jW1Qah7p5O9fAacqJKYZ7YGc6PEk/640?wx_fmt=png&from=appmsg",
+      "naturalWidth": 1080,
+      "naturalHeight": 459,
+      "box": {
+        "x": 324.8140563964844,
+        "y": 343.718994140625,
+        "w": 676.97314453125,
+        "h": 287.7169494628906
+      }
+    },
+    {
+      "i": 2,
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "alt": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf7UVkBSfvxmUm5YNKahAMbib82D0ibeJZ9MpFe7r9iaApibSVHqXovbt0EOErUGD5KUeGiarmtqS1ahFBmDgszWZa7EQCyzk1WYy9EA/640?wx_fmt=png&from=appmsg",
+      "naturalWidth": 1080,
+      "naturalHeight": 552,
+      "box": {
+        "x": 324.8140563964844,
+        "y": 2279.896728515625,
+        "w": 676.97314453125,
+        "h": 346.01239013671875
+      }
+    },
+    {
+      "i": 3,
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "alt": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf60jFwOfh1eYrgyRpY8hk7L7tSkBnXicWzJic43x7YXziaW7P1lUbSolhJHljxUy9ibSuLDrBZqicUpyaEMrRkn5PiaEDsO4D5273scE/640?wx_fmt=png&from=appmsg",
+      "naturalWidth": 1080,
+      "naturalHeight": 1121,
+      "box": {
+        "x": 324.8037109375,
+        "y": 3572.716796875,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 4,
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "alt": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf64TxBQQTBqD7WKNibZ9wUib9SqNWVQibpSHL7NcgcNv8k17iavn6dvbhm7hmFYwuLFibSOicUwhT5VHIP9nJ0jjgooKNDogfxPoBI58/640?wx_fmt=png&from=appmsg",
+      "naturalWidth": 1080,
+      "naturalHeight": 1121,
+      "box": {
+        "x": 324.8037109375,
+        "y": 4605.8369140625,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 5,
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "alt": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf56WNmfr9mdNmrY9cuEZv8YlibGWBKb7CqMZUTs6PdsiaYJjtU2vvMvhG1xuaw1qNhAPyGKvat0wYibPeiaAmIkgZA8xTNAkvRvm7c/640?wx_fmt=png&from=appmsg",
+      "naturalWidth": 1080,
+      "naturalHeight": 1121,
+      "box": {
+        "x": 324.8037109375,
+        "y": 5637.63427734375,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 6,
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "alt": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5CDVNUOhSo3uNMx20uWSnV4TSgbiaryyuiazGaibRbz708Gf4aEgnlyKrtq3C3BPicEADToyup2y2PnD9r9x2ancV6uvudxYLg7b0/640?wx_fmt=png&from=appmsg",
+      "naturalWidth": 1080,
+      "naturalHeight": 1121,
+      "box": {
+        "x": 324.8037109375,
+        "y": 6639.34912109375,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 7,
+      "id": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "alt": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5Ww1NL8eeS4E0yYBndicJ50TiaVCwtghMHK9fAicSjGt21BTdAvjkwc5FxuFMVhE9tuOP0bbcN3LXH0FvObia7siaiaOZ5tvcxvP4RY/640?wx_fmt=png&from=appmsg",
+      "naturalWidth": 1080,
+      "naturalHeight": 1121,
+      "box": {
+        "x": 324.8037109375,
+        "y": 7642.38623046875,
+        "w": 676.9834594726562,
+        "h": 702.6859130859375
+      }
+    },
+    {
+      "i": 8,
+      "id": "",
+      "cls": "",
+      "alt": "",
+      "src": "https://mmbiz.qpic.cn/sz_mmbiz_png/rfsTNXEld3RhbjosibegfLz5JPvRVFxO9x4M1UMez6dNLLVpUNqTdsGzj9RsWdDKvWiaFaX2LI7EvGJGNxuZEibsA/0",
+      "naturalWidth": 1146,
+      "naturalHeight": 645,
+      "box": {
+        "x": 919.638427734375,
+        "y": 316.1466979980469,
+        "w": 348.0061950683594,
+        "h": 195.85743713378906
+      }
+    }
+  ],
+  "lines": [
+    "修改",
+    "每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明",
+    "下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。",
+    "1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了",
+    "这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。",
+    "封面和摘要",
+    "修改记录",
+    "还未开始修改",
+    "预览",
+    "提交修改",
+    "修改封面和摘要",
+    "支持修改文章摘要",
+    "可替换或修改文章中的摘要，修改后摘要总字数不能超过120个字。",
+    "正文可修改字数提升至120个字。"
+  ],
+  "localStorageKeys": []
+}

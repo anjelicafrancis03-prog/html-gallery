@@ -1,0 +1,1097 @@
+{
+  "title": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测",
+  "coverText": "拖拽或选择封面",
+  "hasCover": false,
+  "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+  "bodyTail": "moke test 批量下载最怕一上来就全量跑。正确做法是先抽 3 条链接，调用单篇下载，确认目录里真的出现正文和素材，再启动全量任务。 单篇 smoke test：先验证下载链路，再做 545 条批量触发。 批量触发截图：逐条把真实链接交给 MCP 工具，建议保留延迟，避免队列拥堵。 五、最终要看本地结果，不只看日志 触发成功只是第一层。真正可用的结果，要看本地有没有正文、图片、网页快照和可继续分析的文件结构。 本地落盘结构：正文和素材按目录保存，后续可以继续做统计、总结和检索。 最终统计截图：本轮 545 条触发成功，扫描到 501 篇有效 Markdown 正文。 原始下载证据：最终验收看本地文件，不只看工具界面或脚本输出。 六、保留 3 条核心命令就够了 公众号里代码块不要太重。真正需要复用的命令只保留三条：检查服务、批量触发、统计正文。 # 检查 MCP 服务 Invoke-RestMethod -Uri 'http://127.0.0.1:4545/mcp' -Method Post -ContentType 'application/json' -Body '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{}}' # 批量触发下载 node F:\\codex\\tools\\memorycarry_mcp_batch_download.js --start=0 --delayMs=1200 # 统计有效正文 python F:\\codex\\tools\\memorycarry_mcp_analyze.py 七、边界必须写在最后 它不是搜索器 需要先有 URL 列表，不能凭空找到所有历史文章。 正文来源必须是公众号原文 也就是 `mp.weixin.qq.com/s/...`。第三方索引页只提供链接，不是正文来源。 原文删除后可能失败 只要依赖公众号原文链接，就会受原文可访问状态影响。 所以这套工具最适合的场景是：你已经有一批真实公众号文章 URL，想把下载、落盘、统计和后续分析交给本地 Agent 自动完成。 拖拽或选择封面 41/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 19:11已保存 正文字数1442 回到顶部 一键排版 发表 预览 保存为草稿 选择图片 最近使用 (125) 我的图片 (181) 未分组 (122) 文章配图 (59) 新建分组 原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片 关闭 已关闭图片水印 上传文件 粘贴图片_20260522191126.png 粘贴图片_20260522191119.png 粘贴图片_20260522191112.png 粘贴图片_20260522191105.png 粘贴图片_20260522191058.png 粘贴图片_20260522191052.png 粘贴图片_20260522191045.png 粘贴图片_20260522191038.png wechat-cover-fixed-v2.png 粘贴图片_20260522185244.png 粘贴图片_20260522185237.png 粘贴图片_20260522185230.png 1 / 16 下一页 跳转 下一步 取消 问题反馈 CDP Bridge",
+  "nodes": [
+    {
+      "i": 0,
+      "tag": "A",
+      "id": "",
+      "text": "服务号",
+      "cls": "weui-desktop-service-logo__inner",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 30,
+        "y": 12,
+        "w": 116,
+        "h": 32
+      }
+    },
+    {
+      "i": 1,
+      "tag": "LI",
+      "id": "js_editor_insertimage",
+      "text": "图片",
+      "cls": "tpl_item tpl_item_dropdown jsInsertIcon img",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 416,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 3,
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "cls": "",
+      "accept": "image/gif,image/jpeg,image/jpg,image/png,image/svg,image/webp",
+      "src": "",
+      "style": "",
+      "visible": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "i": 7,
+      "tag": "LI",
+      "id": "js_editor_insertvideo",
+      "text": "视频",
+      "cls": "tpl_item jsInsertIcon video",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 473,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 8,
+      "tag": "LI",
+      "id": "audio_music_plugin_btn",
+      "text": "音频",
+      "cls": "tpl_item tpl_item_dropdown jsInsertIcon audio",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 529,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 11,
+      "tag": "LI",
+      "id": "js_editor_insertlink",
+      "text": "超链接",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 605,
+        "y": 9,
+        "w": 66,
+        "h": 36
+      }
+    },
+    {
+      "i": 12,
+      "tag": "LI",
+      "id": "js_editor_insertweapp",
+      "text": "小程序",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 671,
+        "y": 9,
+        "w": 66,
+        "h": 36
+      }
+    },
+    {
+      "i": 13,
+      "tag": "LI",
+      "id": "js_editor_inserttemplate",
+      "text": "模板",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 737,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 14,
+      "tag": "LI",
+      "id": "js_editor_insertvote",
+      "text": "投票",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 789,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 15,
+      "tag": "LI",
+      "id": "js_editor_insertsearch",
+      "text": "搜索",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 841,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 16,
+      "tag": "LI",
+      "id": "editor_poi",
+      "text": "地理位置",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 893,
+        "y": 9,
+        "w": 80,
+        "h": 36
+      }
+    },
+    {
+      "i": 17,
+      "tag": "LI",
+      "id": "js_editor_insertVideoSnap",
+      "text": "视频号",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 973,
+        "y": 9,
+        "w": 66,
+        "h": 36
+      }
+    },
+    {
+      "i": 18,
+      "tag": "LI",
+      "id": "js_editor_insertProfile",
+      "text": "账号名片",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1039,
+        "y": 9,
+        "w": 80,
+        "h": 36
+      }
+    },
+    {
+      "i": 19,
+      "tag": "LI",
+      "id": "js_editor_21",
+      "text": "问答",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1119,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 20,
+      "tag": "LI",
+      "id": "js_editor_29",
+      "text": "礼物",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1171,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 21,
+      "tag": "LI",
+      "id": "js_editor_advIncomeEntry",
+      "text": "收入变现",
+      "cls": "tpl_item tpl_item_dropdown jsInsertIcon",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1223,
+        "y": 9,
+        "w": 80,
+        "h": 36
+      }
+    },
+    {
+      "i": 36,
+      "tag": "LI",
+      "id": "editor_showmore",
+      "text": "自定义工具栏",
+      "cls": "tpl_item tpl_item_dropdown jsInsertIcon more",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1307,
+        "y": 9,
+        "w": 44,
+        "h": 36
+      }
+    },
+    {
+      "i": 38,
+      "tag": "LI",
+      "id": "js_import_file",
+      "text": "导入",
+      "cls": "media_extra_item import_file",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1482,
+        "y": 9,
+        "w": 56,
+        "h": 36
+      }
+    },
+    {
+      "i": 42,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "weui-desktop-account__thumb",
+      "accept": "",
+      "src": "https://wx.qlogo.cn/mmopen/aNJZ1Dtu57sXwR8GlcdkDnARz2J2RqgLrzo4pVQnzeehsCAGXbCicaQicMObiaA1NCjhaHjT5uKFVuQWNFnzhPW51A0ydIy8zJF/64",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1627,
+        "y": 12,
+        "w": 30,
+        "h": 30
+      }
+    },
+    {
+      "i": 68,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "appmsg_account_img",
+      "accept": "",
+      "src": "https://wx.qlogo.cn/mmopen/aNJZ1Dtu57sXwR8GlcdkDnARz2J2RqgLrzo4pVQnzeehsCAGXbCicaQicMObiaA1NCjhaHjT5uKFVuQWNFnzhPW51A0ydIy8zJF/64",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 45,
+        "y": 140,
+        "w": 20,
+        "h": 20
+      }
+    },
+    {
+      "i": 69,
+      "tag": "DIV",
+      "id": "",
+      "text": "",
+      "cls": "card_appmsg_thumb js_appmsg_thumb_new",
+      "accept": "",
+      "src": "",
+      "style": "background-image:url('');",
+      "visible": true,
+      "rect": {
+        "x": 32,
+        "y": 172,
+        "w": 370,
+        "h": 157
+      }
+    },
+    {
+      "i": 193,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf44TkibOjgltCIvvB8V35740mquEhic9mks7UQN8twTOrz07HUkvm3R3eicjANyRTNR9xDOsMQn1QibqLP8IUucyVDeR7l9nVEL1PQ/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -6333,
+        "w": 578,
+        "h": 371
+      }
+    },
+    {
+      "i": 195,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf7icf0IHPodBTrAWlTrwNlcHzNP2pxqVTnxSp16BPAPicyDzavv1x9HIw51liaKLibWB2ia1G3NlunpepfX7QtTiaVp3tmUKdAgMIHnQ/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -5047,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 197,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6Wnd1RuGI1NbZ8Xf3CM2S53fCt730N0TRibpawkYTOV6AEztKsA6h5FbBk5kKmRrSsnEpe63Uic3PQo3EgDiceyRxzt143UgvbNQ/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -4133,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 199,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5Aw3vwuwcJVGDPWD5jB4F8ibmKxgiaMx0XpAFKYBvpB996ia7yhhic7fBPMOZItiavBfm7QDGIhEcuSmzjzSIvibes9MicdJVILICd4Y/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -3364,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 201,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf437C03mvzAARhvcmlRfwVDYhrGbzu3as6tgsXLLwAfdSclOBVxGbXY24MYFKFaFKbYHNzhSgdHaXpiafdicGOMzRRxOnzcW32Cc/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -2844,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 203,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf51yAVhbV8kLM0OLevCb8xWypMSSTrKVjy4ticozicEYBwiaVVO0NMO5fRSYfmbDx9vXgVibiaTmlU9sibhAhCwskgocx9cZgLBlYZL8/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -2183,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 205,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4JlYPHbMeW28ml0gp43571jiav8CBXicnjUtAibcSZjLbh8XhNMhqD6g27LHOLGYicbAOahkQ0icjYA25aEWwxMf5e9963SbkwwXqs/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -1663,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 207,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7Qzf9f8VAVqeoJrKtSDMOO6GrbTGS36bF7IlSYXTxzf5EwAqjpryPvw2Qxl4I8RJFfQnWPd8iaqHuiaibHEYeqnotQ3t7cI01yN8/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -1143,
+        "w": 578,
+        "h": 489
+      }
+    },
+    {
+      "i": 255,
+      "tag": "A",
+      "id": "",
+      "text": "回到顶部",
+      "cls": "tool_bar__fold-btn",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1288,
+        "y": 684,
+        "w": 106,
+        "h": 36
+      }
+    },
+    {
+      "i": 257,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "发表",
+      "cls": "mass_send",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1151,
+        "y": 761,
+        "w": 98,
+        "h": 34
+      }
+    },
+    {
+      "i": 258,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "预览",
+      "cls": "",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1042,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "i": 259,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "保存为草稿",
+      "cls": "",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 932,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "i": 262,
+      "tag": "DIV",
+      "id": "",
+      "text": "选择图片 最近使用 (125) 我的图片 (181) 未分组 (122) 文章配图 (59) 新建分组 原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片 关闭 已关闭图片水印 上传文件 粘贴图片_20260522191126.png 粘贴图片_20260522191119.png 粘贴图片_20260522191112.png 粘贴图片_202",
+      "cls": "weui-desktop-dialog",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 53,
+        "w": 960,
+        "h": 704
+      }
+    },
+    {
+      "i": 263,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "",
+      "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1276,
+        "y": 80,
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "i": 264,
+      "tag": "LI",
+      "id": "",
+      "text": "最近使用 (125)",
+      "cls": "weui-desktop-menu__item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "i": 265,
+      "tag": "A",
+      "id": "",
+      "text": "最近使用 (125)",
+      "cls": "weui-desktop-menu__link",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "i": 266,
+      "tag": "LI",
+      "id": "",
+      "text": "我的图片 (181)",
+      "cls": "weui-desktop-menu__item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "i": 267,
+      "tag": "A",
+      "id": "",
+      "text": "我的图片 (181)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link_current",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "i": 268,
+      "tag": "LI",
+      "id": "",
+      "text": "未分组 (122)",
+      "cls": "weui-desktop-menu__item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "i": 269,
+      "tag": "A",
+      "id": "",
+      "text": "未分组 (122)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "i": 270,
+      "tag": "LI",
+      "id": "",
+      "text": "文章配图 (59)",
+      "cls": "weui-desktop-menu__item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "i": 271,
+      "tag": "A",
+      "id": "",
+      "text": "文章配图 (59)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "i": 272,
+      "tag": "A",
+      "id": "",
+      "text": "新建分组",
+      "cls": "",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 396,
+        "y": 628,
+        "w": 56,
+        "h": 18
+      }
+    },
+    {
+      "i": 276,
+      "tag": "A",
+      "id": "",
+      "text": "AI 配图",
+      "cls": "",
+      "accept": "",
+      "src": "",
+      "style": "cursor: pointer;",
+      "visible": true,
+      "rect": {
+        "x": 843,
+        "y": 144,
+        "w": 46,
+        "h": 18
+      }
+    },
+    {
+      "i": 280,
+      "tag": "A",
+      "id": "upload_0.0932803375422755",
+      "text": "上传文件",
+      "cls": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "i": 281,
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "cls": "",
+      "accept": "image/bmp, image/png, image/jpeg, image/jpg, image/gif, image/webp",
+      "src": "",
+      "style": "display: none;",
+      "visible": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "i": 288,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7Qzf9f8VAVqeoJrKtSDMOO6GrbTGS36bF7IlSYXTxzf5EwAqjpryPvw2Qxl4I8RJFfQnWPd8iaqHuiaibHEYeqnotQ3t7cI01yN8/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 576,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 289,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4JlYPHbMeW28ml0gp43571jiav8CBXicnjUtAibcSZjLbh8XhNMhqD6g27LHOLGYicbAOahkQ0icjYA25aEWwxMf5e9963SbkwwXqs/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 699,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 290,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf51yAVhbV8kLM0OLevCb8xWypMSSTrKVjy4ticozicEYBwiaVVO0NMO5fRSYfmbDx9vXgVibiaTmlU9sibhAhCwskgocx9cZgLBlYZL8/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 822,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 291,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf437C03mvzAARhvcmlRfwVDYhrGbzu3as6tgsXLLwAfdSclOBVxGbXY24MYFKFaFKbYHNzhSgdHaXpiafdicGOMzRRxOnzcW32Cc/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 945,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 292,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5Aw3vwuwcJVGDPWD5jB4F8ibmKxgiaMx0XpAFKYBvpB996ia7yhhic7fBPMOZItiavBfm7QDGIhEcuSmzjzSIvibes9MicdJVILICd4Y/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 1068,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 293,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6Wnd1RuGI1NbZ8Xf3CM2S53fCt730N0TRibpawkYTOV6AEztKsA6h5FbBk5kKmRrSsnEpe63Uic3PQo3EgDiceyRxzt143UgvbNQ/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 1191,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 294,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf7icf0IHPodBTrAWlTrwNlcHzNP2pxqVTnxSp16BPAPicyDzavv1x9HIw51liaKLibWB2ia1G3NlunpepfX7QtTiaVp3tmUKdAgMIHnQ/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 576,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 295,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf44TkibOjgltCIvvB8V35740mquEhic9mks7UQN8twTOrz07HUkvm3R3eicjANyRTNR9xDOsMQn1QibqLP8IUucyVDeR7l9nVEL1PQ/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 699,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 296,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4gj8VsiaPB7ic8jBhIv0ujM7SPeiadPbxcFAXS0vYhJQGlwr3zkMPLdHvWJqdZTicJzdcf75D9o1j8uQUMMdUwIksWKz4olOqfMWE/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 822,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 297,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf7O6B1WuPfJPqia6gctWH32cicUtWsIiaOsXV8vfjfubA3fjXaoZrP5B4uU17R2dA4td21Lp3ssS5bp92pvSoAFuGy59Yyuw7h4DM/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 945,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 298,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf7q69mqoM8MD59ib3PnubNw4rqNsLFo8rS7J4aTobICHwG4AtXVXBVD6RUWmu0800rvibMptF0e5Vl2lffvlb3FVbtV0rod7fc50/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 1068,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 299,
+      "tag": "I",
+      "id": "",
+      "text": "图片描述",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "accept": "",
+      "src": "",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4p8UFTZpSaZCubfiardxoggtXs3Hic9GDuaqJNQpNDdASH6JJlNG3cXjQpjJv8Vd5iaBIqAIkhpQjR4hFEwonsSDl0pBc1s6789c/300?wx_fmt=png&from=appmsg\");",
+      "visible": true,
+      "rect": {
+        "x": 1191,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      }
+    },
+    {
+      "i": 300,
+      "tag": "A",
+      "id": "",
+      "text": "下一页",
+      "cls": "weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1186,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      }
+    },
+    {
+      "i": 301,
+      "tag": "A",
+      "id": "",
+      "text": "跳转",
+      "cls": "weui-desktop-link",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1280,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      }
+    },
+    {
+      "i": 302,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "下一步",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 740,
+        "y": 689,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "i": 303,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "取消",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 852,
+        "y": 690,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "i": 338,
+      "tag": "DIV",
+      "id": "ljq-ind",
+      "text": "CDP Bridge",
+      "cls": "",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1574,
+        "y": 767,
+        "w": 99,
+        "h": 29
+      }
+    }
+  ]
+}

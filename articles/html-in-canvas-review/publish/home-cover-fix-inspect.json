@@ -1,0 +1,197 @@
+{
+  "url": "https://mp.weixin.qq.com/cgi-bin/home?t=home/index&token=941781265&lang=zh_CN",
+  "text": "首页\n内容管理\n互动管理\n留言\n划线\n私信\n提到\n投票\n视频弹幕\n自动回复\n自定义菜单\n用户管理\n号内搜索\n数据分析\n收入变现\n赞赏\n付费\n带货\n流量主\n微信小店\n广告与服务\n广告主\n小程序管理\n模板消息\n微信搜一搜\n微信支付\n服务市场\n设置与开发\n新的功能\n通知中心\n45\nsinnple coffee\nsinnple coffee\n原创内容\n1\n总用户数\n106\n+3\n昨日阅读(人)\n14\n昨日分享(人)\n0\n昨日新增关注(人)\n0\n数据统计时间: 5月21日 00:00 - 24:00\n关于公众平台支持带货联盟商品的通知\n为更好地帮助公众号创作者进行带货和变现，为用户提供更好的消费体验，公众号（含订阅号和服务号）将支持从优选联盟中选择商品进行推广。开通优选联盟带货功能后，即可推广由小店商家提供的优选联盟商品。\n前往开通\n邀请你试用微信公众平台快捷转载功能\n微信公众平台灰度测试原创图文快捷转载功能，现邀请你体验。在原创声明时开启“快捷转载”后，其它公众号将可以“显示转载来源且不允许修改”的方式转载此内容。\n功能简介\n新的创作\n贴图\n直播\n商品合集\n限时活动\n文章\n选择已有内容\n更多\n近期直播数据\n近30天未开播 去开播\n近期草稿\n全部草稿\n??????? HTML-in-Canvas????????????\n\n?? WICG/html-in-canvas ?? demo ???????? Chrome 148?Chrome for Testing Canary 150?2D Canvas??????WebGL ? WebGPU?\n\n更新于 13:49\n四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付\n更新于 昨天 10:37\n我把 Codex 接到飞书后，最大的变化不是“手机能聊天”\n\n把飞书变成本机 Codex 的远程入口：接线、同线程、长期状态与公开边界。\n\n更新于 星期三 07:54\n真实浏览器爬取方案重新评定\n\n这不是泛泛比较 Playwright、OpenCLI、CDP Bridge MCP、playwright-cli 谁更“先进”。评定口径只有一个： 在已经登录的固定 Chrome 里，能不能稳定读到 TikTok、...\n\n更新于 星期三 07:52\n近期发表\n全部发表记录\n今天 14:01\n已发表\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n1\n0\n0\n0\n0\n0\n今天 12:35\n已发表\n四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付\n2\n0\n0\n0\n0\n0\n今天 12:33\n已发表\n我把 Codex 接到飞书后，最大的变化不是“手机能聊天”\n1\n0\n0\n0\n0\n0\n今天 12:25\n已发表\n真实浏览器爬取方案重新评定\n1\n0\n0\n0\n0\n0\n今天 10:19\n已发表\n【测试勿发】四个 HTML Skill 横向对比\n2\n0\n0\n0\n0\n0\n今天 03:50\n已发表\n比特、MoreLogin、AdsPower 三款指纹浏览器实测对比\n11\n0\n1\n0\n0\n0\n昨天 11:39\n已发表\n我把 Codex 接到飞书后，最大的变化不是“手机能聊天”\n10\n0\n0\n0\n0\n0\n昨天 11:35\n已发表\n四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付\n10\n0\n0\n0\n0\n0\n昨天 11:25\n已发表\n真实浏览器爬取方案重新评定\n3\n0\n0\n0\n0\n0\n05月07日\n已发表\n1块钱用上 Opus 4.6/4.7？Windsurf 低价体验路线\n133\n0\n3\n0\n0\n0\n查看全部\n\n关于腾讯 服务协议 规则中心 腾讯客服 侵权投诉 反馈官号weixingongzhong 上传日志\n\nCopyright © 2012-2026 Tencent. All Rights Reserved.\n\n问题反馈\nCDP Bridge",
+  "els": [
+    {
+      "i": 0,
+      "tag": "A",
+      "cls": "weui-desktop-mass-appmsg__title",
+      "id": "",
+      "href": "https://mp.weixin.qq.com/s/6y32H2JT3u3lVa42bvUhEA",
+      "text": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级",
+      "attrs": {
+        "href": "https://mp.weixin.qq.com/s/6y32H2JT3u3lVa42bvUhEA",
+        "target": "_blank",
+        "class": "weui-desktop-mass-appmsg__title",
+        "style": "overflow: visible;"
+      },
+      "box": {
+        "x": 610.0826416015625,
+        "y": 1635.764404296875,
+        "w": 725.7024536132812,
+        "h": 25.599172592163086
+      }
+    }
+  ],
+  "buttons": [
+    {
+      "i": 29,
+      "tag": "A",
+      "text": "??????? HTML-in-Canvas????????????",
+      "cls": "weui-desktop-publish__cover__title",
+      "href": "javascript:void(0);",
+      "box": {
+        "x": 354.76239013671875,
+        "y": 1289.0909423828125,
+        "w": 264.7107238769531,
+        "h": 38.388427734375
+      }
+    },
+    {
+      "i": 53,
+      "tag": "BUTTON",
+      "text": "全部发表记录",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "href": "",
+      "box": {
+        "x": 1456.8697509765625,
+        "y": 1555.2891845703125,
+        "w": 117.29338836669922,
+        "h": 35.60950469970703
+      }
+    },
+    {
+      "i": 54,
+      "tag": "A",
+      "text": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级",
+      "cls": "weui-desktop-mass-appmsg__title",
+      "href": "https://mp.weixin.qq.com/s/6y32H2JT3u3lVa42bvUhEA",
+      "box": {
+        "x": 610.0826416015625,
+        "y": 1635.764404296875,
+        "w": 725.7024536132812,
+        "h": 25.599172592163086
+      }
+    },
+    {
+      "i": 60,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 1657.2623291015625,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 69,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 1769.245849609375,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 78,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 1881.229248046875,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 87,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 1993.2127685546875,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 96,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 2105.1962890625,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 105,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 2217.1796875,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 114,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 2329.1630859375,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 123,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 2441.146728515625,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 132,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 2553.130126953125,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    },
+    {
+      "i": 141,
+      "tag": "DIV",
+      "text": "还可以修改3次",
+      "cls": "weui-desktop-tooltip__wrp weui-desktop-link",
+      "href": "",
+      "box": {
+        "x": 1482.04541015625,
+        "y": 2665.113525390625,
+        "w": 35.99173355102539,
+        "h": 35.99173355102539
+      }
+    }
+  ]
+}

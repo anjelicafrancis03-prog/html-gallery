@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CLI-Anything 实测：Agent 该怎么发现和调用本地 CLI 工具</title>
+  <meta name="description" content="基于 CLI-Anything / CLI-Hub 的本地实测报告，横向记录 openscreen、mermaid、3MF 等工具的可用性、失败边界和 Agent 工作流建议。">
+  <style>
+    :root {
+      --bg: #f6f2ea;
+      --paper: #fffdf8;
+      --paper-2: #fbf7ef;
+      --ink: #18242a;
+      --muted: #66727b;
+      --line: #ded5c6;
+      --accent: #1b6f63;
+      --accent-2: #b75c3a;
+      --accent-3: #2c5f91;
+      --ok: #1d765d;
+      --warn: #a66614;
+      --bad: #a33c32;
+      --code: #15262b;
+      --max: 1080px;
+      color-scheme: light;
+      font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(27, 111, 99, .11), rgba(27, 111, 99, 0) 420px),
+        radial-gradient(circle at 10% 0%, rgba(183, 92, 58, .12), rgba(183, 92, 58, 0) 300px),
+        var(--bg);
+      letter-spacing: 0;
+    }
+
+    a {
+      color: var(--accent-3);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 58px 24px 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, .82fr);
+      gap: 34px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(40px, 6vw, 76px);
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      margin: 24px 0 0;
+      max-width: 760px;
+      color: #39484f;
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .meta span {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .78);
+      padding: 8px 10px;
+      border-radius: 4px;
+    }
+
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 48px rgba(24, 36, 42, .10);
+      padding: 16px;
+    }
+
+    .hero-card img {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .hero-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .toc-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 248, .82);
+    }
+
+    .toc {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 15px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 8px 11px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 44px 24px 88px;
+    }
+
+    section { margin: 0 0 76px; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 24px;
+      align-items: baseline;
+      border-top: 2px solid var(--accent-2);
+      padding-top: 18px;
+      margin-bottom: 24px;
+    }
+
+    .num {
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 26px 0 12px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    p {
+      margin: 14px 0;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .lead {
+      font-size: 20px;
+      line-height: 1.85;
+      color: #2e3d44;
+    }
+
+    .quote {
+      margin: 30px 0;
+      padding: 28px;
+      background: var(--code);
+      color: #f7f2e8;
+    }
+
+    .quote p {
+      margin: 0;
+      color: inherit;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: 25px;
+      line-height: 1.55;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 26px 0;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px;
+      min-height: 132px;
+    }
+
+    .stat b {
+      display: block;
+      color: var(--accent);
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .86);
+      padding: 18px;
+    }
+
+    .card b {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.78;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .tool {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px;
+    }
+
+    .tool .topline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      background: #fff;
+    }
+
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .neutral { color: var(--accent-3); }
+
+    .figure {
+      margin: 26px 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: 0 14px 34px rgba(24, 36, 42, .08);
+    }
+
+    .figure img {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    figcaption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .two-up {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    pre {
+      margin: 16px 0;
+      padding: 16px;
+      overflow-x: auto;
+      background: var(--code);
+      color: #e9f2ee;
+      border-radius: 4px;
+      font-size: 13px;
+      line-height: 1.7;
+      max-width: 100%;
+    }
+
+    code {
+      font-family: "Cascadia Mono", "Consolas", "SFMono-Regular", monospace;
+      font-size: .94em;
+    }
+
+    p code,
+    li code {
+      color: #0e5149;
+      background: rgba(27, 111, 99, .10);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 24px 0;
+    }
+
+    .step {
+      border: 1px solid var(--line);
+      background: var(--paper-2);
+      padding: 14px;
+      min-height: 118px;
+      position: relative;
+    }
+
+    .step b {
+      display: block;
+      color: var(--accent-2);
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .step span {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .decision-list {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .decision {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr) 150px;
+      gap: 14px;
+      align-items: start;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 16px;
+    }
+
+    .decision strong {
+      color: var(--ink);
+      font-size: 16px;
+    }
+
+    .decision p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .callout {
+      border-left: 5px solid var(--accent);
+      background: rgba(27, 111, 99, .10);
+      padding: 18px 20px;
+      margin: 26px 0;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .scroll-shot {
+      max-height: 760px;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    .scroll-shot img {
+      min-width: 0;
+    }
+
+    .path-list {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .path-list div {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 13px 14px;
+      overflow-wrap: anywhere;
+      font-family: "Cascadia Mono", "Consolas", monospace;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 42px;
+      }
+
+      .section-head,
+      .decision {
+        grid-template-columns: 1fr;
+      }
+
+      .stats,
+      .cards,
+      .tool-grid,
+      .two-up,
+      .workflow {
+        grid-template-columns: 1fr;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-x: hidden;
+      }
+
+      pre code {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      main { padding-inline: 18px; }
+      .hero { padding-inline: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">CLI-Anything / CLI-Hub 实测 · 2026-05-24</p>
+      <h1>Agent 该怎么发现和调用本地 CLI 工具</h1>
+      <p class="dek">这不是一篇“安装成功”的流水账，而是一次把 CLI-Anything 放进真实 Agent 工作流里的可用性测评：哪些工具能直接用，哪些工具只适合留作候选，以及以后应该怎样把它交给其他线程复用。</p>
+      <div class="meta">
+        <span>来源：本地实测报告</span>
+        <span>样本：openscreen / mermaid / 3MF</span>
+        <span>形态：图文长文 HTML</span>
+      </div>
+    </div>
+    <figure class="hero-card">
+      <img src="assets/workflow.png" alt="CLI-Anything 工具发现与调用流程图">
+      <figcaption>本次测评最有价值的部分不是单个 CLI，而是“搜索、查看、安装、跑 smoke test、沉淀口令”的工具发现流程。</figcaption>
+    </figure>
+  </header>
+
+  <nav class="toc-band" aria-label="文章目录">
+    <div class="toc">
+      <a href="#conclusion">结论</a>
+      <a href="#map">工具地图</a>
+      <a href="#hub">CLI-Hub 流程</a>
+      <a href="#openscreen">openscreen</a>
+      <a href="#mermaid">mermaid</a>
+      <a href="#three-mf">3MF</a>
+      <a href="#limits">边界</a>
+      <a href="#handoff">交接</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="conclusion">
+      <div class="section-head">
+        <div class="num">01 / verdict</div>
+        <h2>这东西好不好用？答案是：能用，但要按“工具库”来用</h2>
+      </div>
+      <p class="lead">CLI-Anything 的价值不在于替代 Agent，也不在于让每个 CLI 都立刻稳定可用。它更像一个本地 CLI 工具发现层：Agent 先通过 CLI-Hub 找到候选工具，再看说明、安装、跑最小样例，最后把真正可用的工具沉淀成固定工作流。</p>
+      <div class="quote">
+        <p>最适合它的场景，是“我不知道本地有没有合适 CLI，但我想让 Agent 自己找、自己试、自己留下可复用口令”。</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>3</b><span>个样本跑通：openscreen、mermaid、3MF。</span></div>
+        <div class="stat"><b>2+</b><span>个样本暴露环境或打包问题，需要二次修。</span></div>
+        <div class="stat"><b>5</b><span>步主流程：search、info、install、smoke、handoff。</span></div>
+        <div class="stat"><b>1</b><span>条核心建议：先验工具，再接入生产流程。</span></div>
+      </div>
+      <p>这次最明确的结论是：CLI-Anything 适合作为“Agent 的本地工具雷达”，不适合把所有搜索结果都当成已经可用的正式能力。它需要一层验收纪律。</p>
+    </section>
+
+    <section id="map">
+      <div class="section-head">
+        <div class="num">02 / map</div>
+        <h2>工具地图：哪些已经可用，哪些先别急着交给业务</h2>
+      </div>
+      <div class="decision-list">
+        <div class="decision">
+          <strong>cli-hub</strong>
+          <p>CLI-Anything 的发现、说明、安装和 harness 入口。它解决的是“Agent 如何知道有哪些本地 CLI 可用”的问题。</p>
+          <span class="badge ok">主流程可用</span>
+        </div>
+        <div class="decision">
+          <strong>openscreen</strong>
+          <p>视频探测、缩略图、片段渲染工具。本次从 720p 输入样本生成 1080p 输出帧，链路清楚。</p>
+          <span class="badge ok">可进入工作流</span>
+        </div>
+        <div class="decision">
+          <strong>mermaid</strong>
+          <p>把 Mermaid 文本渲染成图，并给出 Mermaid Live 链接。对 App 架构图、流程图和文章配图很实用。</p>
+          <span class="badge ok">推荐优先用</span>
+        </div>
+        <div class="decision">
+          <strong>3MF</strong>
+          <p>可以读取 3D 文件几何信息，输出顶点、面数、体积、水密性、边界盒等结构化数据。</p>
+          <span class="badge ok">垂直场景可用</span>
+        </div>
+        <div class="decision">
+          <strong>hacker-feeds-cli</strong>
+          <p>目标是聚合 GitHub Trending、HN、Product Hunt 等源，但本次遇到模块导入错误。</p>
+          <span class="badge bad">暂不交付</span>
+        </div>
+        <div class="decision">
+          <strong>obsidian-cli</strong>
+          <p>方向很有价值，适合 BrainVault 或本地知识库，但需要本机 Obsidian / vault 环境先准备好。</p>
+          <span class="badge warn">先配环境</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="hub">
+      <div class="section-head">
+        <div class="num">03 / workflow</div>
+        <h2>CLI-Hub 的正确用法：不要跳过 smoke test</h2>
+      </div>
+      <p>这次验证下来，比较稳的方式不是“搜到就用”，而是把 CLI-Hub 当作工具目录。Agent 应该先用关键词搜索，再查看工具说明，安装以后只跑最小样例，确认输出文件和 JSON 都正常，最后再写进交接口令。</p>
+      <div class="workflow">
+        <div class="step"><b>Step 1</b><span>搜索候选工具，比如 video、diagram、3d。</span></div>
+        <div class="step"><b>Step 2</b><span>读取 info，确认参数、依赖和输出格式。</span></div>
+        <div class="step"><b>Step 3</b><span>安装工具，不把安装成功等同于可用。</span></div>
+        <div class="step"><b>Step 4</b><span>跑 smoke test，检查真实输出文件。</span></div>
+        <div class="step"><b>Step 5</b><span>沉淀口令，交给其他线程复用。</span></div>
+      </div>
+      <pre><code>pip install cli-anything-hub
+cli-hub search video
+cli-hub info openscreen
+cli-hub install openscreen
+cli-anything-openscreen --help</code></pre>
+      <div class="callout">
+        <p>以后交代给其他 Agent 的最短口令可以是：先用 <code>cli-hub search</code> 找候选，再用 <code>cli-hub info</code> 看说明，安装后必须跑一个最小样例，只有能产生真实文件或结构化输出的 CLI 才能写进工作流。</p>
+      </div>
+      <figure class="figure scroll-shot">
+        <img src="assets/cli-anything-visual-report-screenshot.png" alt="CLI-Anything 原始可视化报告长截图">
+        <figcaption>原始可视化报告长截图。源 HTML 存在字符编码损坏，所以本文没有直接复制，而是按实测数据重新整理。</figcaption>
+      </figure>
+    </section>
+
+    <section id="openscreen">
+      <div class="section-head">
+        <div class="num">04 / sample</div>
+        <h2>样本一：openscreen 跑通，适合视频探测和轻量渲染</h2>
+      </div>
+      <p>openscreen 是这次最直观的成功样本。它能读取视频元数据，也能生成缩略图和渲染帧。对“把网页、文章、App 过程做成视频素材”的工作流来说，这类 CLI 很容易被 Agent 调用。</p>
+      <div class="two-up">
+        <figure class="figure">
+          <img src="assets/openscreen-thumbnail.png" alt="openscreen 输入视频缩略图">
+          <figcaption>输入视频缩略图：1280 x 720，3 秒，H.264。</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="assets/openscreen-render-frame.png" alt="openscreen 输出渲染帧">
+          <figcaption>输出渲染帧：1920 x 1080，约 3.042 秒，片段渲染成功。</figcaption>
+        </figure>
+      </div>
+      <div class="tool-grid">
+        <div class="tool">
+          <div class="topline"><span class="badge neutral">input probe</span></div>
+          <pre><code>{
+  "width": 1280,
+  "height": 720,
+  "duration": 3.0,
+  "fps": 30.0,
+  "codec": "h264",
+  "has_audio": true,
+  "file_size": 76956,
+  "path": "F:\\codex\\reports\\cli-anything-test\\sample-input.mp4"
+}</code></pre>
+        </div>
+        <div class="tool">
+          <div class="topline"><span class="badge ok">render output</span></div>
+          <pre><code>{
+  "output": "F:\\codex\\reports\\cli-anything-test\\sample-render-2.mp4",
+  "file_size": 205886,
+  "duration": 3.042,
+  "width": 1920,
+  "height": 1080,
+  "codec": "h264",
+  "segments_rendered": 1
+}</code></pre>
+        </div>
+      </div>
+      <p>使用建议很明确：它可以先放进“视频检查、抽帧、短片段渲染”的工具箱。但如果要进入批量生产，还要继续补异常文件、长视频、无音频、不同编码格式的测试。</p>
+    </section>
+
+    <section id="mermaid">
+      <div class="section-head">
+        <div class="num">05 / sample</div>
+        <h2>样本二：mermaid 最适合给文章和文档补流程图</h2>
+      </div>
+      <p>mermaid 是本次最值得优先沉淀的工具。它产出的不是“看起来成功”的日志，而是能直接放进文章、报告、App 说明里的图形资产。对于多线程协作，流程图尤其适合承载交接。</p>
+      <figure class="figure">
+        <img src="assets/workflow.png" alt="Mermaid 渲染出的 CLI-Hub 工作流图">
+        <figcaption>Mermaid 输出的工作流图。作为 HTML 文章配图时建议用 PNG，公众号发布链路也更稳。</figcaption>
+      </figure>
+      <pre><code>{
+  "output": "F:\\codex\\reports\\cli-anything-test-more\\workflow2.svg",
+  "format": "svg",
+  "method": "mermaid-renderer",
+  "file_size": 13381,
+  "action": "render"
+}</code></pre>
+      <p>这里有个实用经验：SVG 可以作为源文件保留，但给公众号、长文和跨平台发布时，最好另转成 PNG。它牺牲一点可编辑性，换来图片加载和样式兼容的稳定。</p>
+    </section>
+
+    <section id="three-mf">
+      <div class="section-head">
+        <div class="num">06 / sample</div>
+        <h2>样本三：3MF 证明它也能处理垂直格式</h2>
+      </div>
+      <p>3MF 不是大众工具，但它证明 CLI-Anything 的目录不只覆盖常见办公和网页场景，也能触到 3D、制造、模型检查这类垂直格式。对 Agent 来说，这类工具的价值是把“我看不懂的二进制/工程文件”转成可判断的结构化结果。</p>
+      <div class="tool-grid">
+        <div class="tool">
+          <div class="topline"><span class="badge neutral">geometry report</span></div>
+          <pre><code>{
+  "file": "box.3mf",
+  "unit": "millimeter",
+  "vertex_count": 8,
+  "face_count": 12,
+  "bounding_box": {
+    "min": [-5.0, -10.0, -2.5],
+    "max": [5.0, 10.0, 2.5],
+    "size": [10.0, 20.0, 5.0]
+  },
+  "watertight": true,
+  "volume_mm3": 1000.0,
+  "surface_area_mm2": 700.0
+}</code></pre>
+        </div>
+        <div class="tool">
+          <div class="topline"><span class="badge ok">compare output</span></div>
+          <pre><code>{
+  "vertices": { "file1": 8, "file2": 8, "diff": 0 },
+  "faces": { "file1": 12, "file2": 12, "diff": 0 },
+  "volume": { "file1": 1000.0, "file2": 1000.0, "diff": 0.0 },
+  "watertight": { "file1": true, "file2": true },
+  "file1": "box.3mf",
+  "file2": "box-repaired-2.3mf"
+}</code></pre>
+        </div>
+      </div>
+      <p>它的适用边界也清楚：只在有 3D 文件检查、模型验收、制造数据审查时启用。普通文章创作线程不需要常驻它。</p>
+    </section>
+
+    <section id="limits">
+      <div class="section-head">
+        <div class="num">07 / limits</div>
+        <h2>失败样本更重要：它提醒我们不能盲信工具目录</h2>
+      </div>
+      <p>这次有些工具并没有直接跑通。它们不代表 CLI-Anything 不好用，反而说明这个系统必须配合“验收分层”：发现是发现，可用是可用，生产可用又是另一层。</p>
+      <div class="cards">
+        <div class="card">
+          <b>hacker-feeds-cli</b>
+          <p>遇到 <code>ModuleNotFoundError: cli_anything.hacker_feeds_cli</code>。暂时不能交给内容选题线程直接用。</p>
+        </div>
+        <div class="card">
+          <b>obsidian-cli</b>
+          <p>需要本机 Obsidian 和 vault 环境。方向很有价值，但要先让 Windows/知识库线程把依赖补齐。</p>
+        </div>
+        <div class="card">
+          <b>clibrowser</b>
+          <p>可能需要 Rust toolchain 或额外 binary。先作为候选，不进入默认浏览器自动化流程。</p>
+        </div>
+        <div class="card">
+          <b>libreoffice</b>
+          <p>需要 LibreOffice 本体。适合文档转换，但要先确认安装路径和 headless 调用方式。</p>
+        </div>
+        <div class="card">
+          <b>n8n</b>
+          <p>需要本地 n8n 服务或安装。更像自动化平台入口，不是单次任务里的轻 CLI。</p>
+        </div>
+        <div class="card">
+          <b>共性问题</b>
+          <p>目录命中不等于环境就绪。交给其他线程前，必须附带最小命令和成功输出路径。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="handoff">
+      <div class="section-head">
+        <div class="num">08 / handoff</div>
+        <h2>给其他 Agent 的交接口令</h2>
+      </div>
+      <p>以后你可以直接这样交代给其他线程。它们不需要重新理解整篇报告，只要照着这个验收模式跑。</p>
+      <pre><code>用 CLI-Anything / CLI-Hub 找本地 CLI 工具：
+1. 先运行 cli-hub search &lt;关键词&gt; 找候选；
+2. 再运行 cli-hub info &lt;工具名&gt; 看依赖、参数、输出；
+3. 安装后必须跑 smoke test；
+4. 只有产生真实文件或结构化 JSON 的工具，才能写入正式工作流；
+5. 当前优先可用工具：mermaid、openscreen、3mf；
+6. hacker-feeds-cli、obsidian-cli、clibrowser、libreoffice、n8n 先当候选，补齐环境后再验。</code></pre>
+      <div class="path-list">
+        <div>源报告目录：F:\codex\reports\cli-anything-final-report</div>
+        <div>HTML 成品：C:\html\articles\cli-anything-final-report\index.html</div>
+        <div>图片资源：C:\html\articles\cli-anything-final-report\assets\</div>
+      </div>
+      <footer>
+        本文按 HTML 成品仓库规范落盘。源 HTML 存在字符编码损坏，因此采用“真实截图 + 实测数据 + 重新排版”的方式生成新版图文长文。
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

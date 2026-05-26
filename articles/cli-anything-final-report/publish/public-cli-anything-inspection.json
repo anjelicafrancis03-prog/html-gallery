@@ -1,0 +1,295 @@
+{
+  "url": "https://mp.weixin.qq.com/s/xuSzK9YGg3-gjxnzcHiXVw",
+  "title": "Agent 该怎么发现和调用本地 CLI 工具",
+  "author": "innple coffee",
+  "time": "2026年5月24日 13:41",
+  "chars": 2514,
+  "head": "an henmeyong\nAgent 该怎么发现和调用本地 CLI 工具\n\n这次我实测的是 CLI-Anything / CLI-Hub：让 Agent 自己去找本地可用的命令行工具，读说明、安装、跑  moke te t，最后把真正能用的工具沉淀进工作流。\n\n一句话结论：能用，但不能把它当“万能自动化”。更准确的用法是：把它当成本地 CLI 工具库入口，先发现，再验证，最后只留下跑通的命令。\n\n它解决的不是“有没有工具”，而是“Agent 知不知道怎么用”\n\n本地机器里常常已经有一堆工具：图片处理、视频抽帧、流程图渲染、文件格式解析、网页自动化。问题是 Agent 不一定知道它们存在，也不一定知道怎么调用。\n\nCLI-Hub 的价值就在这里：先搜候选工具，再读工具说明，再跑最小命令。只有能产出真实文件或结构化结果的工具，才值得写进长期工作流。\n\n\n\n最稳的路线： earch 找候选，info 看说明，in tall 装依赖， moke te t 验收，再决定是否进入工作流。\n我按这 5 步跑了一遍\n\n1. 搜索：用关键词找候选 CLI，不先假设哪个工具一定能用。\n\n2. 读说明：看参数、依赖、输入输出，而不是只看工具名。\n\n3. 安装：把依赖装进当前环境，避免“目录里有，实际跑不动”。\n\n4. 小样本验证：必须跑出文件、截图、JSON 或明确错误。\n\n5. 交接沉淀：只把验证过的命令写给后续 Agent。\n\npip in tall cli-anything-hub cli-hub  earch mermaid cli-hub info mermaid cli-hub run mermaid --help\n工具地图：哪些值得进入工作流\nCLI-Anything / CLI-Hub\n\n定位是工具发现层。它不负责替你完成所有任务，而是帮 Agent 找到可能有用的 CLI，并把“能不能跑通”变成可验证流程。\n\nopen creen\n\n视频类任务最直观：能读元数据、生成缩略图、渲染片段。适合放进“视频检查、抽帧、轻量预览”的工具箱。\n\nmermaid\n\n最适合长期保留。它能把流程描述转成图，直接服务文章、报告、文档和交接说明。公众号发布时建议转成 PNG。\n\n3MF\n\n它证明这类工具库不只覆盖常见网页和办公场景，也能处理 3D、制造、模型检查这类垂直格式。\n\n成功样本一：",
+  "tail": "olume_mm3: 1000.0  urface_area_mm2: 700.0\n\n这类工具不需要常驻普通写作流程，但在模型检查、制造数据审查、工程文件验收里很有价值。\n\n失败样本更重要：目录命中不等于环境可用\n\n这次也有不少工具没能直接跑通。它们不是“没有价值”，而是提醒我：发现工具只是第一层，能不能长期使用还要看环境、依赖和输出质量。\n\nhacker-feed -cli：遇到模块导入错误，暂时不能直接交给选题工作流。\n\nob idian-cli：需要本机 Ob idian 和 vault 环境，方向有价值，但要先补齐依赖。\n\nclibrow er：可能需要额外 binary 或 Ru t toolchain，先放候选，不进默认浏览器自动化。\n\nlibreoffice：适合文档转换，但必须确认本体安装路径和 headle  调用方式。\n\nn8n：更像自动化平台入口，需要本地服务，不是轻量一次性 CLI。\n\n这次真正留下来的工作流\n\n主流程：CLI-Hub 负责发现，具体 CLI 负责执行， moke te t 负责验收。\n\n优先保留：mermaid、open creen、3MF。\n\n暂缓进入：hacker-feed 、ob idian、clibrow er、libreoffice、n8n，等环境补齐后再测。\n\n\n\n原 HTML 长文截图。公众号版不照搬网页排版，只保留证据链和可复用结论。\n给其他 Agent 的交接口令\n\n以后要交给别的线程，不要只说“去找个 CLI”。直接给它这段，它会少走很多弯路。\n\n用 CLI-Anything / CLI-Hub 找本地 CLI 工具： 1. 先运行 cli-hub  earch <关键词> 找候选； 2. 再运行 cli-hub info <工具名> 看依赖、参数、输入输出； 3. 安装后必须跑  moke te t； 4. 只有产生真实文件或结构化 JSON 的工具，才能写入正式工作流； 5. 当前优先可用：mermaid、open creen、3mf； 6. hacker-feed 、ob idian、clibrow er、libreoffice、n8n 先当候选，补齐环境后再验。\n\n这篇文章的核心经验其实很简单：Agent 的能力不是“会背工具名”，而是能按固定协议验证工具。发现只是开始，能稳定复用，才算进了工作流",
+  "headings": [
+    "Agent 该怎么发现和调用本地 CLI 工具",
+    "它解决的不是“有没有工具”，而是“Agent 知不知道怎么用”",
+    "我按这 5 步跑了一遍",
+    "1. 搜索：",
+    "2. 读说明：",
+    "3. 安装：",
+    "4. 小样本验证：",
+    "5. 交接沉淀：",
+    "工具地图：哪些值得进入工作流",
+    "CLI-Anything / CLI-Hub",
+    "open creen",
+    "mermaid",
+    "3MF",
+    "成功样本一：open creen 跑通了视频检查和渲染",
+    "成功样本二：mermaid 更适合做文章和文档配图",
+    "成功样本三：3MF 能把工程文件变成结构化结果",
+    "失败样本更重要：目录命中不等于环境可用",
+    "hacker-feed -cli：",
+    "ob idian-cli：",
+    "clibrow er：",
+    "libreoffice：",
+    "n8n：",
+    "这次真正留下来的工作流",
+    "主流程：",
+    "优先保留：",
+    "暂缓进入：",
+    "给其他 Agent 的交接口令"
+  ],
+  "paragraphs": [
+    "an henmeyong",
+    "这次我实测的是 CLI-Anything / CLI-Hub：让 Agent 自己去找本地可用的命令行工具，读说明、安装、跑  moke te t，最后把真正能用的工具沉淀进工作流。",
+    "一句话结论：能用，但不能把它当“万能自动化”。更准确的用法是：把它当成本地 CLI 工具库入口，先发现，再验证，最后只留下跑通的命令。",
+    "一句话结论：能用，但不能把它当“万能自动化”。更准确的用法是：把它当成本地 CLI 工具库入口，先发现，再验证，最后只留下跑通的命令。",
+    "本地机器里常常已经有一堆工具：图片处理、视频抽帧、流程图渲染、文件格式解析、网页自动化。问题是 Agent 不一定知道它们存在，也不一定知道怎么调用。",
+    "CLI-Hub 的价值就在这里：先搜候选工具，再读工具说明，再跑最小命令。只有能产出真实文件或结构化结果的工具，才值得写进长期工作流。",
+    "最稳的路线： earch 找候选，info 看说明，in tall 装依赖， moke te t 验收，再决定是否进入工作流。",
+    "1. 搜索：用关键词找候选 CLI，不先假设哪个工具一定能用。\n\n2. 读说明：看参数、依赖、输入输出，而不是只看工具名。\n\n3. 安装：把依赖装进当前环境，避免“目录里有，实际跑不动”。\n\n4. 小样本验证：必须跑出文件、截图、JSON 或明确错误。\n\n5. 交接沉淀：只把验证过的命令写给后续 Agent。",
+    "1. 搜索：用关键词找候选 CLI，不先假设哪个工具一定能用。",
+    "2. 读说明：看参数、依赖、输入输出，而不是只看工具名。",
+    "3. 安装：把依赖装进当前环境，避免“目录里有，实际跑不动”。",
+    "4. 小样本验证：必须跑出文件、截图、JSON 或明确错误。",
+    "5. 交接沉淀：只把验证过的命令写给后续 Agent。",
+    "pip in tall cli-anything-hub cli-hub  earch mermaid cli-hub info mermaid cli-hub run mermaid --help",
+    "CLI-Anything / CLI-Hub\n\n定位是工具发现层。它不负责替你完成所有任务，而是帮 Agent 找到可能有用的 CLI，并把“能不能跑通”变成可验证流程。",
+    "定位是工具发现层。它不负责替你完成所有任务，而是帮 Agent 找到可能有用的 CLI，并把“能不能跑通”变成可验证流程。",
+    "open creen\n\n视频类任务最直观：能读元数据、生成缩略图、渲染片段。适合放进“视频检查、抽帧、轻量预览”的工具箱。",
+    "视频类任务最直观：能读元数据、生成缩略图、渲染片段。适合放进“视频检查、抽帧、轻量预览”的工具箱。",
+    "mermaid\n\n最适合长期保留。它能把流程描述转成图，直接服务文章、报告、文档和交接说明。公众号发布时建议转成 PNG。",
+    "最适合长期保留。它能把流程描述转成图，直接服务文章、报告、文档和交接说明。公众号发布时建议转成 PNG。",
+    "3MF\n\n它证明这类工具库不只覆盖常见网页和办公场景，也能处理 3D、制造、模型检查这类垂直格式。",
+    "它证明这类工具库不只覆盖常见网页和办公场景，也能处理 3D、制造、模型检查这类垂直格式。",
+    "open creen 是这次最容易理解的样本。输入一个短视频，它能读出宽高、时长、编码、音频状态，也能生成缩略图和输出帧。",
+    "输入视频缩略图：1280 x 720，约 3 秒，H.264。",
+    "输出渲染帧：1920 x 1080，片段渲染成功。",
+    "这类工具可以先进入“轻量视频处理”流程，但要做批量生产，还需要补长视频、无音频、异常编码和大文件测试。",
+    "这类工具可以先进入“轻量视频处理”流程，但要做批量生产，还需要补长视频、无音频、异常编码和大文件测试。",
+    "mermaid 的价值不在日志，而在可交付图片。流程图、架构图、协作说明、工具链说明都可以从文本直接渲染出来。",
+    "我的建议是：源文件保留 SVG 或 Mermaid 代码，但跨平台发布时转成 PNG。公众号、知识库、飞书文档里，PNG 往往更稳定。",
+    "3MF 不是大众工具，但它很能说明问题：Agent 不只是写文案，也可能需要读模型、检查几何、比较文件差异。",
+    "vertex_count: 8 face_count: 12 bounding_box: 10 x 20 x 5 mm watertight: true volume_mm3: 1000.0  urface_area_mm2: 700.0",
+    "这类工具不需要常驻普通写作流程，但在模型检查、制造数据审查、工程文件验收里很有价值。",
+    "这次也有不少工具没能直接跑通。它们不是“没有价值”，而是提醒我：发现工具只是第一层，能不能长期使用还要看环境、依赖和输出质量。",
+    "hacker-feed -cli：遇到模块导入错误，暂时不能直接交给选题工作流。\n\nob idian-cli：需要本机 Ob idian 和 vault 环境，方向有价值，但要先补齐依赖。\n\nclibrow er：可能需要额外 binary 或 Ru t toolchain，先放候选，不进默认浏览器自动化。\n\nlibreoffice：适合文档转换，但必须确认本体安装路径和 headle  调用方式。\n\nn8n：更像自动化平台入口，需要本地服务，不是轻量一次性 CLI。",
+    "hacker-feed -cli：遇到模块导入错误，暂时不能直接交给选题工作流。",
+    "ob idian-cli：需要本机 Ob idian 和 vault 环境，方向有价值，但要先补齐依赖。",
+    "clibrow er：可能需要额外 binary 或 Ru t toolchain，先放候选，不进默认浏览器自动化。",
+    "libreoffice：适合文档转换，但必须确认本体安装路径和 headle  调用方式。",
+    "n8n：更像自动化平台入口，需要本地服务，不是轻量一次性 CLI。",
+    "主流程：CLI-Hub 负责发现，具体 CLI 负责执行， moke te t 负责验收。\n\n优先保留：mermaid、open creen、3MF。\n\n暂缓进入：hacker-feed 、ob idian、clibrow er、libreoffice、n8n，等环境补齐后再测。"
+  ],
+  "imgCount": 15,
+  "loadedImgs": 9,
+  "visibleImgs": 7,
+  "imgs": [
+    {
+      "i": 0,
+      "alt": "cover_image",
+      "src": "https://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf5nOODNobsO1AEwysCwQJAQGEJgEawwBxV5gn0s1iaaHN6L1HFljRBX3gOGh8lj3lVtYWoTFRBZzms4SLTLh6zVJJFBPmDncOH4/0?wx_fmt=jpeg",
+      "naturalWidth": 1280,
+      "naturalHeight": 544,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "visible": false
+    },
+    {
+      "i": 1,
+      "alt": "",
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "visible": false
+    },
+    {
+      "i": 2,
+      "alt": "",
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "visible": false
+    },
+    {
+      "i": 3,
+      "alt": "图片",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4uqkEBxnYU6cZ27wpbPibJrib4ceBKuicEek5HwuicQLyME4icqhfD1DjbcWuwbWn3Nnvia3alibT9mvxyStHPu4gaaFibyk2CwPmt97Q/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=0",
+      "naturalWidth": 1080,
+      "naturalHeight": 720,
+      "rect": {
+        "x": 20,
+        "y": -4848,
+        "w": 350,
+        "h": 233
+      },
+      "visible": true
+    },
+    {
+      "i": 4,
+      "alt": "图片",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7E7AKFqS4HkRhft5l1tkUhg7pUoQ2ia90r5QWaIH9CFXaVKdJllETxibrI42J81AVp4g3NzdoFDJIuHtgPh8MOW56a8DRicHC6UI/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=1",
+      "naturalWidth": 1080,
+      "naturalHeight": 608,
+      "rect": {
+        "x": 20,
+        "y": -3096,
+        "w": 350,
+        "h": 197
+      },
+      "visible": true
+    },
+    {
+      "i": 5,
+      "alt": "图片",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4tU11XggzCHxV42H0anRVmr5BFPdw0S4vxYcJaic2rzsibg1MVC3SmhnZvledOXCGM1OeffD079WFwN9iabnD5qLSF5nO9j63FCk/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=2",
+      "naturalWidth": 1080,
+      "naturalHeight": 608,
+      "rect": {
+        "x": 20,
+        "y": -2798,
+        "w": 350,
+        "h": 197
+      },
+      "visible": true
+    },
+    {
+      "i": 6,
+      "alt": "图片",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf460VAvv3piapvTWBdzEv8Zp81EeAgIUTRiaOnplK0BicAicGuq3Bu3sVharicTrmwibtlkXr03yGMA1ibESh8EPx4Fib4P7SahEEWXUbk/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=3",
+      "naturalWidth": 1080,
+      "naturalHeight": 3150,
+      "rect": {
+        "x": 20,
+        "y": -918,
+        "w": 350,
+        "h": 1021
+      },
+      "visible": true
+    },
+    {
+      "i": 7,
+      "alt": "赞赏二维码",
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 140,
+        "y": 838,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true
+    },
+    {
+      "i": 8,
+      "alt": "",
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "visible": false
+    },
+    {
+      "i": 9,
+      "alt": "",
+      "src": "https://mmbiz.qpic.cn/mmbiz_png/IVv8aQy6UZUYx9P5jnJ9MPtzZhST5kQRgHpnmG8Hf6hCyhmkKyC2Dx07iaUXIsNCFW6r6iaBVNQBN038zVz399gw/0?wx_fmt=png",
+      "naturalWidth": 272,
+      "naturalHeight": 272,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "visible": false
+    },
+    {
+      "i": 10,
+      "alt": "",
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "visible": false
+    },
+    {
+      "i": 11,
+      "alt": "跳转二维码",
+      "src": "https://mp.weixin.qq.com/s/xuSzK9YGg3-gjxnzcHiXVw",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "visible": false
+    },
+    {
+      "i": 12,
+      "alt": "作者头像",
+      "src": "https://mmbiz.qpic.cn/mmbiz_png/IVv8aQy6UZUYx9P5jnJ9MPtzZhST5kQRgHpnmG8Hf6hCyhmkKyC2Dx07iaUXIsNCFW6r6iaBVNQBN038zVz399gw/0?wx_fmt=png",
+      "naturalWidth": 272,
+      "naturalHeight": 272,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "visible": false
+    },
+    {
+      "i": 13,
+      "alt": "",
+      "src": "https://mmbiz.qpic.cn/mmbiz_png/IVv8aQy6UZUYx9P5jnJ9MPtzZhST5kQRgHpnmG8Hf6hCyhmkKyC2Dx07iaUXIsNCFW6r6iaBVNQBN038zVz399gw/300?wx_fmt=png&wxfrom=10018",
+      "naturalWidth": 150,
+      "naturalHeight": 150,
+      "rect": {
+        "x": 20,
+        "y": 796,
+        "w": 32,
+        "h": 32
+      },
+      "visible": true
+    },
+    {
+      "i": 14,
+      "alt": "划线引导图",
+      "src": "https://res.wx.qq.com/op_res/opqv3ix6k9E4e64ZzO7uIqE3ZblwIojfmt7u70m59yS1ylFK-hTu6Ra8V_LaWQJ1P4OlUJPdXLfVBtrm3TwRrw",
+      "naturalWidth": 756,
+      "naturalHeight": 642,
+      "rect": {
+        "x": 69,
+        "y": 956,
+        "w": 252,
+        "h": 214
+      },
+      "visible": true
+    }
+  ]
+}

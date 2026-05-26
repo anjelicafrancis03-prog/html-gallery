@@ -1,0 +1,33 @@
+{
+  "clickedConfirm": {
+    "x": 897,
+    "y": 787,
+    "cls": "weui-desktop-btn weui-desktop-btn_primary"
+  },
+  "state": {
+    "leftStyle": "background-image:url('http://mmecoa.qpic.cn/sz_mmecoa_jpg/MqBksTqEibf5ywN7mDOmSrJWzLjzO0icKV2PgpX6pDxXh2ibBZqx2r27WicqbBCia5ibsGib48kxKbI3YYDynXKrpLyTcN5UDADzV07BKaApa2AM5Y/0?wx_fmt=jpeg');",
+    "coverText": "拖拽或选择封面",
+    "coverHtml": "<div id=\"js_cover_area\" class=\"setting-group__cover setting-group__cover_primary\">\n                        <div class=\"select-cover__btn js_cover_btn_area select-cover__mask\">\n                          <i class=\"icon20_common add_cover\" style=\"display: inline-block;\"></i>\n                          <span class=\"btn-text js_share_type_none_image\" style=\"display: block;\">拖拽或选择封面</span>\n                          <span class=\"btn-text js_share_type_image\" style=\"display: none\">默认首图为封面</span>\n                        </div>\n                        <!-- 封面图加载出来之前的 loading 状态 -->\n                        <div class=\"select-cover__loading__mask js_cover_loading\" style=\"visibility: hidden;\">\n                          <i class=\"select-cover__loading weui-desktop-loading\"></i>\n                        </div>\n                        <!-- 默认隐藏，选中图片后才显示 -->\n                        <!-- <div class=\"select-cover__preview js_cover_preview_new\" style=\"display: none;\">\n                            <div class=\"select-cover__icon__modify js_cover_btn_area\">\n                                <a href=\"javascript:;\" class=\"icon18_common del_gray js_modifyCover\" onclick=\"return false;\">修改</a>\n                    ",
+    "coverImgStyle": "background-image: url(\"http://mmecoa.qpic.cn/sz_mmecoa_jpg/MqBksTqEibf5ywN7mDOmSrJWzLjzO0icKV2PgpX6pDxXh2ibBZqx2r27WicqbBCia5ibsGib48kxKbI3YYDynXKrpLyTcN5UDADzV07BKaApa2AM5Y/0?wx_fmt=jpeg\");",
+    "coverImgSrc": "",
+    "dialogs": 4,
+    "status": [
+      "已保存"
+    ]
+  },
+  "hasCover": true,
+  "final": {
+    "title": "【测试勿发】四个 HTML Skill 横向对比",
+    "bodyTextLength": 2724,
+    "editorImgCount": 4,
+    "leftStyle": "background-image:url('http://mmecoa.qpic.cn/sz_mmecoa_jpg/MqBksTqEibf5ywN7mDOmSrJWzLjzO0icKV2PgpX6pDxXh2ibBZqx2r27WicqbBCia5ibsGib48kxKbI3YYDynXKrpLyTcN5UDADzV07BKaApa2AM5Y/0?wx_fmt=jpeg');",
+    "coverText": "拖拽或选择封面",
+    "coverHtml": "<div id=\"js_cover_area\" class=\"setting-group__cover setting-group__cover_primary\">\n                        <div class=\"select-cover__btn js_cover_btn_area select-cover__mask\">\n                          <i class=\"icon20_common add_cover\" style=\"display: inline-block;\"></i>\n                          <span class=\"btn-text js_share_type_none_image\" style=\"display: block;\">拖拽或选择封面</span>\n                          <span class=\"btn-text js_share_type_image\" style=\"display: none\">默认首图为封面</span>\n                        </div>\n                        <!-- 封面图加载出来之前的 loading 状态 -->\n                        <div class=\"select-cover__loading__mask js_cover_loading\" style=\"visibility: hidden;\">\n                          <i class=\"select-cover__loading weui-desktop-loading\"></i>\n                        </div>\n                        <!-- 默认隐藏，选中图片后才显示 -->\n                        <!-- <div class=\"select-cover__preview js_cover_preview_new\" style=\"display: none;\">\n                            <div class=\"select-cover__icon__modify js_cover_btn_area\">\n                                <a href=\"javascript:;\" class=\"icon18_common del_gray js_modifyCover\" onclick=\"return false;\">修改</a>\n                            </div>\n                            <input type=\"hidden\" class=\"js_field js_file_id\" name=\"file_id\">\n                            <input type=\"hidden\" class=\"js_field js_cdn_url\" name=\"cdn_url\">\n                            <input type=\"hidden\" class=\"js_field js_cdn_url_back\" name=\"cdn_url_back\">\n                            <input type=\"hidden\" class=\"js_show_cover_pic js_field\" data-type='c",
+    "coverImgStyle": "background-image: url(\"http://mmecoa.qpic.cn/sz_mmecoa_jpg/MqBksTqEibf5ywN7mDOmSrJWzLjzO0icKV2PgpX6pDxXh2ibBZqx2r27WicqbBCia5ibsGib48kxKbI3YYDynXKrpLyTcN5UDADzV07BKaApa2AM5Y/0?wx_fmt=jpeg\");",
+    "coverImgSrc": "",
+    "dialogs": 4,
+    "status": [
+      "已保存"
+    ]
+  }
+}

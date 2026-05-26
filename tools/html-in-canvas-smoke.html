@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML-in-Canvas Smoke Test</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      background: #f6f4ee;
+      color: #182225;
+    }
+    body {
+      margin: 0;
+      padding: 40px 20px;
+    }
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      background: #fffdf8;
+      border: 1px solid #ded8cb;
+      box-shadow: 0 16px 40px rgba(24, 34, 37, .08);
+      padding: 28px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.15;
+    }
+    p {
+      line-height: 1.8;
+      color: #4f5b60;
+    }
+    .status {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .item {
+      border: 1px solid #ded8cb;
+      background: #faf8f1;
+      padding: 14px;
+      border-radius: 6px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      overflow-wrap: anywhere;
+    }
+    .ok {
+      color: #17724c;
+      font-weight: 800;
+    }
+    .bad {
+      color: #b94633;
+      font-weight: 800;
+    }
+    canvas {
+      width: 100%;
+      max-width: 720px;
+      height: 260px;
+      border: 1px solid #3145b7;
+      background: white;
+      display: block;
+      margin-top: 20px;
+    }
+    .card {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+      width: 320px;
+      padding: 18px;
+      border-radius: 10px;
+      border: 1px solid #d6d0c4;
+      background: #fbf7e8;
+      color: #162023;
+      font: 18px/1.5 "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+    }
+    .card strong {
+      color: #0f6f68;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>HTML-in-Canvas 固定环境烟测</h1>
+    <p>这个页面只用于确认当前浏览器是否真的开启了 HTML-in-Canvas 实验能力。普通 Chrome 大概率会失败；专用 Canary + flag 应显示 function。</p>
+    <div class="status" id="status"></div>
+    <canvas id="canvas" width="720" height="260" layoutsubtree>
+      <div class="card" id="domCard">
+        <strong>DOM content</strong><br>
+        这段 HTML 被浏览器排版后，再绘制进 Canvas。
+      </div>
+    </canvas>
+  </main>
+
+  <script>
+    const checks = [
+      ["canvas.requestPaint", () => typeof HTMLCanvasElement.prototype.requestPaint],
+      ["CanvasRenderingContext2D.drawElementImage", () => typeof CanvasRenderingContext2D.prototype.drawElementImage],
+      ["canvas.captureElementImage", () => typeof HTMLCanvasElement.prototype.captureElementImage],
+      ["WebGLRenderingContext.texElementImage2D", () => typeof WebGLRenderingContext.prototype.texElementImage2D],
+      ["GPUQueue.copyElementImageToTexture", () => typeof window.GPUQueue !== "undefined" ? typeof GPUQueue.prototype.copyElementImageToTexture : "missing GPUQueue"]
+    ];
+
+    const status = document.getElementById("status");
+    for (const [label, getValue] of checks) {
+      const value = getValue();
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `${label}<br><span class="${value === "function" ? "ok" : "bad"}">${value}</span>`;
+      status.appendChild(div);
+    }
+
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const card = document.getElementById("domCard");
+
+    function fallback() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#b94633";
+      ctx.font = "20px Segoe UI, Microsoft YaHei, Arial";
+      ctx.fillText("drawElementImage unavailable in this browser.", 28, 70);
+    }
+
+    if (typeof ctx.drawElementImage === "function" && typeof canvas.requestPaint === "function") {
+      canvas.onpaint = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#f6f4ee";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.translate(80, 62);
+        ctx.rotate(-0.05);
+        ctx.drawElementImage(card, 0, 0);
+      };
+      canvas.requestPaint();
+    } else {
+      fallback();
+    }
+  </script>
+</body>
+</html>

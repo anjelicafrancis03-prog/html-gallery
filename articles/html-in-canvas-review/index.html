@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级</title>
+  <meta name="description" content="基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。">
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --paper: #fffdf8;
+      --paper-2: #f2efe7;
+      --ink: #1f2a2e;
+      --muted: #657076;
+      --line: #ded8cb;
+      --accent: #0f6f68;
+      --accent-2: #c46a2a;
+      --accent-3: #275a8d;
+      --ok: #1f8a5b;
+      --bad: #b94633;
+      --code: #182022;
+      --shadow: 0 18px 50px rgba(31, 42, 46, .10);
+      --max: 1080px;
+      color-scheme: light;
+      font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(15, 111, 104, .08), rgba(15, 111, 104, 0) 420px),
+        var(--bg);
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+    a { color: var(--accent-3); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    img { max-width: 100%; display: block; }
+    .page { overflow: hidden; }
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 56px 24px 36px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(320px, .86fr);
+      gap: 34px;
+      align-items: end;
+    }
+    .kicker {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(42px, 6.6vw, 82px);
+      line-height: .98;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .dek {
+      margin: 26px 0 0;
+      max-width: 760px;
+      color: #3e4b50;
+      font-size: 20px;
+      line-height: 1.72;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta span {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.58);
+      padding: 8px 10px;
+      border-radius: 4px;
+    }
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .hero-card img {
+      border: 1px solid var(--line);
+      background: #fff;
+      width: 100%;
+      height: auto;
+    }
+    .caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .toc-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 248, .72);
+    }
+    .toc {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 9px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    section { margin: 0 0 76px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 26px;
+    }
+    .num {
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 900;
+      border-top: 2px solid var(--accent-2);
+      padding-top: 9px;
+    }
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 30px 0 12px;
+      font-size: 21px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0 0 16px;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+    .lead {
+      font-size: 19px;
+      line-height: 1.9;
+      color: #314044;
+    }
+    .callout {
+      margin: 26px 0;
+      padding: 20px 22px;
+      border-left: 5px solid var(--accent);
+      background: #e9f3ee;
+    }
+    .callout p { margin: 0; font-weight: 750; }
+    .verdict {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .verdict-card {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px;
+      min-height: 150px;
+    }
+    .verdict-card b {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 16px;
+    }
+    .verdict-card .big {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      line-height: 1.1;
+      color: var(--accent);
+    }
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 26px;
+    }
+    .figure {
+      margin: 28px 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 14px;
+      box-shadow: 0 10px 34px rgba(31, 42, 46, .06);
+    }
+    .figure img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      background: #fff;
+      border: 1px solid #e5e0d5;
+    }
+    .figure.compact img {
+      max-height: none;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 0;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #334248;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .dot.ok { background: var(--ok); }
+    .dot.bad { background: var(--bad); }
+    .dot.warn { background: var(--accent-2); }
+    .compare {
+      overflow-x: auto;
+      margin: 26px 0;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      font-size: 15px;
+    }
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.65;
+    }
+    th {
+      background: #ebe6da;
+      color: #263238;
+      font-weight: 850;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .status-ok { color: var(--ok); font-weight: 850; }
+    .status-bad { color: var(--bad); font-weight: 850; }
+    .status-warn { color: var(--accent-2); font-weight: 850; }
+    code {
+      font-family: "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+      font-size: .92em;
+      background: #eee7da;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    pre {
+      margin: 20px 0;
+      overflow-x: auto;
+      background: var(--code);
+      color: #e8f0ed;
+      border-radius: 6px;
+      padding: 18px;
+      line-height: 1.72;
+      font-size: 14px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    pre code { background: transparent; padding: 0; color: inherit; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 28px 0;
+    }
+    .step {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 16px;
+      position: relative;
+      min-height: 150px;
+      overflow-wrap: anywhere;
+    }
+    .step:after {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      width: 10px;
+      height: 1px;
+      background: var(--line);
+    }
+    .step:last-child:after { display: none; }
+    .step b { display: block; margin-bottom: 8px; color: var(--accent); }
+    .step p { font-size: 14px; line-height: 1.65; margin: 0; color: var(--muted); }
+    .quote {
+      margin: 34px 0;
+      padding: 30px;
+      background: #132326;
+      color: #f5f1e8;
+    }
+    .quote p {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(25px, 3.6vw, 42px);
+      line-height: 1.35;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      gap: 26px;
+      align-items: start;
+    }
+    .note-list {
+      margin: 18px 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .note-list li {
+      padding-left: 18px;
+      position: relative;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    .note-list li:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .72em;
+      width: 7px;
+      height: 7px;
+      background: var(--accent-2);
+    }
+    .source-box {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px;
+      margin-top: 22px;
+    }
+    .source-box p { margin: 0 0 8px; font-size: 15px; }
+    .source-box p:last-child { margin-bottom: 0; }
+    .final-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .final-card h2 { margin-bottom: 16px; }
+    .footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 48px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; padding-top: 36px; }
+      .section-head { grid-template-columns: 1fr; gap: 8px; }
+      .verdict, .evidence-grid, .split { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; }
+      .step:after { display: none; }
+      .toc { padding-left: 16px; padding-right: 16px; gap: 8px; }
+      .toc a { font-size: 13px; padding: 8px 10px; }
+      main { padding-left: 16px; padding-right: 16px; }
+      .hero { padding-left: 16px; padding-right: 16px; }
+      pre { font-size: 13px; padding: 16px; }
+    }
+    @media print {
+      body { background: #fff; }
+      .toc-band { display: none; }
+      .hero-card, .figure, .final-card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <p class="kicker">HTML-in-Canvas / local benchmark</p>
+        <h1>我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级</h1>
+        <p class="dek">前端圈说它要打通 DOM 和 Canvas。我没有停在转述概念，而是下载官方仓库、装 Canary、开实验 flag，把 2D、表单、WebGL、WebGPU demo 全部跑了一遍。结论比标题党更有意思：它是真的，但还很早。</p>
+        <div class="meta">
+          <span>测试日期：2026-05-22</span>
+          <span>仓库：WICG/html-in-canvas</span>
+          <span>测试机：Windows + Chrome 148 / Canary 150</span>
+        </div>
+      </div>
+      <figure class="hero-card">
+        <img src="assets/canary-webgl.png" alt="HTML 内容作为 WebGL 纹理贴到 3D 立方体上的实测截图">
+        <figcaption class="caption">实测截图：启用 flag 后，HTML 内容确实能作为 WebGL 纹理贴到旋转立方体上。</figcaption>
+      </figure>
+    </header>
+
+    <nav class="toc-band" aria-label="文章目录">
+      <div class="toc">
+        <a href="#verdict">结论</a>
+        <a href="#setup">测试环境</a>
+        <a href="#fail">普通 Chrome</a>
+        <a href="#pass">Canary 实测</a>
+        <a href="#details">逐项截图</a>
+        <a href="#limits">限制</a>
+        <a href="#rewrite">怎么写文章</a>
+      </div>
+    </nav>
+
+    <main>
+      <section id="verdict">
+        <div class="section-head">
+          <div class="num">01 / verdict</div>
+          <h2>先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。</h2>
+        </div>
+        <p class="lead">我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 <code>canvas-draw-element</code> 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。</p>
+        <div class="verdict">
+          <div class="verdict-card">
+            <b>普通 Chrome 148</b>
+            <div class="big">不可用</div>
+            <p>官方页面能打开，但核心 API 不存在，Canvas 是空白。</p>
+          </div>
+          <div class="verdict-card">
+            <b>Canary 150 + flag</b>
+            <div class="big">可跑通</div>
+            <p><code>drawElementImage</code>、<code>texElementImage2D</code>、<code>copyElementImageToTexture</code> 都出现。</p>
+          </div>
+          <div class="verdict-card">
+            <b>生产可用性</b>
+            <div class="big">太早</div>
+            <p>它仍是实验能力，不适合宣传成稳定标准或现成工程方案。</p>
+          </div>
+        </div>
+        <div class="callout">
+          <p>最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。</p>
+        </div>
+      </section>
+
+      <section id="setup">
+        <div class="section-head">
+          <div class="num">02 / setup</div>
+          <h2>测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。</h2>
+        </div>
+        <p>测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。</p>
+        <div class="flow" aria-label="测试流程">
+          <div class="step">
+            <b>1. clone 仓库</b>
+            <p>下载 <code>WICG/html-in-canvas</code> 到本地实验目录。</p>
+          </div>
+          <div class="step">
+            <b>2. 启动静态服务</b>
+            <p>用 <code>python -m http.server</code> 跑官方 HTML demo。</p>
+          </div>
+          <div class="step">
+            <b>3. 普通 Chrome 对照</b>
+            <p>固定 Chrome 148 打开页面，采 API 和截图。</p>
+          </div>
+          <div class="step">
+            <b>4. Canary + flag</b>
+            <p>下载 Chrome for Testing Canary 150，启用实验项。</p>
+          </div>
+          <div class="step">
+            <b>5. 逐项验证</b>
+            <p>检测 API、像素输出、交互、WebGL 和 WebGPU。</p>
+          </div>
+        </div>
+        <pre><code>git clone https://github.com/WICG/html-in-canvas
+cd html-in-canvas
+python -m http.server 4188 --bind 127.0.0.1</code></pre>
+        <p>Canary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。</p>
+        <pre><code>Chrome for Testing Canary: 150.0.7850.0
+Flag: chrome://flags/#canvas-draw-element
+Local State: "canvas-draw-element@1"</code></pre>
+      </section>
+
+      <section id="fail">
+        <div class="section-head">
+          <div class="num">03 / control</div>
+          <h2>第一轮：普通 Chrome 148，页面能开，但功能等于没有。</h2>
+        </div>
+        <div class="split">
+          <div>
+            <p>先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<code>&lt;canvas&gt;</code> 边框也显示了，但 HTML 内容没有被画进去。</p>
+            <p>核心 API 全部不存在：</p>
+            <ul class="note-list">
+              <li><code>canvas.requestPaint</code> 是 <code>undefined</code></li>
+              <li><code>CanvasRenderingContext2D.drawElementImage</code> 是 <code>undefined</code></li>
+              <li><code>WebGLRenderingContext.texElementImage2D</code> 是 <code>undefined</code></li>
+              <li><code>GPUQueue.copyElementImageToTexture</code> 是 <code>undefined</code></li>
+            </ul>
+          </div>
+          <figure class="figure compact">
+            <img src="assets/chrome148-empty-canvas.png" alt="普通 Chrome 148 下 HTML-in-Canvas 官方 demo 只显示空白 canvas">
+            <figcaption class="caption">普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。</figcaption>
+          </figure>
+        </div>
+        <div class="compare">
+          <table>
+            <thead>
+              <tr>
+                <th>环境</th>
+                <th>requestPaint</th>
+                <th>drawElementImage</th>
+                <th>WebGL texElementImage2D</th>
+                <th>结论</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Chrome 148 普通版</td>
+                <td><span class="status-bad">undefined</span></td>
+                <td><span class="status-bad">undefined</span></td>
+                <td><span class="status-bad">undefined</span></td>
+                <td>不可用，只能打开页面。</td>
+              </tr>
+              <tr>
+                <td>Canary 150 默认</td>
+                <td><span class="status-bad">undefined</span></td>
+                <td><span class="status-bad">undefined</span></td>
+                <td><span class="status-bad">undefined</span></td>
+                <td>有实验项，但默认不开。</td>
+              </tr>
+              <tr>
+                <td>Canary 150 + flag</td>
+                <td><span class="status-ok">function</span></td>
+                <td><span class="status-ok">function</span></td>
+                <td><span class="status-ok">function</span></td>
+                <td>官方 demo 实际跑通。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="pass">
+        <div class="section-head">
+          <div class="num">04 / canary</div>
+          <h2>第二轮：Canary 150 开 flag 后，核心 API 全部出现。</h2>
+        </div>
+        <p>Chrome for Testing Canary 150 的 <code>chrome://flags/#canvas-draw-element</code> 页面里确实能看到一个叫 <strong>HTML-in-Canvas</strong> 的实验项。描述也很直白：启用 Canvas 2D <code>drawElement</code> API 和 WebGL <code>texElement2D</code> API，用于把 HTML 内容画进 Canvas。</p>
+        <div class="quote">
+          <p>这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。</p>
+        </div>
+        <pre><code>canvas.requestPaint                         function
+canvas.captureElementImage                  function
+CanvasRenderingContext2D.drawElementImage   function
+WebGLRenderingContext.texElementImage2D     function
+WebGL2RenderingContext.texElementImage2D    function
+GPUQueue.copyElementImageToTexture          function</code></pre>
+        <div class="badge-row">
+          <span class="badge"><span class="dot ok"></span>2D Canvas API 存在</span>
+          <span class="badge"><span class="dot ok"></span>WebGL API 存在</span>
+          <span class="badge"><span class="dot ok"></span>WebGPU API 存在</span>
+          <span class="badge"><span class="dot warn"></span>需要 Canary + flag</span>
+        </div>
+      </section>
+
+      <section id="details">
+        <div class="section-head">
+          <div class="num">05 / evidence</div>
+          <h2>逐项看截图：它能画 HTML，也能保留表单交互。</h2>
+        </div>
+        <p>下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。</p>
+
+        <h3>1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了</h3>
+        <p>这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 <code>drawElementImage()</code> 绘制到 Canvas，并且整体还能旋转。</p>
+        <figure class="figure">
+          <img src="assets/canary-complex-text.png" alt="HTML-in-Canvas complex text demo 实测截图">
+          <figcaption class="caption">复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。</figcaption>
+        </figure>
+
+        <h3>2. 表单交互：输入框真的能点，值真的能改</h3>
+        <p>这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 <code>Canvas Test</code>。检查结果显示当前 active element 是 <code>shipName</code>，输入框值也变成了 <code>Canvas Test</code>。</p>
+        <figure class="figure">
+          <img src="assets/canary-text-input.png" alt="HTML-in-Canvas 表单交互 demo 输入框被改成 Canvas Test 的截图">
+          <figcaption class="caption">表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。</figcaption>
+        </figure>
+        <pre><code>{
+  "activeId": "shipName",
+  "value": "Canvas Test",
+  "checked": true
+}</code></pre>
+
+        <h3>3. 饼图：Canvas 画图形，HTML 负责多行标签</h3>
+        <p>这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。</p>
+        <figure class="figure">
+          <img src="assets/canary-pie-chart.png" alt="HTML-in-Canvas 饼图标签 demo 实测截图">
+          <figcaption class="caption">饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。</figcaption>
+        </figure>
+
+        <h3>4. WebGL：HTML 变成 3D 立方体纹理</h3>
+        <p>WebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。</p>
+        <figure class="figure">
+          <img src="assets/canary-webgl.png" alt="HTML-in-Canvas WebGL demo HTML 内容贴到 3D 立方体">
+          <figcaption class="caption">WebGL demo：<code>texElementImage2D()</code> 可用，HTML 内容被贴到旋转立方体上。</figcaption>
+        </figure>
+
+        <h3>5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染</h3>
+        <p>WebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，<code>GPUQueue.copyElementImageToTexture</code> 是 <code>function</code>，jelly slider 的视觉也成功渲染。</p>
+        <figure class="figure">
+          <img src="assets/canary-webgpu-jelly.png" alt="HTML-in-Canvas WebGPU jelly slider demo 实测截图">
+          <figcaption class="caption">WebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。</figcaption>
+        </figure>
+      </section>
+
+      <section id="limits">
+        <div class="section-head">
+          <div class="num">06 / limits</div>
+          <h2>所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。</h2>
+        </div>
+        <p>如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。</p>
+        <div class="compare">
+          <table>
+            <thead>
+              <tr>
+                <th>原文说法</th>
+                <th>实测后怎么改</th>
+                <th>原因</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>现在能用</td>
+                <td><span class="status-warn">Canary + flag 后能用</span></td>
+                <td>普通 Chrome 148 下 API 不存在。</td>
+              </tr>
+              <tr>
+                <td>痛点一次性清零</td>
+                <td><span class="status-warn">明显缓解一部分痛点</span></td>
+                <td>仍有实验开关、兼容性、安全和同步问题。</td>
+              </tr>
+              <tr>
+                <td>完整交互</td>
+                <td><span class="status-warn">官方表单 demo 可交互</span></td>
+                <td>交互路径成立，但复杂场景仍要实测。</td>
+              </tr>
+              <tr>
+                <td>HTML 就是 Canvas</td>
+                <td><span class="status-warn">Canvas 可以绘制 HTML 渲染快照</span></td>
+                <td>DOM 仍然存在，并参与布局、命中测试和无障碍。</td>
+              </tr>
+              <tr>
+                <td>生产级方案</td>
+                <td><span class="status-bad">暂时不能这么写</span></td>
+                <td>官方仍定位 Developer Trial / 实验能力。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。</p>
+      </section>
+
+      <section id="rewrite">
+        <div class="section-head">
+          <div class="num">07 / article angle</div>
+          <h2>如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。</h2>
+        </div>
+        <p>这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。</p>
+        <div class="final-card">
+          <h2>建议标题</h2>
+          <p><strong>我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级</strong></p>
+          <p>这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。</p>
+        </div>
+        <div class="source-box">
+          <p><strong>本地报告：</strong><code>F:\codex\experiments\html-in-canvas\TEST-REPORT.md</code></p>
+          <p><strong>官方仓库：</strong><a href="https://github.com/WICG/html-in-canvas">github.com/WICG/html-in-canvas</a></p>
+          <p><strong>官方提案：</strong><a href="https://wicg.github.io/html-in-canvas/">wicg.github.io/html-in-canvas</a></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>HTML review artifact. Source screenshots are from local Canary 150 / Chrome 148 tests. Generated for reusable HTML article workflow.</p>
+    </footer>
+  </div>
+</body>
+</html>

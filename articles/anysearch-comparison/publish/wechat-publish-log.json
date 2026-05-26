@@ -1,0 +1,72 @@
+{
+  "target": {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@5d864f4a4b1695464502ca7b2b1d36f78bf04600/inspector.html?ws=127.0.0.1:9223/devtools/page/F01E4F39A03D9A5C36629AFA3603E396",
+    "faviconUrl": "https://res.wx.qq.com/a/fed_upload/9300e7ac-cec5-4454-b75c-f92260dd5b47/logo-mp.ico",
+    "id": "F01E4F39A03D9A5C36629AFA3603E396",
+    "title": "公众号",
+    "type": "page",
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/F01E4F39A03D9A5C36629AFA3603E396"
+  },
+  "final": {
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+    "title": "",
+    "textLength": 0,
+    "imgCount": 0,
+    "leftStyle": "",
+    "hasCover": false,
+    "dialogs": [],
+    "hasQrVerify": false,
+    "hasPublishDialog": false,
+    "tail": "系统错误(320003)，请点击返回首页 关于腾讯 服务协议 规则中心 腾讯客服 侵权投诉 反馈官号weixingongzhong Copyright © 2012-2026 Tencent. All Rights Reserved. CDP Bridge"
+  },
+  "log": [
+    {
+      "step": "before",
+      "data": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "",
+        "textLength": 0,
+        "imgCount": 0,
+        "leftStyle": "",
+        "hasCover": false,
+        "dialogs": [],
+        "hasQrVerify": false,
+        "hasPublishDialog": false,
+        "tail": "系统错误(320003)，请点击返回首页 关于腾讯 服务协议 规则中心 腾讯客服 侵权投诉 反馈官号weixingongzhong Copyright © 2012-2026 Tencent. All Rights Reserved. CDP Bridge"
+      }
+    },
+    {
+      "step": "after-publish-click",
+      "data": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "",
+        "textLength": 0,
+        "imgCount": 0,
+        "leftStyle": "",
+        "hasCover": false,
+        "dialogs": [],
+        "hasQrVerify": false,
+        "hasPublishDialog": false,
+        "tail": "系统错误(320003)，请点击返回首页 关于腾讯 服务协议 规则中心 腾讯客服 侵权投诉 反馈官号weixingongzhong Copyright © 2012-2026 Tencent. All Rights Reserved. CDP Bridge"
+      }
+    },
+    {
+      "step": "after-confirm-click",
+      "data": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "",
+        "textLength": 0,
+        "imgCount": 0,
+        "leftStyle": "",
+        "hasCover": false,
+        "dialogs": [],
+        "hasQrVerify": false,
+        "hasPublishDialog": false,
+        "tail": "系统错误(320003)，请点击返回首页 关于腾讯 服务协议 规则中心 腾讯客服 侵权投诉 反馈官号weixingongzhong Copyright © 2012-2026 Tencent. All Rights Reserved. CDP Bridge"
+      }
+    }
+  ],
+  "screenshotPath": "C:/html/articles/anysearch-comparison/publish/wechat-publish-current.png"
+}

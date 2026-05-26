@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测</title>
+  <meta name="description" content="介绍 wechatDownload MCP：本地微信公众号文章下载工具，通过 MCP JSON-RPC 批量下载真实 mp.weixin.qq.com 链接，落盘 Markdown、HTML、MHTML、DOCX、PDF 和图片。">
+  <style>
+    :root {
+      --bg: #f7f4ec;
+      --paper: #fffdf8;
+      --ink: #182226;
+      --muted: #647078;
+      --line: #ded7ca;
+      --accent: #0f6f68;
+      --accent-2: #bf6b2f;
+      --accent-3: #295f92;
+      --soft: #edf5f2;
+      --code: #142326;
+      --max: 1040px;
+      color-scheme: light;
+      font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(15, 111, 104, .11), rgba(15, 111, 104, 0) 420px),
+        var(--bg);
+      letter-spacing: 0;
+    }
+    a { color: var(--accent-3); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    img { display: block; width: 100%; height: auto; object-fit: contain; }
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 58px 24px 38px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .84fr);
+      gap: 34px;
+      align-items: end;
+    }
+    .kicker {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 790px;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(42px, 6.2vw, 78px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .dek {
+      margin: 24px 0 0;
+      max-width: 740px;
+      color: #3d4a50;
+      font-size: 20px;
+      line-height: 1.75;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta span {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .76);
+      padding: 8px 10px;
+      border-radius: 4px;
+    }
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px rgba(24, 34, 38, .10);
+      padding: 18px;
+    }
+    .hero-card img { border: 1px solid var(--line); background: #fff; }
+    .hero-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .toc-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 248, .78);
+    }
+    .toc {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 8px 11px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 44px 24px 90px;
+    }
+    section { margin: 0 0 74px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 24px;
+      align-items: baseline;
+      border-top: 2px solid var(--accent-2);
+      padding-top: 18px;
+      margin-bottom: 24px;
+    }
+    .num {
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(28px, 4.2vw, 46px);
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 28px 0 12px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    p {
+      margin: 14px 0;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+    .lead {
+      font-size: 20px;
+      line-height: 1.85;
+      color: #2d3a40;
+    }
+    .quote {
+      margin: 32px 0;
+      padding: 28px;
+      background: var(--code);
+      color: #f6f2e8;
+    }
+    .quote p {
+      margin: 0;
+      color: inherit;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: 24px;
+      line-height: 1.55;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 26px 0;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px;
+      min-height: 132px;
+    }
+    .stat b {
+      display: block;
+      color: var(--accent);
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .82);
+      padding: 18px;
+    }
+    .card b { display: block; margin-bottom: 8px; color: var(--accent); }
+    .card p { margin: 0; font-size: 15px; color: var(--muted); line-height: 1.75; }
+    .figure {
+      margin: 26px 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: 0 14px 36px rgba(24, 34, 38, .08);
+    }
+    .figure img {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .figure.tall {
+      max-height: 760px;
+      overflow: auto;
+    }
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .timeline {
+      counter-reset: step;
+      display: grid;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px;
+    }
+    .step:before {
+      content: counter(step, decimal-leading-zero);
+      color: var(--accent-2);
+      font-weight: 900;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .step b { display: block; margin-bottom: 6px; font-size: 18px; }
+    .step p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    pre {
+      margin: 20px 0;
+      background: var(--code);
+      color: #e9f0ee;
+      border-radius: 6px;
+      padding: 18px;
+      line-height: 1.75;
+      font-size: 15px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    code {
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      background: #efe9dd;
+      padding: 2px 5px;
+      border-radius: 3px;
+      overflow-wrap: anywhere;
+    }
+    .final-card {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 28px;
+      box-shadow: 0 18px 50px rgba(24, 34, 38, .08);
+    }
+    .sources {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; padding: 38px 16px 30px; }
+      .section-head { grid-template-columns: 1fr; gap: 8px; }
+      main { padding-left: 16px; padding-right: 16px; }
+      .toc { padding-left: 16px; padding-right: 16px; }
+      .stats, .cards { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 48px minmax(0, 1fr); }
+      .quote p { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="kicker">wechatDownload MCP / Batch Archive</p>
+      <h1>史上最好用的公众号文章批量下载工具</h1>
+      <p class="dek">如果你手里已经有一批真实公众号文章链接，`wechatDownload MCP` 可以把它们交给本地工具批量下载，落盘 Markdown、HTML、MHTML、DOCX、PDF 和图片。Agent 不需要手工点网页，只需要通过 MCP JSON-RPC 调工具。</p>
+      <div class="meta">
+        <span>测试日期：2026-05-22</span>
+        <span>样本：记忆承载索引页</span>
+        <span>结果：545 / 545 触发成功</span>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <img src="assets/hero-tool-summary.png" alt="wechatDownload MCP 工具概览信息图">
+      <p>工具概览：链接提取、MCP 调用、单篇测试、批量触发、本地验收。</p>
+    </aside>
+  </header>
+
+  <nav class="toc-band" aria-label="文章目录">
+    <div class="toc">
+      <a href="#what">工具定位</a>
+      <a href="#workflow">下载流程</a>
+      <a href="#evidence">截图证据</a>
+      <a href="#output">落盘结果</a>
+      <a href="#commands">可复用命令</a>
+      <a href="#limits">边界</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="what">
+      <div class="section-head">
+        <div class="num">01 / what it is</div>
+        <h2>它不是“网页另存为”，而是给 Agent 用的本地下载工具。</h2>
+      </div>
+      <p class="lead">`wechatDownload MCP` 的定位很清楚：本地启动一个 MCP 服务，Agent 通过 JSON-RPC 调用，把真实 `mp.weixin.qq.com/s/...` 链接交给工具。工具负责在本地生成 `.md / .html / .mhtml / .docx / .pdf / images` 等文件。</p>
+      <div class="quote">
+        <p>一句话：它解决的是“我已经有公众号 URL，怎么批量、稳定、本地留存正文和素材”。</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>545</b><span>索引页提取到的文章链接</span></div>
+        <div class="stat"><b>545</b><span>批量触发成功数量</span></div>
+        <div class="stat"><b>501</b><span>最终有效 Markdown 正文</span></div>
+        <div class="stat"><b>6+</b><span>Markdown / HTML / MHTML / DOCX / PDF / images</span></div>
+      </div>
+      <figure class="figure">
+        <img src="assets/02-mcp-tools-list.png" alt="wechatDownload MCP 服务与工具列表">
+        <figcaption class="caption">MCP 服务与工具列表：`single_article_download`、`batch_download_articles`、`export_article_data` 等能力通过 JSON-RPC 暴露。</figcaption>
+      </figure>
+    </section>
+
+    <section id="workflow">
+      <div class="section-head">
+        <div class="num">02 / workflow</div>
+        <h2>完整流程是：先拿真实链接，再让 MCP 批量下载。</h2>
+      </div>
+      <div class="timeline">
+        <div class="step">
+          <div><b>启动本地工具</b><p>运行 `F:\codex\tools\wechatdownload4.5\微信公众号批量下载工具4.5.exe`，等待 MCP 服务出现在 `http://127.0.0.1:4545/mcp`。</p></div>
+        </div>
+        <div class="step">
+          <div><b>确认 MCP 工具列表</b><p>调用 `initialize` 和 `tools/list`，确认服务名称、版本和可用工具。</p></div>
+        </div>
+        <div class="step">
+          <div><b>构建链接池</b><p>从 `reading.quanlitu.com/detail/11481.html` 索引页提取真实 `mp.weixin.qq.com/s/...` 链接。</p></div>
+        </div>
+        <div class="step">
+          <div><b>单篇 smoke test</b><p>先抽 3 条链接调用 `single_article_download`，确认单篇下载链路正常。</p></div>
+        </div>
+        <div class="step">
+          <div><b>批量触发下载</b><p>用脚本逐条触发 545 条链接，并设置延迟，避免过快造成队列阻塞或风控风险。</p></div>
+        </div>
+        <div class="step">
+          <div><b>扫描本地结果</b><p>统计 Markdown 正文数量、账号目录、正文长度，生成最终验收报告。</p></div>
+        </div>
+      </div>
+      <figure class="figure">
+        <img src="assets/03-link-pool-check.png" alt="链接池来源与域名核验">
+        <figcaption class="caption">链接池来源与域名核验：索引页提供入口，正文下载仍然走真实公众号原文链接。</figcaption>
+      </figure>
+    </section>
+
+    <section id="evidence">
+      <div class="section-head">
+        <div class="num">03 / evidence</div>
+        <h2>这次不是“说能下”，而是把证据链留全。</h2>
+      </div>
+      <p>报告里保留了索引页、工具列表、链接池核验、单篇测试、批量触发、本地落盘结构、最终统计和原始下载证据。这里把关键截图按流程放出来。</p>
+      <figure class="figure tall">
+        <img src="assets/01-quanlitu-index-page.png" alt="记忆承载索引页截图">
+        <figcaption class="caption">索引页截图：这张图较长，页面内做了限高滚动，避免吞掉整篇文章。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="assets/04-smoke-test.png" alt="单篇下载 smoke test 截图">
+        <figcaption class="caption">单篇 smoke test：批量前先验证单篇链路，避免 545 条全量触发后才发现入口不通。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="assets/05-batch-progress.png" alt="批量触发过程截图">
+        <figcaption class="caption">批量触发过程：Agent 逐条把真实文章链接交给 MCP 工具。</figcaption>
+      </figure>
+    </section>
+
+    <section id="output">
+      <div class="section-head">
+        <div class="num">04 / output</div>
+        <h2>最终价值在本地落盘：正文、图片、网页快照都能继续分析。</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <b>Markdown 正文</b>
+          <p>适合后续总结、检索、导入 NotebookLM 或做内容研究。</p>
+        </div>
+        <div class="card">
+          <b>HTML / MHTML</b>
+          <p>适合保留网页结构，便于离线查看和后续格式转换。</p>
+        </div>
+        <div class="card">
+          <b>DOCX / PDF / images</b>
+          <p>适合归档、分发、人工阅读和素材复用。</p>
+        </div>
+      </div>
+      <figure class="figure">
+        <img src="assets/06-output-structure.png" alt="本地落盘结构截图">
+        <figcaption class="caption">本地落盘结构：下载结果按账号和文章组织，便于后续统计和筛选。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="assets/07-final-stats.png" alt="最终统计验收截图">
+        <figcaption class="caption">最终统计验收：545 条触发成功，最终有效 Markdown 正文 501 篇。</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="assets/08-existing-download-evidence.png" alt="原始下载证据截图">
+        <figcaption class="caption">原始下载证据：不是只看脚本日志，也看本地真实文件结构。</figcaption>
+      </figure>
+    </section>
+
+    <section id="commands">
+      <div class="section-head">
+        <div class="num">05 / commands</div>
+        <h2>可复用命令：检查服务、批量触发、统计正文。</h2>
+      </div>
+      <pre><code># 检查 MCP 服务
+Invoke-RestMethod -Uri 'http://127.0.0.1:4545/mcp' -Method Post -ContentType 'application/json' -Body '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+
+# 批量触发下载
+node F:\codex\tools\memorycarry_mcp_batch_download.js --start=0 --delayMs=1200
+
+# 统计有效正文
+python F:\codex\tools\memorycarry_mcp_analyze.py</code></pre>
+    </section>
+
+    <section id="limits" class="final-card">
+      <h2>边界必须讲清楚</h2>
+      <p>这个工具很好用，但它不是公众号文章搜索器。它需要你先有 URL 列表；如果微信原文删除，任何依赖 `mp.weixin.qq.com/s/...` 的工具都可能失败。</p>
+      <p>这次“记忆承载”不是镜像正文下载。索引页只提供链接池，正文来源要核验为真实公众号原文链接。</p>
+      <pre><code>正确理解：
+索引页提供链接 -> MCP 工具接收真实 mp.weixin.qq.com/s/... -> 本地落盘正文和素材
+
+错误理解：
+第三方索引页 = 正文来源
+镜像页面 = 原文证据</code></pre>
+      <p class="sources">源报告：`F:\codex\reports\wechatDownload-MCP工具介绍与记忆承载下载实录-20260522.md`。截图素材：`F:\codex\reports\assets\wechatdownload-mcp-tool-intro-20260522`。</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+  "label": "append-detail-1",
+  "args": [
+    "docs",
+    "+update",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--mode",
+    "append",
+    "--markdown",
+    "---\n\n## 当前样本详情\n\n原 HTML 这里是可切换的交互详情区。为了在飞书中尽量保留结构，这里展开为全量静态样本详情。\n\n| 题材 | 原交互详情区结论 | 可核验来源 |\n|---|---|---|\n| AgentMemory / MCP / Codex / Windsurf | Grok 能把 AgentMemory、MCP、Codex、Windsurf、Antigravity 放进同一技术栈解释，适合趋势判断。 | https://github.com/521xueweihan/HelloGitHub/issues/3193<br>https://github.com/yzfly/awesome-mcp-zh |\n| 小红书蒲公英报备与限流 | Grok 给出隐藏 level 字段、限流经验等社区视角；官方规则仍要用蒲公英帮助中心核验。 | https://pgy.xiaohongshu.com/help/docs?id=2908&userType=1<br>https://www.xiao-ad.com/jd/1047.html |\n| 闲鱼批量上架 / 多店铺工具 |...<902 chars>",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"doc_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"log_id\": \"202605261830359D85219265FF9EB2FD4C\",\n    \"message\": \"文档更新成功（append模式）\",\n    \"mode\": \"append\",\n    \"success\": true\n  }\n}\n",
+  "stderr": ""
+}
+{
+  "label": "append-detail-2",
+  "args": [
+    "docs",
+    "+update",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--mode",
+    "append",
+    "--markdown",
+    "| 题材 | 原交互详情区结论 | 可核验来源 |\n|---|---|---|\n| 飞书多维表格 API | 开发文档类题材 Bright Data 更可靠，Grok 适合把字段类型和注意事项翻译成人话。 | https://open.feishu.cn/document/docs/bitable-v1/faq?lang=zh-CN<br>https://www.feishu.cn/hc/zh-CN/articles/336307279050-%E5%A4%9A%E7%BB%B4%E8%A1%A8%E6%A0%BC-api-%E5%8A%9F%E8%83%BD%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98 |\n| 固定 Chrome CDP 9223 + Playwright | Grok 很会写步骤，但涉及浏览器检测时要遵守验证和平台规则。 | https://playwright.nodejs.cn/ |\n| 微信公众号转载 / 原创 / 白名单 | 正式操作以微信后台和微信开放社区为准，Grok 适合做流程说明草稿。 | https://develope...<839 chars>",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"doc_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"log_id\": \"202605261830365124E91B191D42A9B447\",\n    \"message\": \"文档更新成功（append模式）\",\n    \"mode\": \"append\",\n    \"success\": true\n  }\n}\n",
+  "stderr": ""
+}
+{
+  "label": "append-detail-3",
+  "args": [
+    "docs",
+    "+update",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--mode",
+    "append",
+    "--markdown",
+    "| 题材 | 原交互详情区结论 | 可核验来源 |\n|---|---|---|\n| 深圳灵活就业社保补贴 | 地方政策类 Bright Data 明显胜出，应该优先找政府域名和公示 PDF。 | http://hrss.sz.gov.cn/ztfw/gaojyzt/jycy/lhjysbbt/<br>https://www.szlh.gov.cn/lhrlzyj/gkmlpt/content/12/12776/post_12776641.html |\n| 中文开源 Agent Memory 本地向量检索 | 这个样本暴露了 Grok MCP 长批量调用仍需队列/重试机制；Bright Data 对中文开源资料更稳。 | https://github.com/yzfly/awesome-mcp-zh<br>https://www.openeuler.org/zh/blog/20260318-MCP_01/20260318-MCP_01.html |\n",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"doc_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"log_id\": \"20260526183037D1688F56ED7BA0AA6F26\",\n    \"message\": \"文档更新成功（append模式）\",\n    \"mode\": \"append\",\n    \"success\": true\n  }\n}\n",
+  "stderr": ""
+}
+{
+  "label": "append-evidence",
+  "args": [
+    "docs",
+    "+update",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--mode",
+    "append",
+    "--markdown",
+    "---\n\n## 维度评分\n\n| 工具 | 中文长尾 | 来源可核验 | 解释能力 | 稳定性 | 速度 |\n|---|---|---|---|---|---|\n| Grok MCP | 8 | 6 | 9 | 6 | 7 |\n| Bright Data | 9 | 9 | 5 | 9 | 8 |\n| Tavily | 7 | 6 | 7 | 7 | 8 |\n| 内置搜索 | 8 | 8 | 7 | 8 | 7 |\n\n---\n\n## 截图证据与复现实验\n\n| 证据块 | 内容 |\n|---|---|\n| Grok MCP 健康检查 | `grok-health.ok = true`，OAuth 已登录，执行路径为 release exe：`F:\\codex\\grok-cli\\target\\release\\grok-cli.exe` |\n| UTF-8 中文链路 | Node fetch 调 MCP，自测中文 query 原样回显，避免 PowerShell 把中文污染成问号。 |\n| Bright Data 取证 | SERP 能抓到官方文档、平台帮助中心、政府网站和中文长尾博客，适合作...<547 chars>",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"doc_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"log_id\": \"20260526183037B3E5E1C2094048DDA7B4\",\n    \"message\": \"文档更新成功（append模式）\",\n    \"mode\": \"append\",\n    \"success\": true\n  }\n}\n",
+  "stderr": ""
+}
+{
+  "label": "insert-main-image",
+  "args": [
+    "docs",
+    "+media-insert",
+    "--doc",
+    "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+    "--file",
+    "C:\\html\\articles\\grok-search-benchmark\\assets\\grok-search-benchmark-full.png",
+    "--caption",
+    "原 HTML 主 dashboard 全页截图",
+    "--align",
+    "center",
+    "--type",
+    "image",
+    "--as",
+    "user"
+  ],
+  "status": 2,
+  "stdout": "",
+  "stderr": "{\n  \"ok\": false,\n  \"identity\": \"user\",\n  \"error\": {\n    \"type\": \"validation\",\n    \"message\": \"unsafe file path: --file must be a relative path within the current directory, got \\\"C:\\\\\\\\html\\\\\\\\articles\\\\\\\\grok-search-benchmark\\\\\\\\assets\\\\\\\\grok-search-benchmark-full.png\\\" (hint: cd to the target directory first, or use a relative path like ./filename)\"\n  }\n}\n"
+}

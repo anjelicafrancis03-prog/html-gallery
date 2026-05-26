@@ -1,0 +1,668 @@
+{
+  "at": "2026-05-22 16:48:25",
+  "published_count": 6,
+  "articles_ranked": [
+    {
+      "href": "https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg",
+      "documentTitle": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+      "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+      "title_len": 40,
+      "account": "sinnple coffee",
+      "content_chars": 1837,
+      "text_sample": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用 结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。 这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。 总览图：四种工具在技术检索链路里的位置。 一、四种工具不要混着用 搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。 主搜索源 AnySearch 强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。 短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 URL。 建议位置：技术检索第一搜索源。 第二搜索源 Tavily 强项：结构化 JSON 好处理，适合补充证据、网页摘要和 RAG 入口。 短板：answer 看起来完整，但重名项目时会被带偏；必须看 URL 是否命中同一个对象。 建议位置：第二搜索源和交叉验证。 待接入源 Brave Search 强项：通用网页搜索生态完整，理论上适合补齐搜索结果。 短板：这次本机没有完整 API key，网页版又遇到 429，不能算严肃完整实测。 建议位置：等 BRAVE_SEARCH_API_KEY 接好后再进主流程。 解释层 DeepSeek Chat API 强项：适合解释搜索结果、压缩长文、总结差异、生成最终判断。 短板：不能访问实时网页，不应该被当成搜索引擎。 建议位置：搜索后的理解层，不放在找出处层。 二、关键样本：优势在“命中原始出处” 样本图：CodeGraph、CVE、OpenAI GPT Image 2、",
+      "image_count": 3,
+      "loaded_images": 3,
+      "max_image_width": 334,
+      "images": [
+        {
+          "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7L3S2b2nertk2lTibI28oTHPEaSOkLn1QpVXbBv4b1qp0zXsXyMJVhmbyEkicFsicBtoGbP7XSQlWjrtD076D7xGnCt0tcuDxtn0/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=0",
+          "width": 334.20452880859375,
+          "height": 214.75205993652344,
+          "naturalWidth": 1080,
+          "naturalHeight": 694,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 214.61776733398438,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 214.61776733398438,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        }
+      ],
+      "section_heading_count": 29,
+      "headings": [
+        "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "一、四种工具不要混着用",
+        "AnySearch",
+        "强项：",
+        "短板：",
+        "建议位置：",
+        "Tavily",
+        "强项：",
+        "短板：",
+        "建议位置：",
+        "Brave Search",
+        "强项：",
+        "短板：",
+        "建议位置：",
+        "DeepSeek Chat API",
+        "强项：",
+        "短板：",
+        "建议位置：",
+        "二、关键样本：优势在“命中原始出处”",
+        "CodeGraph benchmark："
+      ],
+      "card_like_blocks": 7,
+      "has_table": false,
+      "copy_anomalies": 0,
+      "list_title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+      "list_url": "https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg",
+      "score": 102,
+      "good": [
+        "标题信息完整",
+        "正文厚度够",
+        "图文密度够",
+        "图片全部加载",
+        "图片宽度适合公众号单列",
+        "分段标题清楚",
+        "卡片/分块明显",
+        "没有横向表格风险",
+        "未发现明显乱码/残缺关键词"
+      ],
+      "bad": []
+    },
+    {
+      "href": "https://mp.weixin.qq.com/s/llYKgI9VPoxdjRerx7U-1A",
+      "documentTitle": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付",
+      "title": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付",
+      "title_len": 36,
+      "account": "sinnple coffee",
+      "content_chars": 2621,
+      "text_sample": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是删掉谁，而是把它们变成一条流水线：设计系统 → 文章骨架 → 可视化模块 → 单文件交付。 横向对比表。 这四个 skill 看起来都在“写 HTML”，但真正的差别在于它们各自默认回答的问题不同。 审美claude-design 文章article-magazine 图解html-visual 交付html-anything 配图：四个 skill 的差别，不在于谁也能写 HTML，而在于默认解决的问题不同。 Skill 最擅长 不擅长 适合保留方式 claude-design 高保真视觉方向、品牌感、杂志感、版式系统、避免模板味。 它不是专门的文章转换器；如果没有内容骨架，容易先陷入视觉探索。 作为“视觉总监”放在最前面：先定审美和设计规则。 article-magazine 长文排版、公众号式节奏、章节组织、引用块、代码块、文末行动卡。 交互能力弱；复杂数据图、筛选、可视化要另补。 作为“文章主模板”：专门负责 HTML 图文长文。 html-visual 流程图、架构图、图表、交互筛选、看板、时间线、单页可视化。 默认不是长文写作；容易变成工具页或图表页，不像文章。 作为“图解模块库”：给文章插入互动解释区。 html-anything 把各种输入变成可打开的 HTML 成品；自动选风格、强调单文件交付。 范围太大，若不约束题材和风格，可能输出泛化报告。 作为“最终打包器”：统一落盘、交付、后续转平台。 逐个拆开看。 01 claude-design：负责“像不像高级设计” 它的价值不是写文章，而是防止 HTML 文章变成普通博客",
+      "image_count": 4,
+      "loaded_images": 4,
+      "max_image_width": 334,
+      "images": [
+        {
+          "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf41v7ia9980YiaJJ9n0DTb6fGcaGZBC1CibgZs8ftELfnE8GHvnTbRpyNYfl0XxD5vMmUCsETibc4bJFMHSaNCuBYUNmd4um3TibF6w/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=0",
+          "width": 334.1838684082031,
+          "height": 142.02479553222656,
+          "naturalWidth": 1080,
+          "naturalHeight": 459,
+          "complete": true
+        },
+        {
+          "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5aWjVia1KqREh8slJQyrQFq24Sgt2WyOwfUd3JJZxibzlJFXK28iaHYiaxzibjeYwCPxOhcvrda7UbC27eJbS6CKHfCwAr0b9DFQ9k/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=1",
+          "width": 334.2148742675781,
+          "height": 334.2148742675781,
+          "naturalWidth": 1080,
+          "naturalHeight": 1080,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 166.99380493164062,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 222.665283203125,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        }
+      ],
+      "section_heading_count": 17,
+      "headings": [
+        "先说结论：它们不是四选一。",
+        "横向对比表。",
+        "逐个拆开看。",
+        "01 claude-design：负责“像不像高级设计”",
+        "02 article-magazine：负责“像不像一篇可读长文”",
+        "03 html-visual：负责“让复杂内容看得懂”",
+        "04 html-anything：负责“最后真的变成成品”",
+        "最稳的组合方式。",
+        "先用 `claude-design` 定视觉系统。",
+        "再用 `article-magazine` 搭文章骨架。",
+        "中途调用 `html-visual` 做关键模块。",
+        "最后用 `html-anything` 收口交付。",
+        "不知道用哪个？按目标选。",
+        "写文章：`article-magazine` 做主",
+        "保留全部。",
+        "最后怎么保留配合？",
+        "一句话版"
+      ],
+      "card_like_blocks": 8,
+      "has_table": true,
+      "copy_anomalies": 0,
+      "list_title": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付",
+      "list_url": "https://mp.weixin.qq.com/s/llYKgI9VPoxdjRerx7U-1A",
+      "score": 88,
+      "good": [
+        "标题信息完整",
+        "正文厚度够",
+        "图文密度够",
+        "图片全部加载",
+        "图片宽度适合公众号单列",
+        "分段标题清楚",
+        "卡片/分块明显",
+        "未发现明显乱码/残缺关键词"
+      ],
+      "bad": [
+        "含表格，手机端风险较高"
+      ]
+    },
+    {
+      "href": "https://mp.weixin.qq.com/s/9MDJxUttWTm46bNtw_EKWQ",
+      "documentTitle": "真实浏览器爬取方案重新评定",
+      "title": "真实浏览器爬取方案重新评定",
+      "title_len": 13,
+      "account": "sinnple coffee",
+      "content_chars": 4308,
+      "text_sample": "Browser Automation Review 真实浏览器爬数据，哪套方案该留下？ 这不是泛泛比较 Playwright、OpenCLI、CDP Bridge MCP、playwright-cli 谁更“先进”。评定口径只有一个： 在已经登录的固定 Chrome 里，能不能稳定读到 TikTok、Instagram、微博、小红书、抖音、知乎这类动态页面， 并最终沉淀成可重复运行的数据供给。 看最终排序 看评分矩阵 看落地路线 A- 当前推荐组合 Playwright 做生产线，CDP Bridge 做真实会话接管，OpenCLI 做快速操作，playwright-cli 做探索和固化。 验证对象 固定 Chrome、CDP 9223、CDP Bridge 18765/18766、OpenCLI、微博搜索页 关键事实 CDP Bridge 可列出真实标签页，并能执行 JS；OpenCLI 可读微博结果；Playwright 仍最适合长期脚本。 主要风险 不要把“交互式接管工具”误当成“批处理爬虫生产线”。两者定位不同。 图 1. 总排行。先看谁是主力，谁只是快刀，谁必须降级。 图 2. 分层路线。真实会话、快速操作、探索固化、最终生产线四层分工。 图 3. 场景选型。按“长期爬取 / 真实会话 / 快速操作”直接对号入座。 总排行：先分清谁负责什么 真正可用的工具箱不是单选题。最稳的路线，是让每个工具只做它擅长的那一段。 01 Playwright CDP 生产主力 02 CDP Bridge MCP 会话接管 03 OpenCLI 快速操作 04 playwright-cli 探索固化 05 raw CDP 底层急救 06 Codex Chrome 插件 交互辅助 07 HTTP / Scrapy 等 降级 评分矩阵：不要只看“能不能打开” 我按真实爬数需要重新打分：登录态复用、可维护性、中文数据质量、交互能力、批处理能力、排障成本。 方案 定位 登录态复用 数据质量 长期运行 主要短板 综合 Playwright connect_over_cdp 最终脚本和定时任",
+      "image_count": 4,
+      "loaded_images": 4,
+      "max_image_width": 334,
+      "images": [
+        {
+          "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf54Licib6Uv9Giat5MrMjDsn4tMAmuSzTO6Q1oed6QjdP4MO1jPro3mZeeb6t8qzZtBXic9Ixeolic0cI6vPcSbDSXfiardbx56AY8zU/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=0",
+          "width": 334.1838684082031,
+          "height": 142.02479553222656,
+          "naturalWidth": 1080,
+          "naturalHeight": 459,
+          "complete": true
+        },
+        {
+          "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7QvlYMWcJNCesQxmnsessk9YAQPicd119UF8muqINFZnIkn3sibA4aiah21rDmv6DEpyVfbFOlR9YldoAHzMvVSFPdRkOREpOS1k/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=1",
+          "width": 334.2148742675781,
+          "height": 222.80990600585938,
+          "naturalWidth": 1080,
+          "naturalHeight": 720,
+          "complete": true
+        },
+        {
+          "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf6v1B9sGeuMcj6PVneAkAddWhiaDwVtf95NrV3blrvibqhynMgydZOvIRBibiag3Dbz5ZMXmMceNqDnSOsVulaJsiaMEHR2RYZgGic0Q/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=2",
+          "width": 334.2148742675781,
+          "height": 222.80990600585938,
+          "naturalWidth": 1080,
+          "naturalHeight": 720,
+          "complete": true
+        },
+        {
+          "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4JNowPwfkCIOC5UibUMxB1dpgdzt3vvLpEJTY1RTJTrSd3rserpJgM3WcQkbT29yPUH3Ptyl0E0HmcuiapyFbIWZJMWFU5eicZLE/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=3",
+          "width": 334.2148742675781,
+          "height": 222.80990600585938,
+          "naturalWidth": 1080,
+          "naturalHeight": 720,
+          "complete": true
+        }
+      ],
+      "section_heading_count": 69,
+      "headings": [
+        "真实浏览器爬数据，哪套方案该留下？",
+        "当前推荐组合",
+        "验证对象",
+        "关键事实",
+        "主要风险",
+        "图 1.",
+        "图 2.",
+        "图 3.",
+        "总排行：先分清谁负责什么",
+        "Playwright CDP",
+        "CDP Bridge MCP",
+        "OpenCLI",
+        "playwright-cli",
+        "raw CDP",
+        "Codex Chrome 插件",
+        "HTTP / Scrapy 等",
+        "评分矩阵：不要只看“能不能打开”",
+        "Playwright connect_over_cdp",
+        "CDP Bridge MCP",
+        "OpenCLI"
+      ],
+      "card_like_blocks": 10,
+      "has_table": true,
+      "copy_anomalies": 0,
+      "list_title": "真实浏览器爬取方案重新评定",
+      "list_url": "https://mp.weixin.qq.com/s/9MDJxUttWTm46bNtw_EKWQ",
+      "score": 88,
+      "good": [
+        "标题信息完整",
+        "正文厚度够",
+        "图文密度够",
+        "图片全部加载",
+        "图片宽度适合公众号单列",
+        "分段标题清楚",
+        "卡片/分块明显",
+        "未发现明显乱码/残缺关键词"
+      ],
+      "bad": [
+        "含表格，手机端风险较高"
+      ]
+    },
+    {
+      "href": "https://mp.weixin.qq.com/s/0FGLqz8JAkeQJX6X0K1qrA",
+      "documentTitle": "我把 Codex 接到飞书后，最大的变化不是“手机能聊天”",
+      "title": "我把 Codex 接到飞书后，最大的变化不是“手机能聊天”",
+      "title_len": 29,
+      "account": "sinnple coffee",
+      "content_chars": 2568,
+      "text_sample": "知乎专栏稿 · AI 多线程工作流 我把 Codex 接到飞书后，最大的变化不是“手机能聊天” 飞书在这里不是新的大脑，而是一个远程入口。真正重要的是：手机发出去的消息，能不能回到桌面 Codex 的同一条长期线程。 这篇文章讲清楚三件事 1 为什么“能聊”不等于“工作流连续”。 2 飞书里的“接线”如何把消息送回本机 Codex 线程。 3 公开项目时，哪些能写，哪些必须留在私有环境。 我读完这个开源项目后，越来越觉得，AI 工具真正麻烦的地方，不是它不会做事，而是线程一多，人先乱。 一个线程在改代码，一个线程在查资料，一个线程在整理文档，还有一个线程专门管系统状态。只要你离开电脑，手机里再开一个新的聊天窗口，看起来是“移动办公”，实际上是在重新制造一份上下文。 所以我理解这个 codex-feishu-bridge 的时候，目标就不是把它看成一个“飞书聊天机器人”。更准确地说，它更像一个随身控制台：飞书负责入口，真正的线程、工作区、状态和运行历史仍然留在本机 Codex。 一、为什么不是再做一个机器人？ 因为“能聊”太容易了。 随便接一个 Bot，飞书里发消息，模型回一段话，这件事没什么稀奇。问题在于，真实工作不是一问一答，而是一条条持续很久的线。 比如桌面 Codex 里可能同时有这些长期线程： 一个管 Windows 系统维护 一个管 skills 和工具链 一个管搜索和资料核验 一个管具体项目 一个管内容生产和发布 这些线程各自有上下文，也各自有历史。如果手机飞书只是新开一个机器人，那它再聪明，也接不上这些旧线。 “飞书接 Codex”最容易被低估的地方在这里：它真正要解决的不是远程聊天，而是线程接线。 二、飞书里的“接线”到底是什么？ 最简单的用法是，在飞书里发“接线”。它返回的不是一个通用菜单，而是可接入的本机 Codex 线程列表。你选一个序号，后续普通消息就临时进入那条线程。 在飞书里看到可接线线程列表，选择后把后续消息送进指定 Codex 线程。 这个动作有点像电话总机。你不是让飞书重新创建一个 AI，而是在告诉本地桥：接下来这段话，送到哪条 Cod",
+      "image_count": 5,
+      "loaded_images": 5,
+      "max_image_width": 334,
+      "images": [
+        {
+          "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf68OGP70h5F8WS1bNHXDal9FsOA533QiaRIslVLRQF6SO056cqhvmtibhsoicEZqvRGvtTV5tLlIhcoXwyuEqnuc0XnP7Yb57wFicg/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=0",
+          "width": 334.1838684082031,
+          "height": 142.02479553222656,
+          "naturalWidth": 1080,
+          "naturalHeight": 459,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 301.9938049316406,
+          "height": 671.9318237304688,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 301.9938049316406,
+          "height": 170.0103302001953,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 301.9938049316406,
+          "height": 671.9318237304688,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 301.9938049316406,
+          "height": 201.3223114013672,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        }
+      ],
+      "section_heading_count": 8,
+      "headings": [
+        "我把 Codex 接到飞书后，最大的变化不是“手机能聊天”",
+        "这篇文章讲清楚三件事",
+        "一、为什么不是再做一个机器人？",
+        "二、飞书里的“接线”到底是什么？",
+        "三、手机和桌面为什么能无缝？",
+        "四、长期用，难点反而在这些小地方",
+        "五、公开版和私有版一定要分开",
+        "六、它适合谁？"
+      ],
+      "card_like_blocks": 0,
+      "has_table": true,
+      "copy_anomalies": 0,
+      "list_title": "我把 Codex 接到飞书后，最大的变化不是“手机能聊天”",
+      "list_url": "https://mp.weixin.qq.com/s/0FGLqz8JAkeQJX6X0K1qrA",
+      "score": 78,
+      "good": [
+        "标题信息完整",
+        "正文厚度够",
+        "图文密度够",
+        "图片全部加载",
+        "图片宽度适合公众号单列",
+        "分段标题清楚",
+        "未发现明显乱码/残缺关键词"
+      ],
+      "bad": [
+        "分块感不足",
+        "含表格，手机端风险较高"
+      ]
+    },
+    {
+      "href": "https://mp.weixin.qq.com/s/5n9abYlSYAl343fBLapRLg",
+      "documentTitle": "比特、MoreLogin、AdsPower 三款指纹浏览器实测对比",
+      "title": "比特、MoreLogin、AdsPower 三款指纹浏览器实测对比",
+      "title_len": 33,
+      "account": "sinnple coffee",
+      "content_chars": 5329,
+      "text_sample": "很多人在选指纹浏览器时，第一反应是看价格。 这个反应没错，但不够。 如果你是拿它做自动化、采集、账号运营、批量测试，真正要看的不是“能不能打开网页”，而是这套链路能不能长期跑： • Local API 能不能启动环境 • 能不能稳定拿到 CDP 地址 • Playwright 能不能接上 • 页面操作会不会频繁波动 • 失败后有没有证据可查 • 工具成本和任务价值是否匹配 这次我们在同一台 Windows 机器上，把 比特浏览器、MoreLogin、AdsPower 三款工具按真实自动化任务测了一遍。 结论先放前面： 比特适合低成本跑量，AdsPower 适合稳定主力，MoreLogin 目前更适合做备选测试。 先给选择建议 如果你只想快速决策，可以直接按下面这个表选。 你的需求 更推荐 成本优先，先把流程跑起来 比特浏览器 自动化稳定性优先 AdsPower 团队协作、环境管理、API 规整度 AdsPower 云手机低频试用 MoreLogin 或比特，继续看套餐 技术验证、横向对照 MoreLogin 高价值账号任务 AdsPower 大批量低价值任务 比特浏览器 换成更直白的话： 只选一个起步：选比特。 只选一个长期稳定：选 AdsPower。 预算允许：比特跑量，AdsPower 保关键账号，MoreLogin 先别投入太多。 我们到底怎么测 这不是只看官网参数，也不是打开 example.com 就算通过。 测试方式是： Local API 启动环境 -> 拿 CDP 调试地址 -> Playwright connectOverCDP -> 跑完整电商下单流程 -> 截图留证 -> 关闭环境 测试网站用的是 SauceDemo，一个常见的自动化测试电商站。 完整流程包括： • 登录 • 清理本地状态 • 商品排序 • 加购两个商品 • 进入购物车 • 填写结算表单 • 完成订单 • 截图 • 关闭浏览器环境 这个流程覆盖了页面跳转、表单输入、下拉选择、DOM 等待、状态持久化和截图留证，比“网页能打开”更接近真实任务。 总览：三款工具的定位差异 项目 比特浏",
+      "image_count": 5,
+      "loaded_images": 5,
+      "max_image_width": 334,
+      "images": [
+        {
+          "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf67RTtN0PA64T2tuZz5rLwNvzPicItfKzh76o8zQn0PUDWn150eUo4ROI8dKqtMl6bl0arxqicQ3bbqhvMzINnicZehJLXD9OE5VU/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=0",
+          "width": 334.1838684082031,
+          "height": 142.02479553222656,
+          "naturalWidth": 1080,
+          "naturalHeight": 459,
+          "complete": true
+        },
+        {
+          "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7q3bEDaMFibz17RTT2dZwF2VyDqCMwaMNOLZHIrTHL1KJJj8EYqoDBgxsbYZVdLveGsiblQc6kRSeMSp4BVaxRdP1yicQCSp3HIk/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=1",
+          "width": 334.2148742675781,
+          "height": 250.66114807128906,
+          "naturalWidth": 1080,
+          "naturalHeight": 810,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 194.2045440673828,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 355.33056640625,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 295.33056640625,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        }
+      ],
+      "section_heading_count": 36,
+      "headings": [
+        "比特浏览器、MoreLogin、AdsPower",
+        "比特适合低成本跑量，AdsPower 适合稳定主力，MoreLogin 目前更适合做备选测试。",
+        "先给选择建议",
+        "只选一个起步：选比特。",
+        "只选一个长期稳定：选 AdsPower。",
+        "预算允许：比特跑量，AdsPower 保关键账号，MoreLogin 先别投入太多。",
+        "我们到底怎么测",
+        "总览：三款工具的定位差异",
+        "比特浏览器：便宜不是原罪",
+        "比特的优点",
+        "第一，成本低。",
+        "第二，API 能用。",
+        "第三，有云手机入口。",
+        "第四，复杂流程能跑通。",
+        "比特的问题",
+        "AdsPower：贵一些，但链路最规整",
+        "AdsPower 的优点",
+        "第一，API 规整。",
+        "第二，Playwright 接入顺。",
+        "第三，官方 CLI 可用。"
+      ],
+      "card_like_blocks": 2,
+      "has_table": true,
+      "copy_anomalies": 0,
+      "list_title": "比特、MoreLogin、AdsPower 三款指纹浏览器实测对比",
+      "list_url": "https://mp.weixin.qq.com/s/5n9abYlSYAl343fBLapRLg",
+      "score": 78,
+      "good": [
+        "标题信息完整",
+        "正文厚度够",
+        "图文密度够",
+        "图片全部加载",
+        "图片宽度适合公众号单列",
+        "分段标题清楚",
+        "未发现明显乱码/残缺关键词"
+      ],
+      "bad": [
+        "分块感不足",
+        "含表格，手机端风险较高"
+      ]
+    },
+    {
+      "href": "https://mp.weixin.qq.com/s/6y32H2JT3u3lVa42bvUhEA",
+      "documentTitle": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级",
+      "title": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级",
+      "title_len": 34,
+      "account": "sinnple coffee",
+      "content_chars": 3502,
+      "text_sample": "先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。 我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。 普通 Chrome 148 不可用 官方页面能打开，但核心 API 不存在，Canvas 是空白。 Canary 150 + flag 可跑通 drawElementImage、texElementImage2D、copyElementImageToTexture 都出现。 生产可用性 太早 它仍是实验能力，不适合宣传成稳定标准或现成工程方案。 最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。 测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。 测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。 1. clone 仓库 下载 WICG/html-in-canvas 到本地实验目录。 2. 启动静态服务 用 python -m http.server 跑官方 HTML demo。 3. 普通 Chrome 对照 固定 Chrome 148 打开页面，采 API 和截图。 4. Canary + flag 下载 Chrome for Testing Canary 150，启用实验项。 5. 逐项验证 检测 API、像素输出、交互、WebGL 和 WebGPU。 Canary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。 第一轮：普通 Chrome 148，页面能开，但功能等于没",
+      "image_count": 7,
+      "loaded_images": 7,
+      "max_image_width": 334,
+      "images": [
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 141.942138671875,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 170.7024688720703,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 346.6735534667969,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 346.6735534667969,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 346.6735534667969,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 346.6735534667969,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        },
+        {
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+          "width": 333.9979248046875,
+          "height": 346.6735534667969,
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "complete": true
+        }
+      ],
+      "section_heading_count": 23,
+      "headings": [
+        "先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。",
+        "普通 Chrome 148",
+        "Canary 150 + flag",
+        "生产可用性",
+        "测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。",
+        "1. clone 仓库",
+        "2. 启动静态服务",
+        "3. 普通 Chrome 对照",
+        "4. Canary + flag",
+        "5. 逐项验证",
+        "第一轮：普通 Chrome 148，页面能开，但功能等于没有。",
+        "第二轮：Canary 150 开 flag 后，核心 API 全部出现。",
+        "HTML-in-Canvas",
+        "逐项看截图：它能画 HTML，也能保留表单交互。",
+        "1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了",
+        "2. 表单交互：输入框真的能点，值真的能改",
+        "3. 饼图：Canvas 画图形，HTML 负责多行标签",
+        "4. WebGL：HTML 变成 3D 立方体纹理",
+        "5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染",
+        "所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。"
+      ],
+      "card_like_blocks": 2,
+      "has_table": false,
+      "copy_anomalies": 1,
+      "list_title": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级 已修改",
+      "list_url": "https://mp.weixin.qq.com/s/6y32H2JT3u3lVa42bvUhEA",
+      "score": 72,
+      "good": [
+        "标题信息完整",
+        "正文厚度够",
+        "图文密度够",
+        "图片全部加载",
+        "图片宽度适合公众号单列",
+        "分段标题清楚",
+        "没有横向表格风险"
+      ],
+      "bad": [
+        "分块感不足",
+        "发现疑似乱码或残缺关键词"
+      ]
+    }
+  ],
+  "best": {
+    "href": "https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg",
+    "documentTitle": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+    "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+    "title_len": 40,
+    "account": "sinnple coffee",
+    "content_chars": 1837,
+    "text_sample": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用 结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。 这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。 总览图：四种工具在技术检索链路里的位置。 一、四种工具不要混着用 搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。 主搜索源 AnySearch 强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。 短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 URL。 建议位置：技术检索第一搜索源。 第二搜索源 Tavily 强项：结构化 JSON 好处理，适合补充证据、网页摘要和 RAG 入口。 短板：answer 看起来完整，但重名项目时会被带偏；必须看 URL 是否命中同一个对象。 建议位置：第二搜索源和交叉验证。 待接入源 Brave Search 强项：通用网页搜索生态完整，理论上适合补齐搜索结果。 短板：这次本机没有完整 API key，网页版又遇到 429，不能算严肃完整实测。 建议位置：等 BRAVE_SEARCH_API_KEY 接好后再进主流程。 解释层 DeepSeek Chat API 强项：适合解释搜索结果、压缩长文、总结差异、生成最终判断。 短板：不能访问实时网页，不应该被当成搜索引擎。 建议位置：搜索后的理解层，不放在找出处层。 二、关键样本：优势在“命中原始出处” 样本图：CodeGraph、CVE、OpenAI GPT Image 2、",
+    "image_count": 3,
+    "loaded_images": 3,
+    "max_image_width": 334,
+    "images": [
+      {
+        "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7L3S2b2nertk2lTibI28oTHPEaSOkLn1QpVXbBv4b1qp0zXsXyMJVhmbyEkicFsicBtoGbP7XSQlWjrtD076D7xGnCt0tcuDxtn0/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=0",
+        "width": 334.20452880859375,
+        "height": 214.75205993652344,
+        "naturalWidth": 1080,
+        "naturalHeight": 694,
+        "complete": true
+      },
+      {
+        "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+        "width": 333.9979248046875,
+        "height": 214.61776733398438,
+        "naturalWidth": 1,
+        "naturalHeight": 1,
+        "complete": true
+      },
+      {
+        "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+        "width": 333.9979248046875,
+        "height": 214.61776733398438,
+        "naturalWidth": 1,
+        "naturalHeight": 1,
+        "complete": true
+      }
+    ],
+    "section_heading_count": 29,
+    "headings": [
+      "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+      "一、四种工具不要混着用",
+      "AnySearch",
+      "强项：",
+      "短板：",
+      "建议位置：",
+      "Tavily",
+      "强项：",
+      "短板：",
+      "建议位置：",
+      "Brave Search",
+      "强项：",
+      "短板：",
+      "建议位置：",
+      "DeepSeek Chat API",
+      "强项：",
+      "短板：",
+      "建议位置：",
+      "二、关键样本：优势在“命中原始出处”",
+      "CodeGraph benchmark："
+    ],
+    "card_like_blocks": 7,
+    "has_table": false,
+    "copy_anomalies": 0,
+    "list_title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+    "list_url": "https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg",
+    "score": 102,
+    "good": [
+      "标题信息完整",
+      "正文厚度够",
+      "图文密度够",
+      "图片全部加载",
+      "图片宽度适合公众号单列",
+      "分段标题清楚",
+      "卡片/分块明显",
+      "没有横向表格风险",
+      "未发现明显乱码/残缺关键词"
+    ],
+    "bad": []
+  },
+  "tool_results": [
+    {
+      "method": "Playwright connectOverCDP",
+      "ok": true,
+      "ms": null,
+      "note": "本脚本全流程使用：读取发表记录、打开公开页、移动/桌面截图、DOM 统计。最适合长期脚本化。"
+    },
+    {
+      "method": "OpenCLI",
+      "ok": true,
+      "ms": 7744,
+      "note": "命令短，适合快速打开/看 state；复杂提取要写 eval 字符串，维护性一般",
+      "sample": "URL: https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg\n\nurl: https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg\ntitle: AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\nviewport: 1693x810\npage_scroll: 0.9↑ 3.8↓\n---\n<body id=activity-detail />\n  <div id=js_article />\n    <div id=js_base_container />\n      <div id=page-content />\n        <div />\n          <div id=img-content />\n            <h1 id=activity-name />\n              <span>AnySearch / Tavily / Brave 实测：以后技术检索该怎么用</span>\n            <div id=meta_content />\n              <span id=profileBt />\n                [1]<a id=js_name>sinnple coffee</a>\n              <span id=meta_content_hide_info />\n                <em id=publish_time>2026年5月22日 16:36</em>\n                <em id=js_ip_wording_wrp aria-label=上海 />\n                  <span id=js_ip_wording>上海</span>\n            <div id=js_novel_card />\n              <div />\n                <div />\n                  <div id=js_novel_title>在小说阅读器读本章</div>\n              <div id=js_novel_link>去阅读</div>\n "
+    },
+    {
+      "method": "raw CDP",
+      "ok": true,
+      "ms": null,
+      "note": "可直接操作 /json/list、Runtime.evaluate、Page.captureScreenshot；排障强，日常写法啰嗦。"
+    },
+    {
+      "method": "playwright-cli",
+      "ok": false,
+      "ms": null,
+      "note": "本机 playwright CLI 可用，但它会新开浏览器，不适合固定登录态公众号验收；不作为主流程。"
+    },
+    {
+      "method": "CDP Bridge MCP",
+      "ok": false,
+      "ms": null,
+      "note": "本轮 127.0.0.1:18766 未连接；适合读当前真实标签页，但依赖桥服务在线。"
+    },
+    {
+      "method": "Codex Chrome 插件",
+      "ok": "not_retaken",
+      "ms": null,
+      "note": "历史可用，但本轮公众号验收用 Playwright connectOverCDP 更直接；插件适合人工/AI 视觉探索，不作为批量脚本主流程。"
+    }
+  ]
+}

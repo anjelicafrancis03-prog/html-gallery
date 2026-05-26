@@ -1,0 +1,32 @@
+{
+  "target": {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@5d864f4a4b1695464502ca7b2b1d36f78bf04600/inspector.html?ws=127.0.0.1:9223/devtools/page/A34346F3CAD44579C14F7B78952FF653",
+    "faviconUrl": "https://res.wx.qq.com/a/fed_upload/9300e7ac-cec5-4454-b75c-f92260dd5b47/logo-mp.ico",
+    "id": "A34346F3CAD44579C14F7B78952FF653",
+    "title": "服务号",
+    "type": "page",
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779447099704&type=77&appmsgid=100000277&token=941781265&lang=zh_CN",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/A34346F3CAD44579C14F7B78952FF653"
+  },
+  "action": "inspect",
+  "actionResult": {},
+  "state": {
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779447099704&type=77&appmsgid=100000277&token=941781265&lang=zh_CN",
+    "title": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测",
+    "desc": "我用真实公众号链接跑了一遍 wechatDownload MCP：从工具列表、链接池、smoke test 到 545 条批量触发和 501 篇有效 Markdown 验收。",
+    "textLength": 2061,
+    "imgCount": 16,
+    "placeholderCount": 0,
+    "hasCover": false,
+    "coverText": "拖拽或选择封面",
+    "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+    "publishButtonVisible": true,
+    "saved": true,
+    "wordCount": "正文字数1442",
+    "forbiddenHits": [],
+    "dialogText": "未授权使用切换账号能力，请退出后扫码登录其他账号。登录时需勾选「 允许切换登录我的其他公众号、服务号、小程序」，才能切换账号。 退出登录 我知道了",
+    "tail": "ch_download.js --start=0 --delayMs=1200 # 统计有效正文 python F:\\codex\\tools\\memorycarry_mcp_analyze.py 七、边界必须写在最后 它不是搜索器 需要先有 URL 列表，不能凭空找到所有历史文章。 正文来源必须是公众号原文 也就是 `mp.weixin.qq.com/s/...`。第三方索引页只提供链接，不是正文来源。 原文删除后可能失败 只要依赖公众号原文链接，就会受原文可访问状态影响。 所以这套工具最适合的场景是：你已经有一批真实公众号文章 URL，想把下载、落盘、统计和后续分析交给本地 Agent 自动完成。 拖拽或选择封面 41/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 18:52已保存 正文字数1442 回到顶部 一键排版 发表 预览 保存为草稿 选择图片 最近使用 (117) 我的图片 (173) 未分组 (114) 文章配图 (59) 新建分组 原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片 关闭 已关闭图片水印 上传文件 wechat-cover-fixed-v2.png 粘贴图片_20260522185244.png 粘贴图片_20260522185237.png 粘贴图片_20260522185230.png 粘贴图片_20260522185224.png 粘贴图片_20260522185217.png 粘贴图片_20260522185210.png 粘贴图片_20260522185203.png 粘贴图片_20260522185156.png 粘贴图片_20260522181759.png wechat-cover-1200x512.png 粘贴图片_20260522180747.png 1 / 15 下一页 跳转 下一步 取消 问题反馈 CDP Bridge"
+  },
+  "screenshot": "C:\\html\\articles\\wechatdownload-mcp-tool\\publish\\wechatdownload-action-inspect.png"
+}

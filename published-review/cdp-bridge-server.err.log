@@ -1,0 +1,15 @@
+Using CPython 3.13.12
+Creating virtual environment at: .venv
+   Building cdp-bridge @ file:///F:/codex/cdp-bridge-mcp
+Downloading pywin32 (9.1MiB)
+Downloading cryptography (3.6MiB)
+Downloading pydantic-core (2.0MiB)
+      Built cdp-bridge @ file:///F:/codex/cdp-bridge-mcp
+ Downloaded pydantic-core
+ Downloaded cryptography
+ Downloaded pywin32
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 39 packages in 1.36s
+WebSocket server running on ws://127.0.0.1:18765

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "doc_id": "XwRjdHPB4obHRsxuXDmcznIinGh",
+  "doc_url": "https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh",
+  "source_html": "C:\\html\\articles\\grok-search-benchmark\\index.html",
+  "markdown": "C:\\html\\articles\\grok-search-benchmark\\publish\\feishu-publish.md",
+  "assets_inserted": [
+    "assets/grok-search-benchmark-full.png",
+    "assets/grok-search-benchmark-video-full.png",
+    "assets/grok-mcp-test-video-480p-6s.mp4",
+    "assets/grok-search-benchmark-grayops-full.png"
+  ],
+  "log": "C:\\html\\articles\\grok-search-benchmark\\publish\\feishu-media-upload.log"
+}

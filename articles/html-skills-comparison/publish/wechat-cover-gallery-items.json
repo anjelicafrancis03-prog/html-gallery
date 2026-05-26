@@ -1,0 +1,878 @@
+{
+  "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779413648610&type=77&appmsgid=100000182&token=941781265&lang=zh_CN",
+  "imgs": [],
+  "bgs": [
+    {
+      "idx": 0,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf67RTtN0PA64T2tuZz5rLwNvzPicItfKzh76o8zQn0PUDWn150eUo4ROI8dKqtMl6bl0arxqicQ3bbqhvMzINnicZehJLXD9OE5VU/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 576,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf67RTtN0PA64T2tuZz5rLwNvzPicItfKzh76o8zQn0PUDWn150eUo4ROI8dKqtMl6bl0arxqicQ3bbqhvMzINnicZehJLXD9OE5VU/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 1,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf46VfZNZcYqE4Y9FHXGRzeMZMwUBV1O1U0DibXtYWgkRly4t7doDR5ib6pV5jT6icicMgpDIIbAdGoicaakP9TdDdLnVqjv9HgDopCY/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 699,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf46VfZNZcYqE4Y9FHXGRzeMZMwUBV1O1U0DibXtYWgkRly4t7doDR5ib6pV5jT6icicMgpDIIbAdGoicaakP9TdDdLnVqjv9HgDopCY/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 2,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6WlibVfrKYM9QAKVicYLPIfibG3hdicjwJiaas7frhv8nXPOllrApHd0icJB3PJeAymJZ1dxxTpGic0eA7J9xaKtibziaIzKQFJSxIbceg/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 822,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6WlibVfrKYM9QAKVicYLPIfibG3hdicjwJiaas7frhv8nXPOllrApHd0icJB3PJeAymJZ1dxxTpGic0eA7J9xaKtibziaIzKQFJSxIbceg/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 3,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6LzC0TUo4NxjzguJP3C5thtvIPtdAwdedoic0FwAn4icy3b9M72icO0Fg98ywQ8VGWrkS58hZ82LJGoWrHmg6PiapoIfsaTbkibUQI/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 945,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6LzC0TUo4NxjzguJP3C5thtvIPtdAwdedoic0FwAn4icy3b9M72icO0Fg98ywQ8VGWrkS58hZ82LJGoWrHmg6PiapoIfsaTbkibUQI/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 4,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7q3bEDaMFibz17RTT2dZwF2VyDqCMwaMNOLZHIrTHL1KJJj8EYqoDBgxsbYZVdLveGsiblQc6kRSeMSp4BVaxRdP1yicQCSp3HIk/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 1068,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7q3bEDaMFibz17RTT2dZwF2VyDqCMwaMNOLZHIrTHL1KJJj8EYqoDBgxsbYZVdLveGsiblQc6kRSeMSp4BVaxRdP1yicQCSp3HIk/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 5,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7R8qjZ3PqpNoKzRq6JetmTPyEHqVVzSY8FANQgN6yPDnvqZW0XfvojvmRydlfPzJuibTlj2QEkyTRic3w9tYHRW5C2G2SwYHMXE/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 1191,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7R8qjZ3PqpNoKzRq6JetmTPyEHqVVzSY8FANQgN6yPDnvqZW0XfvojvmRydlfPzJuibTlj2QEkyTRic3w9tYHRW5C2G2SwYHMXE/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 6,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5LXFlhheNM0VPaXDbzwkpeTSiazeniacw92JX2rqBwAnZuMXQWuVcfOWv42eWsxrZ0XGaGG4HJHf1dznicoQMWRurg4NZkCLia62w/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 576,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5LXFlhheNM0VPaXDbzwkpeTSiazeniacw92JX2rqBwAnZuMXQWuVcfOWv42eWsxrZ0XGaGG4HJHf1dznicoQMWRurg4NZkCLia62w/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 7,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5xBN6CV67bvIs7IuGNuo3iaKHHEU9dVCH0CRR9FD8Ticm7trkq01BPkhBaPPicKEjI4Oq9SjKNNiaQp2STnQSxfuZzbveicTFAr0Sw/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 699,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5xBN6CV67bvIs7IuGNuo3iaKHHEU9dVCH0CRR9FD8Ticm7trkq01BPkhBaPPicKEjI4Oq9SjKNNiaQp2STnQSxfuZzbveicTFAr0Sw/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 8,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5wufyBvu9HuPLpgRGTDhpQ9b9MYPGn7yHDf831g4AoicF5APc0Kvol715xxKicnnLqDjSMjjfKWeGDTXvP4sQHMartdVV8948eA/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 822,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5wufyBvu9HuPLpgRGTDhpQ9b9MYPGn7yHDf831g4AoicF5APc0Kvol715xxKicnnLqDjSMjjfKWeGDTXvP4sQHMartdVV8948eA/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 9,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf78YTGiaZwfNcKCHa4o6zaoNnx8GRCLMLpiayMkOiaE1U3MxnRFccUmjCQ2wXN0fMtjQoZk0lt5YclBUVh6gwDfYH8mPbYjD1tda8/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 945,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf78YTGiaZwfNcKCHa4o6zaoNnx8GRCLMLpiayMkOiaE1U3MxnRFccUmjCQ2wXN0fMtjQoZk0lt5YclBUVh6gwDfYH8mPbYjD1tda8/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 10,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5mV6HCUQA8jzMRqgSgN4hRXHqRyQhBlffTkopRYkk1KUsibdUa88GEZB9TEaAiaETqZhkcvAZ5xssVe9RiatUjf2klhM7vEjIaicE/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 1068,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5mV6HCUQA8jzMRqgSgN4hRXHqRyQhBlffTkopRYkk1KUsibdUa88GEZB9TEaAiaETqZhkcvAZ5xssVe9RiatUjf2klhM7vEjIaicE/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    },
+    {
+      "idx": 11,
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4RJVFpTaDmHWvdzSRC1Uib2v1jOlK9Sf9vUiaicFnbqJCo0alOIFGpmeLMlBbuJKxUXicrTjrZPqMksmKhbgRhG0GU3NJM4fOgEqU/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 1191,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "className": "weui-desktop-img-picker__img-thumb",
+      "text": "",
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4RJVFpTaDmHWvdzSRC1Uib2v1jOlK9Sf9vUiaicFnbqJCo0alOIFGpmeLMlBbuJKxUXicrTjrZPqMksmKhbgRhG0GU3NJM4fOgEqU/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>",
+      "visible": true
+    }
+  ],
+  "allItems": [
+    {
+      "idx": 0,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker weui-desktop-grid",
+      "id": "",
+      "text": "最近使用 (55)\n我的图片 (113)\n未分组 (54)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\n粘贴图片_20260522034739.png\n粘贴图片_20260522034603.png\n粘贴图片_20260522034556.png\n粘贴图片_202605220",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 960,
+        "h": 532
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker weui-desktop-grid\"><div class=\"weui-desktop-grid__item weui-desktop-img-category\"><ul class=\"weui-desktop-menu\"><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(55)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(113)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__li"
+    },
+    {
+      "idx": 1,
+      "tag": "DIV",
+      "className": "weui-desktop-grid__item weui-desktop-img-category",
+      "id": "",
+      "text": "最近使用 (55)\n我的图片 (113)\n未分组 (54)\n文章配图 (59)\n新建分组",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 190,
+        "h": 532
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-grid__item weui-desktop-img-category\"><ul class=\"weui-desktop-menu\"><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(55)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(113)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-de"
+    },
+    {
+      "idx": 2,
+      "tag": "LI",
+      "className": "weui-desktop-menu__item",
+      "id": "",
+      "text": "最近使用 (55)",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(55)</em></a></li>"
+    },
+    {
+      "idx": 5,
+      "tag": "LI",
+      "className": "weui-desktop-menu__item",
+      "id": "",
+      "text": "我的图片 (113)",
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(113)</em></a></li>"
+    },
+    {
+      "idx": 8,
+      "tag": "LI",
+      "className": "weui-desktop-menu__item",
+      "id": "",
+      "text": "未分组 (54)",
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</strong> <em class=\"weui-desktop-img-category__size\">(54)</em></a></li>"
+    },
+    {
+      "idx": 11,
+      "tag": "LI",
+      "className": "weui-desktop-menu__item",
+      "id": "",
+      "text": "文章配图 (59)",
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">文章配图</strong> <em class=\"weui-desktop-img-category__size\">(59)</em></a></li>"
+    },
+    {
+      "idx": 14,
+      "tag": "DIV",
+      "className": "weui-desktop-img-category__add",
+      "id": "",
+      "text": "新建分组",
+      "rect": {
+        "x": 364,
+        "y": 617,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-category__add\"><div class=\"weui-desktop-popover__wrp\"><span class=\"weui-desktop-popover__target\"><a href=\"javascript:;\">新建分组</a></span> <div class=\"weui-desktop-popover weui-desktop-popover_pos-down-left\" style=\"display: none;\"><div class=\"weui-desktop-popover__inner\"><!----> <div class=\"weui-desktop-popover__desc\"><div><form weui=\"true\"><div class=\"weui-desktop-form__control-group\"><label class=\"weui-desktop-form__label\">创建分组</label> <div class=\"weui-desktop-form__controls\"> <div class=\"weui-desktop-form__input-area\"><span class=\"weui-desktop-form__input-wrp\"><!----> <!----> <!----> <!----> <input type=\"text\" name=\"group_name\" placeholder=\"\" class=\"weui-desktop-"
+    },
+    {
+      "idx": 15,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__list__area",
+      "id": "",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\n粘贴图片_20260522034739.png\n粘贴图片_20260522034603.png\n粘贴图片_20260522034556.png\n粘贴图片_20260522034549.png\n粘贴图片_20260522034542.png\n粘贴图片_202605",
+      "rect": {
+        "x": 553,
+        "y": 133,
+        "w": 771,
+        "h": 524
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__list__area\"><div class=\"weui-desktop-global-mod\"><div class=\"weui-desktop-msg weui-desktop-msg_mini weui-desktop-msg_title-only weui-desktop-msg_temp\" style=\"background: rgb(241, 243, 245); margin: 8px 16px;\"><div class=\"weui-desktop-msg__inner\"><span class=\"weui-desktop-msg__hd\"><i class=\"weui-desktop-icon-info weui-desktop-icon_msg\"></i></span> <div class=\"weui-desktop-msg__bd\"><h4 class=\"weui-desktop-msg__title\" style=\"padding-right: 2px;\">原“公共图片库”已下线，推荐您使用“<a style=\"cursor: pointer;\">AI 配图</a>”，找到更多图片 </h4> <span class=\"weui-desktop-msg__close-btn\" style=\"top: 50%; transform: translateY(-50%);\">关闭</span></div></div></div></div> <div class=\"weui-deskto"
+    },
+    {
+      "idx": 17,
+      "tag": "A",
+      "className": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "id": "upload_0.8281380082559996",
+      "text": "上传文件",
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<a href=\"javascript:;\" id=\"upload_0.8281380082559996\" class=\"weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick\"><span>上传文件</span> <!----></a>"
+    },
+    {
+      "idx": 27,
+      "tag": "DIV",
+      "className": "weui-desktop-media-list-wrp weui-desktop-img-picker__list__wrp mb-40",
+      "id": "js_image_dialog_list_wrp",
+      "text": "粘贴图片_20260522034739.png\n粘贴图片_20260522034603.png\n粘贴图片_20260522034556.png\n粘贴图片_20260522034549.png\n粘贴图片_20260522034542.png\n粘贴图片_20260521112237.png\n粘贴图片_20260521112143.png\n粘贴图片_2026052",
+      "rect": {
+        "x": 553,
+        "y": 247,
+        "w": 770,
+        "h": 316
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div id=\"js_image_dialog_list_wrp\" class=\"weui-desktop-media-list-wrp weui-desktop-img-picker__list__wrp mb-40\" style=\"height: 316px;\"><div class=\"weui-desktop-img-picker__list\"><div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf67RTtN0PA64T2tuZz5rLwNvzPicItfKzh76o8zQn0PUDWn150eUo4ROI8dKqtMl6bl0arxqicQ3bbqhvMzINnicZehJLXD9OE5VU/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522034739.png</s"
+    },
+    {
+      "idx": 29,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260522034739.png",
+      "rect": {
+        "x": 576,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf67RTtN0PA64T2tuZz5rLwNvzPicItfKzh76o8zQn0PUDWn150eUo4ROI8dKqtMl6bl0arxqicQ3bbqhvMzINnicZehJLXD9OE5VU/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522034739.png</strong></div>"
+    },
+    {
+      "idx": 30,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 576,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf67RTtN0PA64T2tuZz5rLwNvzPicItfKzh76o8zQn0PUDWn150eUo4ROI8dKqtMl6bl0arxqicQ3bbqhvMzINnicZehJLXD9OE5VU/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 32,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260522034603.png",
+      "rect": {
+        "x": 699,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf46VfZNZcYqE4Y9FHXGRzeMZMwUBV1O1U0DibXtYWgkRly4t7doDR5ib6pV5jT6icicMgpDIIbAdGoicaakP9TdDdLnVqjv9HgDopCY/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522034603.png</strong></div>"
+    },
+    {
+      "idx": 33,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 699,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf46VfZNZcYqE4Y9FHXGRzeMZMwUBV1O1U0DibXtYWgkRly4t7doDR5ib6pV5jT6icicMgpDIIbAdGoicaakP9TdDdLnVqjv9HgDopCY/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 35,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260522034556.png",
+      "rect": {
+        "x": 822,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6WlibVfrKYM9QAKVicYLPIfibG3hdicjwJiaas7frhv8nXPOllrApHd0icJB3PJeAymJZ1dxxTpGic0eA7J9xaKtibziaIzKQFJSxIbceg/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522034556.png</strong></div>"
+    },
+    {
+      "idx": 36,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 822,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6WlibVfrKYM9QAKVicYLPIfibG3hdicjwJiaas7frhv8nXPOllrApHd0icJB3PJeAymJZ1dxxTpGic0eA7J9xaKtibziaIzKQFJSxIbceg/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 38,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260522034549.png",
+      "rect": {
+        "x": 945,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6LzC0TUo4NxjzguJP3C5thtvIPtdAwdedoic0FwAn4icy3b9M72icO0Fg98ywQ8VGWrkS58hZ82LJGoWrHmg6PiapoIfsaTbkibUQI/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522034549.png</strong></div>"
+    },
+    {
+      "idx": 39,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 945,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6LzC0TUo4NxjzguJP3C5thtvIPtdAwdedoic0FwAn4icy3b9M72icO0Fg98ywQ8VGWrkS58hZ82LJGoWrHmg6PiapoIfsaTbkibUQI/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 41,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260522034542.png",
+      "rect": {
+        "x": 1068,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7q3bEDaMFibz17RTT2dZwF2VyDqCMwaMNOLZHIrTHL1KJJj8EYqoDBgxsbYZVdLveGsiblQc6kRSeMSp4BVaxRdP1yicQCSp3HIk/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522034542.png</strong></div>"
+    },
+    {
+      "idx": 42,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 1068,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7q3bEDaMFibz17RTT2dZwF2VyDqCMwaMNOLZHIrTHL1KJJj8EYqoDBgxsbYZVdLveGsiblQc6kRSeMSp4BVaxRdP1yicQCSp3HIk/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 44,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260521112237.png",
+      "rect": {
+        "x": 1191,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7R8qjZ3PqpNoKzRq6JetmTPyEHqVVzSY8FANQgN6yPDnvqZW0XfvojvmRydlfPzJuibTlj2QEkyTRic3w9tYHRW5C2G2SwYHMXE/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260521112237.png</strong></div>"
+    },
+    {
+      "idx": 45,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 1191,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7R8qjZ3PqpNoKzRq6JetmTPyEHqVVzSY8FANQgN6yPDnvqZW0XfvojvmRydlfPzJuibTlj2QEkyTRic3w9tYHRW5C2G2SwYHMXE/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 47,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260521112143.png",
+      "rect": {
+        "x": 576,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5LXFlhheNM0VPaXDbzwkpeTSiazeniacw92JX2rqBwAnZuMXQWuVcfOWv42eWsxrZ0XGaGG4HJHf1dznicoQMWRurg4NZkCLia62w/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260521112143.png</strong></div>"
+    },
+    {
+      "idx": 48,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 576,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5LXFlhheNM0VPaXDbzwkpeTSiazeniacw92JX2rqBwAnZuMXQWuVcfOWv42eWsxrZ0XGaGG4HJHf1dznicoQMWRurg4NZkCLia62w/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 50,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260521112137.png",
+      "rect": {
+        "x": 699,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5xBN6CV67bvIs7IuGNuo3iaKHHEU9dVCH0CRR9FD8Ticm7trkq01BPkhBaPPicKEjI4Oq9SjKNNiaQp2STnQSxfuZzbveicTFAr0Sw/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260521112137.png</strong></div>"
+    },
+    {
+      "idx": 51,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 699,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5xBN6CV67bvIs7IuGNuo3iaKHHEU9dVCH0CRR9FD8Ticm7trkq01BPkhBaPPicKEjI4Oq9SjKNNiaQp2STnQSxfuZzbveicTFAr0Sw/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 53,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260521112131.png",
+      "rect": {
+        "x": 822,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5wufyBvu9HuPLpgRGTDhpQ9b9MYPGn7yHDf831g4AoicF5APc0Kvol715xxKicnnLqDjSMjjfKWeGDTXvP4sQHMartdVV8948eA/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260521112131.png</strong></div>"
+    },
+    {
+      "idx": 54,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 822,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5wufyBvu9HuPLpgRGTDhpQ9b9MYPGn7yHDf831g4AoicF5APc0Kvol715xxKicnnLqDjSMjjfKWeGDTXvP4sQHMartdVV8948eA/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 56,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260521112124.png",
+      "rect": {
+        "x": 945,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf78YTGiaZwfNcKCHa4o6zaoNnx8GRCLMLpiayMkOiaE1U3MxnRFccUmjCQ2wXN0fMtjQoZk0lt5YclBUVh6gwDfYH8mPbYjD1tda8/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260521112124.png</strong></div>"
+    },
+    {
+      "idx": 57,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 945,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf78YTGiaZwfNcKCHa4o6zaoNnx8GRCLMLpiayMkOiaE1U3MxnRFccUmjCQ2wXN0fMtjQoZk0lt5YclBUVh6gwDfYH8mPbYjD1tda8/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 59,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260521111802.png",
+      "rect": {
+        "x": 1068,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5mV6HCUQA8jzMRqgSgN4hRXHqRyQhBlffTkopRYkk1KUsibdUa88GEZB9TEaAiaETqZhkcvAZ5xssVe9RiatUjf2klhM7vEjIaicE/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260521111802.png</strong></div>"
+    },
+    {
+      "idx": 60,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 1068,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5mV6HCUQA8jzMRqgSgN4hRXHqRyQhBlffTkopRYkk1KUsibdUa88GEZB9TEaAiaETqZhkcvAZ5xssVe9RiatUjf2klhM7vEjIaicE/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "idx": 62,
+      "tag": "DIV",
+      "className": "weui-desktop-img-picker__item",
+      "id": "",
+      "text": "粘贴图片_20260521111715.png",
+      "rect": {
+        "x": 1191,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4RJVFpTaDmHWvdzSRC1Uib2v1jOlK9Sf9vUiaicFnbqJCo0alOIFGpmeLMlBbuJKxUXicrTjrZPqMksmKhbgRhG0GU3NJM4fOgEqU/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260521111715.png</strong></div>"
+    },
+    {
+      "idx": 63,
+      "tag": "I",
+      "className": "weui-desktop-img-picker__img-thumb",
+      "id": "",
+      "text": "",
+      "rect": {
+        "x": 1191,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "selected": false,
+      "outer": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4RJVFpTaDmHWvdzSRC1Uib2v1jOlK9Sf9vUiaicFnbqJCo0alOIFGpmeLMlBbuJKxUXicrTjrZPqMksmKhbgRhG0GU3NJM4fOgEqU/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    }
+  ],
+  "buttons": [
+    {
+      "text": "",
+      "className": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+      "id": "",
+      "rect": {
+        "x": 1276,
+        "y": 80,
+        "w": 16,
+        "h": 16
+      },
+      "visible": true,
+      "outer": "<button class=\"weui-desktop-icon-btn weui-desktop-dialog__close-btn\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10.01 8.996l7.922-7.922c.086-.086.085-.21.008-.289l-.73-.73c-.075-.074-.208-.075-.29.007L9 7.984 1.077.062C.995-.02.863-.019.788.055l-.73.73c-.078.078-.079.203.007.29l7.922 7.92-7.922 7.922c-.086.086-.085.212-.007.29l.73.73c.075.074.207.0"
+    },
+    {
+      "text": "最近使用 (55)",
+      "className": "weui-desktop-menu__link",
+      "id": "",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(55)</em></a>"
+    },
+    {
+      "text": "我的图片 (113)",
+      "className": "weui-desktop-menu__link weui-desktop-menu__link_current",
+      "id": "",
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(113)</em></a>"
+    },
+    {
+      "text": "未分组 (54)",
+      "className": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "id": "",
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</strong> <em class=\"weui-desktop-img-category__size\">(54)</em></a>"
+    },
+    {
+      "text": "文章配图 (59)",
+      "className": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "id": "",
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">文章配图</strong> <em class=\"weui-desktop-img-category__size\">(59)</em></a>"
+    },
+    {
+      "text": "新建分组",
+      "className": "",
+      "id": "",
+      "rect": {
+        "x": 396,
+        "y": 628,
+        "w": 56,
+        "h": 18
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\">新建分组</a>"
+    },
+    {
+      "text": "AI 配图",
+      "className": "",
+      "id": "",
+      "rect": {
+        "x": 843,
+        "y": 144,
+        "w": 46,
+        "h": 18
+      },
+      "visible": true,
+      "outer": "<a style=\"cursor: pointer;\">AI 配图</a>"
+    },
+    {
+      "text": "上传文件",
+      "className": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "id": "upload_0.8281380082559996",
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" id=\"upload_0.8281380082559996\" class=\"weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick\"><span>上传文件</span> <!----></a>"
+    },
+    {
+      "text": "下一页",
+      "className": "weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini",
+      "id": "",
+      "rect": {
+        "x": 1186,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini\">下一页</a>"
+    },
+    {
+      "text": "跳转",
+      "className": "weui-desktop-link",
+      "id": "",
+      "rect": {
+        "x": 1280,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "visible": true,
+      "outer": "<a href=\"javascript:;\" class=\"weui-desktop-link\">跳转</a>"
+    },
+    {
+      "text": "下一步",
+      "className": "weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled",
+      "id": "",
+      "rect": {
+        "x": 740,
+        "y": 689,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "outer": "<button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled\">下一步</button>"
+    },
+    {
+      "text": "取消",
+      "className": "weui-desktop-btn weui-desktop-btn_default",
+      "id": "",
+      "rect": {
+        "x": 852,
+        "y": 690,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "outer": "<button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_default\">取消</button>"
+    }
+  ]
+}

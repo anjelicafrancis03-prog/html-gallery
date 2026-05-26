@@ -1,0 +1,214 @@
+{
+  "hasCover": false,
+  "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+  "itemClass": "weui-desktop-img-picker__item",
+  "itemRect": {
+    "x": 573,
+    "y": 234,
+    "w": 110,
+    "h": 138
+  },
+  "buttons": [
+    {
+      "text": "从图片库选择",
+      "cls": "pop-opr__button js_imagedialog",
+      "rect": {
+        "x": 655,
+        "y": 455,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "text": "微信扫码上传",
+      "cls": "pop-opr__button js_imageScan",
+      "rect": {
+        "x": 655,
+        "y": 498,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "text": "AI 配图",
+      "cls": "pop-opr__button js_aiImage",
+      "rect": {
+        "x": 655,
+        "y": 540,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "text": "回到顶部",
+      "cls": "tool_bar__fold-btn",
+      "rect": {
+        "x": 1288,
+        "y": 740,
+        "w": 106,
+        "h": 36
+      }
+    },
+    {
+      "text": "发表",
+      "cls": "mass_send",
+      "rect": {
+        "x": 1151,
+        "y": 816,
+        "w": 98,
+        "h": 34
+      }
+    },
+    {
+      "text": "预览",
+      "cls": "",
+      "rect": {
+        "x": 1042,
+        "y": 816,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "text": "保存为草稿",
+      "cls": "",
+      "rect": {
+        "x": 932,
+        "y": 816,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "text": "",
+      "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+      "rect": {
+        "x": 1273,
+        "y": 67,
+        "w": 16,
+        "h": 16
+      }
+    },
+    {
+      "text": "最近使用 (126)",
+      "cls": "weui-desktop-menu__link",
+      "rect": {
+        "x": 361,
+        "y": 112,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "text": "我的图片 (182)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link_current",
+      "rect": {
+        "x": 361,
+        "y": 152,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "text": "未分组 (123)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "rect": {
+        "x": 361,
+        "y": 192,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "text": "文章配图 (59)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "rect": {
+        "x": 361,
+        "y": 232,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "text": "新建分组",
+      "cls": "",
+      "rect": {
+        "x": 393,
+        "y": 773,
+        "w": 56,
+        "h": 18
+      }
+    },
+    {
+      "text": "AI 配图",
+      "cls": "",
+      "rect": {
+        "x": 840,
+        "y": 131,
+        "w": 46,
+        "h": 18
+      }
+    },
+    {
+      "text": "上传文件",
+      "cls": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "rect": {
+        "x": 1193,
+        "y": 168,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "text": "下一页",
+      "cls": "weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini",
+      "rect": {
+        "x": 1183,
+        "y": 758,
+        "w": 24,
+        "h": 24
+      }
+    },
+    {
+      "text": "跳转",
+      "cls": "weui-desktop-link",
+      "rect": {
+        "x": 1277,
+        "y": 758,
+        "w": 24,
+        "h": 24
+      }
+    },
+    {
+      "text": "下一步",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled",
+      "rect": {
+        "x": 737,
+        "y": 834,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "text": "取消",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "rect": {
+        "x": 849,
+        "y": 835,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "text": "CDP Bridge",
+      "cls": "",
+      "rect": {
+        "x": 1574,
+        "y": 823,
+        "w": 99,
+        "h": 29
+      }
+    }
+  ],
+  "tail": "得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 19:11已保存 正文字数1442 回到顶部 一键排版 发表 预览 保存为草稿 选择图片 最近使用 (126) 我的图片 (182) 未分组 (123) 文章配图 (59) 新建分组 原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片 关闭 已关闭图片水印 上传文件 wechat-cover-fixed-v2.png 粘贴图片_20260522191126.png 粘贴图片_20260522191119.png 粘贴图片_20260522191112.png 粘贴图片_20260522191105.png 粘贴图片_20260522191058.png 粘贴图片_20260522191052.png 粘贴图片_20260522191045.png 粘贴图片_20260522191038.png wechat-cover-fixed-v2.png 粘贴图片_20260522185244.png 粘贴图片_20260522185237.png 粘贴图片_20260522185230.png 粘贴图片_20260522185224.png 粘贴图片_20260522185217.png 粘贴图片_20260522185210.png 粘贴图片_20260522185203.png 粘贴图片_20260522185156.png 1 / 11 下一页 跳转 下一步 取消 问题反馈 CDP Bridge"
+}

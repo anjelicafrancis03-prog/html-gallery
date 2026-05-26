@@ -1,0 +1,32 @@
+{
+  "desktop": {
+    "title": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测",
+    "innerWidth": 1280,
+    "bodyWidth": 1265,
+    "scrollWidth": 1265,
+    "imageCount": 8,
+    "imagesOk": true,
+    "hasQuestionMarks": false,
+    "hasStyleTag": false,
+    "usesObjectFitCoverStyle": false,
+    "includesLongIndexImage": false,
+    "commandBlocks": 2,
+    "h2Count": 7,
+    "textLength": 2107
+  },
+  "mobile": {
+    "title": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测",
+    "innerWidth": 390,
+    "bodyWidth": 390,
+    "scrollWidth": 390,
+    "imageCount": 8,
+    "imagesOk": true,
+    "hasQuestionMarks": false,
+    "hasStyleTag": false,
+    "usesObjectFitCoverStyle": false,
+    "includesLongIndexImage": false,
+    "commandBlocks": 2,
+    "h2Count": 7,
+    "textLength": 2107
+  }
+}

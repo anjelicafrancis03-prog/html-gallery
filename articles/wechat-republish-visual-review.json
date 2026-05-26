@@ -1,0 +1,700 @@
+[
+  {
+    "slug": "browser-automation-methods",
+    "title": "真实浏览器爬取方案重新评定",
+    "url": "https://mp.weixin.qq.com/s/9MDJxUttWTm46bNtw_EKWQ",
+    "local": {
+      "textLength": 4372,
+      "imgCount": 3,
+      "missingImageFiles": [],
+      "hasDataImage": false,
+      "hasScript": true,
+      "hasSvg": false,
+      "hasTable": true,
+      "hasInlineStyle": false,
+      "h2Count": 6,
+      "textStart": "真实浏览器爬取方案重新评定 夜 Browser Automation Review 真实浏览器爬数据，哪套方案该留下？ 这不是泛泛比较 Playwright、OpenCLI、CDP Bridge MCP、playwright-cli 谁更“先进”。评定口径只有一个： 在已经登录的固定 Chrome 里，能不能稳定读到 TikTok、Instagram、微博、小红书、抖音、知乎这类动态页面， 并最终沉淀成可重复运行的数据供给。 看最终排序 看评分矩阵 看落地路线 A- 当前推荐组合 Playwright 做生产线，CDP Bridge 做真实会话接管，OpenCLI 做快速操作，playwrig"
+    },
+    "publish": {
+      "textLength": 4347,
+      "imgCount": 3,
+      "missingImageFiles": [],
+      "hasDataImage": false,
+      "hasScript": false,
+      "hasSvg": false,
+      "hasTable": true,
+      "hasInlineStyle": true,
+      "h2Count": 6,
+      "textStart": "真实浏览器爬取方案重新评定 Browser Automation Review 真实浏览器爬数据，哪套方案该留下？ 这不是泛泛比较 Playwright、OpenCLI、CDP Bridge MCP、playwright-cli 谁更“先进”。评定口径只有一个： 在已经登录的固定 Chrome 里，能不能稳定读到 TikTok、Instagram、微博、小红书、抖音、知乎这类动态页面， 并最终沉淀成可重复运行的数据供给。 看最终排序 看评分矩阵 看落地路线 A- 当前推荐组合 Playwright 做生产线，CDP Bridge 做真实会话接管，OpenCLI 做快速操作，playwright"
+    },
+    "published": {
+      "finalUrl": "https://mp.weixin.qq.com/s/9MDJxUttWTm46bNtw_EKWQ",
+      "title": "真实浏览器爬取方案重新评定",
+      "account": "sinnple coffee",
+      "textLength": 4526,
+      "textStart": "Browser Automation Review\n\n真实浏览器爬数据，哪套方案该留下？\n\n这不是泛泛比较 Playwright、OpenCLI、CDP Bridge MCP、playwright-cli 谁更“先进”。评定口径只有一个： 在已经登录的固定 Chrome 里，能不能稳定读到 TikTok、Instagram、微博、小红书、抖音、知乎这类动态页面， 并最终沉淀成可重复运行的数据供给。\n\n看最终排序 看评分矩阵 看落地路线\n\nA-\n\n当前推荐组合\n\nPlaywright 做生产线，CDP Bridge 做真实会话接管，OpenCLI 做快速操作，playwright-cli 做探索和固化。\n\n验证对象\n固定 Chrome、CDP 9223、CDP Bridge 18765/18766、OpenCLI、微博搜索页\n关键事实\nCDP Bridge 可列出真实标签页，并能执行 JS；OpenCLI 可读微博结果；Playwright 仍最适合长期脚本。\n主要风险\n不要把“交互式接管工具”误当成“批处理爬虫生产线”。两者定位不同。\n\n\n图 1. 总排行。先看谁是主力，谁只是快刀，谁",
+      "imgCount": 4,
+      "loadedImgCount": 4,
+      "zeroSizeImgCount": 0,
+      "imgs": [
+        {
+          "index": 0,
+          "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf54Licib6Uv9Giat5MrMjDsn4tMAmuSzTO6Q1oed6QjdP4MO1jPro3mZeeb6t8qzZtBXic9Ixeolic0cI6vPcSbDSXfiardbx56AY8zU/640?wx_f",
+          "naturalWidth": 1080,
+          "naturalHeight": 459,
+          "width": 350,
+          "height": 149,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 1,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 350,
+          "height": 233,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 2,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 350,
+          "height": 233,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 3,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 350,
+          "height": 233,
+          "alt": "图片",
+          "nearbyText": ""
+        }
+      ],
+      "headings": [
+        "真实浏览器爬数据，哪套方案该留下？",
+        "总排行：先分清谁负责什么",
+        "Playwright CDP",
+        "CDP Bridge MCP",
+        "OpenCLI",
+        "playwright-cli",
+        "raw CDP",
+        "Codex Chrome 插件",
+        "HTTP / Scrapy 等",
+        "评分矩阵：不要只看“能不能打开”",
+        "逐项评定：每套方法留在哪里",
+        "Playwright connect_over_cdp",
+        "CDP Bridge MCP",
+        "OpenCLI",
+        "playwright-cli",
+        "raw CDP",
+        "Codex Chrome 插件",
+        "requests / Scrapy / Instaloader / Patchright",
+        "最终落地路线：四层分工",
+        "CDP Bridge 看当前状态",
+        "OpenCLI 快速操作",
+        "playwright-cli 探索路径",
+        "Playwright 批量生产",
+        "平台建议：按目标拆工具",
+        "最后判断"
+      ],
+      "blocks": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "text": "Browser Automation Review 真实浏览器爬数据，哪套方案该留下？ 这不是泛泛比较 Playwright、OpenCLI、CDP Bridge MCP、playwright-cli 谁更“先进”。评定口径只有一个： 在已",
+          "width": 350,
+          "height": 965,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 1,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 233,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "text": "图 1. 总排行。先看谁是主力，谁只是快刀，谁必须降级。",
+          "width": 350,
+          "height": 140,
+          "bg": "rgb(255, 253, 248)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 233,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "text": "图 2. 分层路线。真实会话、快速操作、探索固化、最终生产线四层分工。",
+          "width": 350,
+          "height": 140,
+          "bg": "rgb(255, 253, 248)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 233,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "text": "图 3. 场景选型。按“长期爬取 / 真实会话 / 快速操作”直接对号入座。",
+          "width": 350,
+          "height": 114,
+          "bg": "rgb(255, 253, 248)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "text": "总排行：先分清谁负责什么 真正可用的工具箱不是单选题。最稳的路线，是让每个工具只做它擅长的那一段。 01 Playwright CDP 生产主力 02 CDP Bridge MCP 会话接管 03 OpenCLI 快速操作 04 playw",
+          "width": 350,
+          "height": 1268,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "text": "评分矩阵：不要只看“能不能打开” 我按真实爬数需要重新打分：登录态复用、可维护性、中文数据质量、交互能力、批处理能力、排障成本。 方案 定位 登录态复用 数据质量 长期运行 主要短板 综合 Playwright connect_over_c",
+          "width": 350,
+          "height": 1937,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "text": "逐项评定：每套方法留在哪里 点下面筛选，可以按使用场景查看。这里的结论按你当前固定 Chrome 和真实测试结果来写。 Playwright connect_over_cdp 主力 最终应该沉淀到这里。它直连固定 Chrome 的 CDP ",
+          "width": 350,
+          "height": 4052,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 10,
+          "tag": "SECTION",
+          "text": "最终落地路线：四层分工 不要把所有任务压给一个工具。正确做法是分层：看页面、试动作、固化脚本、批处理交付。 Step 1 CDP Bridge 看当前状态 先读真实浏览器标签页，确认账号是否登录、页面是否加载、搜索结果是否存在。它负责“接管",
+          "width": 350,
+          "height": 1077,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 11,
+          "tag": "SECTION",
+          "text": "平台建议：按目标拆工具 微博、小红书、抖音、TikTok、Instagram 的共同点是动态页面；差异在登录态和字段稳定性。 微博：CDP Bridge 和 OpenCLI 已证明能读真实搜索页；长期抽取建议用 Playwright。 小红",
+          "width": 350,
+          "height": 346,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 12,
+          "tag": "SECTION",
+          "text": "最后判断 真正的分水岭不是“哪个工具最酷”，而是谁能把失败原因、字段口径和重跑成本控制住。 最终保留组合： Playwright 是生产线，CDP Bridge MCP 是真实会话桥，OpenCLI 是快速操作台，playwright-cl",
+          "width": 350,
+          "height": 449,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 13,
+          "tag": "FOOTER",
+          "text": "评定基于当前固定 Chrome、CDP 9223、CDP Bridge 18765/18766、OpenCLI 与微博搜索页实测。本文是工具选型和工程实践建议，不包含绕过平台访问控制的指导。",
+          "width": 350,
+          "height": 119,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 14,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 27,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        }
+      ],
+      "hasInlineStyle": true,
+      "hasTable": true,
+      "hasScript": false,
+      "hasSvg": false,
+      "hasTestWord": false,
+      "hasEnvError": false,
+      "screenshotPath": "C:/html/articles/browser-automation-methods/publish/published-mobile-top.png"
+    },
+    "ratios": {
+      "publishedVsPublishText": 104,
+      "publishedVsPublishImages": 133,
+      "loadedImageRatio": 100
+    }
+  },
+  {
+    "slug": "codex-feishu-bridge-control-plane",
+    "title": "我把 Codex 接到飞书后，最大的变化不是“手机能聊天”",
+    "url": "https://mp.weixin.qq.com/s/0FGLqz8JAkeQJX6X0K1qrA",
+    "local": {
+      "textLength": 2648,
+      "imgCount": 4,
+      "missingImageFiles": [],
+      "hasDataImage": false,
+      "hasScript": true,
+      "hasSvg": false,
+      "hasTable": true,
+      "hasInlineStyle": false,
+      "h2Count": 7,
+      "textStart": "我把 Codex 接到飞书后，最大的变化不是“手机能聊天” 知乎专栏稿 · AI 多线程工作流 我把 Codex 接到飞书后，最大的变化不是“手机能聊天” 飞书在这里不是新的大脑，而是一个远程入口。真正重要的是：手机发出去的消息，能不能回到桌面 Codex 的同一条长期线程。 这篇文章讲清楚三件事 1 为什么“能聊”不等于“工作流连续”。 2 飞书里的“接线”如何把消息送回本机 Codex 线程。 3 公开项目时，哪些能写，哪些必须留在私有环境。 目录 为什么不是机器人 接线是什么 无缝衔接原理 长期运行难点 公开与私有边界 适合谁 我读完这个开源项目后，越来越觉得，AI 工具真正麻烦的地方，"
+    },
+    "publish": {
+      "textLength": 2604,
+      "imgCount": 4,
+      "missingImageFiles": [],
+      "hasDataImage": false,
+      "hasScript": false,
+      "hasSvg": false,
+      "hasTable": true,
+      "hasInlineStyle": true,
+      "h2Count": 7,
+      "textStart": "我把 Codex 接到飞书后，最大的变化不是“手机能聊天” 知乎专栏稿 · AI 多线程工作流 我把 Codex 接到飞书后，最大的变化不是“手机能聊天” 飞书在这里不是新的大脑，而是一个远程入口。真正重要的是：手机发出去的消息，能不能回到桌面 Codex 的同一条长期线程。 这篇文章讲清楚三件事 1 为什么“能聊”不等于“工作流连续”。 2 飞书里的“接线”如何把消息送回本机 Codex 线程。 3 公开项目时，哪些能写，哪些必须留在私有环境。 我读完这个开源项目后，越来越觉得，AI 工具真正麻烦的地方，不是它不会做事，而是线程一多，人先乱。 一个线程在改代码，一个线程在查资料，一个线程在整"
+    },
+    "published": {
+      "finalUrl": "https://mp.weixin.qq.com/s/0FGLqz8JAkeQJX6X0K1qrA",
+      "title": "我把 Codex 接到飞书后，最大的变化不是“手机能聊天”",
+      "account": "sinnple coffee",
+      "textLength": 2681,
+      "textStart": "知乎专栏稿 · AI 多线程工作流\n\n我把 Codex 接到飞书后，最大的变化不是“手机能聊天”\n\n飞书在这里不是新的大脑，而是一个远程入口。真正重要的是：手机发出去的消息，能不能回到桌面 Codex 的同一条长期线程。\n\n这篇文章讲清楚三件事\n1\n\n为什么“能聊”不等于“工作流连续”。\n\n2\n\n飞书里的“接线”如何把消息送回本机 Codex 线程。\n\n3\n\n公开项目时，哪些能写，哪些必须留在私有环境。\n\n\n\n\n我读完这个开源项目后，越来越觉得，AI 工具真正麻烦的地方，不是它不会做事，而是线程一多，人先乱。\n\n一个线程在改代码，一个线程在查资料，一个线程在整理文档，还有一个线程专门管系统状态。只要你离开电脑，手机里再开一个新的聊天窗口，看起来是“移动办公”，实际上是在重新制造一份上下文。\n\n所以我理解这个 codex-feishu-bridge 的时候，目标就不是把它看成一个“飞书聊天机器人”。更准确地说，它更像一个随身控制台：飞书负责入口，真正的线程、工作区、状态和运行历史仍然留在本机 Codex。\n\n一、为什么不是再做一个机器人？\n\n因为“能聊”太容易了。\n\n随便接一个 Bot，",
+      "imgCount": 5,
+      "loadedImgCount": 5,
+      "zeroSizeImgCount": 0,
+      "imgs": [
+        {
+          "index": 0,
+          "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf68OGP70h5F8WS1bNHXDal9FsOA533QiaRIslVLRQF6SO056cqhvmtibhsoicEZqvRGvtTV5tLlIhcoXwyuEqnuc0XnP7Yb57wFicg/640?wx_fmt=pn",
+          "naturalWidth": 1080,
+          "naturalHeight": 459,
+          "width": 350,
+          "height": 149,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 1,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 318,
+          "height": 708,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 2,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 318,
+          "height": 179,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 3,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 318,
+          "height": 708,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 4,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 318,
+          "height": 212,
+          "alt": "图片",
+          "nearbyText": ""
+        }
+      ],
+      "headings": [
+        "我把 Codex 接到飞书后，最大的变化不是“手机能聊天”",
+        "这篇文章讲清楚三件事",
+        "一、为什么不是再做一个机器人？",
+        "二、飞书里的“接线”到底是什么？",
+        "三、手机和桌面为什么能无缝？",
+        "四、长期用，难点反而在这些小地方",
+        "五、公开版和私有版一定要分开",
+        "六、它适合谁？"
+      ],
+      "blocks": [
+        {
+          "index": 0,
+          "tag": "HEADER",
+          "text": "知乎专栏稿 · AI 多线程工作流 我把 Codex 接到飞书后，最大的变化不是“手机能聊天” 飞书在这里不是新的大脑，而是一个远程入口。真正重要的是：手机发出去的消息，能不能回到桌面 Codex 的同一条长期线程。 这篇文章讲清楚三件事 ",
+          "width": 350,
+          "height": 725,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 1,
+          "tag": "P",
+          "text": "",
+          "width": 350,
+          "height": 27,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "text": "我读完这个开源项目后，越来越觉得，AI 工具真正麻烦的地方，不是它不会做事，而是线程一多，人先乱。 一个线程在改代码，一个线程在查资料，一个线程在整理文档，还有一个线程专门管系统状态。只要你离开电脑，手机里再开一个新的聊天窗口，看起来是“移",
+          "width": 350,
+          "height": 6980,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 3,
+          "tag": "P",
+          "text": "",
+          "width": 350,
+          "height": 27,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 27,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        }
+      ],
+      "hasInlineStyle": true,
+      "hasTable": true,
+      "hasScript": false,
+      "hasSvg": false,
+      "hasTestWord": false,
+      "hasEnvError": false,
+      "screenshotPath": "C:/html/articles/codex-feishu-bridge-control-plane/publish/published-mobile-top.png"
+    },
+    "ratios": {
+      "publishedVsPublishText": 103,
+      "publishedVsPublishImages": 125,
+      "loadedImageRatio": 100
+    }
+  },
+  {
+    "slug": "html-skills-comparison",
+    "title": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付",
+    "url": "https://mp.weixin.qq.com/s/llYKgI9VPoxdjRerx7U-1A",
+    "local": {
+      "textLength": 3113,
+      "imgCount": 3,
+      "missingImageFiles": [],
+      "hasDataImage": false,
+      "hasScript": true,
+      "hasSvg": true,
+      "hasTable": true,
+      "hasInlineStyle": false,
+      "h2Count": 7,
+      "textStart": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付 ◐ HTML Skill Stack / 横向对比 四个 HTML Skill， 别混用 本地已经有 `claude-design`，又装了 `article-magazine`、`html-visual`、`html-anything`。它们都能碰 HTML，但职责完全不同：一个管审美系统，一个管文章长文，一个管交互图解，一个管最终交付。 结论先行：组合用，不替代 阅读时间：7 分钟 用途：转发给其他线程 claude-design 视觉系统 article-magazine 长文骨架 html-visual 交互图解"
+    },
+    "publish": {
+      "textLength": 3052,
+      "imgCount": 3,
+      "missingImageFiles": [],
+      "hasDataImage": false,
+      "hasScript": false,
+      "hasSvg": false,
+      "hasTable": true,
+      "hasInlineStyle": true,
+      "h2Count": 7,
+      "textStart": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付 HTML Skill Stack / 横向对比 四个 HTML Skill， 别混用 本地已经有 `claude-design`，又装了 `article-magazine`、`html-visual`、`html-anything`。它们都能碰 HTML，但职责完全不同：一个管审美系统，一个管文章长文，一个管交互图解，一个管最终交付。 结论先行：组合用，不替代 阅读时间：7 分钟 用途：转发给其他线程 claude-design 视觉系统 article-magazine 长文骨架 html-visual 交互图解 h"
+    },
+    "published": {
+      "finalUrl": "https://mp.weixin.qq.com/s/llYKgI9VPoxdjRerx7U-1A",
+      "title": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付",
+      "account": "sinnple coffee",
+      "textLength": 2702,
+      "textStart": "先说结论：它们不是四选一。\n\n如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。\n\n`claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。\n\n最好的保留方式不是删掉谁，而是把它们变成一条流水线：设计系统 → 文章骨架 → 可视化模块 → 单文件交付。\n横向对比表。\n\n这四个 skill 看起来都在“写 HTML”，但真正的差别在于它们各自默认回答的问题不同。\n\n\n\n\n\n\n审美claude-design 文章article-magazine 图解html-visual 交付html-anything\n\n配图：四个 skill 的差别，不在于谁也能写 HTML，而在于默认解决的问题不同。\nSkill\n\t\n最擅长\n\t\n不擅长\n\t\n适合保留方式\n\n\nclaude-design\n\t\n高保真视觉方向、品牌感、杂志感、",
+      "imgCount": 4,
+      "loadedImgCount": 4,
+      "zeroSizeImgCount": 0,
+      "imgs": [
+        {
+          "index": 0,
+          "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf41v7ia9980YiaJJ9n0DTb6fGcaGZBC1CibgZs8ftELfnE8GHvnTbRpyNYfl0XxD5vMmUCsETibc4bJFMHSaNCuBYUNmd4um3TibF6w/640?wx_fmt=p",
+          "naturalWidth": 1080,
+          "naturalHeight": 459,
+          "width": 350,
+          "height": 149,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 1,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 350,
+          "height": 350,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 2,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 350,
+          "height": 175,
+          "alt": "图片",
+          "nearbyText": ""
+        },
+        {
+          "index": 3,
+          "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/s",
+          "naturalWidth": 1,
+          "naturalHeight": 1,
+          "width": 350,
+          "height": 233,
+          "alt": "图片",
+          "nearbyText": ""
+        }
+      ],
+      "headings": [
+        "先说结论：它们不是四选一。",
+        "横向对比表。",
+        "逐个拆开看。",
+        "01 claude-design：负责“像不像高级设计”",
+        "02 article-magazine：负责“像不像一篇可读长文”",
+        "03 html-visual：负责“让复杂内容看得懂”",
+        "04 html-anything：负责“最后真的变成成品”",
+        "最稳的组合方式。",
+        "不知道用哪个？按目标选。",
+        "写文章：`article-magazine` 做主",
+        "最后怎么保留配合？",
+        "一句话版"
+      ],
+      "blocks": [
+        {
+          "index": 0,
+          "tag": "SECTION",
+          "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-",
+          "width": 350,
+          "height": 589,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 2,
+          "tag": "SECTION",
+          "text": "横向对比表。 这四个 skill 看起来都在“写 HTML”，但真正的差别在于它们各自默认回答的问题不同。",
+          "width": 350,
+          "height": 141,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 3,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 350,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 4,
+          "tag": "SECTION",
+          "text": "审美claude-design 文章article-magazine 图解html-visual 交付html-anything 配图：四个 skill 的差别，不在于谁也能写 HTML，而在于默认解决的问题不同。 Skill 最擅长 不擅",
+          "width": 350,
+          "height": 800,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 5,
+          "tag": "SECTION",
+          "text": "逐个拆开看。 01 claude-design：负责“像不像高级设计” 它的价值不是写文章，而是防止 HTML 文章变成普通博客模板。比如字体层级、首屏构图、色彩克制、真实素材优先、不要一堆圆角卡片，这些都属于它的审美约束。 所以它适合做第",
+          "width": 350,
+          "height": 1115,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 6,
+          "tag": "SECTION",
+          "text": "最稳的组合方式。 不要让四个 skill 同时抢主导权。它们应该像工序一样排队。 先用 `claude-design` 定视觉系统。 确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。 再用 `arti",
+          "width": 350,
+          "height": 542,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 7,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 175,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 8,
+          "tag": "SECTION",
+          "text": "1定视觉 2搭文章 3补图解 4落 HTML 配图：最稳的用法是把四个 skill 当成工序，而不是让它们互相抢主导权。 这不是“四个模板轮流试”，而是把四个能力拼成一条文章生产线。 handoff promptcopy-ready 请用四",
+          "width": 350,
+          "height": 431,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 9,
+          "tag": "SECTION",
+          "text": "不知道用哪个？按目标选。 下面这个小模块可以直接给其他线程看：点目标，就知道谁做主、谁辅助。 写文章：`article-magazine` 做主 主线用 `article-magazine`。开头用 `claude-design` 定视觉，",
+          "width": 350,
+          "height": 384,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 10,
+          "tag": "SECTION",
+          "text": "最后怎么保留配合？ 我建议不要删，也不要合并成一个大而全 skill。大而全的结果通常是边界变模糊，线程不知道该听谁的。 更好的做法是给其他线程一句固定规则： 写专门文章时，`article-magazine` 为主；追求设计质量时，先过 ",
+          "width": 350,
+          "height": 479,
+          "bg": "rgb(251, 250, 247)",
+          "fontSize": "16px",
+          "lineHeight": "25.6px",
+          "display": "block"
+        },
+        {
+          "index": 11,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 233,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        },
+        {
+          "index": 12,
+          "tag": "SECTION",
+          "text": "",
+          "width": 350,
+          "height": 27,
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": "17px",
+          "lineHeight": "27.2px",
+          "display": "block"
+        }
+      ],
+      "hasInlineStyle": true,
+      "hasTable": true,
+      "hasScript": false,
+      "hasSvg": false,
+      "hasTestWord": false,
+      "hasEnvError": false,
+      "screenshotPath": "C:/html/articles/html-skills-comparison/publish/published-mobile-top.png"
+    },
+    "ratios": {
+      "publishedVsPublishText": 89,
+      "publishedVsPublishImages": 133,
+      "loadedImageRatio": 100
+    }
+  }
+]

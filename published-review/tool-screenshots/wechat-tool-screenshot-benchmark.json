@@ -1,0 +1,52 @@
+[
+  {
+    "method": "Playwright connectOverCDP",
+    "ok": true,
+    "ms": 6568,
+    "screenshot": "C:\\html\\published-review\\tool-screenshots\\01-playwright-connect-over-cdp.png",
+    "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+    "images": 3
+  },
+  {
+    "method": "OpenCLI",
+    "ok": true,
+    "ms": 13009,
+    "screenshot": "C:\\html\\published-review\\tool-screenshots\\02-opencli.png",
+    "stdout_sample": "URL: https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg\n\nurl: https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg\ntitle: AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\nviewport: 1693x810\npage_scroll: 0.9↑ 3.8↓\n---\n<body id=activity-detail />\n  <div id=js_article />\n    <div id=js_base_container />\n      <div id=page-content />\n        <div />\n          <div id=img-content />\n            <h1 id=activity-name />\n              <span>AnySearch / Tavily / Brave 实测：以后技术检索该怎么用</span>\n            <div id=meta_content />\n              <span id=profileBt />\n                [1]<a id=js_name>sinnple coffee</a>\n              <span id=meta_content_hide_info />\n                <em id=publish_time>2026年5月22日 16:36</em>\n                <em id=js_ip_wording_wrp aria-label=上海 />\n                  <span id=js_ip_wording>上海</span>\n            <div id=js_novel_card />\n              <div />\n                <div />\n                  <div id=js_novel_title>在小说阅读器读本章</div>\n              <div id=js_novel_link>去阅读</div>\n              <div />\n                <div />\n                  <div />\n                    <div>在小说阅读器中沉浸阅读</div>\n            <div id=js_content />\n              <h1 />\n                <span>AnySearch",
+    "stderr_sample": ""
+  },
+  {
+    "method": "playwright-cli",
+    "ok": true,
+    "ms": 3309,
+    "screenshot": "C:\\html\\published-review\\tool-screenshots\\03-playwright-cli.png",
+    "note": "能截公开文章，但会启动独立浏览器；不适合公众号后台登录态任务。",
+    "stdout_sample": "Navigating to https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg\nCapturing screenshot into C:\\html\\published-review\\tool-screenshots\\03-playwright-cli.png\n",
+    "stderr_sample": ""
+  },
+  {
+    "method": "raw CDP",
+    "ok": true,
+    "ms": 4670,
+    "screenshot": "C:\\html\\published-review\\tool-screenshots\\04-raw-cdp.png",
+    "stdout_sample": "{\"title\":\"AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\",\"imgs\":3,\"href\":\"https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg\"}\n",
+    "stderr_sample": ""
+  },
+  {
+    "method": "CDP Bridge MCP",
+    "ok": true,
+    "ms": 4889,
+    "screenshot": "C:\\html\\published-review\\tool-screenshots\\05-cdp-bridge-mcp.png",
+    "session": {
+      "id": "1658364050",
+      "url": "https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg",
+      "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用"
+    },
+    "data": {
+      "href": "https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg",
+      "imgs": 3,
+      "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用"
+    },
+    "note": "?????????????? Chrome ?????? JS??????????????????? Playwright ?????"
+  }
+]

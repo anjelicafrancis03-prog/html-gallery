@@ -1,0 +1,73 @@
+{
+  "url": "https://mp.weixin.qq.com/cgi-bin/masssendmodify?action=edit_new&appmsgid=2247483878&idx=1&msgid=2247483878&modify_version=1&open_from=https%3A%2F%2Fmp.weixin.qq.com%2Fcgi-bin%2Fappmsgpublish%3Fsub%3Dlist%26begin%3D0%26count%3D10%26token%3D941781265%26lang%3Dzh_CN%26_%3D1779430178221&token=941781265&lang=zh_CN",
+  "dialogs": [
+    {
+      "i": 0,
+      "text": "支持修改文章摘要\n\n可替换或修改文章中的摘要，修改后摘要总字数不能超过120个字。\n\n正文可修改字数提升至120个字。\n\n我知道了",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1687.272705078125,
+        "h": 860.165283203125
+      },
+      "buttons": [
+        {
+          "j": 0,
+          "text": "",
+          "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+          "box": {
+            "x": 1275.6507568359375,
+            "y": 178.08883666992188,
+            "w": 15.991735458374023,
+            "h": 15.991735458374023
+          }
+        },
+        {
+          "j": 1,
+          "text": "我知道了",
+          "cls": "weui-desktop-btn weui-desktop-btn_primary",
+          "box": {
+            "x": 795.6405029296875,
+            "y": 641.0743408203125,
+            "w": 95.99173736572266,
+            "h": 36.0020637512207
+          }
+        }
+      ]
+    },
+    {
+      "i": 1,
+      "text": "支持修改文章摘要\n\n可替换或修改文章中的摘要，修改后摘要总字数不能超过120个字。\n\n正文可修改字数提升至120个字。\n\n我知道了",
+      "box": {
+        "x": 363.6363525390625,
+        "y": 151.09503173828125,
+        "w": 960,
+        "h": 557.9752197265625
+      },
+      "buttons": [
+        {
+          "j": 0,
+          "text": "",
+          "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+          "box": {
+            "x": 1275.6507568359375,
+            "y": 178.08883666992188,
+            "w": 15.991735458374023,
+            "h": 15.991735458374023
+          }
+        },
+        {
+          "j": 1,
+          "text": "我知道了",
+          "cls": "weui-desktop-btn weui-desktop-btn_primary",
+          "box": {
+            "x": 795.6405029296875,
+            "y": 641.0743408203125,
+            "w": 95.99173736572266,
+            "h": 36.0020637512207
+          }
+        }
+      ]
+    }
+  ]
+}

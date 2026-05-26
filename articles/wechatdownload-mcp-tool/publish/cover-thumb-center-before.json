@@ -1,0 +1,15 @@
+{
+  "hasCover": false,
+  "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+  "itemClass": "weui-desktop-img-picker__item",
+  "itemHtml": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4gj8VsiaPB7ic8jBhIv0ujM7SPeiadPbxcFAXS0vYhJQGlwr3zkMPLdHvWJqdZTicJzdcf75D9o1j8uQUMMdUwIksWKz4olOqfMWE/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->wechat-cover-fixed-v2.png</strong></div>",
+  "nextClass": "",
+  "nextRect": null,
+  "itemRect": {
+    "x": 576,
+    "y": 247,
+    "w": 110,
+    "h": 138
+  },
+  "bodyTail": "con 创作来源 未添加 icon 平台推荐 已开启 icon 18:52已保存 正文字数1442 回到顶部 一键排版 发表 预览 保存为草稿 选择图片 最近使用 (117) 我的图片 (173) 未分组 (114) 文章配图 (59) 新建分组 原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片 关闭 已关闭图片水印 上传文件 wechat-cover-fixed-v2.png 粘贴图片_20260522185244.png 粘贴图片_20260522185237.png 粘贴图片_20260522185230.png 粘贴图片_20260522185224.png 粘贴图片_20260522185217.png 粘贴图片_20260522185210.png 粘贴图片_20260522185203.png 粘贴图片_20260522185156.png 粘贴图片_20260522181759.png wechat-cover-1200x512.png 粘贴图片_20260522180747.png 1 / 15 下一页 跳转 下一步 取消 问题反馈 CDP Bridge"
+}

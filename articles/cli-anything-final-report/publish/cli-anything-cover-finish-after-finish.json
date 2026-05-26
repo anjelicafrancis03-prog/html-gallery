@@ -1,0 +1,195 @@
+{
+  "title": "Agent 该怎么发现和调用本地 CLI 工具",
+  "hasCover": false,
+  "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+  "buttons": [
+    {
+      "text": "服务号",
+      "cls": "weui-desktop-service-logo__inner",
+      "visible": true,
+      "rect": {
+        "x": 30,
+        "y": 12,
+        "w": 116,
+        "h": 32
+      }
+    },
+    {
+      "text": "回到顶部",
+      "cls": "tool_bar__fold-btn",
+      "visible": true,
+      "rect": {
+        "x": 1288,
+        "y": 740,
+        "w": 106,
+        "h": 36
+      }
+    },
+    {
+      "text": "发表",
+      "cls": "mass_send",
+      "visible": true,
+      "rect": {
+        "x": 1151,
+        "y": 816,
+        "w": 98,
+        "h": 34
+      }
+    },
+    {
+      "text": "预览",
+      "cls": "",
+      "visible": true,
+      "rect": {
+        "x": 1042,
+        "y": 816,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "text": "保存为草稿",
+      "cls": "",
+      "visible": true,
+      "rect": {
+        "x": 932,
+        "y": 816,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "text": "最近使用 (131)",
+      "cls": "weui-desktop-menu__link",
+      "visible": true,
+      "rect": {
+        "x": 361,
+        "y": 36,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "text": "我的图片 (187)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link_current",
+      "visible": true,
+      "rect": {
+        "x": 361,
+        "y": 76,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "text": "未分组 (128)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "visible": true,
+      "rect": {
+        "x": 361,
+        "y": 116,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "text": "文章配图 (59)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "visible": true,
+      "rect": {
+        "x": 361,
+        "y": 156,
+        "w": 189,
+        "h": 40
+      }
+    },
+    {
+      "text": "新建分组",
+      "cls": "",
+      "visible": true,
+      "rect": {
+        "x": 393,
+        "y": 697,
+        "w": 56,
+        "h": 18
+      }
+    },
+    {
+      "text": "AI 配图",
+      "cls": "",
+      "visible": true,
+      "rect": {
+        "x": 840,
+        "y": 55,
+        "w": 46,
+        "h": 18
+      }
+    },
+    {
+      "text": "上传文件",
+      "cls": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "visible": true,
+      "rect": {
+        "x": 1193,
+        "y": 92,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "text": "下一页",
+      "cls": "weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini",
+      "visible": true,
+      "rect": {
+        "x": 1183,
+        "y": 682,
+        "w": 24,
+        "h": 24
+      }
+    },
+    {
+      "text": "跳转",
+      "cls": "weui-desktop-link",
+      "visible": true,
+      "rect": {
+        "x": 1277,
+        "y": 682,
+        "w": 24,
+        "h": 24
+      }
+    },
+    {
+      "text": "下一步",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled",
+      "visible": true,
+      "rect": {
+        "x": 737,
+        "y": 758,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "text": "取消",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "visible": true,
+      "rect": {
+        "x": 849,
+        "y": 758,
+        "w": 96,
+        "h": 36
+      }
+    },
+    {
+      "text": "CDP Bridge",
+      "cls": "",
+      "visible": true,
+      "rect": {
+        "x": 1574,
+        "y": 823,
+        "w": 99,
+        "h": 29
+      }
+    }
+  ],
+  "bodyTextTail": "er、libreoffice、n8n，等环境补齐后再测。 原 HTML 长文截图。公众号版不照搬网页排版，只保留证据链和可复用结论。 给其他 Agent 的交接口令 以后要交给别的线程，不要只说“去找个 CLI”。直接给它这段，它会少走很多弯路。 用 CLI-Anything / CLI-Hub 找本地 CLI 工具： 1. 先运行 cli-hub search <关键词> 找候选； 2. 再运行 cli-hub info <工具名> 看依赖、参数、输入输出； 3. 安装后必须跑 smoke test； 4. 只有产生真实文件或结构化 JSON 的工具，才能写入正式工作流； 5. 当前优先可用：mermaid、openscreen、3mf； 6. hacker-feeds、obsidian、clibrowser、libreoffice、n8n 先当候选，补齐环境后再验。 这篇文章的核心经验其实很简单：Agent 的能力不是“会背工具名”，而是能按固定协议验证工具。发现只是开始，能稳定复用，才算进了工作流 拖拽或选择封面 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 13:34已保存 正文字数1695 回到顶部 一键排版 发表 预览 保存为草稿 选择图片 最近使用 (131) 我的图片 (187) 未分组 (128) 文章配图 (59) 新建分组 原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片 关闭 已关闭图片水印 上传文件 cli-anything-cover-v1.png 粘贴图片_20260524133400.png 粘贴图片_20260524133353.png 粘贴图片_20260524133346.png 粘贴图片_20260524133339.png wechat-cover-fixed-v2.png 粘贴图片_20260522191126.png 粘贴图片_20260522191119.png 粘贴图片_20260522191112.png 粘贴图片_20260522191105.png 粘贴图片_20260522191058.png 粘贴图片_20260522191052.png 粘贴图片_20260522191045.png 粘贴图片_20260522191038.png wechat-cover-fixed-v2.png 粘贴图片_20260522185244.png 粘贴图片_20260522185237.png 粘贴图片_20260522185230.png 1 / 11 下一页 跳转 下一步 取消 问题反馈 CDP Bridge"
+}

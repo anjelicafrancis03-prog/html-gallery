@@ -1,0 +1,28 @@
+{
+  "target": {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@5d864f4a4b1695464502ca7b2b1d36f78bf04600/inspector.html?ws=127.0.0.1:9223/devtools/page/EBD7017778316A34BC21DE9F2D71C441",
+    "faviconUrl": "https://res.wx.qq.com/a/fed_upload/9300e7ac-cec5-4454-b75c-f92260dd5b47/logo-mp.ico",
+    "id": "EBD7017778316A34BC21DE9F2D71C441",
+    "title": "服务号",
+    "type": "page",
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779443387383&type=77&appmsgid=100000254&token=941781265&lang=zh_CN",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/EBD7017778316A34BC21DE9F2D71C441"
+  },
+  "inspect": {
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779443387383&type=77&appmsgid=100000254&token=941781265&lang=zh_CN",
+    "title": "我实测了 5 种公众号自动化方式，真正稳定的是哪一种？",
+    "desc": "按真实公众号工作流测试 Playwright connectOverCDP、OpenCLI、CDP Bridge、raw CDP 和 playwright-cli，最后只保留一套最稳主流程。",
+    "textLength": 2059,
+    "imgCount": 6,
+    "hasCover": true,
+    "coverText": "拖拽或选择封面",
+    "coverStyle": "background-image:url('http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf5fKZRBIAknC8rVKIgQ85Y5T5AAMdibTxBb2iapHgXRXEUC1q2d2alibgmwYqBYHMbp2picSH9TfcDrtoqnJSiclBRR5sFKTayficZrE/0?wx_fmt=jpeg');  background-image: url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf5fKZRBIAknC8rVKIgQ85Y5T5AAMdibTxBb2iapHgXRXEUC1q2d2alibgmwYqBYHMbp2picSH9TfcDrtoqnJSiclBRR5sFKTayficZrE/0?wx_fmt=jpeg\"); ",
+    "publishButtonVisible": true,
+    "saved": true,
+    "dialogText": "未授权使用切换账号能力，请退出后扫码登录其他账号。登录时需勾选「 允许切换登录我的其他公众号、服务号、小程序」，才能切换账号。 退出登录 我知道了",
+    "wordCount": "正文字数1522",
+    "bodyTail": "依赖固定登录态的流程。 三、发布成功不等于读者看到正常 后台草稿看起来正常，不代表公开页正常。公众号真正要验收的，是读者打开的那条公开链接。 所以发表后必须进入“发表记录”，从那里拿公开链接，再检查标题、正文、图片、表格、手机宽度和是否乱码。 发表记录截图：公开链接必须从这里拿，不能只看后台保存成功。 这一步最容易被省掉，但不能省。后台保存成功，只能说明编辑器收到了内容；公开页正常，才说明读者能正常阅读。 所以验收不能只看后台。必须从发表记录拿公开链接，再分别看桌面和手机宽度下的标题、正文、图片和表格。 四、主流程为什么最后胜出 下面这张截图对应的是主流程：Playwright connectOverCDP 接已登录 Chrome，再打开公开页做验收。它不是最轻的工具，但它最适合成为长期方案。 Playwright connectOverCDP：能接固定 Chrome、打开公开页、统计图片和正文，并保存验收截图。 它胜出的原因不是“功能最多”，而是链路完整：同一个登录态，同一个浏览器，同一套截图和页面检查方式，最后还能沉淀成脚本。 以后做公众号浏览器任务，先问一句：这个动作是否依赖已登录后台？只要答案是“是”，主流程就不要离开已登录 Chrome + connectOverCDP。 五、最后留下这套复用清单 这次测完后，我会把公众号浏览器任务固定成下面这套清单： 公众号浏览器任务优先复用已登录 Chrome。 主流程用 Playwright connectOverCDP。 从发表记录拿公开链接验收，不只看后台。 CDP Bridge 要看 18765/18766，不是开了 9223 就算可用。 OpenCLI、raw CDP、CDP Bridge 都是辅助，别抢主流程。 这套结论的价值，不在于把工具讲全，而在于把流程定死：主流程稳定，辅助工具轻量，最终验收必须看公开页。 拖拽或选择封面 26/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 无需声明 icon 平台推荐 已开启 icon 17:50已保存 正文字数1522疑似错别字1 查看 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge 正在发表..."
+  },
+  "screenshot": "C:\\html\\articles\\wechat-automation-tools\\publish\\wechat-action-inspect.png"
+}

@@ -1,0 +1,181 @@
+{
+  "target": {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@5d864f4a4b1695464502ca7b2b1d36f78bf04600/inspector.html?ws=127.0.0.1:9223/devtools/page/679C49EE2B4A7365B42D398C1705F2F9",
+    "faviconUrl": "https://res.wx.qq.com/a/fed_upload/9300e7ac-cec5-4454-b75c-f92260dd5b47/logo-mp.ico",
+    "id": "679C49EE2B4A7365B42D398C1705F2F9",
+    "title": "服务号",
+    "type": "page",
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/679C49EE2B4A7365B42D398C1705F2F9"
+  },
+  "final": {
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+    "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+    "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+    "textLength": 1883,
+    "textStart": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\n\n结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。\n\n这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。\n\n\n\n\n总览图：四种工具在技术检索链路里的位置。\n\n一、四种工具不要混着用\n\n搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。\n\n主搜索源\nAnySearch\n\n强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。\n\n短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 UR",
+    "textEnd": "tHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n",
+    "imgCount": 6,
+    "leftStyle": "background-image:url('http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf690poaic8dK1sHj5Yia976RWWpJ0ytktYgJlJ3KPUq6w1PphianGWpeHW5RdCoTH0PHDN04sjibe88TicVmdk2mq4NhqBIo582xSms/0?wx_fmt=jpeg');",
+    "coverText": "拖拽或选择封面",
+    "coverAreaStyle": "",
+    "coverImgStyle": "background-image: url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf690poaic8dK1sHj5Yia976RWWpJ0ytktYgJlJ3KPUq6w1PphianGWpeHW5RdCoTH0PHDN04sjibe88TicVmdk2mq4NhqBIo582xSms/0?wx_fmt=jpeg\");",
+    "coverImgSrc": "",
+    "hasCover": true,
+    "wordCount": "",
+    "bodyTail": "CVE-2024-3094：AnySearch 命中 OpenSSF、JFrog、NVD 等安全出处；安全类查询不能只看 summary，要优先抓官方、安全机构和供应商公告。 ngrok free static domain：Tavily 更容易补到官方博客和 docs，说明它适合作第二来源，尤其是产品功能类查询。 OpenAI GPT Image 2 docs：两边都能命中 OpenAI 文档和 API reference，但涉及 OpenAI 产品，最终仍应回到官方文档确认。 三、以后直接按这个流程跑 流程图：给其他线程最容易执行的搜索口令和验证顺序。 第一步：先用 AnySearch 找原始出处。目标是 README、官方 docs、GitHub、NVD、厂商公告和参数表，不是先要模型总结。 第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。 第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。 四、给其他 Agent 的口令 用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。 如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。 五、这次留下的边界 Brave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。 所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。 拖拽或选择封面 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 16:27已保存 正文字数1211 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge"
+  },
+  "log": [
+    {
+      "step": "start",
+      "state": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "textStart": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\n\n结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。\n\n这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。\n\n\n\n\n总览图：四种工具在技术检索链路里的位置。\n\n一、四种工具不要混着用\n\n搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。\n\n主搜索源\nAnySearch\n\n强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。\n\n短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 UR",
+        "textEnd": "tHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n",
+        "imgCount": 6,
+        "leftStyle": "background-image:url('');",
+        "coverText": "拖拽或选择封面",
+        "coverAreaStyle": "",
+        "coverImgStyle": "display: none; background-image: url(\"\");",
+        "coverImgSrc": "",
+        "hasCover": false,
+        "wordCount": "",
+        "bodyTail": "CVE-2024-3094：AnySearch 命中 OpenSSF、JFrog、NVD 等安全出处；安全类查询不能只看 summary，要优先抓官方、安全机构和供应商公告。 ngrok free static domain：Tavily 更容易补到官方博客和 docs，说明它适合作第二来源，尤其是产品功能类查询。 OpenAI GPT Image 2 docs：两边都能命中 OpenAI 文档和 API reference，但涉及 OpenAI 产品，最终仍应回到官方文档确认。 三、以后直接按这个流程跑 流程图：给其他线程最容易执行的搜索口令和验证顺序。 第一步：先用 AnySearch 找原始出处。目标是 README、官方 docs、GitHub、NVD、厂商公告和参数表，不是先要模型总结。 第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。 第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。 四、给其他 Agent 的口令 用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。 如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。 五、这次留下的边界 Brave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。 所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。 拖拽或选择封面 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 16:27已保存 正文字数1211 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge"
+      }
+    },
+    {
+      "step": "opened-library"
+    },
+    {
+      "step": "selected-cover",
+      "selected": {
+        "className": "weui-desktop-img-picker__item",
+        "text": "wechat-cover-image2.png",
+        "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5WnqdoUFcAZDkDnRkyRV82mVFV0u4NKhOVMxd0G23L6XbAUEQZ7bM1H0VOadXtXFJbDfviawAOb4lgGNe1yZeBIgdIGfSkOon8/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->wechat-cover-image2.png</strong></div>"
+      }
+    },
+    {
+      "step": "before-primary-0",
+      "state": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "textStart": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\n\n结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。\n\n这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。\n\n\n\n\n总览图：四种工具在技术检索链路里的位置。\n\n一、四种工具不要混着用\n\n搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。\n\n主搜索源\nAnySearch\n\n强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。\n\n短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 UR",
+        "textEnd": "tHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n",
+        "imgCount": 6,
+        "leftStyle": "background-image:url('');",
+        "coverText": "拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图",
+        "coverAreaStyle": "",
+        "coverImgStyle": "display: none; background-image: url(\"\");",
+        "coverImgSrc": "",
+        "hasCover": false,
+        "wordCount": "",
+        "bodyTail": "只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。 四、给其他 Agent 的口令 用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。 如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。 五、这次留下的边界 Brave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。 所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。 拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 16:27已保存 正文字数1211 回到顶部 一键排版 发表 预览 保存为草稿 选择图片 最近使用 (91) 我的图片 (147) 未分组 (88) 文章配图 (59) 新建分组 原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片 关闭 已关闭图片水印 上传文件 wechat-cover-image2.png 粘贴图片_20260522162659.png 粘贴图片_20260522162652.png 粘贴图片_20260522162645.png 粘贴图片_20260522161707.png 粘贴图片_20260522161700.png wechat-cover.png 粘贴图片_20260522135611.png 粘贴图片_20260522135500.png 粘贴图片_20260522135453.png 粘贴图片_20260522135446.png 粘贴图片_20260522135439.png 1 / 13 下一页 跳转 下一步 取消 问题反馈 CDP Bridge"
+      }
+    },
+    {
+      "step": "clicked-primary-0",
+      "clicked": {
+        "x": 788,
+        "y": 707,
+        "text": "下一步",
+        "className": "weui-desktop-btn weui-desktop-btn_primary"
+      }
+    },
+    {
+      "step": "before-primary-1",
+      "state": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "textStart": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\n\n结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。\n\n这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。\n\n\n\n\n总览图：四种工具在技术检索链路里的位置。\n\n一、四种工具不要混着用\n\n搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。\n\n主搜索源\nAnySearch\n\n强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。\n\n短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 UR",
+        "textEnd": "tHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n",
+        "imgCount": 6,
+        "leftStyle": "background-image:url('');",
+        "coverText": "拖拽或选择封面",
+        "coverAreaStyle": "",
+        "coverImgStyle": "display: none; background-image: url(\"\");",
+        "coverImgSrc": "",
+        "hasCover": false,
+        "wordCount": "",
+        "bodyTail": "VD 等安全出处；安全类查询不能只看 summary，要优先抓官方、安全机构和供应商公告。 ngrok free static domain：Tavily 更容易补到官方博客和 docs，说明它适合作第二来源，尤其是产品功能类查询。 OpenAI GPT Image 2 docs：两边都能命中 OpenAI 文档和 API reference，但涉及 OpenAI 产品，最终仍应回到官方文档确认。 三、以后直接按这个流程跑 流程图：给其他线程最容易执行的搜索口令和验证顺序。 第一步：先用 AnySearch 找原始出处。目标是 README、官方 docs、GitHub、NVD、厂商公告和参数表，不是先要模型总结。 第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。 第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。 四、给其他 Agent 的口令 用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。 如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。 五、这次留下的边界 Brave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。 所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。 拖拽或选择封面 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 16:27已保存 正文字数1211 回到顶部 一键排版 发表 预览 保存为草稿 编辑封面 1:1 服务号列表 转发卡片 2.35:1 (服务号会话) 上一步 确认 问题反馈 CDP Bridge"
+      }
+    },
+    {
+      "step": "clicked-primary-1",
+      "clicked": {
+        "x": 897,
+        "y": 787,
+        "text": "确认",
+        "className": "weui-desktop-btn weui-desktop-btn_primary"
+      }
+    },
+    {
+      "step": "before-primary-2",
+      "state": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "textStart": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\n\n结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。\n\n这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。\n\n\n\n\n总览图：四种工具在技术检索链路里的位置。\n\n一、四种工具不要混着用\n\n搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。\n\n主搜索源\nAnySearch\n\n强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。\n\n短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 UR",
+        "textEnd": "tHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n",
+        "imgCount": 6,
+        "leftStyle": "background-image:url('http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf690poaic8dK1sHj5Yia976RWWpJ0ytktYgJlJ3KPUq6w1PphianGWpeHW5RdCoTH0PHDN04sjibe88TicVmdk2mq4NhqBIo582xSms/0?wx_fmt=jpeg');",
+        "coverText": "拖拽或选择封面",
+        "coverAreaStyle": "",
+        "coverImgStyle": "background-image: url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf690poaic8dK1sHj5Yia976RWWpJ0ytktYgJlJ3KPUq6w1PphianGWpeHW5RdCoTH0PHDN04sjibe88TicVmdk2mq4NhqBIo582xSms/0?wx_fmt=jpeg\");",
+        "coverImgSrc": "",
+        "hasCover": true,
+        "wordCount": "",
+        "bodyTail": "CVE-2024-3094：AnySearch 命中 OpenSSF、JFrog、NVD 等安全出处；安全类查询不能只看 summary，要优先抓官方、安全机构和供应商公告。 ngrok free static domain：Tavily 更容易补到官方博客和 docs，说明它适合作第二来源，尤其是产品功能类查询。 OpenAI GPT Image 2 docs：两边都能命中 OpenAI 文档和 API reference，但涉及 OpenAI 产品，最终仍应回到官方文档确认。 三、以后直接按这个流程跑 流程图：给其他线程最容易执行的搜索口令和验证顺序。 第一步：先用 AnySearch 找原始出处。目标是 README、官方 docs、GitHub、NVD、厂商公告和参数表，不是先要模型总结。 第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。 第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。 四、给其他 Agent 的口令 用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。 如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。 五、这次留下的边界 Brave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。 所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。 拖拽或选择封面 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 16:27已保存 正文字数1211 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge"
+      }
+    },
+    {
+      "step": "before-save",
+      "final": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "textStart": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\n\n结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。\n\n这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。\n\n\n\n\n总览图：四种工具在技术检索链路里的位置。\n\n一、四种工具不要混着用\n\n搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。\n\n主搜索源\nAnySearch\n\n强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。\n\n短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 UR",
+        "textEnd": "tHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n",
+        "imgCount": 6,
+        "leftStyle": "background-image:url('http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf690poaic8dK1sHj5Yia976RWWpJ0ytktYgJlJ3KPUq6w1PphianGWpeHW5RdCoTH0PHDN04sjibe88TicVmdk2mq4NhqBIo582xSms/0?wx_fmt=jpeg');",
+        "coverText": "拖拽或选择封面",
+        "coverAreaStyle": "",
+        "coverImgStyle": "background-image: url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf690poaic8dK1sHj5Yia976RWWpJ0ytktYgJlJ3KPUq6w1PphianGWpeHW5RdCoTH0PHDN04sjibe88TicVmdk2mq4NhqBIo582xSms/0?wx_fmt=jpeg\");",
+        "coverImgSrc": "",
+        "hasCover": true,
+        "wordCount": "",
+        "bodyTail": "CVE-2024-3094：AnySearch 命中 OpenSSF、JFrog、NVD 等安全出处；安全类查询不能只看 summary，要优先抓官方、安全机构和供应商公告。 ngrok free static domain：Tavily 更容易补到官方博客和 docs，说明它适合作第二来源，尤其是产品功能类查询。 OpenAI GPT Image 2 docs：两边都能命中 OpenAI 文档和 API reference，但涉及 OpenAI 产品，最终仍应回到官方文档确认。 三、以后直接按这个流程跑 流程图：给其他线程最容易执行的搜索口令和验证顺序。 第一步：先用 AnySearch 找原始出处。目标是 README、官方 docs、GitHub、NVD、厂商公告和参数表，不是先要模型总结。 第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。 第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。 四、给其他 Agent 的口令 用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。 如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。 五、这次留下的边界 Brave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。 所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。 拖拽或选择封面 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 16:27已保存 正文字数1211 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge"
+      }
+    },
+    {
+      "step": "after-save",
+      "final": {
+        "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+        "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+        "desc": "基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。",
+        "textLength": 1883,
+        "textStart": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用\n\n结论先放前面：以后做技术检索，AnySearch 应该放在第一搜索源，Tavily 做第二搜索源和交叉验证，Brave 等 API key 接好后再进入主流程，DeepSeek 只负责解释和压缩，不负责找原始出处。\n\n这篇不是抽象比较“谁更聪明”，而是按真实 Agent 工作流去看：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更容易把人带到可靠来源。\n\n\n\n\n总览图：四种工具在技术检索链路里的位置。\n\n一、四种工具不要混着用\n\n搜索、验证、解释、写作是四件事。把它们混在一个模型回答里，结果往往是看起来顺滑，但出处不稳。更稳的做法，是给每个工具固定角色。\n\n主搜索源\nAnySearch\n\n强项：更适合找 GitHub README、官方 docs、开源项目、benchmark、参数表和 URL extract。它的价值是把 Agent 带到原始页面。\n\n短板：中文结果偶尔会混入低质量页面；遇到重名项目仍然要加 owner/repo、官方域名或精确 UR",
+        "textEnd": "tHub、NVD、厂商公告和参数表，不是先要模型总结。\n\n第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。\n\n第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。\n\n四、给其他 Agent 的口令\n用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。\n\n如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。\n\n五、这次留下的边界\nBrave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。\n\n所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。\n\n\n",
+        "imgCount": 6,
+        "leftStyle": "background-image:url('http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf690poaic8dK1sHj5Yia976RWWpJ0ytktYgJlJ3KPUq6w1PphianGWpeHW5RdCoTH0PHDN04sjibe88TicVmdk2mq4NhqBIo582xSms/0?wx_fmt=jpeg');",
+        "coverText": "拖拽或选择封面",
+        "coverAreaStyle": "",
+        "coverImgStyle": "background-image: url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf690poaic8dK1sHj5Yia976RWWpJ0ytktYgJlJ3KPUq6w1PphianGWpeHW5RdCoTH0PHDN04sjibe88TicVmdk2mq4NhqBIo582xSms/0?wx_fmt=jpeg\");",
+        "coverImgSrc": "",
+        "hasCover": true,
+        "wordCount": "",
+        "bodyTail": "CVE-2024-3094：AnySearch 命中 OpenSSF、JFrog、NVD 等安全出处；安全类查询不能只看 summary，要优先抓官方、安全机构和供应商公告。 ngrok free static domain：Tavily 更容易补到官方博客和 docs，说明它适合作第二来源，尤其是产品功能类查询。 OpenAI GPT Image 2 docs：两边都能命中 OpenAI 文档和 API reference，但涉及 OpenAI 产品，最终仍应回到官方文档确认。 三、以后直接按这个流程跑 流程图：给其他线程最容易执行的搜索口令和验证顺序。 第一步：先用 AnySearch 找原始出处。目标是 README、官方 docs、GitHub、NVD、厂商公告和参数表，不是先要模型总结。 第二步：再用 Tavily 做交叉验证。重点看结构化结果是否支持同一结论，URL 是否命中同一个项目或同一份文档。 第三步：最后让模型解释。模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。 四、给其他 Agent 的口令 用 anysearch + tavily 对比搜索：<主题> 要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。 如果是非常具体的技术对象，再补一句：注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。 五、这次留下的边界 Brave 这次还不能进入最终排名，因为本机没有完整 API key，网页版又出现 429。DeepSeek Chat API 也不能替代搜索，它只能解释已经找到的证据。 所以最终工作流不是“找一个最强工具”，而是把工具排成顺序：AnySearch 找出处，Tavily 交叉验证，模型解释和写作。 拖拽或选择封面 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 16:27已保存 正文字数1211 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge"
+      }
+    }
+  ],
+  "screenshotPath": "C:/html/articles/anysearch-comparison/publish/wechat-draft-current.png"
+}

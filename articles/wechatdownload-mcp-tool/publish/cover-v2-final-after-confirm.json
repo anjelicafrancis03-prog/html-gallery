@@ -1,0 +1,286 @@
+{
+  "href": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779447099704&type=77&appmsgid=100000277&token=941781265&lang=zh_CN",
+  "title": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测",
+  "hasCover": false,
+  "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+  "coverText": "拖拽或选择封面",
+  "dialogText": "未授权使用切换账号能力，请退出后扫码登录其他账号。登录时需勾选「 允许切换登录我的其他公众号、服务号、小程序」，才能切换账号。 退出登录 我知道了",
+  "buttons": [
+    {
+      "i": 0,
+      "text": "服务号",
+      "cls": "weui-desktop-service-logo__inner",
+      "rect": {
+        "x": 30,
+        "y": 12,
+        "w": 116,
+        "h": 32
+      },
+      "disabled": false
+    },
+    {
+      "i": 1,
+      "text": "文档导入",
+      "cls": "weui-desktop-tooltip weui-desktop-tooltip__up-center",
+      "rect": {
+        "x": 1478,
+        "y": 55,
+        "w": 64,
+        "h": 24
+      },
+      "disabled": false
+    },
+    {
+      "i": 40,
+      "text": "从正文选择可选视频封面",
+      "cls": "pop-opr__button js_selectCoverFromContent",
+      "rect": {
+        "x": 655,
+        "y": 413,
+        "w": 116,
+        "h": 42
+      },
+      "disabled": false
+    },
+    {
+      "i": 41,
+      "text": "从图片库选择",
+      "cls": "pop-opr__button js_imagedialog",
+      "rect": {
+        "x": 655,
+        "y": 455,
+        "w": 116,
+        "h": 42
+      },
+      "disabled": false
+    },
+    {
+      "i": 42,
+      "text": "微信扫码上传",
+      "cls": "pop-opr__button js_imageScan",
+      "rect": {
+        "x": 655,
+        "y": 498,
+        "w": 116,
+        "h": 42
+      },
+      "disabled": false
+    },
+    {
+      "i": 43,
+      "text": "AI 配图",
+      "cls": "pop-opr__button js_aiImage",
+      "rect": {
+        "x": 655,
+        "y": 540,
+        "w": 116,
+        "h": 42
+      },
+      "disabled": false
+    },
+    {
+      "i": 51,
+      "text": "回到顶部",
+      "cls": "tool_bar__fold-btn",
+      "rect": {
+        "x": 1288,
+        "y": 684,
+        "w": 106,
+        "h": 36
+      },
+      "disabled": false
+    },
+    {
+      "i": 53,
+      "text": "发表",
+      "cls": "mass_send",
+      "rect": {
+        "x": 1151,
+        "y": 761,
+        "w": 98,
+        "h": 34
+      },
+      "disabled": false
+    },
+    {
+      "i": 54,
+      "text": "预览",
+      "cls": "",
+      "rect": {
+        "x": 1042,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      },
+      "disabled": false
+    },
+    {
+      "i": 55,
+      "text": "保存为草稿",
+      "cls": "",
+      "rect": {
+        "x": 932,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      },
+      "disabled": false
+    },
+    {
+      "i": 58,
+      "text": "",
+      "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+      "rect": {
+        "x": 1276,
+        "y": 80,
+        "w": 16,
+        "h": 16
+      },
+      "disabled": false
+    },
+    {
+      "i": 59,
+      "text": "最近使用 (117)",
+      "cls": "weui-desktop-menu__link",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      },
+      "disabled": false
+    },
+    {
+      "i": 60,
+      "text": "我的图片 (173)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link_current",
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      },
+      "disabled": false
+    },
+    {
+      "i": 61,
+      "text": "未分组 (114)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      },
+      "disabled": false
+    },
+    {
+      "i": 62,
+      "text": "文章配图 (59)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      },
+      "disabled": false
+    },
+    {
+      "i": 63,
+      "text": "新建分组",
+      "cls": "",
+      "rect": {
+        "x": 396,
+        "y": 628,
+        "w": 56,
+        "h": 18
+      },
+      "disabled": false
+    },
+    {
+      "i": 66,
+      "text": "AI 配图",
+      "cls": "",
+      "rect": {
+        "x": 843,
+        "y": 144,
+        "w": 46,
+        "h": 18
+      },
+      "disabled": false
+    },
+    {
+      "i": 69,
+      "text": "上传文件",
+      "cls": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      },
+      "disabled": false
+    },
+    {
+      "i": 72,
+      "text": "下一页",
+      "cls": "weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini",
+      "rect": {
+        "x": 1186,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "disabled": false
+    },
+    {
+      "i": 73,
+      "text": "跳转",
+      "cls": "weui-desktop-link",
+      "rect": {
+        "x": 1280,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "disabled": false
+    },
+    {
+      "i": 74,
+      "text": "下一步",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary",
+      "rect": {
+        "x": 740,
+        "y": 689,
+        "w": 96,
+        "h": 36
+      },
+      "disabled": false
+    },
+    {
+      "i": 75,
+      "text": "取消",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "rect": {
+        "x": 852,
+        "y": 690,
+        "w": 96,
+        "h": 36
+      },
+      "disabled": false
+    },
+    {
+      "i": 99,
+      "text": "CDP Bridge",
+      "cls": "",
+      "rect": {
+        "x": 1574,
+        "y": 767,
+        "w": 99,
+        "h": 29
+      },
+      "disabled": false
+    }
+  ]
+}

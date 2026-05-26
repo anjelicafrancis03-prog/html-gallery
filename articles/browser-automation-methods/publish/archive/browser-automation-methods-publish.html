@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>真实浏览器爬取方案重新评定</title>
+
+<meta content="这不是泛泛比较 Playwright、OpenCLI、CDP Bridge MCP、playwright-cli 谁更“先进”。评定口径只有一个：
+          在已经登录的固定 Chrome 里，能不能稳定读到 TikTok、Ins" name="description"/></head>
+<body style="margin:0; padding:0; background:#fbfaf7; color:#1f241f; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif; line-height:1.78; letter-spacing:0;">
+
+<main class="page" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<section class="hero">
+<div>
+<div class="eyebrow">Browser Automation Review</div>
+<h1 style="font-size:28px; line-height:1.28; font-weight:800; margin:24px 0 18px; color:#1f241f;">真实浏览器爬数据，哪套方案该留下？</h1>
+<p class="lead" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">
+          这不是泛泛比较 Playwright、OpenCLI、CDP Bridge MCP、playwright-cli 谁更“先进”。评定口径只有一个：
+          在已经登录的固定 Chrome 里，能不能稳定读到 TikTok、Instagram、微博、小红书、抖音、知乎这类动态页面，
+          并最终沉淀成可重复运行的数据供给。
+        </p>
+<div class="hero-actions">
+<a class="btn primary" href="#verdict">看最终排序</a>
+<a class="btn" href="#matrix">看评分矩阵</a>
+<a class="btn" href="#workflow">看落地路线</a>
+</div>
+</div>
+<aside aria-label="评定摘要" class="brief-card">
+<div class="score-ring">
+<div class="ring">A-</div>
+<div>
+<strong>当前推荐组合</strong>
+<p class="section-note" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">Playwright 做生产线，CDP Bridge 做真实会话接管，OpenCLI 做快速操作，playwright-cli 做探索和固化。</p>
+</div>
+</div>
+<ul class="meta-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;"><strong>验证对象</strong><span>固定 Chrome、CDP 9223、CDP Bridge 18765/18766、OpenCLI、微博搜索页</span></li>
+<li style="margin:6px 0; line-height:1.78;"><strong>关键事实</strong><span>CDP Bridge 可列出真实标签页，并能执行 JS；OpenCLI 可读微博结果；Playwright 仍最适合长期脚本。</span></li>
+<li style="margin:6px 0; line-height:1.78;"><strong>主要风险</strong><span>不要把“交互式接管工具”误当成“批处理爬虫生产线”。两者定位不同。</span></li>
+</ul>
+</aside>
+</section>
+<section aria-label="图文摘要" class="figure-grid" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;">
+<figure class="figure-card">
+<img alt="浏览器方式总评定信息图" loading="lazy" src="assets/rank-overview-light.png" style="display:block; width:100%; max-width:100%; height:auto; object-fit:contain; margin:14px auto; border-radius:8px;"/>
+<figcaption><strong>图 1.</strong> 总排行。先看谁是主力，谁只是快刀，谁必须降级。</figcaption>
+</figure>
+<figure class="figure-card">
+<img alt="分层落地路线信息图" loading="lazy" src="assets/workflow-layers-light.png" style="display:block; width:100%; max-width:100%; height:auto; object-fit:contain; margin:14px auto; border-radius:8px;"/>
+<figcaption><strong>图 2.</strong> 分层路线。真实会话、快速操作、探索固化、最终生产线四层分工。</figcaption>
+</figure>
+<figure class="figure-card">
+<img alt="场景选型信息图" loading="lazy" src="assets/decision-map-light.png" style="display:block; width:100%; max-width:100%; height:auto; object-fit:contain; margin:14px auto; border-radius:8px;"/>
+<figcaption><strong>图 3.</strong> 场景选型。按“长期爬取 / 真实会话 / 快速操作”直接对号入座。</figcaption>
+</figure>
+</section>
+<section class="section" id="verdict">
+<div class="section-head">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">总排行：先分清谁负责什么</h2>
+<p class="section-note" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">真正可用的工具箱不是单选题。最稳的路线，是让每个工具只做它擅长的那一段。</p>
+</div>
+<div aria-label="方案总排行" class="rank-grid">
+<article class="rank-card" style="max-width:760px; margin:0 auto; padding:24px 16px;"><div class="rank-num">01</div><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">Playwright CDP</h3><span class="tag">生产主力</span></article>
+<article class="rank-card" style="max-width:760px; margin:0 auto; padding:24px 16px;"><div class="rank-num">02</div><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">CDP Bridge MCP</h3><span class="tag">会话接管</span></article>
+<article class="rank-card" style="max-width:760px; margin:0 auto; padding:24px 16px;"><div class="rank-num">03</div><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">OpenCLI</h3><span class="tag">快速操作</span></article>
+<article class="rank-card" style="max-width:760px; margin:0 auto; padding:24px 16px;"><div class="rank-num">04</div><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">playwright-cli</h3><span class="tag">探索固化</span></article>
+<article class="rank-card" style="max-width:760px; margin:0 auto; padding:24px 16px;"><div class="rank-num">05</div><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">raw CDP</h3><span class="tag">底层急救</span></article>
+<article class="rank-card" style="max-width:760px; margin:0 auto; padding:24px 16px;"><div class="rank-num">06</div><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">Codex Chrome 插件</h3><span class="tag">交互辅助</span></article>
+<article class="rank-card" style="max-width:760px; margin:0 auto; padding:24px 16px;"><div class="rank-num">07</div><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">HTTP / Scrapy 等</h3><span class="tag">降级</span></article>
+</div>
+</section>
+<section class="section" id="matrix">
+<div class="section-head">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">评分矩阵：不要只看“能不能打开”</h2>
+<p class="section-note" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">我按真实爬数需要重新打分：登录态复用、可维护性、中文数据质量、交互能力、批处理能力、排障成本。</p>
+</div>
+<div aria-label="方案评分矩阵" class="matrix-wrap" role="region" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;" tabindex="0">
+<table style="width:100%; border-collapse:collapse; margin:18px 0; font-size:14px;">
+<thead>
+<tr>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">方案</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">定位</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">登录态复用</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">数据质量</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">长期运行</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">主要短板</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">综合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;"><strong>Playwright connect_over_cdp</strong></td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">最终脚本和定时任务生产线</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">强，直接连固定 Chrome 9223</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">最好，字段和中文最可控</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">最好，可写成 Python 脚本、入库、重试</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">需要写代码，探索阶段不如工具快</td>
+<td class="score" style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">9.2</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;"><strong>CDP Bridge MCP</strong></td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">让模型接管你正在用的真实浏览器</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">很强，18766 已能列出微博、小红书、抖音等标签页</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">好，适合页面扫描和 JS 执行</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">中上，适合作为交互桥，不宜独自承担批处理</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">健康检查要验它自己的链路，不能拿 Codex 烟测误判</td>
+<td class="score" style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">8.5</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;"><strong>OpenCLI</strong></td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">命令行快速打开、点击、state、find、extract</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">强，已接固定 Chrome</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">中等，结构可用但终端层可能中文乱码</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">中等，适合操作流，不适合作为唯一数据层</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">输出编码和 wrapper 参数边界要管</td>
+<td class="score" style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">8.0</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;"><strong>playwright-cli</strong></td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">探索路径、调试选择器、生成脚本</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">可通过 CDP attach 复用</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">好，但更偏探索</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">中等，本体不是最终运行层</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">长 JS、复杂数据抽取不如正式脚本舒服</td>
+<td class="score" style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">7.7</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;"><strong>raw CDP</strong></td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">最底层验证和急救</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">强</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">好，但靠自己封装</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">低，不适合团队维护</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">可读性差，脚本脆</td>
+<td class="score" style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">6.8</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;"><strong>Codex Chrome 插件</strong></td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">Codex 内交互式浏览器能力</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">强</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">中等</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">中低，更适合辅助而非爬虫主线</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">容易和会话、tab、烟测脚本耦合</td>
+<td class="score" style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">6.5</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;"><strong>requests / Scrapy / Instaloader / Patchright</strong></td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">传统抓取或替代浏览器路线</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">弱到中等</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">平台差异大</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">低，对动态登录页不占优</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">登录墙、反爬、动态渲染、字段漂移</td>
+<td class="score" style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">4.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="section" id="methods">
+<div class="section-head">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">逐项评定：每套方法留在哪里</h2>
+<p class="section-note" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">点下面筛选，可以按使用场景查看。这里的结论按你当前固定 Chrome 和真实测试结果来写。</p>
+</div>
+<div aria-label="筛选方法" class="controls">
+
+
+
+
+
+</div>
+<div class="method-grid">
+<article class="method-card" data-kind="production session" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="method-top"><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">Playwright connect_over_cdp</h3><span class="badge">主力</span></div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">最终应该沉淀到这里。它直连固定 Chrome 的 CDP 端口，既能复用登录态，又能把动作固化成可运行脚本。真正要每天、每周稳定拉数据，字段解析、去重、增量、重试、导出都应该写在这一层。</p>
+<div class="kv"><div><span>最好场景</span><strong>定时批处理</strong></div><div><span>保留原因</span><strong>可维护</strong></div><div><span>风险</span><strong>需要工程化</strong></div></div>
+<ul class="use-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">用于微博搜索、评论、账号页这类结构化抓取。</li>
+<li style="margin:6px 0; line-height:1.78;">用于 TikTok / Instagram 在登录态允许下的页面滚动和字段抽取。</li>
+<li style="margin:6px 0; line-height:1.78;">适合落 CSV、SQLite、Parquet，后续再接入数据库。</li>
+</ul>
+</article>
+<article class="method-card" data-kind="session explore" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="method-top"><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">CDP Bridge MCP</h3><span class="badge">上调</span></div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">这次重新评定后必须上调。它的 18766 fallback 已能返回当前真实浏览器标签页，包括微博、小红书、抖音、知乎等，并能执行 JS。它适合让模型读取当前页面、判断页面状态、执行小段脚本、截图和读取 Cookie。</p>
+<div class="kv"><div><span>最好场景</span><strong>真实会话接管</strong></div><div><span>保留原因</span><strong>直接看现有标签页</strong></div><div><span>风险</span><strong>别拿错验收链</strong></div></div>
+<ul class="use-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">适合“我已经打开并登录了页面，你来读一下”的任务。</li>
+<li style="margin:6px 0; line-height:1.78;">适合跨多个已打开平台做检查和轻量抽取。</li>
+<li style="margin:6px 0; line-height:1.78;">不建议独自承担大规模批处理，它更像模型和真实浏览器之间的桥。</li>
+</ul>
+</article>
+<article class="method-card" data-kind="session explore" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="method-top"><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">OpenCLI</h3><span class="badge">快刀</span></div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">OpenCLI 现在也是真可用。它能跑 doctor、browser open/state/find/extract，也能跑微博 search/hot。它适合运营式操作和快速排查，尤其是不用写脚本时快速看页面结构。</p>
+<div class="kv"><div><span>最好场景</span><strong>快速操作</strong></div><div><span>保留原因</span><strong>命令简单</strong></div><div><span>风险</span><strong>中文输出层</strong></div></div>
+<ul class="use-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">适合临时打开页面、点击、提取文本片段。</li>
+<li style="margin:6px 0; line-height:1.78;">适合验证微博搜索结果是否能看到。</li>
+<li style="margin:6px 0; line-height:1.78;">不建议直接作为最终数据导出层，除非编码问题已完全处理。</li>
+</ul>
+</article>
+<article class="method-card" data-kind="explore production" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="method-top"><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">playwright-cli</h3><span class="badge">探索</span></div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">它的价值不是替代 Playwright 脚本，而是让 AI 边看页面边定位元素、调试动作、最后把可行路径整理成标准脚本。它适合解决“按钮点了没反应”“iframe 结构复杂”“下载捕获不到”这类探索问题。</p>
+<div class="kv"><div><span>最好场景</span><strong>路径发现</strong></div><div><span>保留原因</span><strong>沉淀脚本</strong></div><div><span>风险</span><strong>不是运行层</strong></div></div>
+<ul class="use-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">先 snapshot，再 click/type，再生成 Python Playwright。</li>
+<li style="margin:6px 0; line-height:1.78;">适合把一次性 AI 操作变成可重复脚本。</li>
+<li style="margin:6px 0; line-height:1.78;">最终脚本仍建议交给 Playwright 正式项目管理。</li>
+</ul>
+</article>
+<article class="method-card" data-kind="explore" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="method-top"><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">raw CDP</h3><span class="badge">急救</span></div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">raw CDP 很快，也最接近浏览器底层。它适合在其他工具表现异常时快速验证：目标页在不在、DOM 能不能读、网络请求有没有发出。但它太底层，不适合作为团队长期维护的主线。</p>
+<div class="kv"><div><span>最好场景</span><strong>底层排障</strong></div><div><span>保留原因</span><strong>速度快</strong></div><div><span>风险</span><strong>难维护</strong></div></div>
+<ul class="use-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">适合快速跑 Runtime.evaluate。</li>
+<li style="margin:6px 0; line-height:1.78;">适合排查 CDP 9223 是否健康。</li>
+<li style="margin:6px 0; line-height:1.78;">不适合复杂流程和多人维护。</li>
+</ul>
+</article>
+<article class="method-card" data-kind="session" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="method-top"><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">Codex Chrome 插件</h3><span class="badge">辅助</span></div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">它能接管固定 Chrome，但不该当主爬虫。它更适合作为 Codex 内部交互能力，处理页面查看、简单点击、局部检查。之前 tab/session 错位的问题也说明，不能用它的烟测结果来判 CDP Bridge 是否可用。</p>
+<div class="kv"><div><span>最好场景</span><strong>Codex 内操作</strong></div><div><span>保留原因</span><strong>集成方便</strong></div><div><span>风险</span><strong>会话耦合</strong></div></div>
+<ul class="use-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">适合辅助浏览器任务。</li>
+<li style="margin:6px 0; line-height:1.78;">不适合承担数据生产。</li>
+<li style="margin:6px 0; line-height:1.78;">验收时要和 CDP Bridge 分开看。</li>
+</ul>
+</article>
+<article class="method-card" data-kind="downgrade" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="method-top"><h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">requests / Scrapy / Instaloader / Patchright</h3><span class="badge">降级</span></div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">这些不是完全没用，而是不适合做你当前的主方案。TikTok、Instagram、微博、小红书、抖音这类页面有登录态、动态渲染、地区差异和反爬，纯 HTTP 或传统爬虫经常只能跑通样例，跑不稳日常供给。</p>
+<div class="kv"><div><span>最好场景</span><strong>低风险静态页</strong></div><div><span>保留原因</span><strong>便宜轻量</strong></div><div><span>风险</span><strong>平台不稳</strong></div></div>
+<ul class="use-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">Scrapy 适合传统网页，不适合复杂登录态社媒主线。</li>
+<li style="margin:6px 0; line-height:1.78;">Instaloader 无登录或弱登录对 Instagram 很容易撞墙。</li>
+<li style="margin:6px 0; line-height:1.78;">Patchright 不是银弹，实测收益不如稳定的 CDP 路线。</li>
+</ul>
+</article>
+</div>
+</section>
+<section class="section" id="workflow">
+<div class="section-head">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">最终落地路线：四层分工</h2>
+<p class="section-note" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">不要把所有任务压给一个工具。正确做法是分层：看页面、试动作、固化脚本、批处理交付。</p>
+</div>
+<div class="route">
+<article class="route-step" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="num">Step 1</div>
+<h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">CDP Bridge 看当前状态</h3>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">先读真实浏览器标签页，确认账号是否登录、页面是否加载、搜索结果是否存在。它负责“接管现场”。</p>
+</article>
+<article class="route-step" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="num">Step 2</div>
+<h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">OpenCLI 快速操作</h3>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">需要点、搜、切页面、抽一段文本时，用 OpenCLI 快速完成，不要一开始就写完整脚本。</p>
+</article>
+<article class="route-step" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="num">Step 3</div>
+<h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">playwright-cli 探索路径</h3>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">遇到 iframe、按钮、下载、滚动加载时，用 playwright-cli 找到稳定路径和选择器。</p>
+</article>
+<article class="route-step" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<div class="num">Step 4</div>
+<h3 style="font-size:18px; line-height:1.45; font-weight:700; margin:22px 0 10px; color:#2f3a34;">Playwright 批量生产</h3>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">把已验证路径写成 Python Playwright，接 CSV、SQLite、Parquet、定时任务和失败重跑。</p>
+</article>
+</div>
+</section>
+<section class="section">
+<div class="section-head">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">平台建议：按目标拆工具</h2>
+<p class="section-note" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">微博、小红书、抖音、TikTok、Instagram 的共同点是动态页面；差异在登录态和字段稳定性。</p>
+</div>
+<div class="callout" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;">
+<strong>微博：</strong>CDP Bridge 和 OpenCLI 已证明能读真实搜索页；长期抽取建议用 Playwright。<br/>
+<strong>小红书 / 抖音：</strong>先用 CDP Bridge 判断页面和登录态，再用 Playwright 固化滚动、列表、详情页。<br/>
+<strong>TikTok：</strong>公开 hashtag 可用 Playwright PoC；搜索、评论和批量任务要优先考虑登录态与风控。<br/>
+<strong>Instagram：</strong>无登录路线基本不稳；必须围绕真实 Chrome 登录态设计，最终仍建议 Playwright 直连 CDP。
+      </div>
+</section>
+<section class="section">
+<div class="section-head">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">最后判断</h2>
+<p class="section-note" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">真正的分水岭不是“哪个工具最酷”，而是谁能把失败原因、字段口径和重跑成本控制住。</p>
+</div>
+<div class="callout" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;">
+<strong>最终保留组合：</strong>
+        Playwright 是生产线，CDP Bridge MCP 是真实会话桥，OpenCLI 是快速操作台，playwright-cli 是探索和脚本生成器。
+        raw CDP 只用于排障。传统 HTTP、Scrapy、无登录 Instaloader、Patchright 不再作为主方案。
+      </div>
+<div class="note-strip" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;">
+<div class="note-chip" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><strong>为什么这样排</strong> 真实浏览器爬取最贵的不是打开页面，而是失败后的维护和重跑。</div>
+<div class="note-chip" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><strong>为什么保留 CDP Bridge</strong> 它直接读你已经登录的真实 Chrome，会话状态最有价值。</div>
+<div class="note-chip" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><strong>为什么不只靠插件</strong> 插件适合操作，不适合把字段、重试、增量做成供给线。</div>
+<div class="note-chip" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><strong>为什么最终还是 Playwright</strong> 因为你最后需要的是可交付的脚本，不是一次性会话。</div>
+</div>
+</section>
+<footer class="footer">
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">评定基于当前固定 Chrome、CDP 9223、CDP Bridge 18765/18766、OpenCLI 与微博搜索页实测。本文是工具选型和工程实践建议，不包含绕过平台访问控制的指导。</p>
+</footer>
+</main>
+
+</body>
+</html>

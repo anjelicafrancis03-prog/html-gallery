@@ -1,0 +1,17 @@
+{
+  "method": "CDP Bridge MCP",
+  "ok": true,
+  "ms": 4889,
+  "screenshot": "C:\\html\\published-review\\tool-screenshots\\05-cdp-bridge-mcp.png",
+  "session": {
+    "id": "1658364050",
+    "url": "https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg",
+    "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用"
+  },
+  "data": {
+    "href": "https://mp.weixin.qq.com/s/djui9wT8rs8sJEzaHxpoZg",
+    "imgs": 3,
+    "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用"
+  },
+  "note": "?????????????? Chrome ?????? JS??????????????????? Playwright ?????"
+}

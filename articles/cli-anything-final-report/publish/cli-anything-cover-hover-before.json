@@ -1,0 +1,8 @@
+{
+  "itemClass": "",
+  "itemRect": null,
+  "btnClass": "",
+  "btnText": "",
+  "btnRect": null,
+  "bodyTail": "自动化平台入口，需要本地服务，不是轻量一次性 CLI。 这次真正留下来的工作流 主流程：CLI-Hub 负责发现，具体 CLI 负责执行，smoke test 负责验收。 优先保留：mermaid、openscreen、3MF。 暂缓进入：hacker-feeds、obsidian、clibrowser、libreoffice、n8n，等环境补齐后再测。 原 HTML 长文截图。公众号版不照搬网页排版，只保留证据链和可复用结论。 给其他 Agent 的交接口令 以后要交给别的线程，不要只说“去找个 CLI”。直接给它这段，它会少走很多弯路。 用 CLI-Anything / CLI-Hub 找本地 CLI 工具： 1. 先运行 cli-hub search <关键词> 找候选； 2. 再运行 cli-hub info <工具名> 看依赖、参数、输入输出； 3. 安装后必须跑 smoke test； 4. 只有产生真实文件或结构化 JSON 的工具，才能写入正式工作流； 5. 当前优先可用：mermaid、openscreen、3mf； 6. hacker-feeds、obsidian、clibrowser、libreoffice、n8n 先当候选，补齐环境后再验。 这篇文章的核心经验其实很简单：Agent 的能力不是“会背工具名”，而是能按固定协议验证工具。发现只是开始，能稳定复用，才算进了工作流 拖拽或选择封面 0/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 无需声明 icon 平台推荐 已开启 icon 13:34已保存 正文字数1695 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge 正在发表..."
+}

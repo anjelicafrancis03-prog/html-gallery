@@ -1,0 +1,14 @@
+{
+  "hasCover": false,
+  "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+  "itemClass": "weui-desktop-img-picker__item",
+  "itemRect": {
+    "x": 576,
+    "y": 247,
+    "w": 110,
+    "h": 138
+  },
+  "nextText": "下一步",
+  "nextClass": "weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled",
+  "bodyTail": "来源。 原文删除后可能失败 只要依赖公众号原文链接，就会受原文可访问状态影响。 所以这套工具最适合的场景是：你已经有一批真实公众号文章 URL，想把下载、落盘、统计和后续分析交给本地 Agent 自动完成。 拖拽或选择封面 41/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 19:11已保存 正文字数1442 回到顶部 一键排版 发表 预览 保存为草稿 选择图片 最近使用 (126) 我的图片 (182) 未分组 (123) 文章配图 (59) 新建分组 原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片 关闭 已关闭图片水印 上传文件 wechat-cover-fixed-v2.png 粘贴图片_20260522191126.png 粘贴图片_20260522191119.png 粘贴图片_20260522191112.png 粘贴图片_20260522191105.png 粘贴图片_20260522191058.png 粘贴图片_20260522191052.png 粘贴图片_20260522191045.png 粘贴图片_20260522191038.png wechat-cover-fixed-v2.png 粘贴图片_20260522185244.png 粘贴图片_20260522185237.png 1 / 16 下一页 跳转 下一步 取消 问题反馈 CDP Bridge"
+}

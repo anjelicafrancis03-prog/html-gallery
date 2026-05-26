@@ -1,0 +1,30 @@
+{
+  "desktop": {
+    "title": "我实测了 5 种公众号自动化方式，真正稳定的是哪一种？",
+    "innerWidth": 1280,
+    "bodyWidth": 1265,
+    "scrollWidth": 1265,
+    "imageCount": 3,
+    "imagesOk": true,
+    "hasQuestionMarks": false,
+    "hasStyleTag": false,
+    "usesObjectFitCoverStyle": false,
+    "h2Count": 5,
+    "highlightBlocks": 4,
+    "textLength": 2047
+  },
+  "mobile": {
+    "title": "我实测了 5 种公众号自动化方式，真正稳定的是哪一种？",
+    "innerWidth": 390,
+    "bodyWidth": 390,
+    "scrollWidth": 390,
+    "imageCount": 3,
+    "imagesOk": true,
+    "hasQuestionMarks": false,
+    "hasStyleTag": false,
+    "usesObjectFitCoverStyle": false,
+    "h2Count": 5,
+    "highlightBlocks": 4,
+    "textLength": 2047
+  }
+}

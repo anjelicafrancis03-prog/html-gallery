@@ -1,0 +1,268 @@
+{
+  "url": "https://mp.weixin.qq.com/s/oSI1jzXA8-XJwaK5T5krng",
+  "title": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测",
+  "author": "innple coffee",
+  "time": "2026年5月22日 19:06",
+  "chars": 2131,
+  "head": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测\n\n一句话说明：wechatDownload MCP 是本地微信公众号文章批量下载工具。它不是搜索器，必须先有真实公众号文章 URL。\n\n这次我拿“记忆承载”做样本，跑了一遍完整链路：先从索引页拿到真实 `mp.weixin.qq.com/ /...` 链接，再交给本地 MCP 服务批量下载，最后扫描本地 Markdown 正文做验收。\n\n重点不是“网页保存了一份”，而是 Agent 可以通过 JSON-RPC 调用工具，把公众号文章正文、HTML、MHTML、DOCX、PDF 和图片都落到本地，后续继续分析。\n\n先看总览图：这套工具的核心是“真实链接池 -> MCP 调用 -> 本地落盘 -> 统计验收”。\n\n\n\n\n工具概览图：从链接池到 MCP 调用，再到本地多格式落盘。\n\n一、这个工具到底解决什么问题\n\n很多公众号文章适合长期保存：做选题研究、账号分析、知识库整理、NotebookLM 导入、PDF 汇总，都需要稳定拿到正文和素材。\n\n人工一篇篇打开、复制、另存，非常慢，也不适合交给 Agent 反复执行。wechatDownload MCP 的价值就是把这件事变成一个本地可调用工具。\n\n545 条链接\n\n从索引页提取出来的公众号文章 URL。\n\n545 条触发成功\n\n逐条交给 MCP 工具下载，触发环节全部完成。\n\n501 篇有效 Markdown\n\n最终本地扫描到的有效正文数量。\n\n支持多格式落盘\n\n包括 md、html、mhtml、docx、pdf、image 。\n\n二、它是怎么工作的\n\n本地启动工具后，会出现一个 MCP 入口。Agent 不需要模拟鼠标点网页，而是直接通过 JSON-RPC 调用工具能力。\n\n\n\n\n工具列表截图：` ingle_article_download`、`batch_download_article `、`export_article_data` 是核心能力。\n\n完整流程可以压成四步：\n\n1. 准备真实公众号文章链接 2. 检查 MCP 服务和工具列表",
+  "tail": "用单篇下载，确认目录里真的出现正文和素材，再启动全量任务。\n\n\n\n\n单篇  moke te t：先验证下载链路，再做 545 条批量触发。\n\n\n\n\n批量触发截图：逐条把真实链接交给 MCP 工具，建议保留延迟，避免队列拥堵。\n\n五、最终要看本地结果，不只看日志\n\n触发成功只是第一层。真正可用的结果，要看本地有没有正文、图片、网页快照和可继续分析的文件结构。\n\n\n\n\n本地落盘结构：正文和素材按目录保存，后续可以继续做统计、总结和检索。\n\n\n\n\n最终统计截图：本轮 545 条触发成功，扫描到 501 篇有效 Markdown 正文。\n\n\n\n\n原始下载证据：最终验收看本地文件，不只看工具界面或脚本输出。\n\n六、保留 3 条核心命令就够了\n\n公众号里代码块不要太重。真正需要复用的命令只保留三条：检查服务、批量触发、统计正文。\n\n# 检查 MCP 服务 Invoke-Re tMethod -Uri 'http://127.0.0.1:4545/mcp' -Method Po t -ContentType 'application/j on' -Body '{\"j onrpc\":\"2.0\",\"id\":1,\"method\":\"tool /li t\",\"param \":{}}'  # 批量触发下载 node F:\\codex\\tool \\memorycarry_mcp_batch_download.j  -- tart=0 --delayM =1200  # 统计有效正文 python F:\\codex\\tool \\memorycarry_mcp_analyze.py\n七、边界必须写在最后\n\n它不是搜索器\n\n需要先有 URL 列表，不能凭空找到所有历史文章。\n\n正文来源必须是公众号原文\n\n也就是 `mp.weixin.qq.com/ /...`。第三方索引页只提供链接，不是正文来源。\n\n原文删除后可能失败\n\n只要依赖公众号原文链接，就会受原文可访问状态影响。\n\n所以这套工具最适合的场景是：你已经有一批真实公众号文章 URL，想把下载、落盘、统计和后续分析交给本地 Agent 自动完成。",
+  "imgs": [
+    {
+      "i": 0,
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_jpg/MqBksTqEibf7VCXic1jIF7DFdIGCojutacMyL9dyX0wPhbiaXgkoI6H5GZjSVhbAlFbAOG6mWM3Yrpm1ibkX81UV9eaRl3ynq3m9PRTp6fZKyGU/0?wx_fmt=jpeg",
+      "naturalWidth": 1280,
+      "naturalHeight": 544,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "alt": "cover_image"
+    },
+    {
+      "i": 1,
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "alt": ""
+    },
+    {
+      "i": 2,
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "alt": ""
+    },
+    {
+      "i": 3,
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5wfg8Nala2nTdMT0Z58Rp2xmTsgTLdP7LwSxyib7sZMRVM4clbGzaBibHTF07ibpGibBN583Bicozk52icEIod0rEiattRavg5Jicv2Rw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=10005&wx_lazy=1#imgIndex=0",
+      "naturalWidth": 1080,
+      "naturalHeight": 694,
+      "rect": {
+        "x": 500,
+        "y": 577,
+        "w": 677,
+        "h": 435
+      },
+      "alt": "图片"
+    },
+    {
+      "i": 4,
+      "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+      "naturalWidth": 1,
+      "naturalHeight": 1,
+      "rect": {
+        "x": 500,
+        "y": 1926,
+        "w": 677,
+        "h": 476
+      },
+      "alt": "图片"
+    },
+    {
+      "i": 5,
+      "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+      "naturalWidth": 1,
+      "naturalHeight": 1,
+      "rect": {
+        "x": 500,
+        "y": 2888,
+        "w": 677,
+        "h": 476
+      },
+      "alt": "图片"
+    },
+    {
+      "i": 6,
+      "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+      "naturalWidth": 1,
+      "naturalHeight": 1,
+      "rect": {
+        "x": 500,
+        "y": 3699,
+        "w": 677,
+        "h": 476
+      },
+      "alt": "图片"
+    },
+    {
+      "i": 7,
+      "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+      "naturalWidth": 1,
+      "naturalHeight": 1,
+      "rect": {
+        "x": 500,
+        "y": 4289,
+        "w": 677,
+        "h": 476
+      },
+      "alt": "图片"
+    },
+    {
+      "i": 8,
+      "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+      "naturalWidth": 1,
+      "naturalHeight": 1,
+      "rect": {
+        "x": 500,
+        "y": 5019,
+        "w": 677,
+        "h": 476
+      },
+      "alt": "图片"
+    },
+    {
+      "i": 9,
+      "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+      "naturalWidth": 1,
+      "naturalHeight": 1,
+      "rect": {
+        "x": 500,
+        "y": 5609,
+        "w": 677,
+        "h": 476
+      },
+      "alt": "图片"
+    },
+    {
+      "i": 10,
+      "src": "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='1px' height='1px' viewBox='0 0 1 1' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E%3C/title%3E%3Cg stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0'%3E%3Cg transform='translate(-249.000000, -126.000000)' fill='%23FFFFFF'%3E%3Crect x='249' y='126' width='1' height='1'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+      "naturalWidth": 1,
+      "naturalHeight": 1,
+      "rect": {
+        "x": 500,
+        "y": 6199,
+        "w": 677,
+        "h": 572
+      },
+      "alt": "图片"
+    },
+    {
+      "i": 11,
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 784,
+        "y": 860,
+        "w": 110,
+        "h": 110
+      },
+      "alt": "赞赏二维码"
+    },
+    {
+      "i": 12,
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "alt": ""
+    },
+    {
+      "i": 13,
+      "src": "https://mmbiz.qpic.cn/mmbiz_png/IVv8aQy6UZUYx9P5jnJ9MPtzZhST5kQRgHpnmG8Hf6hCyhmkKyC2Dx07iaUXIsNCFW6r6iaBVNQBN038zVz399gw/0?wx_fmt=png",
+      "naturalWidth": 272,
+      "naturalHeight": 272,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "alt": ""
+    },
+    {
+      "i": 14,
+      "src": "",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "alt": ""
+    },
+    {
+      "i": 15,
+      "src": "https://mp.weixin.qq.com/s/oSI1jzXA8-XJwaK5T5krng",
+      "naturalWidth": 0,
+      "naturalHeight": 0,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "alt": "跳转二维码"
+    },
+    {
+      "i": 16,
+      "src": "https://mmbiz.qpic.cn/mmbiz_png/IVv8aQy6UZUYx9P5jnJ9MPtzZhST5kQRgHpnmG8Hf6hCyhmkKyC2Dx07iaUXIsNCFW6r6iaBVNQBN038zVz399gw/0?wx_fmt=png",
+      "naturalWidth": 272,
+      "naturalHeight": 272,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      },
+      "alt": "作者头像"
+    },
+    {
+      "i": 17,
+      "src": "https://mmbiz.qpic.cn/mmbiz_png/IVv8aQy6UZUYx9P5jnJ9MPtzZhST5kQRgHpnmG8Hf6hCyhmkKyC2Dx07iaUXIsNCFW6r6iaBVNQBN038zVz399gw/300?wx_fmt=png&wxfrom=10018",
+      "naturalWidth": 150,
+      "naturalHeight": 150,
+      "rect": {
+        "x": 500,
+        "y": 818,
+        "w": 32,
+        "h": 32
+      },
+      "alt": ""
+    },
+    {
+      "i": 18,
+      "src": "https://res.wx.qq.com/op_res/opqv3ix6k9E4e64ZzO7uIqE3ZblwIojfmt7u70m59yS1ylFK-hTu6Ra8V_LaWQJ1P4OlUJPdXLfVBtrm3TwRrw",
+      "naturalWidth": 756,
+      "naturalHeight": 642,
+      "rect": {
+        "x": 713,
+        "y": 954,
+        "w": 252,
+        "h": 214
+      },
+      "alt": "划线引导图"
+    }
+  ],
+  "h2": [
+    "一、这个工具到底解决什么问题",
+    "二、它是怎么工作的",
+    "三、正文来源必须说清楚",
+    "四、批量前先做  moke te t",
+    "五、最终要看本地结果，不只看日志",
+    "六、保留 3 条核心命令就够了",
+    "七、边界必须写在最后"
+  ],
+  "bodyText": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测\n innple coffee\n 2026年5月22日 19:06 上海\n史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测\n\n一句话说明：wechatDownload MCP 是本地微信公众号文章批量下载工具。它不是搜索器，必须先有真实公众号文章 URL。\n\n这次我拿“记忆承载”做样本，跑了一遍完整链路：先从索引页拿到真实 `mp.weixin.qq.com/ /...` 链接，再交给本地 MCP 服务批量下载，最后扫描本地 Markdown 正文做验收。\n\n重点不是“网页保存了一份”，而是 Agent 可以通过 JSON-RPC 调用工具，把公众号文章正文、HTML、MHTML、DOCX、PDF 和图片都落到本地，后续继续分析。\n\n先看总览图：这套工具的核心是“真实链接池 -> MCP 调用 -> 本地落盘 -> 统计验收”。\n\n\n\n\n工具概览图：从链接池到 MCP 调用，再到本地多格式落盘。\n\n一、这个工具到底解决什么问题\n\n很多公众号文章适合长期保存：做选题研究、账号分析、知识库整理、NotebookLM 导入、PDF 汇总，都需要稳定拿到正文和素材。\n\n人工一篇篇打开、复制、另存，非常慢，也不适合交给 Agent 反复执行。wechatDownload MCP 的价值就是把这件事变成一个本地可调用工具。\n\n545 条链接\n\n从索引页提取出来的公众号文章 URL。\n\n545 条触发成功\n\n逐条交给 MCP 工具下载，触发环节全部完成。\n\n501 篇有效 Markdown\n\n最终本地扫描到的有效正文数量。\n\n支持多格式落盘\n\n包括 md、html、mhtml、docx、pdf、image 。\n\n二、它是怎么工作的\n\n本地启动工具后，会出现一个 MCP 入口。Agent 不需要模拟鼠标点网页，而是直接通过 JSON-RPC 调用工具能力。\n\n\n\n\n工具列表截图：` ingle_article_download`、`batch_download_article `、`export_article_data` 是核心能力。\n\n完整流程可以压成四步：\n\n1. 准备真实公众号文章链接 2. 检查 MCP 服务和工具列表 3. 先用 3 条链接做  moke te t 4. 批量触发下载并扫描本地结果\n三、正文来源必须说清楚\n\n这篇很容易被误解成“万能公众号搜索工具”。不是。它不负责搜索文章，也不保证凭空找到某个公众号的全部历史内容。\n\n这次链接池来自第三方索引页，但正文下载使用的是提取出来的真实 `mp.weixin.qq.com/ /...` 链接。也就是说，索引页只提供入口，不是正文来源。\n\n\n\n\n链接池核验截图：需要确认最终交给工具的是公众号原文链接。\n\n正确理解：第三方索引页提供 URL 列表，正文来源仍然是 `mp.weixin.qq.com/ /...`。\n\n四、批量前先做  moke te t\n\n批量下载最怕一上来就全量跑。正确做法是先抽 3 条链接，调用单篇下载，确认目录里真的出现正文和素材，再启动全量任务。\n\n\n\n\n单篇  moke te t：先验证下载链路，再做 545 条批量触发。\n\n\n\n\n批量触发截图：逐条把真实链接交给 MCP 工具，建议保留延迟，避免队列拥堵。\n\n五、最终要看本地结果，不只看日志\n\n触发成功只是第一层。真正可用的结果，要看本地有没有正文、图片、网页快照和可继续分析的文件结构。\n\n\n\n\n本地落盘结构：正文和素材按目录保存，后续可以继续做统计、总结和检索。\n\n\n\n\n最终统计截图：本轮 545 条触发成功，扫描到 501 篇有效 Markdown 正文。\n\n\n\n\n原始下载证据：最终验收看本地文件，不只看工具界面或脚本输出。\n\n六、保留 3 条核心命令就够了\n\n公众号里代码块不要太重。真正需要复用的命令只保留三条：检查服务、批量触发、统计正文。\n\n# 检查 MCP 服务 Invoke-Re tMethod -Uri 'http://127.0.0.1:4545/mcp' -Method Po t -ContentType 'application/j on' -Body '{\"j onrpc\":\"2.0\",\"id\":1,\"method\":\"tool /li t\",\"param \":{}}'  # 批量触发下载 node F:\\codex\\tool \\memorycarry_mcp_batch_download.j  -- tart=0 --delayM =1200  # 统计有效正文 python F:\\codex\\tool \\memorycarry_mcp_analyze.py\n七、边界必须写在最后\n\n它不是搜索器\n\n需要先有 URL 列表，不能凭空找到所有历史文章。\n\n正文来源必须是公众号原文\n\n也就是 `mp.weixin.qq.com/ /...`。第三方索引页只提供链接，不是正文来源。\n\n原文删除后可能失败\n\n只要依赖公众号原文链接，就会受原文可访问状态影响。\n\n所以这套工具最适合的场景是：你已经有一批真实公众号文章 URL，想把下载、落盘、统计和后续分析交给本地 Agen"
+}

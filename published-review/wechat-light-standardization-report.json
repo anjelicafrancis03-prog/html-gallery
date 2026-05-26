@@ -1,0 +1,62 @@
+[
+  {
+    "file": "C:\\html\\articles\\anysearch-comparison\\publish\\wechat-standard.html",
+    "title": "AnySearch / Tavily / Brave 实测：以后技术检索该怎么用",
+    "chars": 1898,
+    "images": 3,
+    "tables": 0,
+    "sections": 7,
+    "object_fit_cover": false,
+    "slug": "anysearch-comparison",
+    "source": "C:\\html\\articles\\anysearch-comparison\\publish\\archive\\anysearch-comparison-wechat-single-column.html",
+    "standard": "C:\\html\\articles\\anysearch-comparison\\publish\\wechat-standard.html"
+  },
+  {
+    "file": "C:\\html\\articles\\browser-automation-methods\\publish\\wechat-standard.html",
+    "title": "真实浏览器爬取方案重新评定",
+    "chars": 4375,
+    "images": 3,
+    "tables": 1,
+    "sections": 8,
+    "object_fit_cover": false,
+    "slug": "browser-automation-methods",
+    "source": "C:\\html\\articles\\browser-automation-methods\\publish\\archive\\browser-automation-methods-publish.html",
+    "standard": "C:\\html\\articles\\browser-automation-methods\\publish\\wechat-standard.html"
+  },
+  {
+    "file": "C:\\html\\articles\\codex-feishu-bridge-control-plane\\publish\\wechat-standard.html",
+    "title": "我把 Codex 接到飞书后，最大的变化不是“手机能聊天”",
+    "chars": 2604,
+    "images": 4,
+    "tables": 2,
+    "sections": 7,
+    "object_fit_cover": false,
+    "slug": "codex-feishu-bridge-control-plane",
+    "source": "C:\\html\\articles\\codex-feishu-bridge-control-plane\\publish\\archive\\codex-feishu-bridge-control-plane-publish.html",
+    "standard": "C:\\html\\articles\\codex-feishu-bridge-control-plane\\publish\\wechat-standard.html"
+  },
+  {
+    "file": "C:\\html\\articles\\html-in-canvas-review\\publish\\wechat-standard.html",
+    "title": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级",
+    "chars": 3548,
+    "images": 6,
+    "tables": 0,
+    "sections": 11,
+    "object_fit_cover": false,
+    "slug": "html-in-canvas-review",
+    "source": "C:\\html\\articles\\html-in-canvas-review\\publish\\archive\\html-in-canvas-review-publish.html",
+    "standard": "C:\\html\\articles\\html-in-canvas-review\\publish\\wechat-standard.html"
+  },
+  {
+    "file": "C:\\html\\articles\\html-skills-comparison\\publish\\wechat-standard.html",
+    "title": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付",
+    "chars": 3054,
+    "images": 3,
+    "tables": 1,
+    "sections": 6,
+    "object_fit_cover": false,
+    "slug": "html-skills-comparison",
+    "source": "C:\\html\\articles\\html-skills-comparison\\publish\\archive\\html-skills-comparison-publish.html",
+    "standard": "C:\\html\\articles\\html-skills-comparison\\publish\\wechat-standard.html"
+  }
+]

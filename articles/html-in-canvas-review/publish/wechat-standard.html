@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级</title>
+<meta content="基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。" name="description"/>
+</head>
+<body style="margin:0;background:#f5f7fb;color:#1f2d3d;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',Arial,sans-serif;">
+<section id="wechat-output" style="max-width:760px;margin:0 auto;background:#ffffff;padding:28px 18px 40px;box-sizing:border-box;">
+<section style="margin:0 0 10px;">
+<h2 style="font-size:21px;line-height:1.45;color:#102033;margin:34px 0 15px;font-weight:800;border-left:6px solid #2f75d6;padding-left:12px;">先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。</h2>
+<p style="font-size:17px;line-height:1.9;color:#15253a;font-weight:600;background:#eef5ff;border-left:5px solid #2f75d6;padding:14px 15px;border-radius:8px;margin:8px 0 22px;">我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">canvas-draw-element</code> 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。</p>
+<b style="color:#102033;">普通 Chrome 148</b>
+不可用
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">官方页面能打开，但核心 API 不存在，Canvas 是空白。</p>
+<b style="color:#102033;">Canary 150 + flag</b>
+可跑通
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;"><code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">drawElementImage</code>、<code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">texElementImage2D</code>、<code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">copyElementImageToTexture</code> 都出现。</p>
+<b style="color:#102033;">生产可用性</b>
+太早
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">它仍是实验能力，不适合宣传成稳定标准或现成工程方案。</p>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。</p>
+</section><section style="margin:0 0 10px;">
+<h2 style="font-size:21px;line-height:1.45;color:#102033;margin:34px 0 15px;font-weight:800;border-left:6px solid #2f75d6;padding-left:12px;">测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。</h2>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。</p>
+<b style="color:#102033;">1. clone 仓库</b>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">下载 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">WICG/html-in-canvas</code> 到本地实验目录。</p>
+<b style="color:#102033;">2. 启动静态服务</b>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">用 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">python -m http.server</code> 跑官方 HTML demo。</p>
+<b style="color:#102033;">3. 普通 Chrome 对照</b>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">固定 Chrome 148 打开页面，采 API 和截图。</p>
+<b style="color:#102033;">4. Canary + flag</b>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">下载 Chrome for Testing Canary 150，启用实验项。</p>
+<b style="color:#102033;">5. 逐项验证</b>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">检测 API、像素输出、交互、WebGL 和 WebGPU。</p>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">Canary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。</p>
+</section><section style="margin:0 0 10px;">
+<h2 style="font-size:21px;line-height:1.45;color:#102033;margin:34px 0 15px;font-weight:800;border-left:6px solid #2f75d6;padding-left:12px;">第一轮：普通 Chrome 148，页面能开，但功能等于没有。</h2>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">&lt;canvas&gt;</code> 边框也显示了，但 HTML 内容没有被画进去。</p>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">核心 API 全部不存在：</p>
+<ul style="padding-left:18px;margin:8px 0 18px;">
+<li style="font-size:16px;line-height:1.85;color:#26384d;margin-bottom:6px;"><code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">canvas.requestPaint</code> 是 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">undefined</code></li>
+<li style="font-size:16px;line-height:1.85;color:#26384d;margin-bottom:6px;"><code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">CanvasRenderingContext2D.drawElementImage</code> 是 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">undefined</code></li>
+<li style="font-size:16px;line-height:1.85;color:#26384d;margin-bottom:6px;"><code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">WebGLRenderingContext.texElementImage2D</code> 是 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">undefined</code></li>
+<li style="font-size:16px;line-height:1.85;color:#26384d;margin-bottom:6px;"><code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">GPUQueue.copyElementImageToTexture</code> 是 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">undefined</code></li>
+</ul>
+<figure style="margin:18px 0 26px;padding:0;background:#ffffff;border:1px solid #e1e9f2;border-radius:8px;overflow:hidden;">
+<img alt="普通 Chrome 148 下 HTML-in-Canvas 官方 demo 只显示空白 canvas" src="assets/chrome148-empty-canvas.png" style="display:block;width:100%;height:auto;object-fit:contain;margin:0;max-width:100%;"/>
+<figcaption style="font-size:14px;line-height:1.7;color:#5b6b7c;background:#f7fafc;padding:10px 12px;margin:0;">普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。</figcaption>
+</figure>
+<section style="margin:0 0 10px;"><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论</p><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">Chrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。</p><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">Canary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。</p><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">Canary 150 + flag?function?function?function?官方 demo 实际跑通。</p></section>
+</section><section style="margin:0 0 10px;">
+<h2 style="font-size:21px;line-height:1.45;color:#102033;margin:34px 0 15px;font-weight:800;border-left:6px solid #2f75d6;padding-left:12px;">第二轮：Canary 150 开 flag 后，核心 API 全部出现。</h2>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">Chrome for Testing Canary 150 的 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">chrome://flags/#canvas-draw-element</code> 页面里确实能看到一个叫 <strong style="color:#102033;">HTML-in-Canvas</strong> 的实验项。描述也很直白：启用 Canvas 2D <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">drawElement</code> API 和 WebGL <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">texElement2D</code> API，用于把 HTML 内容画进 Canvas。</p>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。</p>
+<span style="color:inherit;"><span style="color:inherit;"></span>2D Canvas API 存在</span>
+<span style="color:inherit;"><span style="color:inherit;"></span>WebGL API 存在</span>
+<span style="color:inherit;"><span style="color:inherit;"></span>WebGPU API 存在</span>
+<span style="color:inherit;"><span style="color:inherit;"></span>需要 Canary + flag</span>
+</section><section style="margin:0 0 10px;">
+<h2 style="font-size:21px;line-height:1.45;color:#102033;margin:34px 0 15px;font-weight:800;border-left:6px solid #2f75d6;padding-left:12px;">逐项看截图：它能画 HTML，也能保留表单交互。</h2>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。</p>
+<h3 style="font-size:18px;line-height:1.55;color:#102033;margin:26px 0 12px;font-weight:800;">1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了</h3>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">drawElementImage()</code> 绘制到 Canvas，并且整体还能旋转。</p>
+<figure style="margin:18px 0 26px;padding:0;background:#ffffff;border:1px solid #e1e9f2;border-radius:8px;overflow:hidden;">
+<img alt="HTML-in-Canvas complex text demo 实测截图" src="assets/canary-complex-text.png" style="display:block;width:100%;height:auto;object-fit:contain;margin:0;max-width:100%;"/>
+<figcaption style="font-size:14px;line-height:1.7;color:#5b6b7c;background:#f7fafc;padding:10px 12px;margin:0;">复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。</figcaption>
+</figure>
+<h3 style="font-size:18px;line-height:1.55;color:#102033;margin:26px 0 12px;font-weight:800;">2. 表单交互：输入框真的能点，值真的能改</h3>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">Canvas Test</code>。检查结果显示当前 active element 是 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">shipName</code>，输入框值也变成了 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">Canvas Test</code>。</p>
+<figure style="margin:18px 0 26px;padding:0;background:#ffffff;border:1px solid #e1e9f2;border-radius:8px;overflow:hidden;">
+<img alt="HTML-in-Canvas 表单交互 demo 输入框被改成 Canvas Test 的截图" src="assets/canary-text-input.png" style="display:block;width:100%;height:auto;object-fit:contain;margin:0;max-width:100%;"/>
+<figcaption style="font-size:14px;line-height:1.7;color:#5b6b7c;background:#f7fafc;padding:10px 12px;margin:0;">表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。</figcaption>
+</figure>
+<h3 style="font-size:18px;line-height:1.55;color:#102033;margin:26px 0 12px;font-weight:800;">3. 饼图：Canvas 画图形，HTML 负责多行标签</h3>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。</p>
+<figure style="margin:18px 0 26px;padding:0;background:#ffffff;border:1px solid #e1e9f2;border-radius:8px;overflow:hidden;">
+<img alt="HTML-in-Canvas 饼图标签 demo 实测截图" src="assets/canary-pie-chart.png" style="display:block;width:100%;height:auto;object-fit:contain;margin:0;max-width:100%;"/>
+<figcaption style="font-size:14px;line-height:1.7;color:#5b6b7c;background:#f7fafc;padding:10px 12px;margin:0;">饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。</figcaption>
+</figure>
+<h3 style="font-size:18px;line-height:1.55;color:#102033;margin:26px 0 12px;font-weight:800;">4. WebGL：HTML 变成 3D 立方体纹理</h3>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">WebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。</p>
+<figure style="margin:18px 0 26px;padding:0;background:#ffffff;border:1px solid #e1e9f2;border-radius:8px;overflow:hidden;">
+<img alt="HTML-in-Canvas WebGL demo HTML 内容贴到 3D 立方体" src="assets/canary-webgl.png" style="display:block;width:100%;height:auto;object-fit:contain;margin:0;max-width:100%;"/>
+<figcaption style="font-size:14px;line-height:1.7;color:#5b6b7c;background:#f7fafc;padding:10px 12px;margin:0;">WebGL demo：<code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">texElementImage2D()</code> 可用，HTML 内容被贴到旋转立方体上。</figcaption>
+</figure>
+<h3 style="font-size:18px;line-height:1.55;color:#102033;margin:26px 0 12px;font-weight:800;">5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染</h3>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">WebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，<code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">GPUQueue.copyElementImageToTexture</code> 是 <code style="background:#eef2f7;color:#17324d;border-radius:4px;padding:1px 4px;">function</code>，jelly slider 的视觉也成功渲染。</p>
+<figure style="margin:18px 0 26px;padding:0;background:#ffffff;border:1px solid #e1e9f2;border-radius:8px;overflow:hidden;">
+<img alt="HTML-in-Canvas WebGPU jelly slider demo 实测截图" src="assets/canary-webgpu-jelly.png" style="display:block;width:100%;height:auto;object-fit:contain;margin:0;max-width:100%;"/>
+<figcaption style="font-size:14px;line-height:1.7;color:#5b6b7c;background:#f7fafc;padding:10px 12px;margin:0;">WebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。</figcaption>
+</figure>
+</section><section style="margin:0 0 10px;">
+<h2 style="font-size:21px;line-height:1.45;color:#102033;margin:34px 0 15px;font-weight:800;border-left:6px solid #2f75d6;padding-left:12px;">所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。</h2>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。</p>
+<section style="margin:0 0 10px;"><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">原文说法 / 实测后怎么改 / 原因</p><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。</p><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。</p><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。</p><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">HTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。</p><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。</p></section>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。</p>
+</section><section style="background:#fff7e8;border-left:5px solid #e6a23c;border-radius:8px;padding:13px 14px;margin:18px 0;">
+<h2 style="font-size:21px;line-height:1.45;color:#102033;margin:34px 0 15px;font-weight:800;border-left:6px solid #2f75d6;padding-left:12px;">如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。</h2>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。</p>
+<h2 style="font-size:21px;line-height:1.45;color:#102033;margin:34px 0 15px;font-weight:800;border-left:6px solid #2f75d6;padding-left:12px;">建议标题</h2>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;"><strong style="color:#102033;">我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级</strong></p>
+<p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;">这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。</p>
+<section style="background:#fff7e8;border-left:5px solid #e6a23c;border-radius:8px;padding:13px 14px;margin:18px 0;"><p style="font-size:16px;line-height:1.88;margin:0 0 16px;color:#26384d;"></p></section>
+</section>
+</section>
+</body>
+</html>

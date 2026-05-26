@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AnySearch / Tavily / Brave 实测：以后技术检索该怎么用</title>
+  <meta name="description" content="基于本地搜索样本的 AnySearch、Tavily、Brave、DeepSeek 对比测评：技术检索、原始出处、结构化结果和使用工作流。">
+  <style>
+    :root {
+      --bg: #f7f4ec;
+      --paper: #fffdf8;
+      --ink: #182226;
+      --muted: #657078;
+      --line: #ddd6c9;
+      --accent: #0f6f68;
+      --accent-2: #bf6b2f;
+      --accent-3: #275d91;
+      --soft: #eef5f3;
+      --code: #152225;
+      --max: 1060px;
+      color-scheme: light;
+      font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(15, 111, 104, .10), rgba(15, 111, 104, 0) 430px),
+        var(--bg);
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+    a { color: var(--accent-3); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    img { width: 100%; height: auto; display: block; object-fit: contain; }
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 58px 24px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .82fr);
+      gap: 34px;
+      align-items: end;
+    }
+    .kicker {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(42px, 6.4vw, 78px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .dek {
+      margin: 24px 0 0;
+      max-width: 760px;
+      color: #3d4a50;
+      font-size: 20px;
+      line-height: 1.75;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta span {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .74);
+      padding: 8px 10px;
+      border-radius: 4px;
+    }
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px rgba(24, 34, 38, .10);
+      padding: 20px;
+    }
+    .hero-card img { border: 1px solid var(--line); background: #fff; }
+    .hero-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .toc-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 248, .78);
+    }
+    .toc {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 8px 11px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 44px 24px 90px;
+    }
+    section { margin: 0 0 72px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 172px minmax(0, 1fr);
+      gap: 24px;
+      align-items: baseline;
+      border-top: 2px solid var(--accent-2);
+      padding-top: 18px;
+      margin-bottom: 24px;
+    }
+    .num {
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(28px, 4.2vw, 46px);
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 30px 0 12px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    p {
+      margin: 14px 0;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+    .lead {
+      font-size: 20px;
+      line-height: 1.85;
+      color: #2d3a40;
+    }
+    .verdict-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 26px 0;
+    }
+    .verdict {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 20px;
+      min-height: 180px;
+    }
+    .verdict b {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .verdict p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .compare {
+      overflow-x: auto;
+      margin: 24px 0;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    th {
+      background: #f1eee5;
+      font-weight: 850;
+    }
+    tr:last-child td { border-bottom: 0; }
+    th:last-child, td:last-child { border-right: 0; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 780;
+      white-space: nowrap;
+    }
+    .figure {
+      margin: 30px 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: 0 14px 36px rgba(24, 34, 38, .08);
+    }
+    .figure img {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .sample-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 22px 0;
+    }
+    .sample {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .78);
+      padding: 16px 18px;
+    }
+    .sample strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent-3);
+      font-size: 17px;
+    }
+    .sample p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+    .quote {
+      margin: 32px 0;
+      padding: 28px;
+      background: #142326;
+      color: #f6f2e8;
+    }
+    .quote p {
+      margin: 0;
+      color: inherit;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: 24px;
+      line-height: 1.55;
+    }
+    code {
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      background: #efe9dd;
+      padding: 2px 5px;
+      border-radius: 3px;
+      overflow-wrap: anywhere;
+    }
+    pre {
+      margin: 20px 0;
+      background: var(--code);
+      color: #e9f0ee;
+      border-radius: 6px;
+      padding: 18px;
+      line-height: 1.75;
+      font-size: 15px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    .steps {
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .step {
+      counter-increment: step;
+      position: relative;
+      min-height: 150px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px;
+    }
+    .step:before {
+      content: counter(step, decimal-leading-zero);
+      display: block;
+      margin-bottom: 12px;
+      color: var(--accent-2);
+      font-weight: 900;
+      font-size: 13px;
+    }
+    .step b { display: block; margin-bottom: 8px; }
+    .step p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    .final-card {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 28px;
+      box-shadow: 0 18px 50px rgba(24, 34, 38, .08);
+    }
+    .final-card h2 { margin-bottom: 18px; }
+    .sources {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; padding: 38px 16px 30px; }
+      .section-head { grid-template-columns: 1fr; gap: 8px; }
+      main { padding-left: 16px; padding-right: 16px; }
+      .toc { padding-left: 16px; padding-right: 16px; }
+      .verdict-grid, .steps { grid-template-columns: 1fr; }
+      .quote p { font-size: 21px; }
+      table { min-width: 720px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="kicker">Search Benchmark / Local Test</p>
+      <h1>AnySearch / Tavily / Brave 实测：以后技术检索该怎么用</h1>
+      <p class="dek">这不是“谁最聪明”的抽象排名，而是一次面向本地 Agent 工作流的检索测试：找 GitHub README、官方文档、参数表、benchmark 数字、CVE 原始出处时，谁更可靠，谁适合作第二来源，谁暂时只能放进待接入名单。</p>
+      <div class="meta">
+        <span>测试日期：2026-05-22</span>
+        <span>样本：15 组 AnySearch 查询</span>
+        <span>输出：Markdown / HTML / 截图 / 原始结果</span>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <img src="assets/card-01-overview.png" alt="AnySearch Tavily Brave 对比总览卡片">
+      <p>总览卡：结论先行，把四类搜索方式按“强项、短板、使用位置”归档。</p>
+    </aside>
+  </header>
+
+  <nav class="toc-band" aria-label="文章目录">
+    <div class="toc">
+      <a href="#verdict">结论</a>
+      <a href="#matrix">横向对比</a>
+      <a href="#samples">样本证据</a>
+      <a href="#workflow">使用工作流</a>
+      <a href="#limits">限制</a>
+      <a href="#handoff">交接口令</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="verdict">
+      <div class="section-head">
+        <div class="num">01 / verdict</div>
+        <h2>结论很明确：技术检索优先 AnySearch，Tavily 做第二搜索源。</h2>
+      </div>
+      <p class="lead">AnySearch 在这轮测试里最适合拿来找原始出处，尤其是 GitHub README、官方文档、benchmark 数字、参数表和开源工具说明。Tavily 的结构化结果更规整，适合补充和交叉验证，但遇到重名项目时会被带偏。Brave 这次本机没有完整 API key，网页版又出现 429，所以只能列为“可接入，但未完整实测”。DeepSeek Chat API 不应该当搜索引擎用，它适合解释、压缩和总结，不适合负责找出处。</p>
+      <div class="verdict-grid">
+        <div class="verdict">
+          <b>AnySearch：主搜索源</b>
+          <p>优先用于技术检索、README、docs、GitHub 项目、benchmark、参数表。它的价值在于更容易把 agent 带到原始页面。</p>
+        </div>
+        <div class="verdict">
+          <b>Tavily：第二搜索源</b>
+          <p>结构化 JSON 好处理，适合做补充证据、网页摘要和 RAG 入口。但不能无脑相信 answer，必须看 URL 是否对题。</p>
+        </div>
+        <div class="verdict">
+          <b>Brave / DeepSeek：边界清晰</b>
+          <p>Brave 需要 API key 和限流处理；DeepSeek 只做理解和归纳，不承担搜索职责。</p>
+        </div>
+      </div>
+      <div class="quote">
+        <p>以后不是“搜一下”，而是“先 AnySearch 找原始出处，再 Tavily 做交叉验证，最后让模型解释”。</p>
+      </div>
+    </section>
+
+    <section id="matrix">
+      <div class="section-head">
+        <div class="num">02 / matrix</div>
+        <h2>四种方式的角色，不应该混在一起。</h2>
+      </div>
+      <div class="compare">
+        <table>
+          <thead>
+            <tr>
+              <th>工具</th>
+              <th>适合做什么</th>
+              <th>这次暴露的问题</th>
+              <th>建议位置</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag">AnySearch</span></td>
+              <td>GitHub README、官方文档、开源项目说明、benchmark、参数表、URL extract。</td>
+              <td>中文结果有时会混入低质量页面；重名项目仍需指定仓库、作者或 URL。</td>
+              <td>技术检索第一搜索源。</td>
+            </tr>
+            <tr>
+              <td><span class="tag">Tavily</span></td>
+              <td>API 化搜索、结构化结果、网页摘要、agent RAG 的第二来源。</td>
+              <td>CodeGraph 样本里被另一个同名项目带偏，answer 看起来完整但不一定命中目标。</td>
+              <td>第二搜索源和交叉验证。</td>
+            </tr>
+            <tr>
+              <td><span class="tag">Brave Search</span></td>
+              <td>通用网页搜索，本来适合补齐搜索生态。</td>
+              <td>本机没有 API key，网页版出现 429，无法完整实测。</td>
+              <td>等 `BRAVE_SEARCH_API_KEY` 接好后再进主流程。</td>
+            </tr>
+            <tr>
+              <td><span class="tag">DeepSeek Chat API</span></td>
+              <td>解释搜索结果、压缩长文、总结差异、生成最终判断。</td>
+              <td>不能访问实时网页，不应被当成搜索工具。</td>
+              <td>搜索后的理解层。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="samples">
+      <div class="section-head">
+        <div class="num">03 / evidence</div>
+        <h2>关键样本里，AnySearch 的优势主要体现在“命中原始出处”。</h2>
+      </div>
+      <figure class="figure">
+        <img src="assets/card-02-samples.png" alt="AnySearch Tavily Brave 样本对比卡片">
+        <figcaption class="caption">样本卡：把 CodeGraph、CVE、OpenAI GPT Image 2、ngrok 等不同类型查询放在一起看。</figcaption>
+      </figure>
+      <div class="sample-list">
+        <article class="sample">
+          <strong>CodeGraph benchmark</strong>
+          <p>AnySearch 命中 `colbymchenry/codegraph` README，并直接带出关键表格：VS Code 样本从 52 calls / 1m37s 降到 3 calls / 17s。Tavily 则优先返回了 Visual Studio Marketplace 上另一个 CodeGraph，语义相关但项目对象偏了。</p>
+        </article>
+        <article class="sample">
+          <strong>CodeGraph 语言/框架支持</strong>
+          <p>AnySearch 和 Tavily 都能找到 CodeGraph 相关结果，但重名项目问题很明显。结论是：搜技术项目必须带仓库名、作者名或精确 URL，否则“看起来相关”的结果会把 agent 带偏。</p>
+        </article>
+        <article class="sample">
+          <strong>CVE-2024-3094</strong>
+          <p>AnySearch 命中了 OpenSSF、JFrog、NVD 等安全出处；Tavily 命中了 Datadog、OpenSSF、JFrog。安全类查询的正确用法不是只看一个 summary，而是优先抓官方/安全机构/供应商公告。</p>
+        </article>
+        <article class="sample">
+          <strong>ngrok free static domain</strong>
+          <p>AnySearch 先找到 Stack Overflow 和 InfoQ，Tavily 命中 ngrok 官方博客与 docs。这个样本说明 Tavily 很适合作补官方文档，尤其是 query 明确指向产品功能时。</p>
+        </article>
+        <article class="sample">
+          <strong>OpenAI GPT Image 2 docs</strong>
+          <p>AnySearch 和 Tavily 都能命中 OpenAI 文档、社区发布、API reference。涉及 OpenAI 产品时，最终仍应优先回到官方文档确认。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="section-head">
+        <div class="num">04 / workflow</div>
+        <h2>以后直接按这个工作流跑，不要把搜索、解释、发布混成一锅。</h2>
+      </div>
+      <figure class="figure">
+        <img src="assets/card-03-how-to-use.png" alt="AnySearch Tavily 对比搜索使用方法卡片">
+        <figcaption class="caption">用法卡：给其他线程最容易执行的口令和流程。</figcaption>
+      </figure>
+      <div class="steps">
+        <div class="step">
+          <b>先用 AnySearch 找原始出处</b>
+          <p>目标是 README、官方 docs、GitHub、NVD、厂商公告、参数表，而不是先要模型总结。</p>
+        </div>
+        <div class="step">
+          <b>再用 Tavily 做交叉验证</b>
+          <p>看结构化结果和摘要是否支持同一结论，重点检查 URL 是否命中同一个项目或同一份文档。</p>
+        </div>
+        <div class="step">
+          <b>最后用模型解释</b>
+          <p>让模型只处理已经拿到的证据：抽结论、比较差异、写文章、生成使用建议。</p>
+        </div>
+      </div>
+      <pre><code>用 anysearch + tavily 对比搜索：&lt;你的问题&gt;
+优先找原始出处，输出 AnySearch / Tavily 命中差异、关键 URL、最终建议。</code></pre>
+      <p>如果主题是 GitHub 项目，查询里最好带上仓库名或作者名；如果主题是官方产品，查询里最好带 `docs`、`pricing`、`api reference`、`official` 这类限定词。</p>
+    </section>
+
+    <section id="limits">
+      <div class="section-head">
+        <div class="num">05 / limits</div>
+        <h2>这次测试也暴露了几个不能忽略的坑。</h2>
+      </div>
+      <div class="compare">
+        <table>
+          <thead>
+            <tr>
+              <th>问题</th>
+              <th>影响</th>
+              <th>处理办法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>重名项目</td>
+              <td>CodeGraph 这种名字容易命中多个项目，摘要会看起来都对。</td>
+              <td>查询中加入 `owner/repo`、GitHub URL、包名或关键 benchmark 数字。</td>
+            </tr>
+            <tr>
+              <td>Brave 未完整实测</td>
+              <td>本机缺 API key，网页版出现 429，无法严肃比较。</td>
+              <td>接入 `BRAVE_SEARCH_API_KEY` 后重新跑同一套样本。</td>
+            </tr>
+            <tr>
+              <td>Chat API 不是搜索</td>
+              <td>DeepSeek 可以解释，但不能保证实时出处。</td>
+              <td>把 Chat API 放在“结果解释层”，不要放在“找出处层”。</td>
+            </tr>
+            <tr>
+              <td>旧报告存在编码损坏</td>
+              <td>部分标题和标签已经变成乱码占位符，直接转 HTML 会污染成品。</td>
+              <td>成品文章重写正文，只复用可确认的原始结果和截图。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="handoff" class="final-card">
+      <h2>给其他 Agent 的最短交代</h2>
+      <p>以后你可以直接发下面这句话：</p>
+      <pre><code>用 anysearch + tavily 对比搜索：&lt;主题&gt;
+要求：AnySearch 优先找 GitHub README / 官方 docs / 原始出处；Tavily 做第二搜索源；输出命中差异、关键 URL、结论和使用建议。</code></pre>
+      <p>如果是非常具体的技术对象，再补一句：</p>
+      <pre><code>注意避免重名项目，查询里带 owner/repo、官方域名、包名或关键 benchmark 数字。</code></pre>
+      <p class="sources">原始产物保留在 `F:\codex\reports\anysearch-comparison\`；本 HTML 成品与图片资产已归档到 `C:\html\articles\anysearch-comparison\`。</p>
+    </section>
+  </main>
+</body>
+</html>

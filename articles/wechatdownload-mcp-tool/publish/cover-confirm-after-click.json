@@ -1,0 +1,138 @@
+{
+  "hasCover": true,
+  "coverStyle": "background-image:url('http://mmecoa.qpic.cn/sz_mmecoa_jpg/MqBksTqEibf588ibDe0BMCYjibo1uecticyPLYD1v8apFaX9iaBKLbh4Z33jicP7N2Sb6qsyIic2qiaLfxvyIyreXj1NtHib6tuAmGWC5aOia9UAV8z28/0?wx_fmt=jpeg');  background-image: url(\"http://mmecoa.qpic.cn/sz_mmecoa_jpg/MqBksTqEibf588ibDe0BMCYjibo1uecticyPLYD1v8apFaX9iaBKLbh4Z33jicP7N2Sb6qsyIic2qiaLfxvyIyreXj1NtHib6tuAmGWC5aOia9UAV8z28/0?wx_fmt=jpeg\"); ",
+  "coverText": "拖拽或选择封面",
+  "buttons": [
+    {
+      "text": "服务号",
+      "cls": "weui-desktop-service-logo__inner",
+      "rect": {
+        "x": 30,
+        "y": 12,
+        "w": 116,
+        "h": 32
+      }
+    },
+    {
+      "text": "文档导入",
+      "cls": "weui-desktop-tooltip weui-desktop-tooltip__up-center",
+      "rect": {
+        "x": 1478,
+        "y": 55,
+        "w": 64,
+        "h": 24
+      }
+    },
+    {
+      "text": "",
+      "cls": "weui-desktop-icon20 weui-desktop-icon-btn  icon20_common comm_edit js_modifyCover",
+      "rect": {
+        "x": 750,
+        "y": 371,
+        "w": 20,
+        "h": 20
+      }
+    },
+    {
+      "text": "",
+      "cls": "weui-desktop-icon20 weui-desktop-icon-btn icon20_common comm_replace js_chooseCover",
+      "rect": {
+        "x": 794,
+        "y": 371,
+        "w": 20,
+        "h": 20
+      }
+    },
+    {
+      "text": "从正文选择",
+      "cls": "pop-opr__button js_selectCoverFromContent",
+      "rect": {
+        "x": 787,
+        "y": 416,
+        "w": 125,
+        "h": 40
+      }
+    },
+    {
+      "text": "从图片库选择",
+      "cls": "pop-opr__button js_imagedialog",
+      "rect": {
+        "x": 787,
+        "y": 456,
+        "w": 125,
+        "h": 40
+      }
+    },
+    {
+      "text": "微信扫码上传",
+      "cls": "pop-opr__button js_imageScan",
+      "rect": {
+        "x": 787,
+        "y": 496,
+        "w": 125,
+        "h": 40
+      }
+    },
+    {
+      "text": "AI 配图",
+      "cls": "pop-opr__button js_aiImage",
+      "rect": {
+        "x": 787,
+        "y": 536,
+        "w": 125,
+        "h": 40
+      }
+    },
+    {
+      "text": "回到顶部",
+      "cls": "tool_bar__fold-btn",
+      "rect": {
+        "x": 1288,
+        "y": 740,
+        "w": 106,
+        "h": 36
+      }
+    },
+    {
+      "text": "发表",
+      "cls": "mass_send",
+      "rect": {
+        "x": 1151,
+        "y": 816,
+        "w": 98,
+        "h": 34
+      }
+    },
+    {
+      "text": "预览",
+      "cls": "",
+      "rect": {
+        "x": 1042,
+        "y": 816,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "text": "保存为草稿",
+      "cls": "",
+      "rect": {
+        "x": 932,
+        "y": 816,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "text": "CDP Bridge",
+      "cls": "",
+      "rect": {
+        "x": 1574,
+        "y": 823,
+        "w": 99,
+        "h": 29
+      }
+    }
+  ],
+  "tail": "原始下载证据：最终验收看本地文件，不只看工具界面或脚本输出。 六、保留 3 条核心命令就够了 公众号里代码块不要太重。真正需要复用的命令只保留三条：检查服务、批量触发、统计正文。 # 检查 MCP 服务 Invoke-RestMethod -Uri 'http://127.0.0.1:4545/mcp' -Method Post -ContentType 'application/json' -Body '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{}}' # 批量触发下载 node F:\\codex\\tools\\memorycarry_mcp_batch_download.js --start=0 --delayMs=1200 # 统计有效正文 python F:\\codex\\tools\\memorycarry_mcp_analyze.py 七、边界必须写在最后 它不是搜索器 需要先有 URL 列表，不能凭空找到所有历史文章。 正文来源必须是公众号原文 也就是 `mp.weixin.qq.com/s/...`。第三方索引页只提供链接，不是正文来源。 原文删除后可能失败 只要依赖公众号原文链接，就会受原文可访问状态影响。 所以这套工具最适合的场景是：你已经有一批真实公众号文章 URL，想把下载、落盘、统计和后续分析交给本地 Agent 自动完成。 拖拽或选择封面 41/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 19:11已保存 正文字数1442 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge"
+}

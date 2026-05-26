@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>公众号自动化工具实测：到底用什么最方便</title>
+  <meta name="description" content="基于公众号后台、公开页验收、截图、DOM 检查和固定 Chrome 登录态的工具横评：Playwright connectOverCDP、OpenCLI、CDP Bridge MCP、raw CDP、playwright-cli。">
+  <style>
+    :root {
+      --bg: #f7f4ec;
+      --paper: #fffdf8;
+      --ink: #182226;
+      --muted: #647078;
+      --line: #ded7ca;
+      --accent: #0f6f68;
+      --accent-2: #bf6b2f;
+      --accent-3: #295f92;
+      --soft: #edf5f2;
+      --code: #142326;
+      --max: 1040px;
+      color-scheme: light;
+      font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(15, 111, 104, .11), rgba(15, 111, 104, 0) 420px),
+        var(--bg);
+      letter-spacing: 0;
+    }
+    a { color: var(--accent-3); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    img { display: block; width: 100%; height: auto; object-fit: contain; }
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 58px 24px 38px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .84fr);
+      gap: 34px;
+      align-items: end;
+    }
+    .kicker {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(42px, 6.2vw, 78px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .dek {
+      margin: 24px 0 0;
+      max-width: 740px;
+      color: #3d4a50;
+      font-size: 20px;
+      line-height: 1.75;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta span {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .76);
+      padding: 8px 10px;
+      border-radius: 4px;
+    }
+    .hero-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px rgba(24, 34, 38, .10);
+      padding: 18px;
+    }
+    .hero-card img { border: 1px solid var(--line); background: #fff; }
+    .hero-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .toc-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 248, .78);
+    }
+    .toc {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 8px 11px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 44px 24px 90px;
+    }
+    section { margin: 0 0 74px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 24px;
+      align-items: baseline;
+      border-top: 2px solid var(--accent-2);
+      padding-top: 18px;
+      margin-bottom: 24px;
+    }
+    .num {
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(28px, 4.2vw, 46px);
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 28px 0 12px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    p {
+      margin: 14px 0;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+    .lead {
+      font-size: 20px;
+      line-height: 1.85;
+      color: #2d3a40;
+    }
+    .quote {
+      margin: 32px 0;
+      padding: 28px;
+      background: var(--code);
+      color: #f6f2e8;
+    }
+    .quote p {
+      margin: 0;
+      color: inherit;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: 24px;
+      line-height: 1.55;
+    }
+    .rank-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 26px 0;
+    }
+    .rank-card {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 20px;
+      min-height: 176px;
+    }
+    .rank-card.primary {
+      grid-column: 1 / -1;
+      background: #eef7f4;
+      border-color: #bed9d3;
+    }
+    .rank-card b {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--accent);
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+    .rank-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .tool {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      margin: 18px 0;
+      padding: 22px;
+    }
+    .tool-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .tool h3 { margin: 0; }
+    .tool p { color: #415057; }
+    .figure {
+      margin: 24px 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: 0 14px 36px rgba(24, 34, 38, .08);
+    }
+    .figure img {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .figure.tall {
+      max-height: 760px;
+      overflow: auto;
+    }
+    .figure.tall img {
+      min-width: 260px;
+    }
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .small-card {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .78);
+      padding: 18px;
+    }
+    .small-card b { display: block; margin-bottom: 8px; color: var(--accent); }
+    .small-card p { margin: 0; font-size: 15px; color: var(--muted); line-height: 1.75; }
+    pre {
+      margin: 20px 0;
+      background: var(--code);
+      color: #e9f0ee;
+      border-radius: 6px;
+      padding: 18px;
+      line-height: 1.75;
+      font-size: 15px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    code {
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      background: #efe9dd;
+      padding: 2px 5px;
+      border-radius: 3px;
+      overflow-wrap: anywhere;
+    }
+    .final-card {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 28px;
+      box-shadow: 0 18px 50px rgba(24, 34, 38, .08);
+    }
+    .sources {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; padding: 38px 16px 30px; }
+      .section-head { grid-template-columns: 1fr; gap: 8px; }
+      main { padding-left: 16px; padding-right: 16px; }
+      .toc { padding-left: 16px; padding-right: 16px; }
+      .rank-grid, .cards { grid-template-columns: 1fr; }
+      .rank-card.primary { grid-column: auto; }
+      .tool-head { grid-template-columns: 1fr; }
+      .quote p { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="kicker">WeChat Automation / Tool Review</p>
+      <h1>公众号自动化工具实测：到底用什么最方便</h1>
+      <p class="dek">这次不讨论“理论上能不能自动化”，只看真实公众号场景：后台登录态、发表记录、公开页验收、截图、DOM 检查、长期脚本化，哪个工具最稳，哪个工具只适合排障。</p>
+      <div class="meta">
+        <span>测试时间：2026-05-22</span>
+        <span>固定 Chrome：9223</span>
+        <span>样本公开页：AnySearch 对比文章</span>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <img src="assets/tool-ranking.png" alt="公众号自动化工具排序信息图">
+      <p>工具排序图：主流程、快速确认、接管当前页、排障和探索各自分工。</p>
+    </aside>
+  </header>
+
+  <nav class="toc-band" aria-label="文章目录">
+    <div class="toc">
+      <a href="#verdict">结论</a>
+      <a href="#standard">公众号标准</a>
+      <a href="#tools">工具横评</a>
+      <a href="#workflow">推荐流程</a>
+      <a href="#screenshots">截图证据</a>
+      <a href="#handoff">交接口令</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="verdict">
+      <div class="section-head">
+        <div class="num">01 / verdict</div>
+        <h2>最终主流程：Playwright connectOverCDP 接固定 Chrome。</h2>
+      </div>
+      <p class="lead">公众号自动化最重要的不是“能截图”，而是能稳定复用固定 Chrome 登录态。按这个标准看，Playwright connectOverCDP 最顺手：能接 `127.0.0.1:9223`，能做后台操作、发表记录检查、公开页验收、截图和 DOM 检查，也适合写成长期脚本。</p>
+      <div class="quote">
+        <p>日常主流程用 Playwright connectOverCDP。OpenCLI 快速看状态，CDP Bridge 接管当前标签，raw CDP 排障，playwright-cli 不碰登录态主流程。</p>
+      </div>
+      <div class="rank-grid">
+        <div class="rank-card primary">
+          <b><span class="badge">主流程</span> Playwright connectOverCDP</b>
+          <p>最适合公众号后台、发表记录、公开页验收、截图、DOM 检查和长期脚本化。它的核心价值是复用固定 Chrome，而不是另开一个临时浏览器。</p>
+        </div>
+        <div class="rank-card">
+          <b><span class="badge">快速检查</span> OpenCLI</b>
+          <p>适合快速打开、看 state、临时确认页面结构。批处理和复杂流程不如 Playwright 清楚。</p>
+        </div>
+        <div class="rank-card">
+          <b><span class="badge">接管当前页</span> CDP Bridge MCP</b>
+          <p>桥服务在线时，可以读当前真实 Chrome 标签页、执行 JS、截图。适合交互接管，不是长期批量主流程。</p>
+        </div>
+        <div class="rank-card">
+          <b><span class="badge">排障</span> raw CDP</b>
+          <p>底层、直接、可控，但写起来繁琐。适合定位问题，不适合日常发布流水线。</p>
+        </div>
+        <div class="rank-card">
+          <b><span class="badge">探索</span> playwright-cli</b>
+          <p>能截公开页，但会新开浏览器。不适合依赖固定登录态的公众号后台操作。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="standard">
+      <div class="section-head">
+        <div class="num">02 / article standard</div>
+        <h2>工具好不好用，要放到公众号发布标准里看。</h2>
+      </div>
+      <p>这轮公开页验收里，最好的一篇是《AnySearch / Tavily / Brave 实测：以后技术检索该怎么用》。它赢在公众号形态稳：单列、3 张正文图、无横向表格、分段清楚、公开页图片加载正常。</p>
+      <figure class="figure">
+        <img src="assets/published-list.png" alt="公众号发表记录截图">
+        <figcaption class="caption">发表记录截图：工具评估不是只看本地 HTML，而是要从已发布公开页回看实际效果。</figcaption>
+      </figure>
+      <div class="cards">
+        <div class="small-card">
+          <b>唯一入口</b>
+          <p>本地发布版统一认 `C:\html\articles\<slug>\publish\wechat-standard.html`，旧版归档。</p>
+        </div>
+        <div class="small-card">
+          <b>手机优先</b>
+          <p>所有表格已转手机端卡片，正文图片单列，不使用 `object-fit: cover`。</p>
+        </div>
+        <div class="small-card">
+          <b>发布后验收</b>
+          <p>发表后必须从发表记录打开公开链接，保存桌面和手机截图。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools">
+      <div class="section-head">
+        <div class="num">03 / tools</div>
+        <h2>五个工具各有位置，不要混用。</h2>
+      </div>
+
+      <article class="tool">
+        <div class="tool-head">
+          <h3>1. Playwright connectOverCDP：主流程</h3>
+          <span class="badge">最顺手</span>
+        </div>
+        <p>它能连接固定 Chrome `http://127.0.0.1:9223`，保留公众号后台登录态。适合做发布前后完整链路：打开后台、检查草稿、读取发表记录、进入公开页、截图、DOM 检查、保存证据。</p>
+        <figure class="figure tall">
+          <img src="assets/01-playwright-connect-over-cdp.png" alt="Playwright connectOverCDP 工具截图">
+          <figcaption class="caption">Playwright connectOverCDP：本轮主流程成功，公开页标题和 3 张正文图都能验到。</figcaption>
+        </figure>
+      </article>
+
+      <article class="tool">
+        <div class="tool-head">
+          <h3>2. OpenCLI：快速打开和临时状态检查</h3>
+          <span class="badge">轻量确认</span>
+        </div>
+        <p>OpenCLI 适合快速打开页面、看 URL、标题、DOM state 和临时截图。它的优点是快，缺点是复杂批处理不如 Playwright 脚本清晰。</p>
+        <figure class="figure">
+          <img src="assets/02-opencli.png" alt="OpenCLI 工具截图">
+          <figcaption class="caption">OpenCLI：能快速拿到公开页标题、发布时间、DOM 结构片段。</figcaption>
+        </figure>
+      </article>
+
+      <article class="tool">
+        <div class="tool-head">
+          <h3>3. CDP Bridge MCP：桥在线时接管当前标签页</h3>
+          <span class="badge">补测成功</span>
+        </div>
+        <p>CDP Bridge MCP 这次补测成功：能读当前真实 Chrome 标签页、执行 JS、截图。它适合接管已经打开的页面，尤其是需要交互探索时。但长期批量流程仍然不如 Playwright connectOverCDP 直观。</p>
+        <figure class="figure tall">
+          <img src="assets/05-cdp-bridge-mcp.png" alt="CDP Bridge MCP 工具截图">
+          <figcaption class="caption">CDP Bridge MCP：桥服务启动后可以读取当前标签页，验证 AnySearch 公开页标题和图片数量。</figcaption>
+        </figure>
+      </article>
+
+      <article class="tool">
+        <div class="tool-head">
+          <h3>4. raw CDP：底层排障</h3>
+          <span class="badge">不做日常</span>
+        </div>
+        <p>raw CDP 最直接，可以自己调 `/json/list`、WebSocket、Runtime.evaluate。但它太底层，容易把简单任务写复杂。适合排查“到底是不是浏览器、标签页、DOM、截图链路的问题”。</p>
+        <figure class="figure tall">
+          <img src="assets/04-raw-cdp.png" alt="raw CDP 工具截图">
+          <figcaption class="caption">raw CDP：能输出标题、图片数量和公开页链接，但日常主流程不建议用它写。</figcaption>
+        </figure>
+      </article>
+
+      <article class="tool">
+        <div class="tool-head">
+          <h3>5. playwright-cli：公开页探索可以，后台登录态不行</h3>
+          <span class="badge">新浏览器</span>
+        </div>
+        <p>playwright-cli 能截公开页，适合探索或生成脚本。但它会启动独立浏览器，不适合依赖固定登录态的公众号后台操作。</p>
+        <figure class="figure tall">
+          <img src="assets/03-playwright-cli.png" alt="playwright-cli 工具截图">
+          <figcaption class="caption">playwright-cli：公开页截图成功，但不应接管公众号后台主流程。</figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <section id="workflow">
+      <div class="section-head">
+        <div class="num">04 / workflow</div>
+        <h2>推荐流程：固定 Chrome 先验，再跑主工具。</h2>
+      </div>
+      <p>只要涉及公众号后台、登录态网页、浏览器发布、发表记录，就必须先验证固定 Chrome。不要新开普通 Chrome 顶替。</p>
+      <pre><code>& 'F:\codex\tools\verify-codex-fixed-chrome.ps1' -RestartIfMissingExtension</code></pre>
+      <div class="cards">
+        <div class="small-card">
+          <b>发布前</b>
+          <p>检查 `publish/wechat-standard.html`，确认图片单列、无 `object-fit: cover`、表格转卡片。</p>
+        </div>
+        <div class="small-card">
+          <b>发布中</b>
+          <p>用 Playwright connectOverCDP 接固定 Chrome，操作公众号后台和草稿。</p>
+        </div>
+        <div class="small-card">
+          <b>发布后</b>
+          <p>从发表记录打开公开页，保存手机/桌面截图，记录图片数量和标题。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <div class="section-head">
+        <div class="num">05 / evidence</div>
+        <h2>截图不是装饰，是验收证据。</h2>
+      </div>
+      <p>本轮所有工具截图保存在 `C:\html\published-review\tool-screenshots`。成品文章复制了关键截图到自己的 `assets/`，避免后续迁移时断图。</p>
+      <p>关键证据包括：Playwright connectOverCDP 主流程截图、OpenCLI DOM 状态、playwright-cli 公开页截图、raw CDP 执行结果、CDP Bridge MCP 补测截图。</p>
+    </section>
+
+    <section id="handoff" class="final-card">
+      <h2>给其他 Agent 的交代</h2>
+      <p>可以直接转发这段：</p>
+      <pre><code>公众号自动化主流程用 Playwright connectOverCDP 接固定 Chrome 9223。
+先跑：
+& 'F:\codex\tools\verify-codex-fixed-chrome.ps1' -RestartIfMissingExtension
+
+通过后再操作公众号后台、发表记录和公开页验收。
+OpenCLI 只做快速 state 检查。
+CDP Bridge MCP 用于桥在线时接管当前标签页。
+raw CDP 只用于排障。
+playwright-cli 会新开浏览器，不用于依赖固定登录态的后台流程。
+
+发布版 HTML 只认：
+C:\html\articles\<slug>\publish\wechat-standard.html</code></pre>
+      <p class="sources">源报告：`C:\html\published-review\wechat-published-effect-and-tool-comparison.md`。工具截图：`C:\html\published-review\tool-screenshots`。</p>
+    </section>
+  </main>
+</body>
+</html>

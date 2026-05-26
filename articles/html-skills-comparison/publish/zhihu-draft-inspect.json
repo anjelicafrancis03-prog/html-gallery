@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-05-22T02:42:37.584Z",
+  "url": "https://zhuanlan.zhihu.com/p/2041105925902184639/edit",
+  "pageTitle": "写文章 - 知乎",
+  "title": "四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付",
+  "bodyTextLength": 2544,
+  "bodyStart": " \n先说结论：它们不是四选一。\n如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。\n`claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。\n最好的保留方式不是删掉谁，而是把它们变成一条流水线：设计系统 → 文章骨架 → 可视化模块 → 单文件交付。\n\n\n \n横向对比表。\n这四个 skill 看起来都在“写 HTML”，但真正的差别在于它们各自默认回答的问题不同。\n添加图片注释，不超过 140 字（可选）\n \nSkill\n\t\n最擅长\n\t\n不擅长\n\t\n适合保留方式\n\n\nclaude-design\n\t\n高保真视觉方向、品牌感、杂志感、版式系统、避免模板味。\n\t\n它不是专门的文章转换器；如果没有内容骨架，容易先陷入视觉探索。\n\t\n作为“视觉总监”放在最前面：先定审美和设计规则。\n\n\narticle-magazine\n\t\n长文排版、公众号式节奏、章节组织、引用块、代码块、文末行动卡。\n\t\n交互能力弱；复杂数据图、筛选、可视化要另补。\n\t\n作为“文章主模板”：专门负责 HTML 图文长文。\n\n\nhtml-visual\n\t\n流程图、架构图、图表、交互筛选、看板、时间线、单页可视化。\n\t\n默认不是长文写作；容易变成工具页或图表页，不像文章。\n\t\n作为“图解模块库”：给文章插入互动解释区。\n\n\nhtml-anyth",
+  "bodyEnd": "志/公众号长文排版。 \n3. html-visual：为关键对比、流程、决策树做交互图解。 \n4. html-anything：最终输出单文件 HTML，落盘并验证可打开。 \n题材：四个 HTML 写作/视觉 skill 的横向对比与使用策略。\n\n\n\n\n \n不知道用哪个？按目标选。\n下面这个小模块可以直接给其他线程看：点目标，就知道谁做主、谁辅助。\n \n写文章：`article-magazine` 做主\n主线用 `article-magazine`。开头用 `claude-design` 定视觉，遇到复杂说明时让 `html-visual` 插图解，最后让 `html-anything` 收口成单文件。\n\n\n \n保留全部。只把职责写清楚：`article-magazine` 是文章主模板，`claude-design` 是审美前置，`html-visual` 是图解组件，`html-anything` 是最终交付器。以后“专门写文章”默认走这条链路。\n\n\n\n\n\n\n \n最后怎么保留配合？\n我建议不要删，也不要合并成一个大而全 skill。大而全的结果通常是边界变模糊，线程不知道该听谁的。\n更好的做法是给其他线程一句固定规则：\n写专门文章时，`article-magazine` 为主；追求设计质量时，先过 `claude-design`；需要图解互动时，插入 `html-visual`；最终落盘交付时，用 `html-anything` 收口。\n \n一句话版\n这四个 skill 的关系不是竞品，而是工序。把它们当成“设计总监、主笔、图解编辑、出版打包”四个角色，就不会混用。\n\n\n\n",
+  "h2": 7,
+  "h3": 5,
+  "tables": 1,
+  "bodyImages": 2,
+  "bodyImageSrcs": [
+    "https://picx.zhimg.com/80/v2-3a1668a126f91f4e48636f42c73be77b_1440w.png",
+    "https://pica.zhimg.com/80/v2-269b400d2f818540744ae630b64b319f_1440w.png"
+  ],
+  "coverCandidates": [
+    {
+      "src": "https://zhuanlan.zhihu.com/p/2041105925902184639/edit",
+      "alt": "",
+      "width": 0,
+      "height": 0,
+      "visible": true
+    },
+    {
+      "src": "https://picx.zhimg.com/v2-75e7075c24bb943ba8bcaedb5a019950_l.jpg?source=32738c0c&needBackground=1",
+      "alt": "点击打开胶囊智饮的主页",
+      "width": 50,
+      "height": 50,
+      "visible": true
+    },
+    {
+      "src": "https://pic-private.zhihu.com/v2-3a80cba18195f599400bd43f7d000847~resize:1440:q75.png?source=1f5c5e47&expiration=1779421176&auth_key=1779421176-0-0-a7ac0db8f8ceae7e903eb8247c3316ee&protocol=v2&sampling=False&animatedImagePlayCount=1&overTime=60&incremental=False&sceneCode=article_draft_web&animatedImageAutoPlay=False&retryCount=3&precoder=False&draft_token=2041105925902184639",
+      "alt": "封面图",
+      "width": 900,
+      "height": 383,
+      "visible": true
+    }
+  ],
+  "fileInputs": [
+    {
+      "className": "",
+      "accept": ".pdf,.md,.txt,.ppt,.pptx,.xlsx,.xls,.docx,.doc,.webp,.png,.jpg,.mobi,.epub,.csv,.azw3"
+    },
+    {
+      "className": "",
+      "accept": "image/webp,image/jpg,image/jpeg,image/png,image/avif,image/heic,image/heif,.avif,.heic,.heif,image/gif"
+    },
+    {
+      "className": "UploadPicture-input",
+      "accept": ".jpeg, .jpg, .png"
+    }
+  ],
+  "statusText": "草稿",
+  "publishButtonVisible": true
+}

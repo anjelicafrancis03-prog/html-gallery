@@ -1,0 +1,38 @@
+﻿[
+    {
+        "File":  "seg01.wav",
+        "Slot":  6,
+        "Duration":  5.12,
+        "Text":  "中文小众搜索，难在经验、传闻和规则混在一起。"
+    },
+    {
+        "File":  "seg02.wav",
+        "Slot":  10,
+        "Duration":  11.52,
+        "Text":  "同场测试四种工具：Grok 找线索，Bright Data 抓证据，Tavily 做候选，内置搜索兜底。"
+    },
+    {
+        "File":  "seg03.wav",
+        "Slot":  12,
+        "Duration":  8.64,
+        "Text":  "样本选灰度运营、限流、工具链和地方政策。重点是保留中文、找到原始来源，不跑题。"
+    },
+    {
+        "File":  "seg04.wav",
+        "Slot":  12,
+        "Duration":  8.24,
+        "Text":  "Grok 的优势是发散和总结，适合发现新线索；但正式结论，还要靠证据交叉验证。"
+    },
+    {
+        "File":  "seg05.wav",
+        "Slot":  12,
+        "Duration":  8.16,
+        "Text":  "视频生成已经跑通：十秒到二十秒可行。二十秒再到三十秒，目前会被接口限制。"
+    },
+    {
+        "File":  "seg06.wav",
+        "Slot":  8,
+        "Duration":  7.6,
+        "Text":  "稳定方案：Grok 做动态素材，Image2 做分镜，HyperFrames 做最终成片。"
+    }
+]

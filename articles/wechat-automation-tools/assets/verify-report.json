@@ -1,0 +1,22 @@
+{
+  "desktop": {
+    "title": "公众号自动化工具实测：到底用什么最方便",
+    "innerWidth": 1280,
+    "bodyWidth": 1265,
+    "scrollWidth": 1265,
+    "imageCount": 7,
+    "imagesOk": true,
+    "hasQuestionMarks": false,
+    "heroImg": "assets/tool-ranking.png"
+  },
+  "mobile": {
+    "title": "公众号自动化工具实测：到底用什么最方便",
+    "innerWidth": 390,
+    "bodyWidth": 390,
+    "scrollWidth": 390,
+    "imageCount": 7,
+    "imagesOk": true,
+    "hasQuestionMarks": false,
+    "heroImg": "assets/tool-ranking.png"
+  }
+}

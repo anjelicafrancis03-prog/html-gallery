@@ -1,0 +1,1320 @@
+{
+  "url": "https://mp.weixin.qq.com/cgi-bin/masssendmodify?action=edit_new&appmsgid=2247483878&idx=1&msgid=2247483878&modify_version=1&open_from=https%3A%2F%2Fmp.weixin.qq.com%2Fcgi-bin%2Fappmsgpublish%3Fsub%3Dlist%26begin%3D0%26count%3D10%26token%3D941781265%26lang%3Dzh_CN%26_%3D1779430178221&token=941781265&lang=zh_CN",
+  "coverStyle": "background-image: url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf6HQK8Imia4yAmW9zuibkmbsx4ibv6VftJszudMFpcsoPpUHhEWUaMdwBBKGrq6usRwGeH6XHhmJrfVWtxYQDMEOibTtsFPLznVsxo/0?wx_fmt=jpeg\");",
+  "coverBg": "url(\"http://mmecoa.qpic.cn/mmecoa_jpg/MqBksTqEibf6HQK8Imia4yAmW9zuibkmbsx4ibv6VftJszudMFpcsoPpUHhEWUaMdwBBKGrq6usRwGeH6XHhmJrfVWtxYQDMEOibTtsFPLznVsxo/0?wx_fmt=jpeg\")",
+  "afterCoverInfo": {
+    "cdn_235_1_url": "",
+    "cdn_1_1_url": "",
+    "cdn_3_4_url": "",
+    "cdn_16_9_url": ""
+  },
+  "coverModifyInfo": null,
+  "nodes": [
+    {
+      "i": 11,
+      "tag": "DIV",
+      "id": "body",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部\n选择图片\n最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转\n确定 取消",
+      "cls": "mp-body ",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": -9160.9912109375,
+        "w": 1687.272705078125,
+        "h": 10021.33203125
+      }
+    },
+    {
+      "i": 12,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部\n选择图片\n最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转\n确定 取消",
+      "cls": "weui-desktop-layout weui-desktop-layout_global",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": -9072.99609375,
+        "w": 1687.272705078125,
+        "h": 9869.3388671875
+      }
+    },
+    {
+      "i": 13,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部\n选择图片\n最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转\n确定 取消",
+      "cls": "weui-desktop-layout__main",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": -9072.00390625,
+        "w": 1687.272705078125,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 14,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部\n选择图片\n最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转\n确定 取消",
+      "cls": "weui-desktop-layout__main__area",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": -9072.00390625,
+        "w": 1687.272705078125,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 15,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部\n选择图片\n最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转\n确定 取消",
+      "cls": "js_main_inner weui-desktop-layout__main__inner",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 168.72933959960938,
+        "y": -9072.00390625,
+        "w": 1349.81396484375,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 16,
+      "tag": "DIV",
+      "id": "js_appmsg_modify",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 168.72933959960938,
+        "y": -9072.00390625,
+        "w": 1349.81396484375,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 17,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 168.72933959960938,
+        "y": -9072.00390625,
+        "w": 1349.81396484375,
+        "h": 9698.3466796875
+      }
+    },
+    {
+      "i": 18,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改\n\n每篇内容可修改3次，当前还可以修改3次。支持对标题、正文文字、图片、视频、封面及摘要进行修改。 修改说明",
+      "cls": "weui-desktop-layout__main__hd",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 168.72933959960938,
+        "y": -9072.00390625,
+        "w": 1349.81396484375,
+        "h": 56.39462661743164
+      }
+    },
+    {
+      "i": 19,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改说明",
+      "cls": "weui-desktop-popover__wrp title_modify_education_popover",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 819.1425170898438,
+        "y": -9038.005859375,
+        "w": 55.99173355102539,
+        "h": 22.39669418334961
+      }
+    },
+    {
+      "i": 20,
+      "tag": "SPAN",
+      "id": "",
+      "text": "修改说明",
+      "cls": "weui-desktop-popover__target",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 819.1425170898438,
+        "y": -9036.68359375,
+        "w": 55.99173355102539,
+        "h": 18.51239585876465
+      }
+    },
+    {
+      "i": 21,
+      "tag": "A",
+      "id": "",
+      "text": "修改说明",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 819.1425170898438,
+        "y": -9036.68359375,
+        "w": 55.99173355102539,
+        "h": 18.51239585876465
+      }
+    },
+    {
+      "i": 22,
+      "tag": "DIV",
+      "id": "",
+      "text": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部",
+      "cls": "weui-desktop-panel appmsg_modify",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 168.72933959960938,
+        "y": -8991.611328125,
+        "w": 1349.81396484375,
+        "h": 9617.9541015625
+      }
+    },
+    {
+      "i": 23,
+      "tag": "DIV",
+      "id": "",
+      "text": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部",
+      "cls": "appmsg_modify_box",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 168.72933959960938,
+        "y": -8991.611328125,
+        "w": 1349.81396484375,
+        "h": 9617.9541015625
+      }
+    },
+    {
+      "i": 24,
+      "tag": "DIV",
+      "id": "",
+      "text": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120",
+      "cls": "appmsg_article_wrp",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 168.72933959960938,
+        "y": -8991.611328125,
+        "w": 989.8140258789062,
+        "h": 9617.9541015625
+      }
+    },
+    {
+      "i": 25,
+      "tag": "DIV",
+      "id": "",
+      "text": "我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n2026-05-22  sinnple&nbsp;coffee\n先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。",
+      "cls": "appmsg_article_container modify_new__article_page",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 324.8037109375,
+        "y": -8951.611328125,
+        "w": 676.9937744140625,
+        "h": 9244.96875
+      }
+    },
+    {
+      "i": 66,
+      "tag": "DIV",
+      "id": "",
+      "text": "先给结论：不是 PPT 级概念，是真能跑；但不能写成“已经颠覆前端”。\n\n我把官方 demo 跑完后，判断可以压缩成三句话：普通 Chrome 当前不可用；Chrome for Testing Canary 150 开启 canvas-draw-element 后可用；2D、表单交互、WebGL、WebGPU 都能看到真实效果。\n\n普通 Chrome 148 不可用\n\n官方页面能打开，但核心 API 不存在，Canvas 是空白。\n\nCanary 150 + flag 可跑通\n\ndrawElementImage、texElementImage2D、copyElementImageToTexture 都出现。\n\n生产可用性 太早\n\n它仍是实验能力，不适合宣传成稳定标准或现成工程方案。\n\n最准确的表述：HTML-in-Canvas 在 Canary 150 开启实验开关后，已经能跑通 2D、表单交互、WebGL 纹理和 WebGPU 纹理 demo；但普通 Chrome 当前不可用，距离生产级还很远。\n\n测试不是看视频：我拉了官方仓库，跑了两个浏览器版本。\n\n测试对象是 WICG 官方仓库，不是二手转载文章。仓库里有几个直接可运行的例子：复杂文本、表单交互、饼图标签、WebGL 立方体，以及一个需要 Vite 的 WebGPU jelly slider。\n\n1. clone 仓库\n\n下载 WICG/html-in-canvas 到本地实验目录。\n\n2. 启动静态服务\n\n用 python -m http.server 跑官方 HTML demo。\n\n3. 普通 Chrome 对照\n\n固定 Chrome 148 打开页面，采 API 和截图。\n\n4. Canary + flag\n\n下载 Chrome for Testing Canary 150，启用实验项。\n\n5. 逐项验证\n\n检测 API、像素输出、交互、WebGL 和 WebGPU。\n\nCanary 版本来自 Chrome for Testing，独立安装在本地工具目录，没有动固定 Chrome 登录态。\n\n第一轮：普通 Chrome 148，页面能开，但功能等于没有。\n\n先用当前固定 Chrome 跑一遍，这是最接近日常用户环境的测试。结果很干脆：官方 demo 页面能访问，<canvas> 边框也显示了，但 HTML 内容没有被画进去。\n\n核心 API 全部不存在：\n\ncanvas.requestPaint\n 是 undefined\nCanvasRenderingContext2D.drawElementImage\n 是 undefined\nWebGLRenderingContext.texElementImage2D\n 是 undefined\nGPUQueue.copyElementImageToTexture\n 是 undefined\n\n\n\n\n普通 Chrome 148：只剩一个蓝色边框，Canvas 内部没有内容。这个对照非常关键，说明它不是“现在人人可用”。\n\n环境 / requestPaint / drawElementImage / WebGL texElementImage2D / 结论\n\nChrome 148 普通版?undefined?undefined?undefined?不可用，只能打开页面。\n\nCanary 150 默认?undefined?undefined?undefined?有实验项，但默认不开。\n\nCanary 150 + flag?function?function?function?官方 demo 实际跑通。\n\n第二轮：Canary 150 开 flag 后，核心 API 全部出现。\n\nChrome for Testing Canary 150 的 chrome://flags/#canvas-draw-element 页面里确实能看到一个叫 HTML-in-Canvas 的实验项。描述也很直白：启用 Canvas 2D drawElement API 和 WebGL texElement2D API，用于把 HTML 内容画进 Canvas。\n\n这一步之后，它从“概念文章里的 API”，变成了浏览器里真实存在的函数。\n\n2D Canvas API 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。",
+      "cls": "appmsg_article_content autoTypeSetting24psection",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 324.8037109375,
+        "y": -8817.2724609375,
+        "w": 676.9937744140625,
+        "h": 9110.6298828125
+      }
+    },
+    {
+      "i": 2023,
+      "tag": "SPAN",
+      "id": "",
+      "text": "下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。",
+      "cls": "",
+      "src": "",
+      "style": "pointer-events: initial;",
+      "box": {
+        "x": 324.8037109375,
+        "y": -5872.16943359375,
+        "w": 674.2561645507812,
+        "h": 51.23966979980469
+      }
+    },
+    {
+      "i": 2024,
+      "tag": "SPAN",
+      "id": "",
+      "text": "下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 324.8037109375,
+        "y": -5872.16943359375,
+        "w": 674.2561645507812,
+        "h": 51.23966979980469
+      }
+    },
+    {
+      "i": 2097,
+      "tag": "SPAN",
+      "id": "",
+      "text": "1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了",
+      "cls": "",
+      "src": "",
+      "style": "pointer-events: initial;",
+      "box": {
+        "x": 324.8037109375,
+        "y": -5787.99560546875,
+        "w": 512.2623901367188,
+        "h": 23.801652908325195
+      }
+    },
+    {
+      "i": 2098,
+      "tag": "SPAN",
+      "id": "",
+      "text": "1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 324.8037109375,
+        "y": -5787.99560546875,
+        "w": 512.2623901367188,
+        "h": 23.801652908325195
+      }
+    },
+    {
+      "i": 2132,
+      "tag": "SPAN",
+      "id": "",
+      "text": "这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由",
+      "cls": "",
+      "src": "",
+      "style": "pointer-events: initial;",
+      "box": {
+        "x": 324.8037109375,
+        "y": -5746.1259765625,
+        "w": 674.1528930664062,
+        "h": 51.23966979980469
+      }
+    },
+    {
+      "i": 2133,
+      "tag": "SPAN",
+      "id": "",
+      "text": "这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 324.8037109375,
+        "y": -5746.1259765625,
+        "w": 674.1528930664062,
+        "h": 51.23966979980469
+      }
+    },
+    {
+      "i": 3019,
+      "tag": "SPAN",
+      "id": "",
+      "text": "，jelly slider 的视觉也成功渲染。",
+      "cls": "",
+      "src": "",
+      "style": "pointer-events: initial;",
+      "box": {
+        "x": 474.36981201171875,
+        "y": -1616.291259765625,
+        "w": 241.2396697998047,
+        "h": 21.157024383544922
+      }
+    },
+    {
+      "i": 3020,
+      "tag": "SPAN",
+      "id": "",
+      "text": "，jelly slider 的视觉也成功渲染。",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 474.36981201171875,
+        "y": -1616.291259765625,
+        "w": 241.2396697998047,
+        "h": 21.157024383544922
+      }
+    },
+    {
+      "i": 3045,
+      "tag": "SPAN",
+      "id": "",
+      "text": "WebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。",
+      "cls": "",
+      "src": "",
+      "style": "pointer-events: initial;",
+      "box": {
+        "x": 337.45867919921875,
+        "y": -746.3119506835938,
+        "w": 586.942138671875,
+        "h": 18.51239585876465
+      }
+    },
+    {
+      "i": 3046,
+      "tag": "SPAN",
+      "id": "",
+      "text": "WebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 337.45867919921875,
+        "y": -746.3119506835938,
+        "w": 586.942138671875,
+        "h": 18.51239585876465
+      }
+    },
+    {
+      "i": 3757,
+      "tag": "DIV",
+      "id": "",
+      "text": "封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120",
+      "cls": "appmsg_modify_cd",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 324.8037109375,
+        "y": 333.357421875,
+        "w": 676.9937744140625,
+        "h": 252.98553466796875
+      }
+    },
+    {
+      "i": 3758,
+      "tag": "SPAN",
+      "id": "",
+      "text": "封面和摘要",
+      "cls": "appmsg_modify_cd__text",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 324.8037109375,
+        "y": 374.3491516113281,
+        "w": 69.98966979980469,
+        "h": 20
+      }
+    },
+    {
+      "i": 3875,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改记录\n\n还未开始修改",
+      "cls": "appmsg_extract_wrp",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1178.5433349609375,
+        "y": 60,
+        "w": 340,
+        "h": 133.58470153808594
+      }
+    },
+    {
+      "i": 3876,
+      "tag": "DIV",
+      "id": "",
+      "text": "修改记录\n\n还未开始修改",
+      "cls": "appmsg_extract_panel",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1178.5433349609375,
+        "y": 60,
+        "w": 340,
+        "h": 133.58470153808594
+      }
+    },
+    {
+      "i": 3877,
+      "tag": "DIV",
+      "id": "",
+      "text": "预览\n提交修改",
+      "cls": "tool_area_wrp",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": 760.1755981445312,
+        "w": 1687.272705078125,
+        "h": 99.98966979980469
+      }
+    },
+    {
+      "i": 3878,
+      "tag": "DIV",
+      "id": "",
+      "text": "预览\n提交修改",
+      "cls": "tool_area tc",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": 760.1755981445312,
+        "w": 1687.272705078125,
+        "h": 99.98966979980469
+      }
+    },
+    {
+      "i": 3879,
+      "tag": "DIV",
+      "id": "",
+      "text": "预览\n提交修改",
+      "cls": "tool_bar",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": 760.1755981445312,
+        "w": 1687.272705078125,
+        "h": 99.98966979980469
+      }
+    },
+    {
+      "i": 3880,
+      "tag": "DIV",
+      "id": "",
+      "text": "预览",
+      "cls": "weui-desktop-btn_wrp",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 741.642578125,
+        "y": 792.16943359375,
+        "w": 95.99173736572266,
+        "h": 36.0020637512207
+      }
+    },
+    {
+      "i": 3881,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "预览",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 741.642578125,
+        "y": 792.16943359375,
+        "w": 95.99173736572266,
+        "h": 35.60950469970703
+      }
+    },
+    {
+      "i": 3882,
+      "tag": "DIV",
+      "id": "",
+      "text": "提交修改",
+      "cls": "weui-desktop-btn_wrp",
+      "src": "",
+      "style": "margin-left: 12px;",
+      "box": {
+        "x": 849.6281127929688,
+        "y": 792.16943359375,
+        "w": 95.99173736572266,
+        "h": 36.0020637512207
+      }
+    },
+    {
+      "i": 3883,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "提交修改",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 849.6281127929688,
+        "y": 792.16943359375,
+        "w": 95.99173736572266,
+        "h": 36.0020637512207
+      }
+    },
+    {
+      "i": 3887,
+      "tag": "DIV",
+      "id": "",
+      "text": "选择图片\n最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转\n确定 取消",
+      "cls": "weui-desktop-dialog__wrp weui-desktop-dialog_img-picker",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1687.272705078125,
+        "h": 860.165283203125
+      }
+    },
+    {
+      "i": 3888,
+      "tag": "DIV",
+      "id": "",
+      "text": "选择图片\n最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转\n确定 取消",
+      "cls": "weui-desktop-dialog",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 360.6611633300781,
+        "y": 40,
+        "w": 960,
+        "h": 861.6632080078125
+      }
+    },
+    {
+      "i": 3889,
+      "tag": "DIV",
+      "id": "",
+      "text": "选择图片",
+      "cls": "weui-desktop-dialog__hd",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 360.6611633300781,
+        "y": 40,
+        "w": 960,
+        "h": 71.9937973022461
+      }
+    },
+    {
+      "i": 3891,
+      "tag": "DIV",
+      "id": "",
+      "text": "最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转",
+      "cls": "weui-desktop-dialog__bd",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 360.6611633300781,
+        "y": 111.9937973022461,
+        "w": 960,
+        "h": 689.6797485351562
+      }
+    },
+    {
+      "i": 3892,
+      "tag": "DIV",
+      "id": "",
+      "text": "最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转",
+      "cls": "weui-desktop-step__panel weui-desktop-step__panel",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 360.6611633300781,
+        "y": 111.9937973022461,
+        "w": 960,
+        "h": 689.6797485351562
+      }
+    },
+    {
+      "i": 3893,
+      "tag": "DIV",
+      "id": "",
+      "text": "最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转",
+      "cls": "weui-desktop-img-picker weui-desktop-grid",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 360.6611633300781,
+        "y": 111.9937973022461,
+        "w": 960,
+        "h": 689.6797485351562
+      }
+    },
+    {
+      "i": 3894,
+      "tag": "DIV",
+      "id": "",
+      "text": "最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组",
+      "cls": "weui-desktop-grid__item weui-desktop-img-category",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 360.6611633300781,
+        "y": 111.9937973022461,
+        "w": 190,
+        "h": 689.6797485351562
+      }
+    },
+    {
+      "i": 3896,
+      "tag": "A",
+      "id": "",
+      "text": "我的图片 (141)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link_current",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 360.6611633300781,
+        "y": 151.99380493164062,
+        "w": 189.33883666992188,
+        "h": 40
+      }
+    },
+    {
+      "i": 3903,
+      "tag": "DIV",
+      "id": "",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转",
+      "cls": "weui-desktop-grid__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 549.66943359375,
+        "y": 111.9937973022461,
+        "w": 770.99169921875,
+        "h": 689.6797485351562
+      }
+    },
+    {
+      "i": 3904,
+      "tag": "DIV",
+      "id": "",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转",
+      "cls": "weui-desktop-img-picker__list__area",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 549.66943359375,
+        "y": 119.98966979980469,
+        "w": 770.99169921875,
+        "h": 681.6838989257812
+      }
+    },
+    {
+      "i": 3905,
+      "tag": "DIV",
+      "id": "",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭",
+      "cls": "weui-desktop-global-mod",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 550.33056640625,
+        "y": 119.98966979980469,
+        "w": 770.33056640625,
+        "h": 47.98553466796875
+      }
+    },
+    {
+      "i": 3906,
+      "tag": "DIV",
+      "id": "",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭",
+      "cls": "weui-desktop-msg weui-desktop-msg_mini weui-desktop-msg_title-only weui-desktop-msg_temp",
+      "src": "",
+      "style": "background: rgb(241, 243, 245); margin: 8px 16px;",
+      "box": {
+        "x": 566.3223266601562,
+        "y": 119.98966979980469,
+        "w": 738.3471069335938,
+        "h": 39.98966979980469
+      }
+    },
+    {
+      "i": 3907,
+      "tag": "DIV",
+      "id": "",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭",
+      "cls": "weui-desktop-msg__inner",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 582.3140258789062,
+        "y": 127.98553466796875,
+        "w": 706.3636474609375,
+        "h": 23.997934341430664
+      }
+    },
+    {
+      "i": 3909,
+      "tag": "DIV",
+      "id": "",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭",
+      "cls": "weui-desktop-msg__bd",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 614.307861328125,
+        "y": 130.18594360351562,
+        "w": 654.3698120117188,
+        "h": 19.59710693359375
+      }
+    },
+    {
+      "i": 3912,
+      "tag": "DIV",
+      "id": "",
+      "text": "已关闭图片水印  上传文件",
+      "cls": "weui-desktop-global-mod weui-desktop-media-global-bar",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 550.33056640625,
+        "y": 167.97520446777344,
+        "w": 770.33056640625,
+        "h": 35.60950469970703
+      }
+    },
+    {
+      "i": 3913,
+      "tag": "DIV",
+      "id": "",
+      "text": "已关闭图片水印  上传文件",
+      "cls": "weui-desktop-global__extra",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 582.3243408203125,
+        "y": 167.97520446777344,
+        "w": 706.3429565429688,
+        "h": 35.60950469970703
+      }
+    },
+    {
+      "i": 3914,
+      "tag": "DIV",
+      "id": "",
+      "text": "已关闭图片水印  上传文件",
+      "cls": "weui-desktop-upload weui-desktop-upload_global-media",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1057.4173583984375,
+        "y": 167.97520446777344,
+        "w": 231.25,
+        "h": 35.60950469970703
+      }
+    },
+    {
+      "i": 3915,
+      "tag": "DIV",
+      "id": "",
+      "text": "已关闭图片水印",
+      "cls": "weui-desktop-upload__tips",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1057.4173583984375,
+        "y": 174.58677673339844,
+        "w": 126.1156997680664,
+        "h": 22.39669418334961
+      }
+    },
+    {
+      "i": 3916,
+      "tag": "SPAN",
+      "id": "",
+      "text": "已关闭图片水印",
+      "cls": "weui-desktop-tips weui-desktop-tips_icon-after",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1057.4173583984375,
+        "y": 175.90908813476562,
+        "w": 126.1156997680664,
+        "h": 18.51239585876465
+      }
+    },
+    {
+      "i": 3917,
+      "tag": "DIV",
+      "id": "",
+      "text": "不添加水印 已关闭水印，所有上传的图片都不会带有水印。 若需修改请前往账号设置/功能设置设置图片水印。",
+      "cls": "weui-desktop-popover__wrp",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1159.54541015625,
+        "y": 174.58677673339844,
+        "w": 23.98760223388672,
+        "h": 22.39669418334961
+      }
+    },
+    {
+      "i": 3919,
+      "tag": "DIV",
+      "id": "",
+      "text": "上传文件",
+      "cls": "js_upload_btn_container weui-desktop-upload-input__wrp webuploader-container",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1192.675537109375,
+        "y": 167.97520446777344,
+        "w": 95.99173736572266,
+        "h": 35.60950469970703
+      }
+    },
+    {
+      "i": 3920,
+      "tag": "A",
+      "id": "upload_0.36760554990698",
+      "text": "上传文件",
+      "cls": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1192.675537109375,
+        "y": 167.97520446777344,
+        "w": 95.99173736572266,
+        "h": 35.60950469970703
+      }
+    },
+    {
+      "i": 3921,
+      "tag": "SPAN",
+      "id": "",
+      "text": "上传文件",
+      "cls": "",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1212.675537109375,
+        "y": 175.90908813476562,
+        "w": 55.99173355102539,
+        "h": 18.51239585876465
+      }
+    },
+    {
+      "i": 3923,
+      "tag": "DIV",
+      "id": "js_image_dialog_list_wrp",
+      "text": "wechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png",
+      "cls": "weui-desktop-media-list-wrp weui-desktop-img-picker__list__wrp mb-40",
+      "src": "",
+      "style": "height: 474px;",
+      "box": {
+        "x": 550.33056640625,
+        "y": 233.58470153808594,
+        "w": 770.33056640625,
+        "h": 473.9979248046875
+      }
+    },
+    {
+      "i": 3925,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522135611.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 695.99169921875,
+        "y": 233.58470153808594,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3926,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522135500.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 818.9876098632812,
+        "y": 233.58470153808594,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3927,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522135453.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 941.9834594726562,
+        "y": 233.58470153808594,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3928,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522135446.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1064.9793701171875,
+        "y": 233.58470153808594,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3929,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522135439.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1187.9752197265625,
+        "y": 233.58470153808594,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3930,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522135433.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 572.995849609375,
+        "y": 391.58056640625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3931,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522135426.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 695.99169921875,
+        "y": 391.58056640625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3932,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522134855.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 818.9876098632812,
+        "y": 391.58056640625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3933,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522134848.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 941.9834594726562,
+        "y": 391.58056640625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3934,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522134841.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1064.9793701171875,
+        "y": 391.58056640625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3935,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522134834.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1187.9752197265625,
+        "y": 391.58056640625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3936,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522134828.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 572.995849609375,
+        "y": 549.576416015625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3937,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522134821.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 695.99169921875,
+        "y": 549.576416015625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3938,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522122002.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 818.9876098632812,
+        "y": 549.576416015625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3939,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522121841.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 941.9834594726562,
+        "y": 549.576416015625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3940,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522121834.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1064.9793701171875,
+        "y": 549.576416015625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3941,
+      "tag": "DIV",
+      "id": "",
+      "text": "粘贴图片_20260522121827.png",
+      "cls": "weui-desktop-img-picker__item",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 1187.9752197265625,
+        "y": 549.576416015625,
+        "w": 110,
+        "h": 137.99586486816406
+      }
+    },
+    {
+      "i": 3950,
+      "tag": "DIV",
+      "id": "",
+      "text": "释放鼠标  拖拽图片至此区域上传",
+      "cls": "image_upload_dnd_wrp_mask",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1687.272705078125,
+        "h": 860.165283203125
+      }
+    },
+    {
+      "i": 3951,
+      "tag": "DIV",
+      "id": "image_upload_dnd_wrp",
+      "text": "释放鼠标  拖拽图片至此区域上传",
+      "cls": "image_upload_dnd_wrp_container",
+      "src": "",
+      "style": "height: 540px; width: 740.992px; left: 549.669px; top: 111.994px;",
+      "box": {
+        "x": 549.66943359375,
+        "y": 111.9937973022461,
+        "w": 740.99169921875,
+        "h": 540
+      }
+    },
+    {
+      "i": 3954,
+      "tag": "DIV",
+      "id": "",
+      "text": "拖拽图片至此区域上传",
+      "cls": "image_upload_dnd_outer_text",
+      "src": "",
+      "style": "height: 540px; width: 740.992px;",
+      "box": {
+        "x": 549.66943359375,
+        "y": 651.9937744140625,
+        "w": 740.99169921875,
+        "h": 540
+      }
+    },
+    {
+      "i": 3955,
+      "tag": "SPAN",
+      "id": "",
+      "text": "拖拽图片至此区域上传",
+      "cls": "dnd_outer_text",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 840.165283203125,
+        "y": 922.1900634765625,
+        "w": 160,
+        "h": 25.599172592163086
+      }
+    },
+    {
+      "i": 3956,
+      "tag": "DIV",
+      "id": "",
+      "text": "确定 取消",
+      "cls": "weui-desktop-dialog__ft",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 360.6611633300781,
+        "y": 801.6735229492188,
+        "w": 960,
+        "h": 99.98966979980469
+      }
+    },
+    {
+      "i": 3957,
+      "tag": "DIV",
+      "id": "",
+      "text": "确定",
+      "cls": "weui-desktop-btn_wrp",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 736.6011962890625,
+        "y": 833.6673583984375,
+        "w": 95.99173736572266,
+        "h": 36.0020637512207
+      }
+    },
+    {
+      "i": 3958,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "确定",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 736.6011962890625,
+        "y": 833.6673583984375,
+        "w": 95.99173736572266,
+        "h": 36.0020637512207
+      }
+    },
+    {
+      "i": 3959,
+      "tag": "DIV",
+      "id": "",
+      "text": "取消",
+      "cls": "weui-desktop-btn_wrp",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 848.718994140625,
+        "y": 833.8636474609375,
+        "w": 95.99173736572266,
+        "h": 35.60950469970703
+      }
+    },
+    {
+      "i": 3960,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "取消",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "src": "",
+      "style": "",
+      "box": {
+        "x": 848.718994140625,
+        "y": 833.8636474609375,
+        "w": 95.99173736572266,
+        "h": 35.60950469970703
+      }
+    }
+  ],
+  "textTail": " 存在 WebGL API 存在 WebGPU API 存在 需要 Canary + flag\n逐项看截图：它能画 HTML，也能保留表单交互。\n\n下面所有图片都是本地实测截图，不是官方宣传图。这里要看的是三件事：内容是不是进入 Canvas，复杂布局是不是正常，交互是不是还能落回 DOM。\n\n1. 复杂文本：链接、粗体、RTL、竖排、图片、SVG 都画进去了\n\n这个 demo 不是简单的 Hello World。它包含链接、粗体、emoji、RTL 文本、竖排中文、图片和 SVG。启用 flag 后，这些内容被浏览器排版，再由 drawElementImage() 绘制到 Canvas，并且整体还能旋转。\n\n\n\n\n\n复杂文本 demo：浏览器负责 HTML 排版，Canvas 负责最终绘制和变换。\n2. 表单交互：输入框真的能点，值真的能改\n\n这个结果比“能画出来”更重要。表单 demo 里，我用自动化点击输入框，选中原文字，再输入 Canvas Test。检查结果显示当前 active element 是 shipName，输入框值也变成了 Canvas Test。\n\n\n\n\n\n表单 demo：输入框、checkbox、radio、range、button 都显示正常，输入框也能获得焦点。\n3. 饼图：Canvas 画图形，HTML 负责多行标签\n\n这正是 HTML-in-Canvas 最容易理解的价值：Canvas 擅长画扇区，HTML 擅长排文字。以前你要自己算标签换行、字号、对齐；现在可以把标签作为 DOM 子元素，让浏览器处理排版，再画进 Canvas。\n\n\n\n\n\n饼图 demo：扇区由 Canvas 绘制，百分比和水果标签来自 HTML 元素。\n4. WebGL：HTML 变成 3D 立方体纹理\n\nWebGL demo 跑通后，意义就不只是“Canvas 2D 里画个表单”。它证明 HTML 渲染结果可以作为纹理进入 3D 管线。截图里的立方体表面，就是 HTML 内容。\n\n\n\n\n\nWebGL demo：texElementImage2D() 可用，HTML 内容被贴到旋转立方体上。\n5. WebGPU：copyElementImageToTexture 也存在，jelly slider 能渲染\n\nWebGPU 示例需要单独安装依赖并启动 Vite。页面没有异常，GPUQueue.copyElementImageToTexture 是 function，jelly slider 的视觉也成功渲染。\n\n\n\n\n\nWebGPU jelly slider：画面实际渲染成功。npm 依赖有 audit 警告，但不影响这次功能验证。\n所以它颠覆了吗？还没有。它现在更像一条刚露出来的桥。\n\n如果只看 demo，HTML-in-Canvas 的方向确实很强：DOM 管布局和语义，Canvas/WebGL/WebGPU 管绘制和变换。但从工程角度看，它现在还不能被写成“前端生产范式已经改写”。\n\n原文说法 / 实测后怎么改 / 原因\n\n现在能用?Canary + flag 后能用?普通 Chrome 148 下 API 不存在。\n\n痛点一次性清零?明显缓解一部分痛点?仍有实验开关、兼容性、安全和同步问题。\n\n完整交互?官方表单 demo 可交互?交互路径成立，但复杂场景仍要实测。\n\nHTML 就是 Canvas?Canvas 可以绘制 HTML 渲染快照?DOM 仍然存在，并参与布局、命中测试和无障碍。\n\n生产级方案?暂时不能这么写?官方仍定位 Developer Trial / 实验能力。\n\n这也是我建议文章降温的原因。它不是假东西，但也不是今天就能拿去改公司主链路的稳定能力。\n\n如果写成公众号文章，应该从“实测”切入，而不是从“颠覆”切入。\n\n这个题材最有传播力的地方，不是重复“DOM 和 Canvas 终于打通了”，而是把读者带进真实测试过程：普通 Chrome 空白、Canary 开 flag、API 出现、表单能输入、WebGL/WebGPU 能渲染。\n\n建议标题\n\n我本地跑了一遍 HTML-in-Canvas：能跑，但还远不是生产级\n\n这个标题更诚实，也更有可信度。它承认技术方向是真的，同时把边界说清楚。\n\n\n\n封面和摘要\n基于 WICG/html-in-canvas 官方 demo 的本地实测：普通 Chrome 148、Chrome for Testing Canary 150、2D Canvas、表单交互、WebGL 与 WebGPU。\n111/120\n\n修改记录\n\n还未开始修改\n\n预览\n提交修改\n回到顶部\n选择图片\n最近使用 (84)\n我的图片 (141)\n未分组 (82)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n粘贴图片_20260522135433.png\n粘贴图片_20260522135426.png\n粘贴图片_20260522134855.png\n粘贴图片_20260522134848.png\n粘贴图片_20260522134841.png\n粘贴图片_20260522134834.png\n粘贴图片_20260522134828.png\n粘贴图片_20260522134821.png\n粘贴图片_20260522122002.png\n粘贴图片_20260522121841.png\n粘贴图片_20260522121834.png\n粘贴图片_20260522121827.png\n1 / 8 下一页  跳转\n确定 取消\nCDP Bridge"
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>我把 Codex 接到飞书后，最大的变化不是“手机能聊天”</title>
+<meta content="把飞书变成本机 Codex 的远程入口：接线、同线程、长期状态与公开边界。" name="description"/>
+
+<meta content="把飞书变成本机 Codex 的远程入口：接线、同线程、长期状态与公开边界。" name="description"/></head>
+<body style="margin:0; padding:0; background:#fbfaf7; color:#1f241f; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif; line-height:1.78; letter-spacing:0;">
+
+<main class="page" style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<header class="hero">
+<div>
+<div class="kicker">知乎专栏稿 · AI 多线程工作流</div>
+<h1 style="font-size:28px; line-height:1.28; font-weight:800; margin:24px 0 18px; color:#1f241f;">我把 Codex 接到飞书后，最大的变化不是“手机能聊天”</h1>
+<p class="deck" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">飞书在这里不是新的大脑，而是一个远程入口。真正重要的是：手机发出去的消息，能不能回到桌面 Codex 的同一条长期线程。</p>
+</div>
+<aside aria-label="文章要点" class="hero-card">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">这篇文章讲清楚三件事</h2>
+<ul class="signal-list" style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;"><span>1</span><div>为什么“能聊”不等于“工作流连续”。</div></li>
+<li style="margin:6px 0; line-height:1.78;"><span>2</span><div>飞书里的“接线”如何把消息送回本机 Codex 线程。</div></li>
+<li style="margin:6px 0; line-height:1.78;"><span>3</span><div>公开项目时，哪些能写，哪些必须留在私有环境。</div></li>
+</ul>
+</aside>
+</header>
+<div class="content">
+
+<article style="max-width:760px; margin:0 auto; padding:24px 16px;">
+<section id="intro">
+<p class="lead" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">我读完这个开源项目后，越来越觉得，AI 工具真正麻烦的地方，不是它不会做事，而是线程一多，人先乱。</p>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">一个线程在改代码，一个线程在查资料，一个线程在整理文档，还有一个线程专门管系统状态。只要你离开电脑，手机里再开一个新的聊天窗口，看起来是“移动办公”，实际上是在重新制造一份上下文。</p>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">所以我理解这个 <code>codex-feishu-bridge</code> 的时候，目标就不是把它看成一个“飞书聊天机器人”。更准确地说，它更像一个随身控制台：飞书负责入口，真正的线程、工作区、状态和运行历史仍然留在本机 Codex。</p>
+</section>
+<section id="why">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">一、为什么不是再做一个机器人？</h2>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">因为“能聊”太容易了。</p>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">随便接一个 Bot，飞书里发消息，模型回一段话，这件事没什么稀奇。问题在于，真实工作不是一问一答，而是一条条持续很久的线。</p>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">比如桌面 Codex 里可能同时有这些长期线程：</p>
+<ul style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">一个管 Windows 系统维护</li>
+<li style="margin:6px 0; line-height:1.78;">一个管 skills 和工具链</li>
+<li style="margin:6px 0; line-height:1.78;">一个管搜索和资料核验</li>
+<li style="margin:6px 0; line-height:1.78;">一个管具体项目</li>
+<li style="margin:6px 0; line-height:1.78;">一个管内容生产和发布</li>
+</ul>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">这些线程各自有上下文，也各自有历史。如果手机飞书只是新开一个机器人，那它再聪明，也接不上这些旧线。</p>
+<div class="callout" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;">“飞书接 Codex”最容易被低估的地方在这里：它真正要解决的不是远程聊天，而是线程接线。</div>
+</section>
+<section id="connect">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">二、飞书里的“接线”到底是什么？</h2>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">最简单的用法是，在飞书里发“接线”。它返回的不是一个通用菜单，而是可接入的本机 Codex 线程列表。你选一个序号，后续普通消息就临时进入那条线程。</p>
+<figure class="figure-card">
+<img alt="飞书可接线线程列表截图" loading="lazy" src="assets/feishu-thread-list-safe.png" style="display:block; width:100%; max-width:100%; height:auto; object-fit:contain; margin:14px auto; border-radius:8px;"/>
+<figcaption>在飞书里看到可接线线程列表，选择后把后续消息送进指定 Codex 线程。</figcaption>
+</figure>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">这个动作有点像电话总机。你不是让飞书重新创建一个 AI，而是在告诉本地桥：接下来这段话，送到哪条 Codex 线程里。</p>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">选中之后，手机里的消息、图片、文件，都可以作为这条线程的输入继续往下走。桌面端不是旁观者，手机端也不是另起炉灶，它们只是同一条工作线的两个入口。</p>
+</section>
+<section id="seamless">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">三、手机和桌面为什么能无缝？</h2>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">关键不是“飞书 App 好不好用”，而是路由状态有没有做对。</p>
+<div aria-label="消息路由链路" class="route">
+<div class="route-step" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><b>1</b><span>手机飞书消息</span></div>
+<div class="route-step" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><b>2</b><span>本地桥 runtime 接收事件并处理附件</span></div>
+<div class="route-step" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><b>3</b><span>路由与接线状态绑定 workspaceRoot + threadId</span></div>
+<div class="route-step" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><b>4</b><span>Codex app-server 继续同一条本机长期线程</span></div>
+<div class="route-step" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;"><b>5</b><span>结果返回飞书，手机成为临时入口</span></div>
+</div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">中间最重要的不是某个炫酷界面，而是 <code>workspaceRoot + threadId</code>。只要这两个东西没有变，手机发出去的那句话，就不是落到一个新的机器人会话里，而是落回电脑上同一条 Codex 工作线。</p>
+<figure class="figure-card">
+<img alt="手机飞书与桌面 Codex 的同线程流程图" loading="lazy" src="assets/workflow-ai-thread-control.png" style="display:block; width:100%; max-width:100%; height:auto; object-fit:contain; margin:14px auto; border-radius:8px;"/>
+<figcaption>飞书是入口，本地桥负责路由，真正连续的是同一个 workspaceRoot 和 threadId。</figcaption>
+</figure>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">这也是为什么我不太喜欢把它叫“遥控电脑写代码”。遥控听起来像是在远程按按钮。实际更像是：你在路上突然想到一个补充要求，打开飞书，把它丢回正在跑的那条线程里。</p>
+<figure class="figure-card">
+<img alt="飞书接入本机 Codex 线程截图" loading="lazy" src="assets/feishu-connected-thread-safe.png" style="display:block; width:100%; max-width:100%; height:auto; object-fit:contain; margin:14px auto; border-radius:8px;"/>
+<figcaption>接入指定线程后，手机飞书成为那条本机 Codex 线程的临时入口。</figcaption>
+</figure>
+</section>
+<section id="longrun">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">四、长期用，难点反而在这些小地方</h2>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">这套东西跑一次不难，长期用才会暴露问题。我现在更在意这些细节：</p>
+<div class="table-wrap">
+<table style="width:100%; border-collapse:collapse; margin:18px 0; font-size:14px;">
+<thead>
+<tr>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">检查层</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">要确认什么</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">为什么重要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">事件入口</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">飞书事件有没有真的进到本地 runtime</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">否则手机发了消息，本机根本没有收到。</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">本机服务</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">Codex app-server 是否还活着</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">桥在，Codex 不在，线程也没法继续。</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">多机器人隔离</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">不同机器人是否共用 sessions 或 lock 文件</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">状态混用会导致串线、抢锁或难以排障。</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">附件处理</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">图片、文件、音频有没有被下载并转交</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">只收到元数据，不等于真正能处理内容。</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">恢复能力</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">Windows 重启后桥能不能恢复</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">长期工作流不能依赖一次手动启动。</td>
+</tr>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">发布安全</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">公开发布时有没有带出 secret、日志、本机路径</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">这决定项目是在分享，还是在泄露。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">这也是 <code>codex-feishu-bridge</code> 这类 skill 有价值的地方。它不是替你把所有东西托管到云端，而是把安装、排障、多机器人隔离、附件处理、Windows 守护、公开边界这些事写成固定规则。人不应该每次从零猜。</p>
+</section>
+<section id="boundary">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">五、公开版和私有版一定要分开</h2>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">这类项目最容易出事的地方，其实不是代码。是你一激动，把真实 App Secret、API key、sessions、日志、本机路径、聊天截图一起打包出去了。</p>
+<figure class="figure-card">
+<img alt="公开版与私有版边界图" loading="lazy" src="assets/boundary-ai-thread-control.png" style="display:block; width:100%; max-width:100%; height:auto; object-fit:contain; margin:14px auto; border-radius:8px;"/>
+<figcaption>公开的是方法与结构，保留的是凭据与状态。</figcaption>
+</figure>
+<div class="table-wrap">
+<table style="width:100%; border-collapse:collapse; margin:18px 0; font-size:14px;">
+<thead>
+<tr>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">可以公开</th>
+<th style="border:1px solid #ded3c1; padding:9px; background:#f0e8d8; font-weight:700;">必须留私有</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">通用架构、占位配置、安全截图、守护脚本模板、README 和安装说明。</td>
+<td style="border:1px solid #ded3c1; padding:9px; vertical-align:top;">真实飞书 App ID / Secret、API key、token、sessions、state 数据库、日志、本机用户名、绝对路径、私有知识库、真实运行清单。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;">能公开的是方法和结构；不能公开的是凭据和状态。</div>
+</section>
+<section id="fit">
+<h2 style="font-size:22px; line-height:1.38; font-weight:800; margin:28px 0 14px; color:#1f241f; border-left:4px solid #8f5e2c; padding-left:12px;">六、它适合谁？</h2>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">我觉得它适合三类人。</p>
+<ul style="padding-left:1.4em; margin:12px 0;">
+<li style="margin:6px 0; line-height:1.78;">已经在用 Codex 或类似 coding agent 的人。你不是偶尔问一句，而是真的让 AI 长时间跑项目、查资料、修问题。</li>
+<li style="margin:6px 0; line-height:1.78;">线程很多的人。你已经开始感到“到底哪个线程在干哪件事”变成了负担，需要一个入口层来接线。</li>
+<li style="margin:6px 0; line-height:1.78;">经常离开电脑，但又不想让工作流断掉的人。手机更适合补一句、传一张图、批准一个方向、接回一条线。</li>
+</ul>
+<p style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">如果你只想要一个现成 SaaS，一键扫码就托管所有东西，这套思路可能会显得麻烦。它更偏本地基础设施，需要你接受本机运行、本地状态、凭据隔离和守护脚本这些事情。</p>
+<div class="callout" style="display:block; margin:18px 0; padding:18px; border:1px solid #e5dccb; border-radius:8px; background:#fffdf8;">真正的无缝，不是每个端都能聊天，而是所有端都能回到同一条长期线程。</div>
+<p class="source" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">项目地址：<br/><a href="https://github.com/anjelicafrancis03-prog/codex-feishu-bridge-skill">https://github.com/anjelicafrancis03-prog/codex-feishu-bridge-skill</a></p>
+</section>
+<p class="footer-note" style="font-size:16px; line-height:1.86; margin:12px 0; color:#26312c;">HTML 成品路径：C:\html\articles\codex-feishu-bridge-control-plane\index.html</p>
+</article>
+</div>
+</main>
+
+</body>
+</html>

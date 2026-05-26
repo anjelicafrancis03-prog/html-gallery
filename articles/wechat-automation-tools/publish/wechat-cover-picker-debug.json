@@ -1,0 +1,14 @@
+{
+  "target": {
+    "description": "",
+    "devtoolsFrontendUrl": "https://chrome-devtools-frontend.appspot.com/serve_rev/@5d864f4a4b1695464502ca7b2b1d36f78bf04600/inspector.html?ws=127.0.0.1:9223/devtools/page/EBD7017778316A34BC21DE9F2D71C441",
+    "faviconUrl": "https://res.wx.qq.com/a/fed_upload/9300e7ac-cec5-4454-b75c-f92260dd5b47/logo-mp.ico",
+    "id": "EBD7017778316A34BC21DE9F2D71C441",
+    "title": "服务号",
+    "type": "page",
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779443387383&type=77&appmsgid=100000254&token=941781265&lang=zh_CN",
+    "webSocketDebuggerUrl": "ws://127.0.0.1:9223/devtools/page/EBD7017778316A34BC21DE9F2D71C441"
+  },
+  "dialogText": "未授权使用切换账号能力，请退出后扫码登录其他账号。登录时需勾选「 允许切换登录我的其他公众号、服务号、小程序」，才能切换账号。 退出登录 我知道了",
+  "nodes": []
+}

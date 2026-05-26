@@ -1,0 +1,1168 @@
+{
+  "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779438388267&type=77&appmsgid=100000239&token=941781265&lang=zh_CN",
+  "rootText": "选择图片\n最近使用 (91)\n我的图片 (147)\n未分组 (88)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover-image2.png\n粘贴图片_20260522162659.png\n粘贴图片_20260522162652.png\n粘贴图片_20260522162645.png\n粘贴图片_20260522161707.png\n粘贴图片_20260522161700.png\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20260522135446.png\n粘贴图片_20260522135439.png\n1 / 13 下一页  跳转\n下一步 取消",
+  "all": [
+    {
+      "i": 0,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-dialog__hd",
+      "text": "选择图片",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 53,
+        "w": 960,
+        "h": 72
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-dialog__hd\"><h3 class=\"weui-desktop-dialog__title\">选择图片</h3> <button class=\"weui-desktop-icon-btn weui-desktop-dialog__close-btn\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10.01 8.996l7.922-7.922c.086-.086.085-.21.008-.289l-.73-.73c-.075-.074-.208-.075-.29.007L9 7.984 1.077.062C.995-.02.863-.019.788.055l-.73.73c-.078.078-.079.203.007.29l7.922 7.92-7.922 7.922c-.086.086-.085.212-.007.29l.73.73c.075.074.207.074.29-.008l7.92-7.921 7.922 7.921c.082.082.215.082.29.008l.73-.73c.077-.078.078-.204-.008-.29l-7.921-7.921z\"></path></svg></button></div>"
+    },
+    {
+      "i": 1,
+      "tag": "H3",
+      "id": "",
+      "cls": "weui-desktop-dialog__title",
+      "text": "选择图片",
+      "style": "",
+      "rect": {
+        "x": 396,
+        "y": 53,
+        "w": 896,
+        "h": 86
+      },
+      "visible": true,
+      "html": "<h3 class=\"weui-desktop-dialog__title\">选择图片</h3>"
+    },
+    {
+      "i": 2,
+      "tag": "BUTTON",
+      "id": "",
+      "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+      "text": "",
+      "style": "",
+      "rect": {
+        "x": 1276,
+        "y": 80,
+        "w": 16,
+        "h": 16
+      },
+      "visible": true,
+      "html": "<button class=\"weui-desktop-icon-btn weui-desktop-dialog__close-btn\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10.01 8.996l7.922-7.922c.086-.086.085-.21.008-.289l-.73-.73c-.075-.074-.208-.075-.29.007L9 7.984 1.077.062C.995-.02.863-.019.788.055l-.73.73c-.078.078-.079.203.007.29l7.922 7.92-7.922 7.922c-.086.086-.085.212-.007.29l.73.73c.075.074.207.074.29-.008l7.92-7.921 7.922 7.921c.082.082.215.082.29.008l.73-.73c.077-.078.078-.204-.008-.29l-7.921-7.921z\"></path></svg></button>"
+    },
+    {
+      "i": 5,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-dialog__bd",
+      "text": "最近使用 (91)\n我的图片 (147)\n未分组 (88)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover-image2.png\n粘贴图片_20260522162659.png\n粘贴图片_20260522162652.png\n粘贴图片_20260522162645.png\n粘贴图片_20260522161707.png\n粘贴图片_20260522161700.png\nwe",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 960,
+        "h": 532
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-dialog__bd\"><!----> <div class=\"weui-desktop-step__panel weui-desktop-step__panel\"><div class=\"weui-desktop-img-picker weui-desktop-grid\"><div class=\"weui-desktop-grid__item weui-desktop-img-category\"><ul class=\"weui-desktop-menu\"><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(91)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(147)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</stron"
+    },
+    {
+      "i": 6,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-step__panel weui-desktop-step__panel",
+      "text": "最近使用 (91)\n我的图片 (147)\n未分组 (88)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover-image2.png\n粘贴图片_20260522162659.png\n粘贴图片_20260522162652.png\n粘贴图片_20260522162645.png\n粘贴图片_20260522161707.png\n粘贴图片_20260522161700.png\nwe",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 960,
+        "h": 532
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-step__panel weui-desktop-step__panel\"><div class=\"weui-desktop-img-picker weui-desktop-grid\"><div class=\"weui-desktop-grid__item weui-desktop-img-category\"><ul class=\"weui-desktop-menu\"><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(91)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(147)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</strong> <em class=\"weui-desktop-img-category__size"
+    },
+    {
+      "i": 7,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker weui-desktop-grid",
+      "text": "最近使用 (91)\n我的图片 (147)\n未分组 (88)\n文章配图 (59)\n新建分组\n原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover-image2.png\n粘贴图片_20260522162659.png\n粘贴图片_20260522162652.png\n粘贴图片_20260522162645.png\n粘贴图片_20260522161707.png\n粘贴图片_20260522161700.png\nwe",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 960,
+        "h": 532
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker weui-desktop-grid\"><div class=\"weui-desktop-grid__item weui-desktop-img-category\"><ul class=\"weui-desktop-menu\"><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(91)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(147)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</strong> <em class=\"weui-desktop-img-category__size\">(88)</em></a></li><li class=\"weui-desktop-menu__item\"><a href"
+    },
+    {
+      "i": 8,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-grid__item weui-desktop-img-category",
+      "text": "最近使用 (91)\n我的图片 (147)\n未分组 (88)\n文章配图 (59)\n新建分组",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 190,
+        "h": 532
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-grid__item weui-desktop-img-category\"><ul class=\"weui-desktop-menu\"><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(91)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(147)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</strong> <em class=\"weui-desktop-img-category__size\">(88)</em></a></li><li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-des"
+    },
+    {
+      "i": 10,
+      "tag": "LI",
+      "id": "",
+      "cls": "weui-desktop-menu__item",
+      "text": "最近使用 (91)",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "html": "<li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(91)</em></a></li>"
+    },
+    {
+      "i": 14,
+      "tag": "LI",
+      "id": "",
+      "cls": "weui-desktop-menu__item",
+      "text": "我的图片 (147)",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "html": "<li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(147)</em></a></li>"
+    },
+    {
+      "i": 18,
+      "tag": "LI",
+      "id": "",
+      "cls": "weui-desktop-menu__item",
+      "text": "未分组 (88)",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "html": "<li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</strong> <em class=\"weui-desktop-img-category__size\">(88)</em></a></li>"
+    },
+    {
+      "i": 22,
+      "tag": "LI",
+      "id": "",
+      "cls": "weui-desktop-menu__item",
+      "text": "文章配图 (59)",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "html": "<li class=\"weui-desktop-menu__item\"><a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">文章配图</strong> <em class=\"weui-desktop-img-category__size\">(59)</em></a></li>"
+    },
+    {
+      "i": 47,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-grid__item",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover-image2.png\n粘贴图片_20260522162659.png\n粘贴图片_20260522162652.png\n粘贴图片_20260522162645.png\n粘贴图片_20260522161707.png\n粘贴图片_20260522161700.png\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_2",
+      "style": "",
+      "rect": {
+        "x": 553,
+        "y": 125,
+        "w": 771,
+        "h": 532
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-grid__item\"><div class=\"weui-desktop-img-picker__list__area\"><div class=\"weui-desktop-global-mod\"><div class=\"weui-desktop-msg weui-desktop-msg_mini weui-desktop-msg_title-only weui-desktop-msg_temp\" style=\"background: rgb(241, 243, 245); margin: 8px 16px;\"><div class=\"weui-desktop-msg__inner\"><span class=\"weui-desktop-msg__hd\"><i class=\"weui-desktop-icon-info weui-desktop-icon_msg\"></i></span> <div class=\"weui-desktop-msg__bd\"><h4 class=\"weui-desktop-msg__title\" style=\"padding-right: 2px;\">原“公共图片库”已下线，推荐您使用“<a style=\"cursor: pointer;\">AI 配图</a>”，找到更多图片 </h4> <span class=\"weui-desktop-msg__close-btn\" style=\"top: 50%; transform: translateY(-50%);\">关闭</span></div></div></div></div> <div class=\"weui-desktop-global-mod weui-desktop-media-global-bar\"><div class=\"weui-desktop-global__extra\"><div class=\"weui-desktop-upload weui-desktop-upload_global-media\"><div class=\"w"
+    },
+    {
+      "i": 48,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__list__area",
+      "text": "原“公共图片库”已下线，推荐您使用“AI 配图”，找到更多图片\n关闭\n已关闭图片水印  上传文件\nwechat-cover-image2.png\n粘贴图片_20260522162659.png\n粘贴图片_20260522162652.png\n粘贴图片_20260522162645.png\n粘贴图片_20260522161707.png\n粘贴图片_20260522161700.png\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_2",
+      "style": "",
+      "rect": {
+        "x": 553,
+        "y": 133,
+        "w": 771,
+        "h": 524
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__list__area\"><div class=\"weui-desktop-global-mod\"><div class=\"weui-desktop-msg weui-desktop-msg_mini weui-desktop-msg_title-only weui-desktop-msg_temp\" style=\"background: rgb(241, 243, 245); margin: 8px 16px;\"><div class=\"weui-desktop-msg__inner\"><span class=\"weui-desktop-msg__hd\"><i class=\"weui-desktop-icon-info weui-desktop-icon_msg\"></i></span> <div class=\"weui-desktop-msg__bd\"><h4 class=\"weui-desktop-msg__title\" style=\"padding-right: 2px;\">原“公共图片库”已下线，推荐您使用“<a style=\"cursor: pointer;\">AI 配图</a>”，找到更多图片 </h4> <span class=\"weui-desktop-msg__close-btn\" style=\"top: 50%; transform: translateY(-50%);\">关闭</span></div></div></div></div> <div class=\"weui-desktop-global-mod weui-desktop-media-global-bar\"><div class=\"weui-desktop-global__extra\"><div class=\"weui-desktop-upload weui-desktop-upload_global-media\"><div class=\"weui-desktop-upload__tips\"><span class"
+    },
+    {
+      "i": 57,
+      "tag": "SPAN",
+      "id": "",
+      "cls": "weui-desktop-msg__close-btn",
+      "text": "关闭",
+      "style": "top: 50%; transform: translateY(-50%);",
+      "rect": {
+        "x": 1278,
+        "y": 146,
+        "w": 14,
+        "h": 14
+      },
+      "visible": true,
+      "html": "<span class=\"weui-desktop-msg__close-btn\" style=\"top: 50%; transform: translateY(-50%);\">关闭</span>"
+    },
+    {
+      "i": 58,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-global-mod weui-desktop-media-global-bar",
+      "text": "已关闭图片水印  上传文件",
+      "style": "",
+      "rect": {
+        "x": 553,
+        "y": 181,
+        "w": 770,
+        "h": 36
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-global-mod weui-desktop-media-global-bar\"><div class=\"weui-desktop-global__extra\"><div class=\"weui-desktop-upload weui-desktop-upload_global-media\"><div class=\"weui-desktop-upload__tips\"><span class=\"weui-desktop-tips weui-desktop-tips_icon-after\">已关闭图片水印 <div class=\"weui-desktop-popover__wrp\"><span class=\"weui-desktop-popover__target\"><i class=\"icon-svg-common-ask\"></i></span> <div class=\"weui-desktop-popover weui-desktop-popover_pos-up-center img_water\" style=\"display: none;\"><div class=\"weui-desktop-popover__inner\"><!----> <div class=\"weui-desktop-popover__desc\"><div><p>不添加水印</p> <p style=\"color: rgb(151, 164, 164);\"><span>已关闭水印，所有上传的图片都不会带有水印。</span> <span>若需修改请前往<a target=\"_blank\" href=\"/cgi-bin/settingpage?action=function&amp;set_water=1&amp;token=941781265&amp;lang=zh_CN\">账号设置/功能设置</a>设置图片水印。</span></p></div></div> <!----></div></div></div></span></div> <d"
+    },
+    {
+      "i": 60,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-upload weui-desktop-upload_global-media",
+      "text": "已关闭图片水印  上传文件",
+      "style": "",
+      "rect": {
+        "x": 1060,
+        "y": 181,
+        "w": 231,
+        "h": 36
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-upload weui-desktop-upload_global-media\"><div class=\"weui-desktop-upload__tips\"><span class=\"weui-desktop-tips weui-desktop-tips_icon-after\">已关闭图片水印 <div class=\"weui-desktop-popover__wrp\"><span class=\"weui-desktop-popover__target\"><i class=\"icon-svg-common-ask\"></i></span> <div class=\"weui-desktop-popover weui-desktop-popover_pos-up-center img_water\" style=\"display: none;\"><div class=\"weui-desktop-popover__inner\"><!----> <div class=\"weui-desktop-popover__desc\"><div><p>不添加水印</p> <p style=\"color: rgb(151, 164, 164);\"><span>已关闭水印，所有上传的图片都不会带有水印。</span> <span>若需修改请前往<a target=\"_blank\" href=\"/cgi-bin/settingpage?action=function&amp;set_water=1&amp;token=941781265&amp;lang=zh_CN\">账号设置/功能设置</a>设置图片水印。</span></p></div></div> <!----></div></div></div></span></div> <div class=\"js_upload_btn_container weui-desktop-upload-input__wrp webuploader-container\"><div class=\"weui-de"
+    },
+    {
+      "i": 61,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-upload__tips",
+      "text": "已关闭图片水印",
+      "style": "",
+      "rect": {
+        "x": 1060,
+        "y": 188,
+        "w": 126,
+        "h": 22
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-upload__tips\"><span class=\"weui-desktop-tips weui-desktop-tips_icon-after\">已关闭图片水印 <div class=\"weui-desktop-popover__wrp\"><span class=\"weui-desktop-popover__target\"><i class=\"icon-svg-common-ask\"></i></span> <div class=\"weui-desktop-popover weui-desktop-popover_pos-up-center img_water\" style=\"display: none;\"><div class=\"weui-desktop-popover__inner\"><!----> <div class=\"weui-desktop-popover__desc\"><div><p>不添加水印</p> <p style=\"color: rgb(151, 164, 164);\"><span>已关闭水印，所有上传的图片都不会带有水印。</span> <span>若需修改请前往<a target=\"_blank\" href=\"/cgi-bin/settingpage?action=function&amp;set_water=1&amp;token=941781265&amp;lang=zh_CN\">账号设置/功能设置</a>设置图片水印。</span></p></div></div> <!----></div></div></div></span></div>"
+    },
+    {
+      "i": 75,
+      "tag": "DIV",
+      "id": "",
+      "cls": "js_upload_btn_container weui-desktop-upload-input__wrp webuploader-container",
+      "text": "上传文件",
+      "style": "",
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "html": "<div class=\"js_upload_btn_container weui-desktop-upload-input__wrp webuploader-container\"><div class=\"weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_disabled\" style=\"display: none;\"><span>上传文件</span></div> <a href=\"javascript:;\" id=\"upload_0.795702479825702\" class=\"weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick\"><span>上传文件</span> <!----></a><div id=\"rt_rt_1jp7cpobf1jtumkk3v0orl13m21\" style=\"position: absolute; inset: 0px auto auto 0px; width: 96px; height: 36px; overflow: hidden;\"><input type=\"file\" multiple=\"multiple\" accept=\"image/bmp, image/png, image/jpeg, image/jpg, image/gif, image/webp\" style=\"display: none;\" id=\"anysearch_cover_upload_input\"><label style=\"opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);\"></label></div></div>"
+    },
+    {
+      "i": 78,
+      "tag": "A",
+      "id": "upload_0.795702479825702",
+      "cls": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "text": "上传文件",
+      "style": "",
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "html": "<a href=\"javascript:;\" id=\"upload_0.795702479825702\" class=\"weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick\"><span>上传文件</span> <!----></a>"
+    },
+    {
+      "i": 133,
+      "tag": "DIV",
+      "id": "js_image_dialog_list_wrp",
+      "cls": "weui-desktop-media-list-wrp weui-desktop-img-picker__list__wrp mb-40",
+      "text": "wechat-cover-image2.png\n粘贴图片_20260522162659.png\n粘贴图片_20260522162652.png\n粘贴图片_20260522162645.png\n粘贴图片_20260522161707.png\n粘贴图片_20260522161700.png\nwechat-cover.png\n粘贴图片_20260522135611.png\n粘贴图片_20260522135500.png\n粘贴图片_20260522135453.png\n粘贴图片_20",
+      "style": "height: 316px;",
+      "rect": {
+        "x": 553,
+        "y": 247,
+        "w": 770,
+        "h": 316
+      },
+      "visible": true,
+      "html": "<div id=\"js_image_dialog_list_wrp\" class=\"weui-desktop-media-list-wrp weui-desktop-img-picker__list__wrp mb-40\" style=\"height: 316px;\"><div class=\"weui-desktop-img-picker__list\"><div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5WnqdoUFcAZDkDnRkyRV82mVFV0u4NKhOVMxd0G23L6XbAUEQZ7bM1H0VOadXtXFJbDfviawAOb4lgGNe1yZeBIgdIGfSkOon8/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->wechat-cover-image2.png</strong></div><div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https:/"
+    },
+    {
+      "i": 135,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "wechat-cover-image2.png",
+      "style": "",
+      "rect": {
+        "x": 576,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5WnqdoUFcAZDkDnRkyRV82mVFV0u4NKhOVMxd0G23L6XbAUEQZ7bM1H0VOadXtXFJbDfviawAOb4lgGNe1yZeBIgdIGfSkOon8/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->wechat-cover-image2.png</strong></div>"
+    },
+    {
+      "i": 136,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5WnqdoUFcAZDkDnRkyRV82mVFV0u4NKhOVMxd0G23L6XbAUEQZ7bM1H0VOadXtXFJbDfviawAOb4lgGNe1yZeBIgdIGfSkOon8/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 576,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf5WnqdoUFcAZDkDnRkyRV82mVFV0u4NKhOVMxd0G23L6XbAUEQZ7bM1H0VOadXtXFJbDfviawAOb4lgGNe1yZeBIgdIGfSkOon8/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 138,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "wechat-cover-image2.png",
+      "style": "",
+      "rect": {
+        "x": 576,
+        "y": 365,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->wechat-cover-image2.png</strong>"
+    },
+    {
+      "i": 139,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522162659.png",
+      "style": "",
+      "rect": {
+        "x": 699,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4wrPO5nmO24NCXJ9a8cf4k9NkCJ1qWfVv3UCupoZ90nYqTiaBSBMjf0mNX68WURQicgrEaDrzt3C8uDwrxY7wZQiaTmUIwsibeiaibw/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522162659.png</strong></div>"
+    },
+    {
+      "i": 140,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4wrPO5nmO24NCXJ9a8cf4k9NkCJ1qWfVv3UCupoZ90nYqTiaBSBMjf0mNX68WURQicgrEaDrzt3C8uDwrxY7wZQiaTmUIwsibeiaibw/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 699,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4wrPO5nmO24NCXJ9a8cf4k9NkCJ1qWfVv3UCupoZ90nYqTiaBSBMjf0mNX68WURQicgrEaDrzt3C8uDwrxY7wZQiaTmUIwsibeiaibw/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 142,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522162659.png",
+      "style": "",
+      "rect": {
+        "x": 699,
+        "y": 365,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522162659.png</strong>"
+    },
+    {
+      "i": 143,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522162652.png",
+      "style": "",
+      "rect": {
+        "x": 822,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5QIrDfwPGAYZ0UAQlv6zp6I0ib7ZxjVxMLH2mtbh0YibA2II3FkwMwYRjjBuKz7jerNPBpbYlW0cmPGukR3zDRvibPOb4Gdm2y0w/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522162652.png</strong></div>"
+    },
+    {
+      "i": 144,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5QIrDfwPGAYZ0UAQlv6zp6I0ib7ZxjVxMLH2mtbh0YibA2II3FkwMwYRjjBuKz7jerNPBpbYlW0cmPGukR3zDRvibPOb4Gdm2y0w/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 822,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5QIrDfwPGAYZ0UAQlv6zp6I0ib7ZxjVxMLH2mtbh0YibA2II3FkwMwYRjjBuKz7jerNPBpbYlW0cmPGukR3zDRvibPOb4Gdm2y0w/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 146,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522162652.png",
+      "style": "",
+      "rect": {
+        "x": 822,
+        "y": 365,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522162652.png</strong>"
+    },
+    {
+      "i": 147,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522162645.png",
+      "style": "",
+      "rect": {
+        "x": 945,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7L3S2b2nertk2lTibI28oTHPEaSOkLn1QpVXbBv4b1qp0zXsXyMJVhmbyEkicFsicBtoGbP7XSQlWjrtD076D7xGnCt0tcuDxtn0/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522162645.png</strong></div>"
+    },
+    {
+      "i": 148,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7L3S2b2nertk2lTibI28oTHPEaSOkLn1QpVXbBv4b1qp0zXsXyMJVhmbyEkicFsicBtoGbP7XSQlWjrtD076D7xGnCt0tcuDxtn0/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 945,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7L3S2b2nertk2lTibI28oTHPEaSOkLn1QpVXbBv4b1qp0zXsXyMJVhmbyEkicFsicBtoGbP7XSQlWjrtD076D7xGnCt0tcuDxtn0/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 150,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522162645.png",
+      "style": "",
+      "rect": {
+        "x": 945,
+        "y": 365,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522162645.png</strong>"
+    },
+    {
+      "i": 151,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522161707.png",
+      "style": "",
+      "rect": {
+        "x": 1068,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4icAnDWG1spHTb3fUdK7JXuouKxxeBBIySb1tBEM1Y5IVicBl6QxjYJh7PERwyJa1vIbyqvZwJonuRa7qvwwQTAJT92qZpjCB0I/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522161707.png</strong></div>"
+    },
+    {
+      "i": 152,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4icAnDWG1spHTb3fUdK7JXuouKxxeBBIySb1tBEM1Y5IVicBl6QxjYJh7PERwyJa1vIbyqvZwJonuRa7qvwwQTAJT92qZpjCB0I/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 1068,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4icAnDWG1spHTb3fUdK7JXuouKxxeBBIySb1tBEM1Y5IVicBl6QxjYJh7PERwyJa1vIbyqvZwJonuRa7qvwwQTAJT92qZpjCB0I/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 154,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522161707.png",
+      "style": "",
+      "rect": {
+        "x": 1068,
+        "y": 365,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522161707.png</strong>"
+    },
+    {
+      "i": 155,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522161700.png",
+      "style": "",
+      "rect": {
+        "x": 1191,
+        "y": 247,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf53YEtsPRuKkPSW8kwbeicapm6Cb1woZ87PPqmUntjShldWpuZoutkNwnia2dBGvSlFT34oSnQGBl0l0ic3icxItrUNCfYz3nNia3Vo/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522161700.png</strong></div>"
+    },
+    {
+      "i": 156,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf53YEtsPRuKkPSW8kwbeicapm6Cb1woZ87PPqmUntjShldWpuZoutkNwnia2dBGvSlFT34oSnQGBl0l0ic3icxItrUNCfYz3nNia3Vo/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 1191,
+        "y": 247,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf53YEtsPRuKkPSW8kwbeicapm6Cb1woZ87PPqmUntjShldWpuZoutkNwnia2dBGvSlFT34oSnQGBl0l0ic3icxItrUNCfYz3nNia3Vo/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 158,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522161700.png",
+      "style": "",
+      "rect": {
+        "x": 1191,
+        "y": 365,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522161700.png</strong>"
+    },
+    {
+      "i": 159,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "wechat-cover.png",
+      "style": "",
+      "rect": {
+        "x": 576,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4842G2HZd8SqicQ6Fybicr74icTNAQOMXziaJLwxibXFeB9MEVhGD6rQqoicQwbzY7lzqLI0nWGsArqhPeTMjdic7aZJ5geGwZtZJDEk/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->wechat-cover.png</strong></div>"
+    },
+    {
+      "i": 160,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4842G2HZd8SqicQ6Fybicr74icTNAQOMXziaJLwxibXFeB9MEVhGD6rQqoicQwbzY7lzqLI0nWGsArqhPeTMjdic7aZJ5geGwZtZJDEk/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 576,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4842G2HZd8SqicQ6Fybicr74icTNAQOMXziaJLwxibXFeB9MEVhGD6rQqoicQwbzY7lzqLI0nWGsArqhPeTMjdic7aZJ5geGwZtZJDEk/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 162,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "wechat-cover.png",
+      "style": "",
+      "rect": {
+        "x": 576,
+        "y": 523,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->wechat-cover.png</strong>"
+    },
+    {
+      "i": 163,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522135611.png",
+      "style": "",
+      "rect": {
+        "x": 699,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4zjJAVj5yDyicDXmepGcO1YiczWXQKqsL9ib8ffkOOzXEvj8LxMH3eS5DBrs2SNMmTMegvH1jW1Qah7p5O9fAacqJKYZ7YGc6PEk/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135611.png</strong></div>"
+    },
+    {
+      "i": 164,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4zjJAVj5yDyicDXmepGcO1YiczWXQKqsL9ib8ffkOOzXEvj8LxMH3eS5DBrs2SNMmTMegvH1jW1Qah7p5O9fAacqJKYZ7YGc6PEk/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 699,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf4zjJAVj5yDyicDXmepGcO1YiczWXQKqsL9ib8ffkOOzXEvj8LxMH3eS5DBrs2SNMmTMegvH1jW1Qah7p5O9fAacqJKYZ7YGc6PEk/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 166,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522135611.png",
+      "style": "",
+      "rect": {
+        "x": 699,
+        "y": 523,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135611.png</strong>"
+    },
+    {
+      "i": 167,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522135500.png",
+      "style": "",
+      "rect": {
+        "x": 822,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5Ww1NL8eeS4E0yYBndicJ50TiaVCwtghMHK9fAicSjGt21BTdAvjkwc5FxuFMVhE9tuOP0bbcN3LXH0FvObia7siaiaOZ5tvcxvP4RY/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135500.png</strong></div>"
+    },
+    {
+      "i": 168,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5Ww1NL8eeS4E0yYBndicJ50TiaVCwtghMHK9fAicSjGt21BTdAvjkwc5FxuFMVhE9tuOP0bbcN3LXH0FvObia7siaiaOZ5tvcxvP4RY/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 822,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5Ww1NL8eeS4E0yYBndicJ50TiaVCwtghMHK9fAicSjGt21BTdAvjkwc5FxuFMVhE9tuOP0bbcN3LXH0FvObia7siaiaOZ5tvcxvP4RY/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 170,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522135500.png",
+      "style": "",
+      "rect": {
+        "x": 822,
+        "y": 523,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135500.png</strong>"
+    },
+    {
+      "i": 171,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522135453.png",
+      "style": "",
+      "rect": {
+        "x": 945,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5CDVNUOhSo3uNMx20uWSnV4TSgbiaryyuiazGaibRbz708Gf4aEgnlyKrtq3C3BPicEADToyup2y2PnD9r9x2ancV6uvudxYLg7b0/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135453.png</strong></div>"
+    },
+    {
+      "i": 172,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5CDVNUOhSo3uNMx20uWSnV4TSgbiaryyuiazGaibRbz708Gf4aEgnlyKrtq3C3BPicEADToyup2y2PnD9r9x2ancV6uvudxYLg7b0/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 945,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5CDVNUOhSo3uNMx20uWSnV4TSgbiaryyuiazGaibRbz708Gf4aEgnlyKrtq3C3BPicEADToyup2y2PnD9r9x2ancV6uvudxYLg7b0/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 174,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522135453.png",
+      "style": "",
+      "rect": {
+        "x": 945,
+        "y": 523,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135453.png</strong>"
+    },
+    {
+      "i": 175,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522135446.png",
+      "style": "",
+      "rect": {
+        "x": 1068,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf56WNmfr9mdNmrY9cuEZv8YlibGWBKb7CqMZUTs6PdsiaYJjtU2vvMvhG1xuaw1qNhAPyGKvat0wYibPeiaAmIkgZA8xTNAkvRvm7c/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135446.png</strong></div>"
+    },
+    {
+      "i": 176,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf56WNmfr9mdNmrY9cuEZv8YlibGWBKb7CqMZUTs6PdsiaYJjtU2vvMvhG1xuaw1qNhAPyGKvat0wYibPeiaAmIkgZA8xTNAkvRvm7c/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 1068,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf56WNmfr9mdNmrY9cuEZv8YlibGWBKb7CqMZUTs6PdsiaYJjtU2vvMvhG1xuaw1qNhAPyGKvat0wYibPeiaAmIkgZA8xTNAkvRvm7c/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 178,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522135446.png",
+      "style": "",
+      "rect": {
+        "x": 1068,
+        "y": 523,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135446.png</strong>"
+    },
+    {
+      "i": 179,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-img-picker__item",
+      "text": "粘贴图片_20260522135439.png",
+      "style": "",
+      "rect": {
+        "x": 1191,
+        "y": 405,
+        "w": 110,
+        "h": 138
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-img-picker__item\"><!----> <i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf64TxBQQTBqD7WKNibZ9wUib9SqNWVQibpSHL7NcgcNv8k17iavn6dvbhm7hmFYwuLFibSOicUwhT5VHIP9nJ0jjgooKNDogfxPoBI58/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i> <strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135439.png</strong></div>"
+    },
+    {
+      "i": 180,
+      "tag": "I",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-thumb",
+      "text": "图片描述",
+      "style": "background-image: url(\"https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf64TxBQQTBqD7WKNibZ9wUib9SqNWVQibpSHL7NcgcNv8k17iavn6dvbhm7hmFYwuLFibSOicUwhT5VHIP9nJ0jjgooKNDogfxPoBI58/300?wx_fmt=png&from=appmsg\");",
+      "rect": {
+        "x": 1191,
+        "y": 405,
+        "w": 110,
+        "h": 110
+      },
+      "visible": true,
+      "html": "<i role=\"img\" aria-describedby=\"图片描述\" title=\"图片描述\" class=\"weui-desktop-img-picker__img-thumb\" style=\"background-image: url(&quot;https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf64TxBQQTBqD7WKNibZ9wUib9SqNWVQibpSHL7NcgcNv8k17iavn6dvbhm7hmFYwuLFibSOicUwhT5VHIP9nJ0jjgooKNDogfxPoBI58/300?wx_fmt=png&amp;from=appmsg&quot;);\"><span class=\"image_dialog__checkbox\" style=\"display: none;\"></span></i>"
+    },
+    {
+      "i": 182,
+      "tag": "STRONG",
+      "id": "",
+      "cls": "weui-desktop-img-picker__img-title",
+      "text": "粘贴图片_20260522135439.png",
+      "style": "",
+      "rect": {
+        "x": 1191,
+        "y": 523,
+        "w": 110,
+        "h": 20
+      },
+      "visible": true,
+      "html": "<strong class=\"weui-desktop-img-picker__img-title\"><!---->粘贴图片_20260522135439.png</strong>"
+    },
+    {
+      "i": 189,
+      "tag": "A",
+      "id": "",
+      "cls": "weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini",
+      "text": "下一页",
+      "style": "",
+      "rect": {
+        "x": 1186,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "visible": true,
+      "html": "<a href=\"javascript:;\" class=\"weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini\">下一页</a>"
+    },
+    {
+      "i": 200,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-dialog__ft",
+      "text": "下一步 取消",
+      "style": "",
+      "rect": {
+        "x": 364,
+        "y": 657,
+        "w": 960,
+        "h": 100
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-dialog__ft\"><!----> <div class=\"weui-desktop-btn_wrp\"><button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled\">下一步</button></div> <div class=\"weui-desktop-btn_wrp\"><button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_default\">取消</button></div> <div class=\"weui-desktop-btn_wrp\" style=\"display: none;\"><button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_default\">上一步</button></div> <div class=\"weui-desktop-btn_wrp\" style=\"display: none;\"><button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_primary\">完成</button></div></div>"
+    },
+    {
+      "i": 201,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-btn_wrp",
+      "text": "下一步",
+      "style": "",
+      "rect": {
+        "x": 740,
+        "y": 689,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-btn_wrp\"><button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled\">下一步</button></div>"
+    },
+    {
+      "i": 202,
+      "tag": "BUTTON",
+      "id": "",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled",
+      "text": "下一步",
+      "style": "",
+      "rect": {
+        "x": 740,
+        "y": 689,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "html": "<button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled\">下一步</button>"
+    },
+    {
+      "i": 203,
+      "tag": "DIV",
+      "id": "",
+      "cls": "weui-desktop-btn_wrp",
+      "text": "取消",
+      "style": "",
+      "rect": {
+        "x": 852,
+        "y": 690,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "html": "<div class=\"weui-desktop-btn_wrp\"><button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_default\">取消</button></div>"
+    },
+    {
+      "i": 204,
+      "tag": "BUTTON",
+      "id": "",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "text": "取消",
+      "style": "",
+      "rect": {
+        "x": 852,
+        "y": 690,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "html": "<button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_default\">取消</button>"
+    }
+  ],
+  "buttons": [
+    {
+      "i": 0,
+      "text": "",
+      "cls": "weui-desktop-icon-btn weui-desktop-dialog__close-btn",
+      "rect": {
+        "x": 1276,
+        "y": 80,
+        "w": 16,
+        "h": 16
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<button class=\"weui-desktop-icon-btn weui-desktop-dialog__close-btn\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10.01 8.996l7.922-7.922c.086-.086.085-.21.008-.289l-.73-.73c-.075-.074-.208-.075-.29.007L9 7.984 1.077.062C.995-.02.863-.019.788.055l-.73."
+    },
+    {
+      "i": 1,
+      "text": "最近使用 (91)",
+      "cls": "weui-desktop-menu__link",
+      "rect": {
+        "x": 364,
+        "y": 125,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link\"><strong class=\"weui-desktop-img-category__title\">最近使用</strong> <em class=\"weui-desktop-img-category__size\">(91)</em></a>"
+    },
+    {
+      "i": 2,
+      "text": "我的图片 (147)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link_current",
+      "rect": {
+        "x": 364,
+        "y": 165,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link_current\"><strong class=\"weui-desktop-img-category__title\">我的图片</strong> <em class=\"weui-desktop-img-category__size\">(147)</em></a>"
+    },
+    {
+      "i": 3,
+      "text": "未分组 (88)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "rect": {
+        "x": 364,
+        "y": 205,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">未分组</strong> <em class=\"weui-desktop-img-category__size\">(88)</em></a>"
+    },
+    {
+      "i": 4,
+      "text": "文章配图 (59)",
+      "cls": "weui-desktop-menu__link weui-desktop-menu__link-self",
+      "rect": {
+        "x": 364,
+        "y": 245,
+        "w": 189,
+        "h": 40
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a href=\"javascript:;\" class=\"weui-desktop-menu__link weui-desktop-menu__link-self\"><strong class=\"weui-desktop-img-category__title\">文章配图</strong> <em class=\"weui-desktop-img-category__size\">(59)</em></a>"
+    },
+    {
+      "i": 5,
+      "text": "新建分组",
+      "cls": "",
+      "rect": {
+        "x": 396,
+        "y": 628,
+        "w": 56,
+        "h": 18
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a href=\"javascript:;\">新建分组</a>"
+    },
+    {
+      "i": 8,
+      "text": "AI 配图",
+      "cls": "",
+      "rect": {
+        "x": 843,
+        "y": 144,
+        "w": 46,
+        "h": 18
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a style=\"cursor: pointer;\">AI 配图</a>"
+    },
+    {
+      "i": 11,
+      "text": "上传文件",
+      "cls": "weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick",
+      "rect": {
+        "x": 1196,
+        "y": 181,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a href=\"javascript:;\" id=\"upload_0.795702479825702\" class=\"weui-desktop-btn weui-desktop-btn_default single_upload_btn_container webuploader-pick\"><span>上传文件</span> <!----></a>"
+    },
+    {
+      "i": 14,
+      "text": "下一页",
+      "cls": "weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini",
+      "rect": {
+        "x": 1186,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a href=\"javascript:;\" class=\"weui-desktop-btn weui-desktop-btn_default weui-desktop-btn_mini\">下一页</a>"
+    },
+    {
+      "i": 15,
+      "text": "跳转",
+      "cls": "weui-desktop-link",
+      "rect": {
+        "x": 1280,
+        "y": 613,
+        "w": 24,
+        "h": 24
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<a href=\"javascript:;\" class=\"weui-desktop-link\">跳转</a>"
+    },
+    {
+      "i": 16,
+      "text": "下一步",
+      "cls": "weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled",
+      "rect": {
+        "x": 740,
+        "y": 689,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "disabled": true,
+      "html": "<button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_primary weui-desktop-btn_disabled\">下一步</button>"
+    },
+    {
+      "i": 17,
+      "text": "取消",
+      "cls": "weui-desktop-btn weui-desktop-btn_default",
+      "rect": {
+        "x": 852,
+        "y": 690,
+        "w": 96,
+        "h": 36
+      },
+      "visible": true,
+      "disabled": false,
+      "html": "<button type=\"button\" class=\"weui-desktop-btn weui-desktop-btn_default\">取消</button>"
+    }
+  ]
+}

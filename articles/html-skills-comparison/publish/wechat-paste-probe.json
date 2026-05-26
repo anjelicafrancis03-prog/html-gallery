@@ -1,0 +1,93 @@
+{
+  "ok": true,
+  "platform": "wechat",
+  "mode": "paste-probe-no-publish",
+  "editorTargetId": "36AE9892D53B93B583FF0724CB1CBD27",
+  "editorUrl": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit_v2&action=edit&isNew=1&type=10&token=941781265&lang=zh_CN",
+  "copied": {
+    "textLength": 2684,
+    "htmlLength": 4334709,
+    "imgCount": 2,
+    "selector": "main"
+  },
+  "wechat": {
+    "ok": true,
+    "title": "【测试勿发】四个 HTML Skill 横向对比",
+    "textLength": 2724,
+    "htmlLength": 28895,
+    "imgCount": 4,
+    "dataImageCount": 0,
+    "wxImageCount": 2,
+    "styledNodeCount": 110,
+    "headingCount": 12,
+    "headings": [
+      {
+        "tag": "H2",
+        "text": "先说结论：它们不是四选一。",
+        "style": "box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12;"
+      },
+      {
+        "tag": "H2",
+        "text": "横向对比表。",
+        "style": "box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12;"
+      },
+      {
+        "tag": "H2",
+        "text": "逐个拆开看。",
+        "style": "box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12;"
+      },
+      {
+        "tag": "H3",
+        "text": "01 claude-design：负责“像不像高级设计”",
+        "style": "box-sizing: border-box; margin: 34px 0px 12px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: 1.26rem; line-height: 1.4; font-family: \"Microsoft YaHei\", \"PingFang SC\", sans-serif;"
+      },
+      {
+        "tag": "H3",
+        "text": "02 article-magazine：负责“像不像一篇可读长文”",
+        "style": "box-sizing: border-box; margin: 34px 0px 12px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: 1.26rem; line-height: 1.4; font-family: \"Microsoft YaHei\", \"PingFang SC\", sans-serif;"
+      },
+      {
+        "tag": "H3",
+        "text": "03 html-visual：负责“让复杂内容看得懂”",
+        "style": "box-sizing: border-box; margin: 34px 0px 12px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: 1.26rem; line-height: 1.4; font-family: \"Microsoft YaHei\", \"PingFang SC\", sans-serif;"
+      },
+      {
+        "tag": "H3",
+        "text": "04 html-anything：负责“最后真的变成成品”",
+        "style": "box-sizing: border-box; margin: 34px 0px 12px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: 1.26rem; line-height: 1.4; font-family: \"Microsoft YaHei\", \"PingFang SC\", sans-serif;"
+      },
+      {
+        "tag": "H2",
+        "text": "最稳的组合方式。",
+        "style": "box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12;"
+      },
+      {
+        "tag": "H2",
+        "text": "不知道用哪个？按目标选。",
+        "style": "box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12;"
+      },
+      {
+        "tag": "H3",
+        "text": "写文章：`article-magazine` 做主",
+        "style": "box-sizing: border-box; margin: 0px 0px 12px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: 1.26rem; line-height: 1.4; font-family: \"Microsoft YaHei\", \"PingFang SC\", sans-serif;"
+      },
+      {
+        "tag": "H2",
+        "text": "最后怎么保留配合？",
+        "style": "box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12;"
+      },
+      {
+        "tag": "H2",
+        "text": "一句话版",
+        "style": "box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.12;"
+      }
+    ],
+    "firstText": "先说结论：它们不是四选一。\n\n如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。\n\n`claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。\n\n最好的保留方式不是删掉谁，而是把它们变成一条流水线：设计系统 → 文章骨架 → 可视化模块 → 单文件交付。\n横向对比表。\n\n这四个 skill 看起来都在“写 HTML”，但真正的差别在于它们各自默认回答的问题不同。\n\n审美\nclaude-design\n文章\narticle-magazine\n图解\nhtml-visual\n交付\nhtml-anything\n\n配图：四个",
+    "firstHtml": "<section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 250, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\" data-pm-slice=\"0 0 []\"><h2 style=\"box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12;\"><span leaf=\"\">先说结论：它们不是四选一。</span></h2><p class=\"drop\" style=\"box-sizing: border-box; margin: 0px 0px 18px; font-size: 1.06rem; color: rgb(95, 99, 91);\"><span leaf=\"\">如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。</span></p><p style=\"box-sizing: border-box; margin: 0px 0px 18px; font-size: 1.06rem; color: rgb(95, 99, "
+  },
+  "screenshotPath": "C:\\html\\articles\\html-skills-comparison\\publish\\wechat-paste-probe.png",
+  "fixedChrome": {
+    "profile": "C:/Users/64998/.opencli/chrome-profile",
+    "cdpEndpoint": "http://127.0.0.1:9223"
+  }
+}

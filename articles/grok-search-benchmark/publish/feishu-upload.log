@@ -1,0 +1,16 @@
+{
+  "label": "create",
+  "args": [
+    "docs",
+    "+create",
+    "--title",
+    "Grok MCP、Bright Data、Tavily 与内置搜索：中文小众内容测评",
+    "--markdown",
+    "# Grok MCP、Bright Data、Tavily 与内置搜索：中文小众内容测评\n\n本轮测评聚焦中文长尾、平台规则、灰度运营、地方政策和开发者资料。重点观察是否能保留中文、是否找到中文原始来源、是否可核验、是否跑题，以及作为 Agent 工具的稳定性。\n\n**原 HTML 路径：** `C:\\html\\articles\\grok-search-benchmark\\index.html`\n\n- 时间：2026-05-26\n- 样本：10 个中文小众题材\n- Grok MCP：release exe + UTF-8 自测通过\n- 视频策略：480p 草稿，720p 终稿，10s 链式扩展\n\n---\n\n## 总评\n\n**评分：7.6/10**\n\nGrok MCP 的优势不是传统网页 SERP，而是 X 语境、中文解释和灰度经验总结。它已经能稳定处理中文，但来源可信度需要 Bright Data 或内置搜索兜底。\n\n> 最强场景：中文 AI 圈动态、X 上活跃的灰度运营经验、工具链趋势。\n\n> 最大风险：有时把 X 讨论当作事实，引用不是官方网页；一次长批量查询出现 ECONNRESE...<1918 chars>",
+    "--as",
+    "user"
+  ],
+  "status": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"identity\": \"user\",\n  \"data\": {\n    \"doc_id\": \"XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"doc_url\": \"https://www.feishu.cn/docx/XwRjdHPB4obHRsxuXDmcznIinGh\",\n    \"log_id\": \"20260526182908460ED1AAB094FDCB0B93\",\n    \"message\": \"文档创建成功\"\n  }\n}\n",
+  "stderr": ""
+}

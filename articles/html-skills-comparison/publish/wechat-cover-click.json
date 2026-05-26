@@ -1,0 +1,1134 @@
+{
+  "mode": "click",
+  "targetId": "36AE9892D53B93B583FF0724CB1CBD27",
+  "targetUrl": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779413648610&type=77&appmsgid=100000182&token=941781265&lang=zh_CN",
+  "screenshotPath": "C:\\html\\articles\\html-skills-comparison\\publish\\wechat-cover-click.png",
+  "before": {
+    "url": "https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit&action=edit&reprint_confirm=0&timestamp=1779413648610&type=77&appmsgid=100000182&token=941781265&lang=zh_CN",
+    "scrollY": 6288.26416015625,
+    "coverArea": {
+      "tag": "DIV",
+      "id": "js_cover_area",
+      "name": "",
+      "type": "",
+      "accept": "",
+      "className": "setting-group__cover setting-group__cover_primary",
+      "text": "拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图",
+      "style": "",
+      "rect": {
+        "x": 595,
+        "y": 354,
+        "w": 236,
+        "h": 102
+      },
+      "visible": true,
+      "outer": "<div id=\"js_cover_area\" class=\"setting-group__cover setting-group__cover_primary\">\n                        <div class=\"select-cover__btn js_cover_btn_area select-cover__mask\">\n                          <i class=\"icon20_common add_cover\" style=\"display: inline-block;\"></i>\n                          <span class=\"btn-text js_share_type_none_image\" style=\"display: block;\">拖拽或选择封面</span>\n                          <span class=\"btn-text js_share_type_image\" style=\"display: none\">默认首图为封面</span>\n                        </div>\n                        <!-- 封面图加载出来之前的 loading 状态 -->\n                        <div class=\"select-cover__loading__mask js_cover_loading\">\n                          <i class=\"select-cover__loading weui-desktop-loading\"></i>\n                        </div>\n                        <!-- 默认隐藏，选中图片后才显示 -->\n                        <!-- <div class=\"select-cover__preview js_cover_prev"
+    },
+    "leftThumb": {
+      "tag": "DIV",
+      "id": "",
+      "name": "",
+      "type": "",
+      "accept": "",
+      "className": "card_appmsg_thumb js_appmsg_thumb_new",
+      "text": "",
+      "style": "background-image:url('');",
+      "rect": {
+        "x": 32,
+        "y": 172,
+        "w": 370,
+        "h": 157
+      },
+      "visible": true,
+      "outer": "<div class=\"card_appmsg_thumb js_appmsg_thumb_new\" style=\"background-image:url('');\"></div>"
+    },
+    "fileInputs": [
+      {
+        "tag": "INPUT",
+        "id": "",
+        "name": "file",
+        "type": "file",
+        "accept": "image/gif,image/jpeg,image/jpg,image/png,image/svg,image/webp",
+        "className": "",
+        "text": "",
+        "style": "",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "w": 0,
+          "h": 0
+        },
+        "visible": false,
+        "outer": "<input type=\"file\" name=\"file\" accept=\"image/gif,image/jpeg,image/jpg,image/png,image/svg,image/webp\" multiple=\"multiple\">"
+      }
+    ],
+    "dialogs": [],
+    "coverNodes": [
+      {
+        "tag": "HTML",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "图片 视频 音频 超链接小程序模板投票搜索地理位置视频号账号名片问答礼物收入变现 导入 sinnple coffee 【测试勿发】四个 HTML Skill 横向对比 增加一条 新建内容 历史版本 先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-m",
+        "style": "",
+        "rect": {
+          "x": 0,
+          "y": -6288,
+          "w": 1687,
+          "h": 7217
+        },
+        "visible": true,
+        "outer": "<html><head><style>body {transition: opacity ease-in 0.2s; } \nbody[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } \n</style><link href=\"https://res.wx.qq.com/mpres/zh_CN/htmledition/js/default~layout/base/base_css_4web2~layout/base/meta~layout/base/meta_bak~layout/base_badjs.44921914.css\" rel=\"stylesheet\"><link href=\"https://res.wx.qq.com/mpres/zh_CN/htmledition/js/default~layout/base/meta~layout/base_badjs.44921917.css\" rel=\"stylesheet\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,user-scalable=0\"><!-- <meta name=\"referrer\" content=\"origin-when-crossorigin\"> --><meta charset=\"utf-8\"><script type=\"text/javascript\">\n//上报测速 --初始点\nwindow._points = [+new Date()];\n\n//上报测速 --js加载完成点,通过编译工具加在seajs.use回调中\nfunction wx_main(mod) {\n  window._poin"
+      },
+      {
+        "tag": "BODY",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "zh_CN weui-desktop-page_simple page_appmsg_new weui-desktop-web1",
+        "text": "图片 视频 音频 超链接小程序模板投票搜索地理位置视频号账号名片问答礼物收入变现 导入 sinnple coffee 【测试勿发】四个 HTML Skill 横向对比 增加一条 新建内容 历史版本 先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-m",
+        "style": "",
+        "rect": {
+          "x": 0,
+          "y": -6288,
+          "w": 1687,
+          "h": 7217
+        },
+        "visible": true,
+        "outer": "<body class=\"zh_CN weui-desktop-page_simple page_appmsg_new weui-desktop-web1\">      <div class=\"mp-head\" id=\"header\">        <link href=\"https://res.wx.qq.com/mpres/zh_CN/htmledition/js/web1_web2_common~accusation/accuse_info~ad_system/client~ad_system/client_bill~ad_system/client_pay~~web1_web2_common.44923680.css\" rel=\"stylesheet\"><link href=\"https://res.wx.qq.com/mpres/zh_CN/htmledition/js/web1_web2_common~advanced/menuSetting~bizpage/list~cardticket/member_message~discuss/list~discuss/li~web1_web2_common.44923720.css\" rel=\"stylesheet\"><link href=\"https://res.wx.qq.com/mpres/zh_CN/htmledition/js/default~advanced/menuSetting~bizpage/list~cardticket/member_message~discuss/list~discuss/list_latest~default.44921777.css\" rel=\"stylesheet\"><link href=\"https://res.wx.qq.com/mpres/zh_CN/htmledition/js/layout/base/head-box-simple.44922512.css\" rel=\"stylesheet\"><script type=\"text/javascript\">\n "
+      },
+      {
+        "tag": "IMG",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "weui-desktop-account__thumb",
+        "text": "",
+        "style": "",
+        "rect": {
+          "x": 1627,
+          "y": 12,
+          "w": 30,
+          "h": 30
+        },
+        "visible": true,
+        "outer": "<img class=\"weui-desktop-account__thumb\" src=\"https://wx.qlogo.cn/mmopen/aNJZ1Dtu57sXwR8GlcdkDnARz2J2RqgLrzo4pVQnzeehsCAGXbCicaQicMObiaA1NCjhaHjT5uKFVuQWNFnzhPW51A0ydIy8zJF/64\">"
+      },
+      {
+        "tag": "DIV",
+        "id": "body",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "mp-body ",
+        "text": "sinnple coffee 【测试勿发】四个 HTML Skill 横向对比 增加一条 新建内容 历史版本 先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；",
+        "style": "min-height: 714px;",
+        "rect": {
+          "x": 0,
+          "y": -6158,
+          "w": 1687,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div id=\"body\" class=\"mp-body \" style=\"min-height: 714px;\">        <div class=\"weui-desktop-layout weui-desktop-layout_global\">          <div class=\"weui-desktop-layout__main\">            <div class=\"weui-desktop-layout__main__area\">              <div class=\"js_main_inner weui-desktop-layout__main__inner\">                <!-- 页面公告 @jaminqian -->                <div id=\"_js_announcement\"></div><script type=\"text/html\" id=\"_js_announcement_tpl\">\n  {each announcement_list as item i}\n    <div class=\"page_msg announcement_msg mini{if item.type === 0} with_closed{/if}\">\n      <div class=\"inner\">\n        <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini {if item.type === 0}info{else}warn{/if}\"></i></span>\n        <div class=\"msg_content\">\n          <p>{=item.content}</p>\n        </div>\n        {if item.type === 0}\n          <span class=\"msg_closed js_msg_close\">关闭</span>\n        {/if}\n      </"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "weui-desktop-layout weui-desktop-layout_global",
+        "text": "sinnple coffee 【测试勿发】四个 HTML Skill 横向对比 增加一条 新建内容 历史版本 先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；",
+        "style": "",
+        "rect": {
+          "x": 0,
+          "y": -6158,
+          "w": 1687,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div class=\"weui-desktop-layout weui-desktop-layout_global\">          <div class=\"weui-desktop-layout__main\">            <div class=\"weui-desktop-layout__main__area\">              <div class=\"js_main_inner weui-desktop-layout__main__inner\">                <!-- 页面公告 @jaminqian -->                <div id=\"_js_announcement\"></div><script type=\"text/html\" id=\"_js_announcement_tpl\">\n  {each announcement_list as item i}\n    <div class=\"page_msg announcement_msg mini{if item.type === 0} with_closed{/if}\">\n      <div class=\"inner\">\n        <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini {if item.type === 0}info{else}warn{/if}\"></i></span>\n        <div class=\"msg_content\">\n          <p>{=item.content}</p>\n        </div>\n        {if item.type === 0}\n          <span class=\"msg_closed js_msg_close\">关闭</span>\n        {/if}\n      </div>\n    </div>\n  {/each}\n</script>                <!-- 没有用了 --><di"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "weui-desktop-layout__main",
+        "text": "sinnple coffee 【测试勿发】四个 HTML Skill 横向对比 增加一条 新建内容 历史版本 先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；",
+        "style": "",
+        "rect": {
+          "x": 0,
+          "y": -6158,
+          "w": 1687,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div class=\"weui-desktop-layout__main\">            <div class=\"weui-desktop-layout__main__area\">              <div class=\"js_main_inner weui-desktop-layout__main__inner\">                <!-- 页面公告 @jaminqian -->                <div id=\"_js_announcement\"></div><script type=\"text/html\" id=\"_js_announcement_tpl\">\n  {each announcement_list as item i}\n    <div class=\"page_msg announcement_msg mini{if item.type === 0} with_closed{/if}\">\n      <div class=\"inner\">\n        <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini {if item.type === 0}info{else}warn{/if}\"></i></span>\n        <div class=\"msg_content\">\n          <p>{=item.content}</p>\n        </div>\n        {if item.type === 0}\n          <span class=\"msg_closed js_msg_close\">关闭</span>\n        {/if}\n      </div>\n    </div>\n  {/each}\n</script>                <!-- 没有用了 --><div class=\"js_main_title\"></div><!-- 防止抖动 --><!-- <div style=\"position: "
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "weui-desktop-layout__main__area",
+        "text": "sinnple coffee 【测试勿发】四个 HTML Skill 横向对比 增加一条 新建内容 历史版本 先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；",
+        "style": "",
+        "rect": {
+          "x": 0,
+          "y": -6158,
+          "w": 1687,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div class=\"weui-desktop-layout__main__area\">              <div class=\"js_main_inner weui-desktop-layout__main__inner\">                <!-- 页面公告 @jaminqian -->                <div id=\"_js_announcement\"></div><script type=\"text/html\" id=\"_js_announcement_tpl\">\n  {each announcement_list as item i}\n    <div class=\"page_msg announcement_msg mini{if item.type === 0} with_closed{/if}\">\n      <div class=\"inner\">\n        <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini {if item.type === 0}info{else}warn{/if}\"></i></span>\n        <div class=\"msg_content\">\n          <p>{=item.content}</p>\n        </div>\n        {if item.type === 0}\n          <span class=\"msg_closed js_msg_close\">关闭</span>\n        {/if}\n      </div>\n    </div>\n  {/each}\n</script>                <!-- 没有用了 --><div class=\"js_main_title\"></div><!-- 防止抖动 --><!-- <div style=\"position: absolute;left: 0;height: 101%;width: 1px;\"></div> -"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "js_main_inner weui-desktop-layout__main__inner",
+        "text": "sinnple coffee 【测试勿发】四个 HTML Skill 横向对比 增加一条 新建内容 历史版本 先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；",
+        "style": "",
+        "rect": {
+          "x": 84,
+          "y": -6158,
+          "w": 1519,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div class=\"js_main_inner weui-desktop-layout__main__inner\">                <!-- 页面公告 @jaminqian -->                <div id=\"_js_announcement\"></div><script type=\"text/html\" id=\"_js_announcement_tpl\">\n  {each announcement_list as item i}\n    <div class=\"page_msg announcement_msg mini{if item.type === 0} with_closed{/if}\">\n      <div class=\"inner\">\n        <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini {if item.type === 0}info{else}warn{/if}\"></i></span>\n        <div class=\"msg_content\">\n          <p>{=item.content}</p>\n        </div>\n        {if item.type === 0}\n          <span class=\"msg_closed js_msg_close\">关闭</span>\n        {/if}\n      </div>\n    </div>\n  {/each}\n</script>                <!-- 没有用了 --><div class=\"js_main_title\"></div><!-- 防止抖动 --><!-- <div style=\"position: absolute;left: 0;height: 101%;width: 1px;\"></div> --><a id=\"m_open\" href=\"javascript:;\" class=\"weui-desktop-bt"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appmsg multi has_first_cover editing",
+        "text": "【测试勿发】四个 HTML Skill 横向对比",
+        "style": "",
+        "rect": {
+          "x": 30,
+          "y": 170,
+          "w": 374,
+          "h": 161
+        },
+        "visible": true,
+        "outer": "<div class=\"appmsg multi has_first_cover editing\"><div id=\"js_appmsg_preview\" class=\"appmsg_content\"><div id=\"appmsgItem\" data-fileid=\"\" data-id=\"\" data-msgindex=\"0\" class=\"js_appmsg_item appmsg_item_wrp  first_card_media current\"><div class=\"appmsg_item\">\n    \n    <div class=\"card_appmsg card_container\">\n      <div class=\"card_appmsg_inner\">\n        <div class=\"weui-desktop-vm_primary card_appmsg_hd\">\n          <strong class=\"card_appmsg_title js_appmsg_title\">【测试勿发】四个&nbsp;HTML&nbsp;Skill&nbsp;横向对比</strong>\n          \n\n        </div>\n        <div class=\"weui-desktop-vm_default card_appmsg_bd\">\n          \n          <div class=\"card_appmsg_thumb js_appmsg_thumb_new\" style=\"background-image:url('');\"></div>\n          \n        </div>\n      </div>\n    </div>\n    \n    <!-- <div class=\"appmsg_edit_mask js_readonly\"> -->\n      <!-- <a onclick=\"return false;\" style=\"display:none;\" class=\"icon20"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "card_appmsg_thumb js_appmsg_thumb_new",
+        "text": "",
+        "style": "background-image:url('');",
+        "rect": {
+          "x": 32,
+          "y": 172,
+          "w": 370,
+          "h": 157
+        },
+        "visible": true,
+        "outer": "<div class=\"card_appmsg_thumb js_appmsg_thumb_new\" style=\"background-image:url('');\"></div>"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "weui-desktop-layout__main__bd main_bd",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 164,
+          "y": -6158,
+          "w": 1439,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div class=\"weui-desktop-layout__main__bd main_bd\">  <div class=\"appmsg_edit_box\">    <!-- <div id=\"right_pannel\" class=\"appmsg_edit_mod default appmsg_tpl_area\" style=\"display: none\">      <div class=\"appmsg_edit_container appmsg_tpl_container js_aside\">        <div id=\"media_item_list_scrollbar\" class=\"js_scrollbar scrollbar-macosx\">          <div class=\"appmsg_tpl_container_inner\">            <div class=\"appmsg_container_hd\">              <h4 class=\"appmsg_container_title\">多媒体</h4>            </div>            <div class=\"appmsg_container_bd\"> -->              <!-- <ul id=\"js_media_list\" class=\"tpl_list\">                              <li class=\"tpl_item img\" id=\"js_editor_insertimage\" style=\"display:none;\">                                  <i class=\"icon_media_choose\"></i>图片                                  <i class=\"weui-desktop-icon-reddot\" style=\"display:none\"></i>                 "
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appmsg_edit_box",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 164,
+          "y": -6158,
+          "w": 1439,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div class=\"appmsg_edit_box\">    <!-- <div id=\"right_pannel\" class=\"appmsg_edit_mod default appmsg_tpl_area\" style=\"display: none\">      <div class=\"appmsg_edit_container appmsg_tpl_container js_aside\">        <div id=\"media_item_list_scrollbar\" class=\"js_scrollbar scrollbar-macosx\">          <div class=\"appmsg_tpl_container_inner\">            <div class=\"appmsg_container_hd\">              <h4 class=\"appmsg_container_title\">多媒体</h4>            </div>            <div class=\"appmsg_container_bd\"> -->              <!-- <ul id=\"js_media_list\" class=\"tpl_list\">                              <li class=\"tpl_item img\" id=\"js_editor_insertimage\" style=\"display:none;\">                                  <i class=\"icon_media_choose\"></i>图片                                  <i class=\"weui-desktop-icon-reddot\" style=\"display:none\"></i>                              </li>                              <li c"
+      },
+      {
+        "tag": "DIV",
+        "id": "editor_pannel",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appmsg_edit_mod primary appmsg_input_area",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "min-height: 710px;",
+        "rect": {
+          "x": 500,
+          "y": -6158,
+          "w": 768,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div id=\"editor_pannel\" class=\"appmsg_edit_mod primary appmsg_input_area\" style=\"min-height: 710px;\">      <div id=\"js_appmsg_editor\" class=\"appmsg_editor_wrp\"><div id=\"read_only_container\" class=\"page_msg mini\" style=\"display:none;\">\n  <div class=\"inner\" style=\"z-index: 1\">\n    <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini warn\"></i></span>\n    <div class=\"msg_content\">\n      <p class=\"msg_content_text\"></p>\n      <span class=\"js_close msg_closed\" style=\"display:none;\">关闭</span>\n    </div>\n  </div>\n</div>\n\n<!--todo: BEGIN 视频尾贴顶部 tips-->\n<div class=\"page_msg mini advert_tips hide\" style=\"display: none;\">\n  <div class=\"inner\">\n    <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini info\"></i></span>\n    <div class=\"msg_content\">\n      <p>视频尾部贴片广告已上线<a class=\"page_msg_link\" href=\"javascript:;\">立即开通</a></p>\n      <span class=\"js_close msg_closed ad_closed\">关闭</span>\n    </div>\n  </div>\n"
+      },
+      {
+        "tag": "DIV",
+        "id": "js_appmsg_editor",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appmsg_editor_wrp",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 500,
+          "y": -6158,
+          "w": 768,
+          "h": 7087
+        },
+        "visible": true,
+        "outer": "<div id=\"js_appmsg_editor\" class=\"appmsg_editor_wrp\"><div id=\"read_only_container\" class=\"page_msg mini\" style=\"display:none;\">\n  <div class=\"inner\" style=\"z-index: 1\">\n    <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini warn\"></i></span>\n    <div class=\"msg_content\">\n      <p class=\"msg_content_text\"></p>\n      <span class=\"js_close msg_closed\" style=\"display:none;\">关闭</span>\n    </div>\n  </div>\n</div>\n\n<!--todo: BEGIN 视频尾贴顶部 tips-->\n<div class=\"page_msg mini advert_tips hide\" style=\"display: none;\">\n  <div class=\"inner\">\n    <span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini info\"></i></span>\n    <div class=\"msg_content\">\n      <p>视频尾部贴片广告已上线<a class=\"page_msg_link\" href=\"javascript:;\">立即开通</a></p>\n      <span class=\"js_close msg_closed ad_closed\">关闭</span>\n    </div>\n  </div>\n</div>\n<!--todo: END 视频尾贴顶部 tips-->\n\n<div class=\"appmsg_editor\">\n    <div class=\"appmsg_editor_inner\">\n    "
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appmsg_editor",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6128,
+          "w": 578,
+          "h": 6955
+        },
+        "visible": true,
+        "outer": "<div class=\"appmsg_editor\">\n    <div class=\"appmsg_editor_inner\">\n      <div id=\"appmsg_content\">\n        <div id=\"js_content_top\" class=\"appmsg_edit_item\"><div class=\"page_msg mini with_closed js_content_top_error js_error_msg\" style=\"display: none;\"><div class=\"inner\"><span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini info\"></i></span> <div class=\"msg_content\"><p class=\"js_msg_content\">图片不能为空</p></div></div> <span class=\"msg_closed js_msg_close\">关闭</span></div> <!----></div>\n\n\n        <!-- Audio Card -->\n        <div id=\"audio_article_main\" style=\"display: none;\" class=\"appmsg_edit_origin_preview\">\n        </div>\n        <!-- Audio Card -->\n\n        <!-- BEGIN UEDITOR -->\n        <div id=\"js_ueditor\" class=\"appmsg_edit_item content_edit\">\n          <label for=\"\" class=\"frm_label\" style=\"display:none;\">\n            <strong class=\"title\">正文</strong>\n\n            <p class=\"tips l\">\n      "
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appmsg_editor_inner",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6128,
+          "w": 578,
+          "h": 6955
+        },
+        "visible": true,
+        "outer": "<div class=\"appmsg_editor_inner\">\n      <div id=\"appmsg_content\">\n        <div id=\"js_content_top\" class=\"appmsg_edit_item\"><div class=\"page_msg mini with_closed js_content_top_error js_error_msg\" style=\"display: none;\"><div class=\"inner\"><span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini info\"></i></span> <div class=\"msg_content\"><p class=\"js_msg_content\">图片不能为空</p></div></div> <span class=\"msg_closed js_msg_close\">关闭</span></div> <!----></div>\n\n\n        <!-- Audio Card -->\n        <div id=\"audio_article_main\" style=\"display: none;\" class=\"appmsg_edit_origin_preview\">\n        </div>\n        <!-- Audio Card -->\n\n        <!-- BEGIN UEDITOR -->\n        <div id=\"js_ueditor\" class=\"appmsg_edit_item content_edit\">\n          <label for=\"\" class=\"frm_label\" style=\"display:none;\">\n            <strong class=\"title\">正文</strong>\n\n            <p class=\"tips l\">\n              <em id=\"js_auto_tips\"></"
+      },
+      {
+        "tag": "DIV",
+        "id": "appmsg_content",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6128,
+          "w": 578,
+          "h": 6442
+        },
+        "visible": true,
+        "outer": "<div id=\"appmsg_content\">\n        <div id=\"js_content_top\" class=\"appmsg_edit_item\"><div class=\"page_msg mini with_closed js_content_top_error js_error_msg\" style=\"display: none;\"><div class=\"inner\"><span class=\"msg_icon_wrp\"><i class=\"icon_msg_mini info\"></i></span> <div class=\"msg_content\"><p class=\"js_msg_content\">图片不能为空</p></div></div> <span class=\"msg_closed js_msg_close\">关闭</span></div> <!----></div>\n\n\n        <!-- Audio Card -->\n        <div id=\"audio_article_main\" style=\"display: none;\" class=\"appmsg_edit_origin_preview\">\n        </div>\n        <!-- Audio Card -->\n\n        <!-- BEGIN UEDITOR -->\n        <div id=\"js_ueditor\" class=\"appmsg_edit_item content_edit\">\n          <label for=\"\" class=\"frm_label\" style=\"display:none;\">\n            <strong class=\"title\">正文</strong>\n\n            <p class=\"tips l\">\n              <em id=\"js_auto_tips\"></em>\n              <a id=\"js_cancle\" styl"
+      },
+      {
+        "tag": "DIV",
+        "id": "js_ueditor",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appmsg_edit_item content_edit",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6114,
+          "w": 578,
+          "h": 6428
+        },
+        "visible": true,
+        "outer": "<div id=\"js_ueditor\" class=\"appmsg_edit_item content_edit\">\n          <label for=\"\" class=\"frm_label\" style=\"display:none;\">\n            <strong class=\"title\">正文</strong>\n\n            <p class=\"tips l\">\n              <em id=\"js_auto_tips\"></em>\n              <a id=\"js_cancle\" style=\"display:none;\" href=\"javascript:void(0);\" onclick=\"return false;\">取消</a>\n            </p>\n          </label>\n          <!-- <div class=\"frm_msg fail js_catch_tips\" style=\"display:none;\">有5张图片粘贴失败</div>\n          <div class=\"frm_msg fail js_content_error\" style=\"display:none;\">正文不能为空且长度不能超过20000字</div> -->\n          <div id=\"js_editor\" class=\"edui_editor_wrp edui-default\"><div class=\"edui-default\">\n    <div id=\"edui1\" class=\"edui-editor edui-editor-v edui-default\">\n        <!---todo 9.1、9.2 无自检工具 - 命中不可保存的基础词库--->\n        <div id=\"js_key_words\" class=\"page_msg mini page_msg_stickey edui-default\" style=\"display"
+      },
+      {
+        "tag": "DIV",
+        "id": "js_editor",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "edui_editor_wrp edui-default",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6114,
+          "w": 578,
+          "h": 6428
+        },
+        "visible": true,
+        "outer": "<div id=\"js_editor\" class=\"edui_editor_wrp edui-default\"><div class=\"edui-default\">\n    <div id=\"edui1\" class=\"edui-editor edui-editor-v edui-default\">\n        <!---todo 9.1、9.2 无自检工具 - 命中不可保存的基础词库--->\n        <div id=\"js_key_words\" class=\"page_msg mini page_msg_stickey edui-default\" style=\"display:none;\">\n            <div class=\"inner edui-default\">\n                <span class=\"msg_icon_wrp edui-default\"><i class=\"icon_msg_mini_plus warn edui-default\"></i></span>\n                <div class=\"msg_content edui-default\">\n                    <p class=\"edui-default\">正文不能有违反公众平台协议、相关法律法规和政策内容，<br class=\"edui-default\">请重新编辑</p>\n                    <span class=\"msg_extend edui-default\">\n                        <a class=\"msg_extend__item edui-default\" href=\"javascript:;\" id=\"js_continue_save\" style=\"display:none;\">继续保存</a>\n                        <a class=\"msg_extend__item edui-default\" href=\"jav"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "edui-default",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6114,
+          "w": 578,
+          "h": 6428
+        },
+        "visible": true,
+        "outer": "<div class=\"edui-default\">\n    <div id=\"edui1\" class=\"edui-editor edui-editor-v edui-default\">\n        <!---todo 9.1、9.2 无自检工具 - 命中不可保存的基础词库--->\n        <div id=\"js_key_words\" class=\"page_msg mini page_msg_stickey edui-default\" style=\"display:none;\">\n            <div class=\"inner edui-default\">\n                <span class=\"msg_icon_wrp edui-default\"><i class=\"icon_msg_mini_plus warn edui-default\"></i></span>\n                <div class=\"msg_content edui-default\">\n                    <p class=\"edui-default\">正文不能有违反公众平台协议、相关法律法规和政策内容，<br class=\"edui-default\">请重新编辑</p>\n                    <span class=\"msg_extend edui-default\">\n                        <a class=\"msg_extend__item edui-default\" href=\"javascript:;\" id=\"js_continue_save\" style=\"display:none;\">继续保存</a>\n                        <a class=\"msg_extend__item edui-default\" href=\"javascript:;\" id=\"js_risks_next_block\" style=\"display:none;\""
+      },
+      {
+        "tag": "DIV",
+        "id": "edui1",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "edui-editor edui-editor-v edui-default",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6114,
+          "w": 578,
+          "h": 6428
+        },
+        "visible": true,
+        "outer": "<div id=\"edui1\" class=\"edui-editor edui-editor-v edui-default\">\n        <!---todo 9.1、9.2 无自检工具 - 命中不可保存的基础词库--->\n        <div id=\"js_key_words\" class=\"page_msg mini page_msg_stickey edui-default\" style=\"display:none;\">\n            <div class=\"inner edui-default\">\n                <span class=\"msg_icon_wrp edui-default\"><i class=\"icon_msg_mini_plus warn edui-default\"></i></span>\n                <div class=\"msg_content edui-default\">\n                    <p class=\"edui-default\">正文不能有违反公众平台协议、相关法律法规和政策内容，<br class=\"edui-default\">请重新编辑</p>\n                    <span class=\"msg_extend edui-default\">\n                        <a class=\"msg_extend__item edui-default\" href=\"javascript:;\" id=\"js_continue_save\" style=\"display:none;\">继续保存</a>\n                        <a class=\"msg_extend__item edui-default\" href=\"javascript:;\" id=\"js_risks_next_block\" style=\"display:none;\">下一处</a>\n                    </"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "js_editor_area editor_area edui-default",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6022,
+          "w": 578,
+          "h": 6335
+        },
+        "visible": true,
+        "outer": "<div class=\"js_editor_area editor_area edui-default\"><div class=\"page_msg mini with_closed js_catch_tips\" style=\"width: 0px; top: 0px; z-index: 0; display: none;\"><div class=\"inner\"><span class=\"msg_icon_wrp\" style=\"margin-top: 5px;\"><i class=\"icon_msg_mini_plus info\"></i></span> <div class=\"msg_content\"><p><!----></p></div></div> <p class=\"msg_right_btns\"><span>查看失败内容</span></p> <span class=\"msg_closed\">关闭</span></div>\n            <div class=\"split_line edui-default\"></div>\n            <!-- 正文报错 -->\n            <div class=\"page_msg mini with_closed js_catch_tips edui-default\" style=\"display:none;\">\n                <div class=\"inner edui-default\">\n                    <span class=\"msg_icon_wrp edui-default\" style=\"margin-top: 5px;\"><i class=\"icon_msg_mini_plus info edui-default\"></i></span>\n                    <div class=\"msg_content edui-default\">\n                        <p class=\"edui-d"
+      },
+      {
+        "tag": "DIV",
+        "id": "edui1_iframeholder",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "edui-editor-iframeholder edui-default",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": -6022,
+          "w": 578,
+          "h": 6335
+        },
+        "visible": true,
+        "outer": "<div id=\"edui1_iframeholder\" class=\"edui-editor-iframeholder edui-default\">\n                <div id=\"edui1_contentplaceholder\" class=\"editor_content_placeholder edui-default\" style=\"display:none\">从这里开始写正文</div>\n            <div class=\"editor-v-root\" style=\"position: relative; z-index: 1; width: calc(100% + 8px); box-sizing: content-box; margin-left: -95px; padding: 0 91px;\"><div><div></div> <div id=\"ueditor_0\" class=\"mock-iframe\"><div class=\"mock-iframe-document\"><div class=\"mock-iframe-body\"><div spellcheck=\"false\" lang=\"en\" class=\"view rich_media_content autoTypeSetting24psection\"><div contenteditable=\"true\" translate=\"no\" class=\"ProseMirror\" style=\"padding: 0px 4px; min-height: 448px;\"><section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quo"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "editor-v-root",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "position: relative; z-index: 1; width: calc(100% + 8px); box-sizing: content-box; margin-left: -95px; padding: 0 91px;",
+        "rect": {
+          "x": 500,
+          "y": -6016,
+          "w": 768,
+          "h": 6329
+        },
+        "visible": true,
+        "outer": "<div class=\"editor-v-root\" style=\"position: relative; z-index: 1; width: calc(100% + 8px); box-sizing: content-box; margin-left: -95px; padding: 0 91px;\"><div><div></div> <div id=\"ueditor_0\" class=\"mock-iframe\"><div class=\"mock-iframe-document\"><div class=\"mock-iframe-body\"><div spellcheck=\"false\" lang=\"en\" class=\"view rich_media_content autoTypeSetting24psection\"><div contenteditable=\"true\" translate=\"no\" class=\"ProseMirror\" style=\"padding: 0px 4px; min-height: 448px;\"><section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-inde"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 591,
+          "y": -6016,
+          "w": 586,
+          "h": 6329
+        },
+        "visible": true,
+        "outer": "<div><div></div> <div id=\"ueditor_0\" class=\"mock-iframe\"><div class=\"mock-iframe-document\"><div class=\"mock-iframe-body\"><div spellcheck=\"false\" lang=\"en\" class=\"view rich_media_content autoTypeSetting24psection\"><div contenteditable=\"true\" translate=\"no\" class=\"ProseMirror\" style=\"padding: 0px 4px; min-height: 448px;\"><section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 250, 247); te"
+      },
+      {
+        "tag": "DIV",
+        "id": "ueditor_0",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "mock-iframe",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 591,
+          "y": -6016,
+          "w": 586,
+          "h": 6329
+        },
+        "visible": true,
+        "outer": "<div id=\"ueditor_0\" class=\"mock-iframe\"><div class=\"mock-iframe-document\"><div class=\"mock-iframe-body\"><div spellcheck=\"false\" lang=\"en\" class=\"view rich_media_content autoTypeSetting24psection\"><div contenteditable=\"true\" translate=\"no\" class=\"ProseMirror\" style=\"padding: 0px 4px; min-height: 448px;\"><section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 250, 247); text-decoration-thi"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "mock-iframe-document",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 591,
+          "y": -6016,
+          "w": 586,
+          "h": 6329
+        },
+        "visible": true,
+        "outer": "<div class=\"mock-iframe-document\"><div class=\"mock-iframe-body\"><div spellcheck=\"false\" lang=\"en\" class=\"view rich_media_content autoTypeSetting24psection\"><div contenteditable=\"true\" translate=\"no\" class=\"ProseMirror\" style=\"padding: 0px 4px; min-height: 448px;\"><section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 250, 247); text-decoration-thickness: initial; text-decoration-style: "
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "mock-iframe-body",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 591,
+          "y": -6016,
+          "w": 586,
+          "h": 6329
+        },
+        "visible": true,
+        "outer": "<div class=\"mock-iframe-body\"><div spellcheck=\"false\" lang=\"en\" class=\"view rich_media_content autoTypeSetting24psection\"><div contenteditable=\"true\" translate=\"no\" class=\"ProseMirror\" style=\"padding: 0px 4px; min-height: 448px;\"><section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 250, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: in"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "view rich_media_content autoTypeSetting24psection",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "",
+        "rect": {
+          "x": 591,
+          "y": -6016,
+          "w": 586,
+          "h": 6309
+        },
+        "visible": true,
+        "outer": "<div spellcheck=\"false\" lang=\"en\" class=\"view rich_media_content autoTypeSetting24psection\"><div contenteditable=\"true\" translate=\"no\" class=\"ProseMirror\" style=\"padding: 0px 4px; min-height: 448px;\"><section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 250, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\" data-pm-slice=\"0 0 []\""
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "ProseMirror",
+        "text": "先说结论：它们不是四选一。 如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。 `claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。 最好的保留方式不是",
+        "style": "padding: 0px 4px; min-height: 448px;",
+        "rect": {
+          "x": 591,
+          "y": -6016,
+          "w": 586,
+          "h": 6285
+        },
+        "visible": true,
+        "outer": "<div contenteditable=\"true\" translate=\"no\" class=\"ProseMirror\" style=\"padding: 0px 4px; min-height: 448px;\"><section class=\"section\" id=\"thesis\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 250, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\" data-pm-slice=\"0 0 []\"><h2 style=\"box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap:"
+      },
+      {
+        "tag": "SECTION",
+        "id": "combine",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "section",
+        "text": "最稳的组合方式。 不要让四个 skill 同时抢主导权。它们应该像工序一样排队。 先用 `claude-design` 定视觉系统。 确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。 再用 `article-magazine` 搭文章骨架。 把内容拆成标题、引入、核心观点、场景编号、局限、结尾观点。 中途调用 `html-visual` 做关键模块。 比如横向对比表、使用决策树、流程图、可点击筛选",
+        "style": "box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: \"Noto Serif SC\", \"Source Han Serif SC\", \"Songti SC\", Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight",
+        "rect": {
+          "x": 595,
+          "y": -2621,
+          "w": 578,
+          "h": 1453
+        },
+        "visible": true,
+        "outer": "<section class=\"section\" id=\"combine\" style=\"box-sizing: border-box; margin: 0px 0px 74px; padding: 22px 0px; color: rgb(28, 31, 28); font-family: &quot;Noto Serif SC&quot;, &quot;Source Han Serif SC&quot;, &quot;Songti SC&quot;, Georgia, serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(251, 250, 247); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;\"><h2 style=\"box-sizing: border-box; margin: 0px 0px 22px; color: rgb(28, 31, 28); text-wrap: pretty; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12;\"><span leaf=\"\">最稳的组合方式。</span></h2><p style=\"box-sizing: border-"
+      },
+      {
+        "tag": "OL",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "list-paddingleft-1",
+        "text": "先用 `claude-design` 定视觉系统。 确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。 再用 `article-magazine` 搭文章骨架。 把内容拆成标题、引入、核心观点、场景编号、局限、结尾观点。 中途调用 `html-visual` 做关键模块。 比如横向对比表、使用决策树、流程图、可点击筛选区。 最后用 `html-anything` 收口交付。 保证是单文件 HTML，",
+        "style": "box-sizing: border-box; counter-reset: skill 0; display: grid; gap: 14px; margin: 28px 0px; padding: 0px; list-style: none;",
+        "rect": {
+          "x": 595,
+          "y": -2465,
+          "w": 577,
+          "h": 439
+        },
+        "visible": true,
+        "outer": "<ol style=\"box-sizing: border-box; counter-reset: skill 0; display: grid; gap: 14px; margin: 28px 0px; padding: 0px; list-style: none;\" class=\"list-paddingleft-1\"><li style=\"box-sizing: border-box; counter-increment: skill 1; position: relative; padding: 17px 18px 17px 64px; border: 1px solid rgba(28, 31, 28, 0.11); background: rgb(255, 255, 255); color: rgb(95, 99, 91); border-radius: 6px;\"><b style=\"box-sizing: border-box; color: rgb(28, 31, 28);\"><span leaf=\"\">先用 `claude-design` 定视觉系统。</span></b><section><span leaf=\"\">确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。</span></section></li><li style=\"box-sizing: border-box; counter-increment: skill 1; position: relative; padding: 17px 18px 17px 64px; border: 1px solid rgba(28, 31, 28, 0.11); background: rgb(255, 255, 255); color: rgb(95, 99, 91); border-radius: 6px;\"><b style=\"box-sizing: border-box; color: rgb(28, 31, 28);\"><span leaf=\"\">再用"
+      },
+      {
+        "tag": "LI",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "先用 `claude-design` 定视觉系统。 确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。",
+        "style": "box-sizing: border-box; counter-increment: skill 1; position: relative; padding: 17px 18px 17px 64px; border: 1px solid rgba(28, 31, 28, 0.11); background: rgb(255, 255, 255); color: rgb(95, 99, 91); border-radius: 6px;",
+        "rect": {
+          "x": 595,
+          "y": -2465,
+          "w": 577,
+          "h": 112
+        },
+        "visible": true,
+        "outer": "<li style=\"box-sizing: border-box; counter-increment: skill 1; position: relative; padding: 17px 18px 17px 64px; border: 1px solid rgba(28, 31, 28, 0.11); background: rgb(255, 255, 255); color: rgb(95, 99, 91); border-radius: 6px;\"><b style=\"box-sizing: border-box; color: rgb(28, 31, 28);\"><span leaf=\"\">先用 `claude-design` 定视觉系统。</span></b><section><span leaf=\"\">确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。</span></section></li>"
+      },
+      {
+        "tag": "SECTION",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。",
+        "style": "",
+        "rect": {
+          "x": 659,
+          "y": -2422,
+          "w": 494,
+          "h": 51
+        },
+        "visible": true,
+        "outer": "<section><span leaf=\"\">确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。</span></section>"
+      },
+      {
+        "tag": "SPAN",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。",
+        "style": "",
+        "rect": {
+          "x": 659,
+          "y": -2421,
+          "w": 464,
+          "h": 49
+        },
+        "visible": true,
+        "outer": "<span leaf=\"\">确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。</span>"
+      },
+      {
+        "tag": "PRE",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "请用四个 HTML skill 配合完成一篇图文长文： 1. claude-design：先定视觉系统和版式约束。 2. article-magazine：作为文章主骨架，按杂志/公众号长文排版。 3. html-visual：为关键对比、流程、决策树做交互图解。 4. html-anything：最终输出单文件 HTML，落盘并验证可打开。 题材：四个 HTML 写作/视觉 skill 的横向对比与使用策略。",
+        "style": "box-sizing: border-box; margin: 0px; padding: 18px; overflow: auto; font-size: 0.9rem; line-height: 1.65;",
+        "rect": {
+          "x": 595,
+          "y": -1369,
+          "w": 578,
+          "h": 179
+        },
+        "visible": true,
+        "outer": "<pre style=\"box-sizing: border-box; margin: 0px; padding: 18px; overflow: auto; font-size: 0.9rem; line-height: 1.65;\"><code style=\"box-sizing: border-box;\"><span leaf=\"\">请用四个 HTML skill 配合完成一篇图文长文：</span><br><span leaf=\"\">1. claude-design：先定视觉系统和版式约束。</span><br><span leaf=\"\">2. article-magazine：作为文章主骨架，按杂志/公众号长文排版。</span><br><span leaf=\"\">3. html-visual：为关键对比、流程、决策树做交互图解。</span><br><span leaf=\"\">4. html-anything：最终输出单文件 HTML，落盘并验证可打开。</span><br><span leaf=\"\">题材：四个 HTML 写作/视觉 skill 的横向对比与使用策略。</span></code></pre>"
+      },
+      {
+        "tag": "CODE",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "请用四个 HTML skill 配合完成一篇图文长文： 1. claude-design：先定视觉系统和版式约束。 2. article-magazine：作为文章主骨架，按杂志/公众号长文排版。 3. html-visual：为关键对比、流程、决策树做交互图解。 4. html-anything：最终输出单文件 HTML，落盘并验证可打开。 题材：四个 HTML 写作/视觉 skill 的横向对比与使用策略。",
+        "style": "box-sizing: border-box;",
+        "rect": {
+          "x": 613,
+          "y": -1347,
+          "w": 432,
+          "h": 133
+        },
+        "visible": true,
+        "outer": "<code style=\"box-sizing: border-box;\"><span leaf=\"\">请用四个 HTML skill 配合完成一篇图文长文：</span><br><span leaf=\"\">1. claude-design：先定视觉系统和版式约束。</span><br><span leaf=\"\">2. article-magazine：作为文章主骨架，按杂志/公众号长文排版。</span><br><span leaf=\"\">3. html-visual：为关键对比、流程、决策树做交互图解。</span><br><span leaf=\"\">4. html-anything：最终输出单文件 HTML，落盘并验证可打开。</span><br><span leaf=\"\">题材：四个 HTML 写作/视觉 skill 的横向对比与使用策略。</span></code>"
+      },
+      {
+        "tag": "SPAN",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "",
+        "text": "请用四个 HTML skill 配合完成一篇图文长文：",
+        "style": "",
+        "rect": {
+          "x": 613,
+          "y": -1347,
+          "w": 302,
+          "h": 15
+        },
+        "visible": true,
+        "outer": "<span leaf=\"\">请用四个 HTML skill 配合完成一篇图文长文：</span>"
+      },
+      {
+        "tag": "DIV",
+        "id": "article_setting_area",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appsmg-editor__after-area",
+        "text": "拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图 44/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": 313,
+          "w": 578,
+          "h": 514
+        },
+        "visible": true,
+        "outer": "<div id=\"article_setting_area\" class=\"appsmg-editor__after-area\" style=\"\">\n            <div id=\"js_cover_description_area\" class=\"appmsg-editor__setting-group setting-group__cover_area\">\n                <div class=\"setting-group__title-wrap setting-group__force-hide\">\n                  <div class=\"setting-group__title\">封面和摘要</div>\n                  <!-- <div class=\"setting-group__title-tips\" style=\"display: none;\">增加了3:4的封面尺寸</div> -->\n                </div>\n                <div class=\"setting-group__content setting-group__content_main\">\n                    <!--\n                        主要图文+class: setting-group__cover_primary 2.35:1\n                        次要图文+class: setting-group__cover_minor 1:1\n                        图片消息+class: setting-group__cover_normal 16:9\n                        图片消息+class: setting-group__cover_splice 三图\n                        图片消息+class: setting-group__cover"
+      },
+      {
+        "tag": "DIV",
+        "id": "js_cover_description_area",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "appmsg-editor__setting-group setting-group__cover_area",
+        "text": "拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图 44/120",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": 354,
+          "w": 578,
+          "h": 102
+        },
+        "visible": true,
+        "outer": "<div id=\"js_cover_description_area\" class=\"appmsg-editor__setting-group setting-group__cover_area\">\n                <div class=\"setting-group__title-wrap setting-group__force-hide\">\n                  <div class=\"setting-group__title\">封面和摘要</div>\n                  <!-- <div class=\"setting-group__title-tips\" style=\"display: none;\">增加了3:4的封面尺寸</div> -->\n                </div>\n                <div class=\"setting-group__content setting-group__content_main\">\n                    <!--\n                        主要图文+class: setting-group__cover_primary 2.35:1\n                        次要图文+class: setting-group__cover_minor 1:1\n                        图片消息+class: setting-group__cover_normal 16:9\n                        图片消息+class: setting-group__cover_splice 三图\n                        图片消息+class: setting-group__cover_service_splice 服务号三图\n                        图片消息+class: setting-group__cover_standard"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "setting-group__content setting-group__content_main",
+        "text": "拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图 44/120",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": 354,
+          "w": 578,
+          "h": 102
+        },
+        "visible": true,
+        "outer": "<div class=\"setting-group__content setting-group__content_main\">\n                    <!--\n                        主要图文+class: setting-group__cover_primary 2.35:1\n                        次要图文+class: setting-group__cover_minor 1:1\n                        图片消息+class: setting-group__cover_normal 16:9\n                        图片消息+class: setting-group__cover_splice 三图\n                        图片消息+class: setting-group__cover_service_splice 服务号三图\n                        图片消息+class: setting-group__cover_standard 3:4\n                    -->\n                    <div id=\"js_cover_area\" class=\"setting-group__cover setting-group__cover_primary\">\n                        <div class=\"select-cover__btn js_cover_btn_area select-cover__mask\">\n                          <i class=\"icon20_common add_cover\" style=\"display: inline-block;\"></i>\n                          <span class=\"btn-text js_share_type_none_ima"
+      },
+      {
+        "tag": "DIV",
+        "id": "js_cover_area",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "setting-group__cover setting-group__cover_primary",
+        "text": "拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": 354,
+          "w": 236,
+          "h": 102
+        },
+        "visible": true,
+        "outer": "<div id=\"js_cover_area\" class=\"setting-group__cover setting-group__cover_primary\">\n                        <div class=\"select-cover__btn js_cover_btn_area select-cover__mask\">\n                          <i class=\"icon20_common add_cover\" style=\"display: inline-block;\"></i>\n                          <span class=\"btn-text js_share_type_none_image\" style=\"display: block;\">拖拽或选择封面</span>\n                          <span class=\"btn-text js_share_type_image\" style=\"display: none\">默认首图为封面</span>\n                        </div>\n                        <!-- 封面图加载出来之前的 loading 状态 -->\n                        <div class=\"select-cover__loading__mask js_cover_loading\">\n                          <i class=\"select-cover__loading weui-desktop-loading\"></i>\n                        </div>\n                        <!-- 默认隐藏，选中图片后才显示 -->\n                        <!-- <div class=\"select-cover__preview js_cover_prev"
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "select-cover__btn js_cover_btn_area select-cover__mask",
+        "text": "拖拽或选择封面",
+        "style": "",
+        "rect": {
+          "x": 595,
+          "y": 355,
+          "w": 235,
+          "h": 100
+        },
+        "visible": true,
+        "outer": "<div class=\"select-cover__btn js_cover_btn_area select-cover__mask\">\n                          <i class=\"icon20_common add_cover\" style=\"display: inline-block;\"></i>\n                          <span class=\"btn-text js_share_type_none_image\" style=\"display: block;\">拖拽或选择封面</span>\n                          <span class=\"btn-text js_share_type_image\" style=\"display: none\">默认首图为封面</span>\n                        </div>"
+      },
+      {
+        "tag": "I",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "icon20_common add_cover",
+        "text": "",
+        "style": "display: inline-block;",
+        "rect": {
+          "x": 703,
+          "y": 383,
+          "w": 20,
+          "h": 20
+        },
+        "visible": true,
+        "outer": "<i class=\"icon20_common add_cover\" style=\"display: inline-block;\"></i>"
+      },
+      {
+        "tag": "SPAN",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "btn-text js_share_type_none_image",
+        "text": "拖拽或选择封面",
+        "style": "display: block;",
+        "rect": {
+          "x": 595,
+          "y": 399,
+          "w": 235,
+          "h": 30
+        },
+        "visible": true,
+        "outer": "<span class=\"btn-text js_share_type_none_image\" style=\"display: block;\">拖拽或选择封面</span>"
+      },
+      {
+        "tag": "DIV",
+        "id": "js_cover_null",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "pop-opr__group pop-opr__group-select-cover js_cover_null_pop js_cover_opr",
+        "text": "从正文选择 从图片库选择 微信扫码上传 AI 配图",
+        "style": "display: block;",
+        "rect": {
+          "x": 655,
+          "y": 405,
+          "w": 116,
+          "h": 186
+        },
+        "visible": true,
+        "outer": "<div class=\"pop-opr__group pop-opr__group-select-cover js_cover_null_pop js_cover_opr\" id=\"js_cover_null\" style=\"display: block;\">\n                          <ul class=\"pop-opr__list\">\n                            <li class=\"pop-opr__item\">\n                              <a href=\"javascript:;\" class=\"pop-opr__button js_selectCoverFromContent\" onclick=\"return false;\">从正文选择<br><span class=\"js_selectVideoCoverTips\" style=\"color:#7E8081;display:none\">可选视频封面</span></a>\n                            </li>\n                            <li class=\"pop-opr__item\">\n                              <a href=\"javascript:;\" class=\"pop-opr__button js_imagedialog\" onclick=\"return false;\">从图片库选择</a>\n                            </li>\n                            \n                            <li class=\"pop-opr__item\">\n                              <a href=\"javascript:;\" class=\"pop-opr__button js_imageScan\" onclick=\"r"
+      },
+      {
+        "tag": "UL",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "pop-opr__list",
+        "text": "从正文选择 从图片库选择 微信扫码上传 AI 配图",
+        "style": "",
+        "rect": {
+          "x": 655,
+          "y": 405,
+          "w": 116,
+          "h": 186
+        },
+        "visible": true,
+        "outer": "<ul class=\"pop-opr__list\">\n                            <li class=\"pop-opr__item\">\n                              <a href=\"javascript:;\" class=\"pop-opr__button js_selectCoverFromContent\" onclick=\"return false;\">从正文选择<br><span class=\"js_selectVideoCoverTips\" style=\"color:#7E8081;display:none\">可选视频封面</span></a>\n                            </li>\n                            <li class=\"pop-opr__item\">\n                              <a href=\"javascript:;\" class=\"pop-opr__button js_imagedialog\" onclick=\"return false;\">从图片库选择</a>\n                            </li>\n                            \n                            <li class=\"pop-opr__item\">\n                              <a href=\"javascript:;\" class=\"pop-opr__button js_imageScan\" onclick=\"return false;\">微信扫码上传</a>\n                            </li>\n                            \n                            \n                            <li class=\"p"
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "pop-opr__button js_selectCoverFromContent",
+        "text": "从正文选择",
+        "style": "",
+        "rect": {
+          "x": 655,
+          "y": 413,
+          "w": 116,
+          "h": 42
+        },
+        "visible": true,
+        "outer": "<a href=\"javascript:;\" class=\"pop-opr__button js_selectCoverFromContent\" onclick=\"return false;\">从正文选择<br><span class=\"js_selectVideoCoverTips\" style=\"color:#7E8081;display:none\">可选视频封面</span></a>"
+      },
+      {
+        "tag": "LI",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "pop-opr__item",
+        "text": "从图片库选择",
+        "style": "",
+        "rect": {
+          "x": 655,
+          "y": 455,
+          "w": 116,
+          "h": 42
+        },
+        "visible": true,
+        "outer": "<li class=\"pop-opr__item\">\n                              <a href=\"javascript:;\" class=\"pop-opr__button js_imagedialog\" onclick=\"return false;\">从图片库选择</a>\n                            </li>"
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "pop-opr__button js_imagedialog",
+        "text": "从图片库选择",
+        "style": "",
+        "rect": {
+          "x": 655,
+          "y": 455,
+          "w": 116,
+          "h": 42
+        },
+        "visible": true,
+        "outer": "<a href=\"javascript:;\" class=\"pop-opr__button js_imagedialog\" onclick=\"return false;\">从图片库选择</a>"
+      }
+    ],
+    "buttons": [
+      {
+        "tag": "A",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "pop-opr__button js_selectCoverFromContent",
+        "text": "从正文选择",
+        "style": "",
+        "rect": {
+          "x": 655,
+          "y": 413,
+          "w": 116,
+          "h": 42
+        },
+        "visible": true,
+        "outer": "<a href=\"javascript:;\" class=\"pop-opr__button js_selectCoverFromContent\" onclick=\"return false;\">从正文选择<br><span class=\"js_selectVideoCoverTips\" style=\"color:#7E8081;display:none\">可选视频封面</span></a>"
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "pop-opr__button js_imagedialog",
+        "text": "从图片库选择",
+        "style": "",
+        "rect": {
+          "x": 655,
+          "y": 455,
+          "w": 116,
+          "h": 42
+        },
+        "visible": true,
+        "outer": "<a href=\"javascript:;\" class=\"pop-opr__button js_imagedialog\" onclick=\"return false;\">从图片库选择</a>"
+      },
+      {
+        "tag": "A",
+        "id": "",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "pop-opr__button js_imageScan",
+        "text": "微信扫码上传",
+        "style": "",
+        "rect": {
+          "x": 655,
+          "y": 497,
+          "w": 116,
+          "h": 42
+        },
+        "visible": true,
+        "outer": "<a href=\"javascript:;\" class=\"pop-opr__button js_imageScan\" onclick=\"return false;\">微信扫码上传</a>"
+      },
+      {
+        "tag": "SPAN",
+        "id": "js_send",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "btn btn_input btn_default r",
+        "text": "发表",
+        "style": "",
+        "rect": {
+          "x": 1150,
+          "y": 760,
+          "w": 97,
+          "h": 35
+        },
+        "visible": true,
+        "outer": "<span id=\"js_send\" class=\"btn btn_input btn_default r\">              <button class=\"mass_send\" type=\"button\"><span class=\"send_wording\">发表</span></button>            </span>"
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "name": "",
+        "type": "button",
+        "accept": "",
+        "className": "mass_send",
+        "text": "发表",
+        "style": "",
+        "rect": {
+          "x": 1151,
+          "y": 761,
+          "w": 98,
+          "h": 34
+        },
+        "visible": true,
+        "outer": "<button class=\"mass_send\" type=\"button\"><span class=\"send_wording\">发表</span></button>"
+      },
+      {
+        "tag": "SPAN",
+        "id": "js_preview",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "btn btn_input btn_default r no_extra",
+        "text": "预览",
+        "style": "",
+        "rect": {
+          "x": 1041,
+          "y": 760,
+          "w": 97,
+          "h": 35
+        },
+        "visible": true,
+        "outer": "<span id=\"js_preview\" class=\"btn btn_input btn_default r no_extra\"><button type=\"button\"><span class=\"send_wording\">预览</span></button></span>"
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "name": "",
+        "type": "button",
+        "accept": "",
+        "className": "",
+        "text": "预览",
+        "style": "",
+        "rect": {
+          "x": 1042,
+          "y": 761,
+          "w": 96,
+          "h": 34
+        },
+        "visible": true,
+        "outer": "<button type=\"button\"><span class=\"send_wording\">预览</span></button>"
+      },
+      {
+        "tag": "SPAN",
+        "id": "js_submit",
+        "name": "",
+        "type": "",
+        "accept": "",
+        "className": "btn btn_input btn_primary r",
+        "text": "保存为草稿",
+        "style": "",
+        "rect": {
+          "x": 932,
+          "y": 760,
+          "w": 97,
+          "h": 35
+        },
+        "visible": true,
+        "outer": "<span id=\"js_submit\" class=\"btn btn_input btn_primary r\"><button type=\"button\"><span class=\"send_wording\">保存为草稿</span></button></span>"
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "name": "",
+        "type": "button",
+        "accept": "",
+        "className": "",
+        "text": "保存为草稿",
+        "style": "",
+        "rect": {
+          "x": 932,
+          "y": 761,
+          "w": 96,
+          "h": 34
+        },
+        "visible": true,
+        "outer": "<button type=\"button\"><span class=\"send_wording\">保存为草稿</span></button>"
+      }
+    ],
+    "bodyTail": "eady 请用四个 HTML skill 配合完成一篇图文长文： 1. claude-design：先定视觉系统和版式约束。 2. article-magazine：作为文章主骨架，按杂志/公众号长文排版。 3. html-visual：为关键对比、流程、决策树做交互图解。 4. html-anything：最终输出单文件 HTML，落盘并验证可打开。 题材：四个 HTML 写作/视觉 skill 的横向对比与使用策略。 不知道用哪个？按目标选。 下面这个小模块可以直接给其他线程看：点目标，就知道谁做主、谁辅助。 写文章做图解要高级感要成品交付 写文章：`article-magazine` 做主 主线用 `article-magazine`。开头用 `claude-design` 定视觉，遇到复杂说明时让 `html-visual` 插图解，最后让 `html-anything` 收口成单文件。 展开：推荐保留策略 保留全部。只把职责写清楚：`article-magazine` 是文章主模板，`claude-design` 是审美前置，`html-visual` 是图解组件，`html-anything` 是最终交付器。以后“专门写文章”默认走这条链路。 最后怎么保留配合？ 我建议不要删，也不要合并成一个大而全 skill。大而全的结果通常是边界变模糊，线程不知道该听谁的。 更好的做法是给其他线程一句固定规则： 写专门文章时，`article-magazine` 为主；追求设计质量时，先过 `claude-design`；需要图解互动时，插入 `html-visual`；最终落盘交付时，用 `html-anything` 收口。 一句话版 这四个 skill 的关系不是竞品，而是工序。把它们当成“设计总监、主笔、图解编辑、出版打包”四个角色，就不会混用。 拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图 44/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 09:34已保存 正文字数1919 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge"
+  }
+}

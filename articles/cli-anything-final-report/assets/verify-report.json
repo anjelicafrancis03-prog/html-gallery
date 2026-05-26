@@ -1,0 +1,130 @@
+{
+  "desktop": {
+    "title": "CLI-Anything 实测：Agent 该怎么发现和调用本地 CLI 工具",
+    "innerWidth": 1440,
+    "bodyWidth": 1440,
+    "scrollWidth": 1440,
+    "imageCount": 5,
+    "imagesOk": true,
+    "hasQuestionMarks": false,
+    "h1": "Agent 该怎么发现和调用本地 CLI 工具",
+    "overflowCount": 0,
+    "overflowEls": [],
+    "imgs": [
+      {
+        "src": "assets/workflow.png",
+        "complete": true,
+        "naturalWidth": 1200,
+        "naturalHeight": 800,
+        "rect": {
+          "width": 369,
+          "height": 246
+        }
+      },
+      {
+        "src": "assets/cli-anything-visual-report-screenshot.png",
+        "complete": true,
+        "naturalWidth": 1440,
+        "naturalHeight": 4200,
+        "rect": {
+          "width": 1002,
+          "height": 2919
+        }
+      },
+      {
+        "src": "assets/openscreen-thumbnail.png",
+        "complete": true,
+        "naturalWidth": 1280,
+        "naturalHeight": 720,
+        "rect": {
+          "width": 479,
+          "height": 270
+        }
+      },
+      {
+        "src": "assets/openscreen-render-frame.png",
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1080,
+        "rect": {
+          "width": 479,
+          "height": 270
+        }
+      },
+      {
+        "src": "assets/workflow.png",
+        "complete": true,
+        "naturalWidth": 1200,
+        "naturalHeight": 800,
+        "rect": {
+          "width": 1002,
+          "height": 669
+        }
+      }
+    ]
+  },
+  "mobile": {
+    "title": "CLI-Anything 实测：Agent 该怎么发现和调用本地 CLI 工具",
+    "innerWidth": 390,
+    "bodyWidth": 390,
+    "scrollWidth": 390,
+    "imageCount": 5,
+    "imagesOk": true,
+    "hasQuestionMarks": false,
+    "h1": "Agent 该怎么发现和调用本地 CLI 工具",
+    "overflowCount": 0,
+    "overflowEls": [],
+    "imgs": [
+      {
+        "src": "assets/workflow.png",
+        "complete": true,
+        "naturalWidth": 1200,
+        "naturalHeight": 800,
+        "rect": {
+          "width": 240,
+          "height": 161
+        }
+      },
+      {
+        "src": "assets/cli-anything-visual-report-screenshot.png",
+        "complete": true,
+        "naturalWidth": 1440,
+        "naturalHeight": 4200,
+        "rect": {
+          "width": 324,
+          "height": 941
+        }
+      },
+      {
+        "src": "assets/openscreen-thumbnail.png",
+        "complete": true,
+        "naturalWidth": 1280,
+        "naturalHeight": 720,
+        "rect": {
+          "width": 324,
+          "height": 183
+        }
+      },
+      {
+        "src": "assets/openscreen-render-frame.png",
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 1080,
+        "rect": {
+          "width": 324,
+          "height": 183
+        }
+      },
+      {
+        "src": "assets/workflow.png",
+        "complete": true,
+        "naturalWidth": 1200,
+        "naturalHeight": 800,
+        "rect": {
+          "width": 324,
+          "height": 217
+        }
+      }
+    ]
+  }
+}

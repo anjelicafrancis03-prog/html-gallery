@@ -1,0 +1,648 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light" data-ha-style="html-skills-comparison">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>四个 HTML Skill 横向对比：谁负责审美，谁负责文章，谁负责交付</title>
+  <style>
+    :root[data-theme="dark"] {
+      --color-bg: #111411;
+      --color-surface: #181d18;
+      --color-sheet: #20261f;
+      --color-panel: #272f27;
+      --color-text: #f5efe4;
+      --color-text-muted: #b9b0a4;
+      --color-accent: #d7b46a;
+      --color-accent-2: #88b9a7;
+      --color-accent-3: #d88d76;
+      --color-border: rgba(245, 239, 228, 0.17);
+      --color-rule: rgba(215, 180, 106, 0.34);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    :root[data-theme="light"] {
+      --color-bg: #fbfaf7;
+      --color-surface: #ffffff;
+      --color-sheet: #ffffff;
+      --color-panel: #f6f2ea;
+      --color-text: #1c1f1c;
+      --color-text-muted: #5f635b;
+      --color-accent: #8a5a18;
+      --color-accent-2: #2b6653;
+      --color-accent-3: #a84b3b;
+      --color-border: rgba(28, 31, 28, 0.11);
+      --color-rule: rgba(138, 90, 24, 0.14);
+      --shadow: 0 10px 26px rgba(66, 56, 40, 0.055);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(251,250,247,1) 34rem),
+        var(--color-bg);
+      color: var(--color-text);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+      line-height: 1.78;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration-color: var(--color-accent); text-underline-offset: 0.22em; }
+    ::selection { background: var(--color-accent); color: var(--color-bg); }
+
+    .theme-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 40;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--color-text);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .theme-toggle:hover { border-color: var(--color-accent); }
+    .theme-toggle:focus-visible, .chip:focus-visible, .toc a:focus-visible, .node:focus-visible, .detail-toggle:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    .page { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+    .masthead {
+      min-height: 94vh;
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(340px, 0.7fr);
+      gap: clamp(28px, 5vw, 76px);
+      align-items: center;
+      padding: 88px 0 58px;
+    }
+
+    .kicker {
+      margin: 0 0 18px;
+      color: var(--color-accent);
+      font: 700 0.78rem/1.2 "Microsoft YaHei", "PingFang SC", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { margin: 0; color: var(--color-text); text-wrap: pretty; }
+    h1 {
+      max-width: 860px;
+      font-size: clamp(3rem, 7.7vw, 6.2rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+      font-weight: 800;
+    }
+    .headline-note { display: inline-block; color: var(--color-accent-2); font-style: italic; font-weight: 500; }
+    .dek { max-width: 710px; margin: 28px 0 0; font-size: clamp(1.08rem, 2vw, 1.34rem); color: var(--color-text-muted); }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 34px;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+    .meta-row span {
+      border: 1px solid var(--color-border);
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--color-surface), transparent 20%);
+    }
+
+    .hero-visual, .hero-figure {
+      position: relative;
+      min-height: 590px;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-visual::before, .hero-figure::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border: 1px solid var(--color-rule);
+      pointer-events: none;
+    }
+
+    .toc-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(251, 250, 247, 0.86);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .toc {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 0;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      font-size: 0.86rem;
+    }
+    .toc a, .chip, .node {
+      white-space: nowrap;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border: 1px solid var(--color-border);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 7px 10px;
+      border-radius: 8px;
+    }
+    .toc a:hover, .chip:hover, .chip.active, .node:hover, .node.active { color: var(--color-text); border-color: var(--color-accent); }
+
+    main { width: min(790px, 100%); margin: 0 auto; padding: 72px 0 96px; }
+    .section { margin: 0 0 74px; }
+    .section h2 { margin-bottom: 22px; font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.12; }
+    .section h3 { margin: 34px 0 12px; font-size: 1.26rem; line-height: 1.4; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; }
+    p { margin: 0 0 18px; font-size: 1.06rem; color: var(--color-text-muted); }
+    strong { color: var(--color-text); }
+
+    .drop:first-letter {
+      float: left;
+      padding: 0.07em 0.12em 0 0;
+      font-size: 4.8rem;
+      line-height: 0.78;
+      color: var(--color-accent);
+      font-weight: 800;
+    }
+
+    .pull-quote {
+      margin: 34px 0;
+      padding: 22px 0 22px 24px;
+      border-left: 4px solid var(--color-accent);
+      color: var(--color-text);
+      background: linear-gradient(90deg, rgba(154, 107, 33, 0.055), transparent 64%);
+      font-size: clamp(1.24rem, 3vw, 1.72rem);
+      line-height: 1.45;
+      font-style: italic;
+    }
+
+    .figure, .interactive, .matrix, .ending-card {
+      margin: 34px 0;
+      border: 1px solid var(--color-border);
+      background: var(--color-sheet);
+      box-shadow: var(--shadow);
+      border-radius: 6px;
+    }
+    .figure svg, .figure img, .hero-figure img { display: block; width: 100%; height: auto; }
+    .hero-figure img, .figure img {
+      object-fit: contain;
+    }
+    .labeled-figure {
+      position: relative;
+      overflow: hidden;
+    }
+    .label-strip {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 48px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      z-index: 2;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    }
+    .label-strip span {
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--color-text);
+      backdrop-filter: blur(8px);
+      font-size: 0.78rem;
+      line-height: 1.35;
+      box-shadow: 0 8px 18px rgba(60, 50, 35, 0.055);
+      border-radius: 6px;
+    }
+    .label-strip b {
+      display: block;
+      color: var(--color-accent);
+      margin-bottom: 2px;
+    }
+    .caption {
+      padding: 10px 14px 13px;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font: 0.84rem/1.6 "Microsoft YaHei", "PingFang SC", sans-serif;
+    }
+
+    .matrix { overflow: hidden; }
+    .matrix table { width: 100%; border-collapse: collapse; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; }
+    .matrix th, .matrix td { padding: 14px 13px; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+    .matrix th { color: var(--color-text); background: var(--color-panel); font-size: 0.87rem; }
+    .matrix td { color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.65; }
+    .matrix tr:last-child td { border-bottom: 0; }
+    .tag { color: var(--color-accent); font-weight: 700; }
+
+    .skill-list { counter-reset: skill; display: grid; gap: 14px; margin: 28px 0; padding: 0; list-style: none; }
+    .skill-list li {
+      counter-increment: skill;
+      position: relative;
+      padding: 17px 18px 17px 64px;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+      color: var(--color-text-muted);
+      border-radius: 6px;
+    }
+    .skill-list li::before {
+      content: counter(skill, decimal-leading-zero);
+      position: absolute;
+      left: 17px;
+      top: 20px;
+      color: var(--color-accent);
+      font: 800 0.84rem/1 "Microsoft YaHei", sans-serif;
+    }
+    .skill-list b { color: var(--color-text); }
+
+    .interactive { padding: 20px; }
+    .chips, .decision-nodes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .chip, .node { font-family: "Microsoft YaHei", sans-serif; }
+    .chip-panel, .decision-panel {
+      min-height: 132px;
+      padding: 18px;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+    }
+    .chip-panel h3, .decision-panel h3 { margin-top: 0; }
+
+    .code-block {
+      margin: 28px 0;
+      border: 1px solid var(--color-border);
+      background: #fffaf1;
+      color: #2a2f2a;
+      overflow: hidden;
+      font-family: "Cascadia Code", Consolas, monospace;
+      border-radius: 6px;
+    }
+    .code-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-accent);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    pre { margin: 0; padding: 18px; overflow: auto; font-size: 0.9rem; line-height: 1.65; }
+
+    .detail-toggle {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+      color: var(--color-text);
+      text-align: left;
+      border-radius: 8px;
+    }
+    .detail-body { display: none; padding: 16px 2px 0; color: var(--color-text-muted); }
+    .detail-body.open { display: block; }
+
+    hr {
+      width: 92px;
+      height: 1px;
+      margin: 58px auto;
+      border: 0;
+      background: var(--color-rule);
+    }
+    hr::after {
+      content: "";
+      display: block;
+      width: 7px;
+      height: 7px;
+      margin: -3px auto 0;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
+    .ending-card { padding: 28px; background: linear-gradient(135deg, var(--color-sheet), var(--color-panel)); }
+    .ending-card h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); }
+    .footer-note {
+      width: min(790px, calc(100% - 32px));
+      margin: 0 auto 42px;
+      color: var(--color-text-muted);
+      font: 0.82rem/1.7 "Microsoft YaHei", "PingFang SC", sans-serif;
+      border-top: 1px solid var(--color-border);
+      padding-top: 16px;
+    }
+
+    @media (max-width: 930px) {
+      .masthead { grid-template-columns: 1fr; min-height: auto; padding-top: 78px; }
+    }
+    @media (max-width: 680px) {
+      .page, .toc, .footer-note { width: min(100% - 24px, 1180px); }
+      h1 { font-size: clamp(2.42rem, 14vw, 4.1rem); }
+      .hero-figure { min-height: auto; }
+      .label-strip { position: static; grid-template-columns: 1fr; padding: 10px; background: var(--color-sheet); }
+      .label-strip span { background: color-mix(in srgb, var(--color-bg), transparent 8%); }
+      .matrix { overflow-x: auto; }
+      .matrix table { min-width: 760px; }
+      .theme-toggle { right: 12px; top: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button>
+
+  <header class="page masthead">
+    <div>
+      <p class="kicker">HTML Skill Stack / 横向对比</p>
+      <h1>四个 HTML Skill，<span class="headline-note">别混用</span></h1>
+      <p class="dek">本地已经有 `claude-design`，又装了 `article-magazine`、`html-visual`、`html-anything`。它们都能碰 HTML，但职责完全不同：一个管审美系统，一个管文章长文，一个管交互图解，一个管最终交付。</p>
+      <div class="meta-row" aria-label="文章元信息">
+        <span>结论先行：组合用，不替代</span>
+        <span>阅读时间：7 分钟</span>
+        <span>用途：转发给其他线程</span>
+      </div>
+    </div>
+
+    <figure class="hero-figure labeled-figure" aria-label="四个 HTML skill 的工作台配图">
+      <img src="assets/html-skills-hero-v3.png" alt="四个 HTML skill 围绕一篇 HTML 文章分工协作的信息图" loading="eager">
+      <div class="label-strip" aria-hidden="true">
+        <span><b>claude-design</b>视觉系统</span>
+        <span><b>article-magazine</b>长文骨架</span>
+        <span><b>html-visual</b>交互图解</span>
+        <span><b>html-anything</b>最终交付</span>
+      </div>
+      <figcaption class="caption">首图：四个 skill 组成一条文章生产线，而不是彼此替代。</figcaption>
+    </figure>
+  </header>
+
+  <nav class="toc-wrap" aria-label="文章目录">
+    <div class="toc">
+      <a href="#thesis">一句话结论</a>
+      <a href="#matrix">横向对比</a>
+      <a href="#roles">逐个拆解</a>
+      <a href="#combine">怎么配合</a>
+      <a href="#decision">决策树</a>
+      <a href="#final">保留策略</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section" id="thesis">
+      <h2>先说结论：它们不是四选一。</h2>
+      <p class="drop">如果只是“写一篇专门的文章”，核心应该是 `article-magazine`。但如果你要的是高质量 HTML 图文长文，单靠它还不够。</p>
+      <p><strong>`claude-design` 决定像不像一件设计作品；`article-magazine` 决定像不像一篇文章；`html-visual` 决定有没有图解和互动；`html-anything` 决定最终能不能稳定落成可打开、可复用、可转换的 HTML。</strong></p>
+      <blockquote class="pull-quote">最好的保留方式不是删掉谁，而是把它们变成一条流水线：设计系统 → 文章骨架 → 可视化模块 → 单文件交付。</blockquote>
+    </section>
+
+    <hr>
+
+    <section class="section" id="matrix">
+      <h2>横向对比表。</h2>
+      <p>这四个 skill 看起来都在“写 HTML”，但真正的差别在于它们各自默认回答的问题不同。</p>
+
+      <figure class="figure labeled-figure">
+        <img src="assets/html-skills-matrix-v3.png" alt="四个 HTML skill 的四象限横向对比信息图" loading="lazy">
+        <div class="label-strip" aria-hidden="true">
+          <span><b>审美</b>claude-design</span>
+          <span><b>文章</b>article-magazine</span>
+          <span><b>图解</b>html-visual</span>
+          <span><b>交付</b>html-anything</span>
+        </div>
+        <figcaption class="caption">配图：四个 skill 的差别，不在于谁也能写 HTML，而在于默认解决的问题不同。</figcaption>
+      </figure>
+
+      <div class="matrix" aria-label="四个 HTML skill 横向对比表">
+        <table>
+          <thead>
+            <tr>
+              <th>Skill</th>
+              <th>最擅长</th>
+              <th>不擅长</th>
+              <th>适合保留方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag">claude-design</span></td>
+              <td>高保真视觉方向、品牌感、杂志感、版式系统、避免模板味。</td>
+              <td>它不是专门的文章转换器；如果没有内容骨架，容易先陷入视觉探索。</td>
+              <td>作为“视觉总监”放在最前面：先定审美和设计规则。</td>
+            </tr>
+            <tr>
+              <td><span class="tag">article-magazine</span></td>
+              <td>长文排版、公众号式节奏、章节组织、引用块、代码块、文末行动卡。</td>
+              <td>交互能力弱；复杂数据图、筛选、可视化要另补。</td>
+              <td>作为“文章主模板”：专门负责 HTML 图文长文。</td>
+            </tr>
+            <tr>
+              <td><span class="tag">html-visual</span></td>
+              <td>流程图、架构图、图表、交互筛选、看板、时间线、单页可视化。</td>
+              <td>默认不是长文写作；容易变成工具页或图表页，不像文章。</td>
+              <td>作为“图解模块库”：给文章插入互动解释区。</td>
+            </tr>
+            <tr>
+              <td><span class="tag">html-anything</span></td>
+              <td>把各种输入变成可打开的 HTML 成品；自动选风格、强调单文件交付。</td>
+              <td>范围太大，若不约束题材和风格，可能输出泛化报告。</td>
+              <td>作为“最终打包器”：统一落盘、交付、后续转平台。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="roles">
+      <h2>逐个拆开看。</h2>
+      <h3>01 claude-design：负责“像不像高级设计”</h3>
+      <p>它的价值不是写文章，而是防止 HTML 文章变成普通博客模板。比如字体层级、首屏构图、色彩克制、真实素材优先、不要一堆圆角卡片，这些都属于它的审美约束。</p>
+      <p>所以它适合做第一步：先声明视觉系统。哪怕最后使用 `article-magazine` 写正文，也应该让 `claude-design` 先定调。</p>
+
+      <h3>02 article-magazine：负责“像不像一篇可读长文”</h3>
+      <p>这是专门写文章时最核心的 skill。它天然适合公众号、技术博客、杂志长文：大标题、作者信息、短段落、H2/H3、引用、代码、列表、分隔符、最后一段收束。</p>
+      <p>如果你的目标是“HTML 写文章”，它应该是主干，而不是辅助。</p>
+
+      <h3>03 html-visual：负责“让复杂内容看得懂”</h3>
+      <p>文章里一旦有流程、对比、架构、决策树、时间线，就不要只靠文字。`html-visual` 适合把这些内容做成 SVG、图表、筛选器、可点击面板。</p>
+      <p>它不一定负责整篇文章，但很适合负责文章里的关键图文模块。</p>
+
+      <h3>04 html-anything：负责“最后真的变成成品”</h3>
+      <p>它的定位更像总装线：从一个想法、文件、URL 或资料夹出发，最后生成一个可打开、可分享、可继续转换的 HTML 文件。它适合做最后一公里。</p>
+      <p>但它太通用，所以使用时要明确指定：这是文章，不是 dashboard，不是 landing page，不是通用报告。</p>
+    </section>
+
+    <section class="section" id="combine">
+      <h2>最稳的组合方式。</h2>
+      <p>不要让四个 skill 同时抢主导权。它们应该像工序一样排队。</p>
+      <ol class="skill-list">
+        <li><b>先用 `claude-design` 定视觉系统。</b>确定是杂志、长文、冷静技术风，还是更像设计评论。顺便约束字体、色板、首屏、图片使用方式。</li>
+        <li><b>再用 `article-magazine` 搭文章骨架。</b>把内容拆成标题、引入、核心观点、场景编号、局限、结尾观点。</li>
+        <li><b>中途调用 `html-visual` 做关键模块。</b>比如横向对比表、使用决策树、流程图、可点击筛选区。</li>
+        <li><b>最后用 `html-anything` 收口交付。</b>保证是单文件 HTML，能打开，能转发，后续能再导出 PNG 或改成平台版本。</li>
+      </ol>
+
+      <figure class="figure labeled-figure">
+        <img src="assets/html-skills-workflow-v3.png" alt="四个 HTML skill 按顺序协作生成 HTML 文章的流程信息图" loading="lazy">
+        <div class="label-strip" aria-hidden="true">
+          <span><b>1</b>定视觉</span>
+          <span><b>2</b>搭文章</span>
+          <span><b>3</b>补图解</span>
+          <span><b>4</b>落 HTML</span>
+        </div>
+        <figcaption class="caption">配图：最稳的用法是把四个 skill 当成工序，而不是让它们互相抢主导权。</figcaption>
+      </figure>
+
+      <div class="figure" role="img" aria-label="四个 skill 串联工作流">
+        <svg viewBox="0 0 920 360" xmlns="http://www.w3.org/2000/svg">
+          <rect width="920" height="360" fill="var(--color-sheet)"/>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="var(--color-accent-2)"/>
+            </marker>
+          </defs>
+          <g font-family="Microsoft YaHei, sans-serif">
+            <g transform="translate(52 118)">
+              <rect width="172" height="104" fill="none" stroke="var(--color-border)"/>
+              <text x="24" y="44" fill="var(--color-accent)" font-size="18" font-weight="700">claude-design</text>
+              <text x="24" y="76" fill="var(--color-text-muted)" font-size="14">定审美 / 定系统</text>
+            </g>
+            <g transform="translate(272 118)">
+              <rect width="172" height="104" fill="none" stroke="var(--color-border)"/>
+              <text x="24" y="44" fill="var(--color-accent)" font-size="18" font-weight="700">article-magazine</text>
+              <text x="24" y="76" fill="var(--color-text-muted)" font-size="14">搭长文骨架</text>
+            </g>
+            <g transform="translate(492 118)">
+              <rect width="172" height="104" fill="none" stroke="var(--color-border)"/>
+              <text x="24" y="44" fill="var(--color-accent)" font-size="18" font-weight="700">html-visual</text>
+              <text x="24" y="76" fill="var(--color-text-muted)" font-size="14">插图解 / 互动</text>
+            </g>
+            <g transform="translate(712 118)">
+              <rect width="156" height="104" fill="var(--color-panel)" stroke="var(--color-accent)"/>
+              <text x="22" y="44" fill="var(--color-accent)" font-size="18" font-weight="700">html-anything</text>
+              <text x="22" y="76" fill="var(--color-text-muted)" font-size="14">落盘 / 交付</text>
+            </g>
+          </g>
+          <g stroke="var(--color-accent-2)" stroke-width="2" fill="none" marker-end="url(#arrow)">
+            <path d="M224 170 L272 170"/>
+            <path d="M444 170 L492 170"/>
+            <path d="M664 170 L712 170"/>
+          </g>
+          <text x="52" y="282" fill="var(--color-text-muted)" font-family="Microsoft YaHei, sans-serif" font-size="15">顺序很重要：先定设计语言，再组织文章，再补可视化，最后打包交付。</text>
+        </svg>
+        <div class="caption">这不是“四个模板轮流试”，而是把四个能力拼成一条文章生产线。</div>
+      </div>
+
+      <div class="code-block" aria-label="给其他线程的提示词模板">
+        <div class="code-title"><span>handoff prompt</span><span>copy-ready</span></div>
+        <pre><code>请用四个 HTML skill 配合完成一篇图文长文：
+1. claude-design：先定视觉系统和版式约束。
+2. article-magazine：作为文章主骨架，按杂志/公众号长文排版。
+3. html-visual：为关键对比、流程、决策树做交互图解。
+4. html-anything：最终输出单文件 HTML，落盘并验证可打开。
+题材：四个 HTML 写作/视觉 skill 的横向对比与使用策略。</code></pre>
+      </div>
+    </section>
+
+    <section class="section" id="decision">
+      <h2>不知道用哪个？按目标选。</h2>
+      <p>下面这个小模块可以直接给其他线程看：点目标，就知道谁做主、谁辅助。</p>
+      <div class="interactive" aria-label="HTML skill 使用决策树">
+        <div class="decision-nodes" role="tablist" aria-label="目标选择">
+          <button class="node active" type="button" data-target="article" role="tab" aria-selected="true">写文章</button>
+          <button class="node" type="button" data-target="visual" role="tab" aria-selected="false">做图解</button>
+          <button class="node" type="button" data-target="design" role="tab" aria-selected="false">要高级感</button>
+          <button class="node" type="button" data-target="deliver" role="tab" aria-selected="false">要成品交付</button>
+        </div>
+        <div class="decision-panel" id="decision-panel" tabindex="0">
+          <h3>写文章：`article-magazine` 做主</h3>
+          <p>主线用 `article-magazine`。开头用 `claude-design` 定视觉，遇到复杂说明时让 `html-visual` 插图解，最后让 `html-anything` 收口成单文件。</p>
+        </div>
+        <button class="detail-toggle" type="button" aria-expanded="false">展开：推荐保留策略</button>
+        <div class="detail-body">
+          <p><strong>保留全部。</strong>只把职责写清楚：`article-magazine` 是文章主模板，`claude-design` 是审美前置，`html-visual` 是图解组件，`html-anything` 是最终交付器。以后“专门写文章”默认走这条链路。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="final">
+      <h2>最后怎么保留配合？</h2>
+      <p>我建议不要删，也不要合并成一个大而全 skill。大而全的结果通常是边界变模糊，线程不知道该听谁的。</p>
+      <p>更好的做法是给其他线程一句固定规则：</p>
+      <blockquote class="pull-quote">写专门文章时，`article-magazine` 为主；追求设计质量时，先过 `claude-design`；需要图解互动时，插入 `html-visual`；最终落盘交付时，用 `html-anything` 收口。</blockquote>
+      <div class="ending-card">
+        <h2>一句话版</h2>
+        <p>这四个 skill 的关系不是竞品，而是工序。把它们当成“设计总监、主笔、图解编辑、出版打包”四个角色，就不会混用。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-note">
+    本页为 HTML skill 横向对比样稿。它使用长文杂志骨架、SVG 图解、交互决策模块和单文件交付，适合直接转发给其他线程作为工作流说明。
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector('.theme-toggle');
+    toggle.addEventListener('click', () => {
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      toggle.textContent = next === 'dark' ? '◐' : '●';
+    });
+
+    const decisionData = {
+      article: {
+        title: '写文章：`article-magazine` 做主',
+        body: '主线用 `article-magazine`。开头用 `claude-design` 定视觉，遇到复杂说明时让 `html-visual` 插图解，最后让 `html-anything` 收口成单文件。'
+      },
+      visual: {
+        title: '做图解：`html-visual` 做主',
+        body: '流程图、对比矩阵、架构图、时间线、筛选器都交给 `html-visual`。但如果外层是一篇长文，它只负责模块，不负责整篇文章。'
+      },
+      design: {
+        title: '要高级感：`claude-design` 先行',
+        body: '先用 `claude-design` 定字体、颜色、首屏、图片策略和版式禁区。它不一定写全文，但应该先把审美方向钉住。'
+      },
+      deliver: {
+        title: '要成品交付：`html-anything` 收口',
+        body: '`html-anything` 适合最后统一成一个可打开的 HTML 文件。使用时要明确指定文章路线，避免它自动跑成 dashboard 或泛报告。'
+      }
+    };
+
+    const panel = document.getElementById('decision-panel');
+    document.querySelectorAll('.node').forEach((node) => {
+      node.addEventListener('click', () => {
+        document.querySelectorAll('.node').forEach((item) => {
+          item.classList.remove('active');
+          item.setAttribute('aria-selected', 'false');
+        });
+        node.classList.add('active');
+        node.setAttribute('aria-selected', 'true');
+        const item = decisionData[node.dataset.target];
+        panel.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
+      });
+    });
+
+    const detailButton = document.querySelector('.detail-toggle');
+    const detailBody = document.querySelector('.detail-body');
+    detailButton.addEventListener('click', () => {
+      const open = !detailBody.classList.contains('open');
+      detailBody.classList.toggle('open', open);
+      detailButton.setAttribute('aria-expanded', String(open));
+    });
+  </script>
+</body>
+</html>
+

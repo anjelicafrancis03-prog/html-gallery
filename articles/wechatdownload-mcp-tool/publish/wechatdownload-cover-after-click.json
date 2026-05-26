@@ -1,0 +1,723 @@
+{
+  "title": "史上最好用的公众号文章批量下载工具：wechatDownload MCP 实测",
+  "coverText": "拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图",
+  "hasCover": false,
+  "coverStyle": "background-image:url('');  display: none; background-image: url(\"\"); ",
+  "bodyTail": "d`、`batch_download_articles`、`export_article_data` 是核心能力。 完整流程可以压成四步： 1. 准备真实公众号文章链接 2. 检查 MCP 服务和工具列表 3. 先用 3 条链接做 smoke test 4. 批量触发下载并扫描本地结果 三、正文来源必须说清楚 这篇很容易被误解成“万能公众号搜索工具”。不是。它不负责搜索文章，也不保证凭空找到某个公众号的全部历史内容。 这次链接池来自第三方索引页，但正文下载使用的是提取出来的真实 `mp.weixin.qq.com/s/...` 链接。也就是说，索引页只提供入口，不是正文来源。 链接池核验截图：需要确认最终交给工具的是公众号原文链接。 正确理解：第三方索引页提供 URL 列表，正文来源仍然是 `mp.weixin.qq.com/s/...`。 四、批量前先做 smoke test 批量下载最怕一上来就全量跑。正确做法是先抽 3 条链接，调用单篇下载，确认目录里真的出现正文和素材，再启动全量任务。 单篇 smoke test：先验证下载链路，再做 545 条批量触发。 批量触发截图：逐条把真实链接交给 MCP 工具，建议保留延迟，避免队列拥堵。 五、最终要看本地结果，不只看日志 触发成功只是第一层。真正可用的结果，要看本地有没有正文、图片、网页快照和可继续分析的文件结构。 本地落盘结构：正文和素材按目录保存，后续可以继续做统计、总结和检索。 最终统计截图：本轮 545 条触发成功，扫描到 501 篇有效 Markdown 正文。 原始下载证据：最终验收看本地文件，不只看工具界面或脚本输出。 六、保留 3 条核心命令就够了 公众号里代码块不要太重。真正需要复用的命令只保留三条：检查服务、批量触发、统计正文。 # 检查 MCP 服务 Invoke-RestMethod -Uri 'http://127.0.0.1:4545/mcp' -Method Post -ContentType 'application/json' -Body '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{}}' # 批量触发下载 node F:\\codex\\tools\\memorycarry_mcp_batch_download.js --start=0 --delayMs=1200 # 统计有效正文 python F:\\codex\\tools\\memorycarry_mcp_analyze.py 七、边界必须写在最后 它不是搜索器 需要先有 URL 列表，不能凭空找到所有历史文章。 正文来源必须是公众号原文 也就是 `mp.weixin.qq.com/s/...`。第三方索引页只提供链接，不是正文来源。 原文删除后可能失败 只要依赖公众号原文链接，就会受原文可访问状态影响。 所以这套工具最适合的场景是：你已经有一批真实公众号文章 URL，想把下载、落盘、统计和后续分析交给本地 Agent 自动完成。 拖拽或选择封面 从正文选择 从图片库选择 微信扫码上传 AI 配图 41/120 原创 声明原创成功后将获得平台著作权保护，并有可能得到推荐 未声明 赞赏 声明原创后才可开启 留言 留言自动精选公开 合集 未添加 icon 原文链接 未添加 icon 创作来源 未添加 icon 平台推荐 已开启 icon 19:11已保存 正文字数1442 回到顶部 一键排版 发表 预览 保存为草稿 问题反馈 CDP Bridge",
+  "nodes": [
+    {
+      "i": 0,
+      "tag": "A",
+      "id": "",
+      "text": "服务号",
+      "cls": "weui-desktop-service-logo__inner",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 30,
+        "y": 12,
+        "w": 116,
+        "h": 32
+      }
+    },
+    {
+      "i": 1,
+      "tag": "LI",
+      "id": "js_editor_insertimage",
+      "text": "图片",
+      "cls": "tpl_item tpl_item_dropdown jsInsertIcon img",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 416,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 3,
+      "tag": "INPUT",
+      "id": "",
+      "text": "",
+      "cls": "",
+      "accept": "image/gif,image/jpeg,image/jpg,image/png,image/svg,image/webp",
+      "src": "",
+      "style": "",
+      "visible": false,
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    {
+      "i": 7,
+      "tag": "LI",
+      "id": "js_editor_insertvideo",
+      "text": "视频",
+      "cls": "tpl_item jsInsertIcon video",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 473,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 8,
+      "tag": "LI",
+      "id": "audio_music_plugin_btn",
+      "text": "音频",
+      "cls": "tpl_item tpl_item_dropdown jsInsertIcon audio",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 529,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 11,
+      "tag": "LI",
+      "id": "js_editor_insertlink",
+      "text": "超链接",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 605,
+        "y": 9,
+        "w": 66,
+        "h": 36
+      }
+    },
+    {
+      "i": 12,
+      "tag": "LI",
+      "id": "js_editor_insertweapp",
+      "text": "小程序",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 671,
+        "y": 9,
+        "w": 66,
+        "h": 36
+      }
+    },
+    {
+      "i": 13,
+      "tag": "LI",
+      "id": "js_editor_inserttemplate",
+      "text": "模板",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 737,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 14,
+      "tag": "LI",
+      "id": "js_editor_insertvote",
+      "text": "投票",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 789,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 15,
+      "tag": "LI",
+      "id": "js_editor_insertsearch",
+      "text": "搜索",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 841,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 16,
+      "tag": "LI",
+      "id": "editor_poi",
+      "text": "地理位置",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 893,
+        "y": 9,
+        "w": 80,
+        "h": 36
+      }
+    },
+    {
+      "i": 17,
+      "tag": "LI",
+      "id": "js_editor_insertVideoSnap",
+      "text": "视频号",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 973,
+        "y": 9,
+        "w": 66,
+        "h": 36
+      }
+    },
+    {
+      "i": 18,
+      "tag": "LI",
+      "id": "js_editor_insertProfile",
+      "text": "账号名片",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1039,
+        "y": 9,
+        "w": 80,
+        "h": 36
+      }
+    },
+    {
+      "i": 19,
+      "tag": "LI",
+      "id": "js_editor_21",
+      "text": "问答",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1119,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 20,
+      "tag": "LI",
+      "id": "js_editor_29",
+      "text": "礼物",
+      "cls": "tpl_item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1171,
+        "y": 9,
+        "w": 52,
+        "h": 36
+      }
+    },
+    {
+      "i": 21,
+      "tag": "LI",
+      "id": "js_editor_advIncomeEntry",
+      "text": "收入变现",
+      "cls": "tpl_item tpl_item_dropdown jsInsertIcon",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1223,
+        "y": 9,
+        "w": 80,
+        "h": 36
+      }
+    },
+    {
+      "i": 36,
+      "tag": "LI",
+      "id": "editor_showmore",
+      "text": "自定义工具栏",
+      "cls": "tpl_item tpl_item_dropdown jsInsertIcon more",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1307,
+        "y": 9,
+        "w": 44,
+        "h": 36
+      }
+    },
+    {
+      "i": 38,
+      "tag": "LI",
+      "id": "js_import_file",
+      "text": "导入",
+      "cls": "media_extra_item import_file",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1482,
+        "y": 9,
+        "w": 56,
+        "h": 36
+      }
+    },
+    {
+      "i": 42,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "weui-desktop-account__thumb",
+      "accept": "",
+      "src": "https://wx.qlogo.cn/mmopen/aNJZ1Dtu57sXwR8GlcdkDnARz2J2RqgLrzo4pVQnzeehsCAGXbCicaQicMObiaA1NCjhaHjT5uKFVuQWNFnzhPW51A0ydIy8zJF/64",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1627,
+        "y": 12,
+        "w": 30,
+        "h": 30
+      }
+    },
+    {
+      "i": 68,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "appmsg_account_img",
+      "accept": "",
+      "src": "https://wx.qlogo.cn/mmopen/aNJZ1Dtu57sXwR8GlcdkDnARz2J2RqgLrzo4pVQnzeehsCAGXbCicaQicMObiaA1NCjhaHjT5uKFVuQWNFnzhPW51A0ydIy8zJF/64",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 45,
+        "y": 140,
+        "w": 20,
+        "h": 20
+      }
+    },
+    {
+      "i": 69,
+      "tag": "DIV",
+      "id": "",
+      "text": "",
+      "cls": "card_appmsg_thumb js_appmsg_thumb_new",
+      "accept": "",
+      "src": "",
+      "style": "background-image:url('');",
+      "visible": true,
+      "rect": {
+        "x": 32,
+        "y": 172,
+        "w": 370,
+        "h": 157
+      }
+    },
+    {
+      "i": 193,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf44TkibOjgltCIvvB8V35740mquEhic9mks7UQN8twTOrz07HUkvm3R3eicjANyRTNR9xDOsMQn1QibqLP8IUucyVDeR7l9nVEL1PQ/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -6333,
+        "w": 578,
+        "h": 371
+      }
+    },
+    {
+      "i": 195,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf7icf0IHPodBTrAWlTrwNlcHzNP2pxqVTnxSp16BPAPicyDzavv1x9HIw51liaKLibWB2ia1G3NlunpepfX7QtTiaVp3tmUKdAgMIHnQ/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -5047,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 197,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf6Wnd1RuGI1NbZ8Xf3CM2S53fCt730N0TRibpawkYTOV6AEztKsA6h5FbBk5kKmRrSsnEpe63Uic3PQo3EgDiceyRxzt143UgvbNQ/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -4133,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 199,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/mmecoa_png/MqBksTqEibf5Aw3vwuwcJVGDPWD5jB4F8ibmKxgiaMx0XpAFKYBvpB996ia7yhhic7fBPMOZItiavBfm7QDGIhEcuSmzjzSIvibes9MicdJVILICd4Y/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -3364,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 201,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf437C03mvzAARhvcmlRfwVDYhrGbzu3as6tgsXLLwAfdSclOBVxGbXY24MYFKFaFKbYHNzhSgdHaXpiafdicGOMzRRxOnzcW32Cc/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -2844,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 203,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf51yAVhbV8kLM0OLevCb8xWypMSSTrKVjy4ticozicEYBwiaVVO0NMO5fRSYfmbDx9vXgVibiaTmlU9sibhAhCwskgocx9cZgLBlYZL8/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -2183,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 205,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf4JlYPHbMeW28ml0gp43571jiav8CBXicnjUtAibcSZjLbh8XhNMhqD6g27LHOLGYicbAOahkQ0icjYA25aEWwxMf5e9963SbkwwXqs/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -1663,
+        "w": 578,
+        "h": 407
+      }
+    },
+    {
+      "i": 207,
+      "tag": "IMG",
+      "id": "",
+      "text": "",
+      "cls": "rich_pages wxw-img js_insertlocalimg",
+      "accept": "",
+      "src": "https://mmecoa.qpic.cn/sz_mmecoa_png/MqBksTqEibf7Qzf9f8VAVqeoJrKtSDMOO6GrbTGS36bF7IlSYXTxzf5EwAqjpryPvw2Qxl4I8RJFfQnWPd8iaqHuiaibHEYeqnotQ3t7cI01yN8/640?wx_fmt=png&from=appmsg",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 595,
+        "y": -1143,
+        "w": 578,
+        "h": 489
+      }
+    },
+    {
+      "i": 230,
+      "tag": "LI",
+      "id": "",
+      "text": "从正文选择",
+      "cls": "pop-opr__item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 655,
+        "y": 413,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "i": 231,
+      "tag": "A",
+      "id": "",
+      "text": "从正文选择",
+      "cls": "pop-opr__button js_selectCoverFromContent",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 655,
+        "y": 413,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "i": 232,
+      "tag": "LI",
+      "id": "",
+      "text": "从图片库选择",
+      "cls": "pop-opr__item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 655,
+        "y": 455,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "i": 233,
+      "tag": "A",
+      "id": "",
+      "text": "从图片库选择",
+      "cls": "pop-opr__button js_imagedialog",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 655,
+        "y": 455,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "i": 234,
+      "tag": "LI",
+      "id": "",
+      "text": "微信扫码上传",
+      "cls": "pop-opr__item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 655,
+        "y": 498,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "i": 235,
+      "tag": "A",
+      "id": "",
+      "text": "微信扫码上传",
+      "cls": "pop-opr__button js_imageScan",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 655,
+        "y": 498,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "i": 236,
+      "tag": "LI",
+      "id": "",
+      "text": "AI 配图",
+      "cls": "pop-opr__item",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 655,
+        "y": 540,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "i": 237,
+      "tag": "A",
+      "id": "",
+      "text": "AI 配图",
+      "cls": "pop-opr__button js_aiImage",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 655,
+        "y": 540,
+        "w": 116,
+        "h": 42
+      }
+    },
+    {
+      "i": 255,
+      "tag": "A",
+      "id": "",
+      "text": "回到顶部",
+      "cls": "tool_bar__fold-btn",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1288,
+        "y": 684,
+        "w": 106,
+        "h": 36
+      }
+    },
+    {
+      "i": 257,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "发表",
+      "cls": "mass_send",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1151,
+        "y": 761,
+        "w": 98,
+        "h": 34
+      }
+    },
+    {
+      "i": 258,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "预览",
+      "cls": "",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1042,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "i": 259,
+      "tag": "BUTTON",
+      "id": "",
+      "text": "保存为草稿",
+      "cls": "",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 932,
+        "y": 761,
+        "w": 96,
+        "h": 34
+      }
+    },
+    {
+      "i": 294,
+      "tag": "DIV",
+      "id": "ljq-ind",
+      "text": "CDP Bridge",
+      "cls": "",
+      "accept": "",
+      "src": "",
+      "style": "",
+      "visible": true,
+      "rect": {
+        "x": 1574,
+        "y": 767,
+        "w": 99,
+        "h": 29
+      }
+    }
+  ]
+}
