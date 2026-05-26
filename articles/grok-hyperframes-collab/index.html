@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grok + Image2 + HyperFrames 协作短片制作报告</title>
+  <style>
+    :root {
+      --bg: #10130f;
+      --surface: #1b2119;
+      --panel: #252d21;
+      --text: #f4f0e6;
+      --muted: #b8b19f;
+      --accent: #d7ff5f;
+      --orange: #ff9f43;
+      --green: #85e89d;
+      --red: #ff6b6b;
+      --border: #3a4332;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    header {
+      padding: 56px 6vw 34px;
+      background:
+        linear-gradient(90deg, rgba(16,19,15,.94), rgba(16,19,15,.68)),
+        url("screenshots/final-frame-01.jpg") center/cover;
+      border-bottom: 1px solid var(--border);
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 1120px;
+      margin: 12px 0;
+      font-size: clamp(34px, 5vw, 72px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 940px;
+      color: var(--muted);
+      font-size: 19px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .pill {
+      border: 1px solid var(--border);
+      background: rgba(37,45,33,.78);
+      border-radius: 999px;
+      padding: 7px 12px;
+      color: var(--text);
+      font-size: 13px;
+    }
+    main { padding: 28px 6vw 72px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    section, .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; }
+    h2 { font-size: 25px; }
+    h3 { font-size: 18px; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--muted); }
+    video, img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #050705;
+      display: block;
+    }
+    .hero-video video { max-height: 72vh; object-fit: contain; }
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .thumb-grid figure {
+      margin: 0;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    figcaption {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--accent); }
+    code {
+      color: var(--accent);
+      word-break: break-all;
+    }
+    .ok { color: var(--green); font-weight: 800; }
+    .warn { color: var(--orange); font-weight: 800; }
+    .bad { color: var(--red); font-weight: 800; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .flow .card { background: var(--panel); }
+    .flow strong {
+      display: block;
+      color: var(--accent);
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 980px) {
+      header, main { padding-left: 18px; padding-right: 18px; }
+      .span-8, .span-6, .span-4 { grid-column: span 12; }
+      .thumb-grid, .flow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">Production report · Grok + Image2 + HyperFrames</div>
+    <h1>Grok 生成复杂素材，HyperFrames 稳定成片</h1>
+    <p class="lead">基于《Grok MCP 中文小众搜索测评》的“灰度运营经验收集”题材，制作一条 60 秒横屏短片。Image2 负责分镜图，Grok 负责复杂动态视频素材，HyperFrames 负责中文字幕、图表、证据截图、转场和最终渲染。</p>
+    <div class="meta">
+      <span class="pill">日期：2026-05-26</span>
+      <span class="pill">最终视频：1920×1080 / 24fps / 60s</span>
+      <span class="pill">千问配音：Dylan 1.7B 中文旁白 / AAC 音轨</span>
+      <span class="pill">Grok 视频：3 段 image-to-video + 既有 20s 实测素材</span>
+      <span class="pill">HyperFrames：lint 0 error / inspect 0 layout issue</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <section class="span-12 hero-video">
+        <h2>最终成片</h2>
+        <p class="muted">有声标准版，60 秒。Grok 动态素材只做画面层；所有关键中文、图表和结论由 HyperFrames 控制，千问 Dylan 1.7B 中文旁白负责解说。</p>
+        <video controls src="assets/grok-hyperframes-60s-voiced-better.mp4"></video>
+      </section>
+
+      <section class="span-8">
+        <h2>制作结论</h2>
+        <p>这次验证的最佳分工是：Grok 不负责最终文字，不负责精确图表，也不硬做 20 秒到 30 秒的二次扩展。Grok 的价值是把分镜图变成有复杂运动感的素材，HyperFrames 的价值是把素材变成可控、可复现、可读的成片。</p>
+        <p>由于此前 Grok 20 秒视频继续扩展到 30 秒会被 API 限制拒绝，最终采用剪辑合成路线：多个 8-20 秒片段进入 HyperFrames，统一转码为 CFR 单视频流，再由 HTML 时间轴完成 60 秒短片。</p>
+      </section>
+
+      <section class="span-4">
+        <h2>验收结果</h2>
+        <table>
+          <tr><th>项目</th><th>结果</th></tr>
+          <tr><td>视频时长</td><td class="ok">60.000 秒</td></tr>
+          <tr><td>分辨率</td><td class="ok">1920×1080</td></tr>
+          <tr><td>帧率</td><td class="ok">24fps</td></tr>
+          <tr><td>配音</td><td class="ok">千问 Dylan 1.7B / AAC / 60.000 秒</td></tr>
+          <tr><td>HyperFrames lint</td><td class="warn">0 error / 2 warning</td></tr>
+          <tr><td>HyperFrames inspect</td><td class="ok">0 layout issue</td></tr>
+          <tr><td>中文字幕</td><td class="ok">关键帧人工检查通过</td></tr>
+        </table>
+      </section>
+
+      <section class="span-12">
+        <h2>工作流拆解</h2>
+        <div class="flow">
+          <div class="card"><strong>1. Image2 出分镜</strong><p>先生成 6 张 16:9 分镜图，用来统一构图、色彩、镜头语言和题材气质。</p></div>
+          <div class="card"><strong>2. Grok 出复杂视频</strong><p>选择开场、灰度运营样本、视频实测三张分镜图，用 Grok image-to-video 生成 8 秒动态素材。</p></div>
+          <div class="card"><strong>3. HyperFrames 稳定合成</strong><p>把 Grok 视频、原报告截图、字幕、评分条和流程图放入 HTML 时间轴，渲染成最终 MP4。</p></div>
+        </div>
+      </section>
+
+      <section class="span-12">
+        <h2>Image2 分镜图</h2>
+        <div class="thumb-grid">
+          <figure><img src="storyboards/storyboard-01-opening.png"><figcaption>01 开场：中文小众搜索的信息流和证据板</figcaption></figure>
+          <figure><img src="storyboards/storyboard-02-tools.png"><figcaption>02 四工具：Grok / Bright Data / Tavily / 内置搜索</figcaption></figure>
+          <figure><img src="storyboards/storyboard-03-grayops.png"><figcaption>03 灰度运营样本：规则、风险标签、案例证据</figcaption></figure>
+          <figure><img src="storyboards/storyboard-04-comparison.png"><figcaption>04 结果对比：雷达图、评分条、证据截图</figcaption></figure>
+          <figure><img src="storyboards/storyboard-05-video-test.png"><figcaption>05 视频实测：10s、20s、30s 限制</figcaption></figure>
+          <figure><img src="storyboards/storyboard-06-workflow.png"><figcaption>06 工作流结论：Image2 → Grok → HyperFrames</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="span-12">
+        <h2>Grok 生成的视频素材</h2>
+        <div class="thumb-grid">
+          <figure><video controls src="grok-videos/grok-opening-8s-480p.mp4"></video><figcaption>开场分镜生成 8 秒动态素材</figcaption></figure>
+          <figure><video controls src="grok-videos/grok-grayops-8s-480p.mp4"></video><figcaption>灰度运营分镜生成 8 秒动态素材</figcaption></figure>
+          <figure><video controls src="grok-videos/grok-video-test-8s-480p.mp4"></video><figcaption>视频实测分镜生成 8 秒动态素材</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="span-12">
+        <h2>HyperFrames 成片关键帧</h2>
+        <div class="thumb-grid">
+          <figure><img src="screenshots/final-frame-01.jpg"><figcaption>0-6s 开场钩子</figcaption></figure>
+          <figure><img src="screenshots/final-frame-02.jpg"><figcaption>6-16s 四类工具登场</figcaption></figure>
+          <figure><img src="screenshots/final-frame-03.jpg"><figcaption>16-28s 灰度运营样本</figcaption></figure>
+          <figure><img src="screenshots/final-frame-04.jpg"><figcaption>28-40s 结果对比</figcaption></figure>
+          <figure><img src="screenshots/final-frame-05.jpg"><figcaption>40-52s Grok 视频实测</figcaption></figure>
+          <figure><img src="screenshots/final-frame-06.jpg"><figcaption>52-60s 工作流结论</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="span-6">
+        <h2>关键制作记录</h2>
+        <table>
+          <tr><th>环节</th><th>记录</th></tr>
+          <tr><td>Image2</td><td>6 张分镜全部生成；其中工具登场和结果对比各有一次超时后重试成功。</td></tr>
+          <tr><td>Grok</td><td>OAuth 可用；视频接口出现过可重试网络错误，重试后 3 段素材全部成功。</td></tr>
+          <tr><td>转码</td><td>Grok MP4 统一转为单视频流 CFR，避免 HyperFrames 寻帧漂移。</td></tr>
+          <tr><td>千问配音</td><td>Voicebox CUDA 后端调用 qwen_custom_voice 1.7B 预置 Dylan 声音，6 段生成后按场景补静音，仅第 2 段小幅压速，整体对齐到 60 秒成片。</td></tr>
+          <tr><td>HyperFrames</td><td>先草稿渲染，再标准版；最终成品 60 秒。</td></tr>
+        </table>
+      </section>
+
+      <section class="span-6">
+        <h2>本地文件</h2>
+        <p><strong>成品页：</strong><code>C:\html\articles\grok-hyperframes-collab\index.html</code></p>
+        <p><strong>最终视频：</strong><code>C:\html\articles\grok-hyperframes-collab\assets\grok-hyperframes-60s-voiced-better.mp4</code></p>
+        <p><strong>配音音轨：</strong><code>C:\html\articles\grok-hyperframes-collab\assets\voiceover-qwen-dylan-1p7b-better.wav</code></p>
+        <p><strong>HyperFrames 工程：</strong><code>F:\codex\projects\grok-hyperframes-collab\hyperframes\grok-hyperframes-60s</code></p>
+        <p><strong>源报告：</strong><code>C:\html\articles\grok-search-benchmark\index.html</code></p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
