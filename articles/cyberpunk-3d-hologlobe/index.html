@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canary 3D Hologlobe Console</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+    :root {
+      --neon-pink: #ff007f;
+      --neon-blue: #00f2fe;
+      --neon-green: #05ffc0;
+      --neon-purple: #bd00ff;
+      --neon-yellow: #fffb00;
+      --bg-dark: #030409;
+      --panel-bg: rgba(6, 7, 18, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 10px;
+      user-select: none;
+    }
+
+    /* Ambient background glows */
+    .glow-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .glow-bg::before {
+      content: '';
+      position: absolute;
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.05) 0%, transparent 60%);
+      top: -400px;
+      left: -200px;
+    }
+    .glow-bg::after {
+      content: '';
+      position: absolute;
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(circle, rgba(189, 0, 255, 0.05) 0%, transparent 60%);
+      bottom: -400px;
+      right: -200px;
+    }
+
+    main {
+      z-index: 10;
+      text-align: center;
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Header Panel */
+    .header-panel {
+      width: 100%;
+      max-width: 960px;
+      background: rgba(10, 12, 30, 0.6);
+      border: 1px solid rgba(0, 242, 254, 0.15);
+      border-radius: 12px;
+      padding: 12px 24px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .title-group {
+      text-align: left;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(to right, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: #7d96b5;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .telemetry-header {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--neon-green);
+      display: flex;
+      gap: 20px;
+      text-align: right;
+    }
+    .telemetry-item span {
+      color: #8da2bb;
+    }
+
+    /* Stage Canvas Wrapper */
+    .stage-container {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(4, 5, 12, 0.8);
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      width: 960px;
+    }
+
+    /* Canvas UI scanlines and grid indicators */
+    .stage-container::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid var(--neon-blue);
+      border-left: 2px solid var(--neon-blue);
+      pointer-events: none;
+    }
+    .stage-container::after {
+      content: '';
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 12px;
+      height: 12px;
+      border-bottom: 2px solid var(--neon-blue);
+      border-right: 2px solid var(--neon-blue);
+      pointer-events: none;
+    }
+
+    canvas {
+      display: block;
+      background: #010205;
+      border-radius: 12px;
+      width: 936px;
+      height: 540px;
+      cursor: grab;
+    }
+    canvas:active {
+      cursor: grabbing;
+    }
+
+    /* Target DOM Elements for HTML-in-Canvas */
+    .cyber-widgets-wrap {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+    }
+
+    /* Common Widget style */
+    .cyber-widget {
+      width: 280px;
+      height: 170px;
+      background: var(--panel-bg);
+      border-radius: 12px;
+      padding: 16px;
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      position: relative;
+      box-sizing: border-box;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .widget-corner-decor {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      pointer-events: none;
+    }
+    .wcd-tl { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+    .wcd-tr { top: 0; right: 0; border-top: 2px solid; border-right: 2px solid; }
+    .wcd-bl { bottom: 0; left: 0; border-bottom: 2px solid; border-left: 2px solid; }
+    .wcd-br { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
+
+    .widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .widget-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+    }
+
+    .widget-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    /* Widget 1: Diagnostic Core (Blue) */
+    .widget-core {
+      border: 2px solid var(--neon-blue);
+    }
+    .widget-core .widget-title { color: var(--neon-blue); }
+    .widget-core .widget-badge { background: rgba(0, 242, 254, 0.15); color: var(--neon-blue); }
+    .widget-core .widget-corner-decor { border-color: var(--neon-blue); }
+
+    .chart-container {
+      width: 100%;
+      height: 45px;
+      margin-bottom: 8px;
+    }
+    .log-terminal {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      padding: 6px;
+      height: 52px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.7);
+      overflow-y: hidden;
+      line-height: 1.2;
+    }
+    .log-line {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .log-green { color: var(--neon-green); }
+
+    /* Widget 2: Spatial Radar (Green) */
+    .widget-radar {
+      border: 2px solid var(--neon-green);
+    }
+    .widget-radar .widget-title { color: var(--neon-green); }
+    .widget-radar .widget-badge { background: rgba(5, 255, 192, 0.15); color: var(--neon-green); }
+    .widget-radar .widget-corner-decor { border-color: var(--neon-green); }
+
+    .radar-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      height: 100px;
+    }
+    .radar-graphic {
+      width: 76px;
+      height: 76px;
+      position: relative;
+      border: 1.5px solid rgba(5, 255, 192, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .radar-sweep {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(5, 255, 192, 0.2) 0deg, transparent 90deg, transparent 360deg);
+      animation: sweep-anim 3s linear infinite;
+    }
+    .radar-center-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--neon-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--neon-green);
+    }
+    .radar-target {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: var(--neon-pink);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--neon-pink);
+      animation: target-blink 1.5s infinite alternate;
+    }
+    .radar-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .radar-text div span {
+      color: #8da2bb;
+    }
+
+    /* Widget 3: Neural Link (Purple) */
+    .widget-neural {
+      border: 2px solid var(--neon-purple);
+    }
+    .widget-neural .widget-title { color: var(--neon-purple); }
+    .widget-neural .widget-badge { background: rgba(189, 0, 255, 0.15); color: var(--neon-purple); }
+    .widget-neural .widget-corner-decor { border-color: var(--neon-purple); }
+
+    .sync-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .sync-label { color: #8da2bb; }
+    .sync-value { font-weight: bold; font-family: 'JetBrains Mono', monospace; }
+    
+    .percent-bar-wrap {
+      background: rgba(255, 255, 255, 0.04);
+      height: 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .percent-bar-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--neon-purple), var(--neon-pink));
+      box-shadow: 0 0 10px rgba(189, 0, 255, 0.5);
+    }
+    .neural-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .neural-node {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      padding: 6px 0;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    .neural-node.active {
+      border-color: var(--neon-purple);
+      background: rgba(189, 0, 255, 0.1);
+      color: #ffffff;
+      box-shadow: 0 0 8px rgba(189, 0, 255, 0.2);
+    }
+
+    /* Widget 4: Threat Analytics (Pink) */
+    .widget-threat {
+      border: 2px solid var(--neon-pink);
+    }
+    .widget-threat .widget-title { color: var(--neon-pink); }
+    .widget-threat .widget-badge { background: rgba(255, 0, 127, 0.15); color: var(--neon-pink); }
+    .widget-threat .widget-corner-decor { border-color: var(--neon-pink); }
+
+    .threat-level-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 0, 127, 0.05);
+      border: 1px dashed rgba(255, 0, 127, 0.2);
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    .tli-lbl {
+      font-size: 11px;
+      color: #8da2bb;
+    }
+    .tli-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--neon-pink);
+      text-shadow: 0 0 5px var(--neon-pink);
+    }
+
+    .alert-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      height: 60px;
+      overflow-y: hidden;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+    }
+    .alert-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .alert-warn { border-left: 2px solid var(--neon-yellow); color: var(--neon-yellow); }
+    .alert-danger { border-left: 2px solid var(--neon-pink); color: var(--neon-pink); }
+    .alert-info { border-left: 2px solid var(--neon-blue); color: var(--neon-blue); }
+
+    @keyframes sweep-anim {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes target-blink {
+      0% { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Interactive Indicators overlaying canvas */
+    .hud-controls {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      z-index: 20;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .btn-blue {
+      background: var(--neon-blue);
+      color: var(--bg-dark);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    }
+    .btn-blue:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+    }
+
+    .btn-purple {
+      background: var(--neon-purple);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
+    }
+    .btn-purple:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(189, 0, 255, 0.6);
+    }
+
+    .btn-pink {
+      background: var(--neon-pink);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+    }
+    .btn-pink:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: #8da2bb;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .system-status {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--neon-green);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 1px;
+      z-index: 20;
+    }
+
+    .toast-overlay {
+      position: absolute;
+      top: 30px;
+      background: rgba(255, 0, 127, 0.15);
+      border: 1.5px solid var(--neon-pink);
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: #ffffff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+      backdrop-filter: blur(10px);
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 100;
+    }
+    .toast-overlay.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-bg"></div>
+
+  <main>
+    <!-- Header panel with status telemetry -->
+    <div class="header-panel">
+      <div class="title-group">
+        <h1>3D HOLOGLOBE INTERACTIVE HUD</h1>
+        <div class="subtitle">Canary 150 layoutsubtree Engine & Projected Raycast Controller</div>
+      </div>
+      <div class="telemetry-header">
+        <div class="telemetry-item"><span>COGNITIVE FLOW:</span> <strong id="valEfficiency">98.4%</strong></div>
+        <div class="telemetry-item"><span>SECTOR COORD:</span> <strong>X-0479</strong></div>
+        <div class="telemetry-item"><span>FLAG:</span> <strong style="color: var(--neon-blue)">DRAW_ELEM_ACTIVE</strong></div>
+      </div>
+    </div>
+
+    <!-- Canvas Wrapper -->
+    <div class="stage-container">
+      <canvas id="stage" width="936" height="540" layoutsubtree>
+        <!-- The Widgets we render in 3D -->
+        <div class="cyber-widgets-wrap">
+          <!-- Widget 1: Diagnostic Core -->
+          <div class="cyber-widget widget-core" id="widgetCore">
+            <div class="widget-corner-decor wcd-tl"></div>
+            <div class="widget-corner-decor wcd-tr"></div>
+            <div class="widget-corner-decor wcd-bl"></div>
+            <div class="widget-corner-decor wcd-br"></div>
+            <div class="widget-header">
+              <span class="widget-title">TACTICAL CORE DIAGNOSTICS</span>
+              <span class="widget-badge" id="badgeCore">STABLE</span>
+            </div>
+            <!-- Dynamic SVG Wave Line -->
+            <div class="chart-container">
+              <svg width="100%" height="100%" viewBox="0 0 248 45" preserveAspectRatio="none">
+                <path id="svgWavePath" d="M0,22 Q30,10 60,30 T120,20 T180,35 T248,15" fill="none" stroke="var(--neon-blue)" stroke-width="2" />
+                <path id="svgWaveFill" d="M0,22 Q30,10 60,30 T120,20 T180,35 T248,15 L248,45 L0,45 Z" fill="rgba(0, 242, 254, 0.08)" />
+              </svg>
+            </div>
+            <!-- Log Console -->
+            <div class="log-terminal" id="logConsole">
+              <div class="log-line log-green">&gt; CORE_SYS: Boot OK.</div>
+              <div class="log-line">&gt; SECTOR_PROJ: Ortho matrix computed.</div>
+            </div>
+          </div>
+
+          <!-- Widget 2: Spatial Radar -->
+          <div class="cyber-widget widget-radar" id="widgetRadar">
+            <div class="widget-corner-decor wcd-tl"></div>
+            <div class="widget-corner-decor wcd-tr"></div>
+            <div class="widget-corner-decor wcd-bl"></div>
+            <div class="widget-corner-decor wcd-br"></div>
+            <div class="widget-header">
+              <span class="widget-title">SPATIAL SCANNER ARRAY</span>
+              <span class="widget-badge">ACTIVE</span>
+            </div>
+            <div class="radar-row">
+              <div class="radar-graphic">
+                <div class="radar-sweep"></div>
+                <div class="radar-center-dot"></div>
+                <div class="radar-target" style="top: 20px; left: 45px;"></div>
+                <div class="radar-target" style="top: 50px; left: 15px; animation-delay: 0.5s;"></div>
+              </div>
+              <div class="radar-text">
+                <div><span>BEARING:</span> 284.5°</div>
+                <div><span>RANGE:</span> <span id="radarRange" style="color:#ffffff;">482.1km</span></div>
+                <div><span>OBJECTS:</span> 02 TARGETS</div>
+                <div><span>STATUS:</span> SCANNING</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Widget 3: Neural Link -->
+          <div class="cyber-widget widget-neural" id="widgetNeural">
+            <div class="widget-corner-decor wcd-tl"></div>
+            <div class="widget-corner-decor wcd-tr"></div>
+            <div class="widget-corner-decor wcd-bl"></div>
+            <div class="widget-corner-decor wcd-br"></div>
+            <div class="widget-header">
+              <span class="widget-title">NEURAL LINK SYNC</span>
+              <span class="widget-badge" id="badgeNeural">SYNCED</span>
+            </div>
+            <div class="sync-row">
+              <span class="sync-label">COGNITIVE SYNC SPEED:</span>
+              <span class="sync-value" id="valSyncPercent">78%</span>
+            </div>
+            <div class="percent-bar-wrap">
+              <div class="percent-bar-fill" id="syncPercentFill" style="width: 78%"></div>
+            </div>
+            <div class="neural-grid">
+              <span class="neural-node active" id="nodeA">N_01</span>
+              <span class="neural-node active" id="nodeB">N_02</span>
+              <span class="neural-node" id="nodeC">N_03</span>
+              <span class="neural-node" id="nodeD">N_04</span>
+            </div>
+          </div>
+
+          <!-- Widget 4: Threat Analytics -->
+          <div class="cyber-widget widget-threat" id="widgetThreat">
+            <div class="widget-corner-decor wcd-tl"></div>
+            <div class="widget-corner-decor wcd-tr"></div>
+            <div class="widget-corner-decor wcd-bl"></div>
+            <div class="widget-corner-decor wcd-br"></div>
+            <div class="widget-header">
+              <span class="widget-title">THREAT INTEL DECODE</span>
+              <span class="widget-badge" style="color:#ff007f; background:rgba(255, 0, 127, 0.1)">MINIMAL</span>
+            </div>
+            <div class="threat-level-indicator">
+              <span class="tli-lbl">DECRYPTION DEPTH:</span>
+              <span class="tli-val" id="threatProgress">04.18%</span>
+            </div>
+            <div class="alert-feed" id="alertFeed">
+              <div class="alert-item alert-info">
+                <span>SECTOR LOCK</span>
+                <span>RESOLVED</span>
+              </div>
+              <div class="alert-item alert-warn">
+                <span>BEACON DRIFT</span>
+                <span>DETECTED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </canvas>
+    </div>
+
+    <!-- UI Overlay Controls -->
+    <div class="hud-controls">
+      <button class="btn btn-blue" id="btnGlitchTrigger">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        触发电磁干扰脉冲
+      </button>
+      <button class="btn btn-purple" id="btnToggleGlobe">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        切换地球网格类型
+      </button>
+      <button class="btn btn-pink" id="btnAutoSpin">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+        开启/关闭自动巡航
+      </button>
+      <button class="btn btn-secondary" id="btnResetView">重置视角</button>
+    </div>
+
+    <!-- API State indicator -->
+    <div class="system-status" id="apiStatus">CANARY API: DETECTING...</div>
+
+    <!-- Glitch feedback Toast overlay -->
+    <div class="toast-overlay" id="toastNotice">CRITICAL ELECTROMAGNETIC PULSE DETECTED</div>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('stage');
+    const ctx = canvas.getContext('2d');
+    const apiStatus = document.getElementById('apiStatus');
+    const toastNotice = document.getElementById('toastNotice');
+
+    const widgetCore = document.getElementById('widgetCore');
+    const widgetRadar = document.getElementById('widgetRadar');
+    const widgetNeural = document.getElementById('widgetNeural');
+    const widgetThreat = document.getElementById('widgetThreat');
+
+    // Detect experimental Canary HTML-in-Canvas APIs
+    const supportsHtmlInCanvas = 
+      typeof HTMLCanvasElement.prototype.requestPaint === 'function' &&
+      typeof CanvasRenderingContext2D.prototype.drawElementImage === 'function';
+
+    if (supportsHtmlInCanvas) {
+      apiStatus.textContent = "CANARY API: [ACTIVE] drawElementImage() rendering layoutsubtree natively";
+      apiStatus.style.color = "var(--neon-green)";
+    } else {
+      apiStatus.textContent = "CANARY API: [FALLBACK] drawElementImage() simulated in fallback container";
+      apiStatus.style.color = "#ff3b30";
+    }
+
+    // ----------------------------------------------------
+    // REAL-TIME WIDGET DYNAMICS (DOM level updates)
+    // ----------------------------------------------------
+    let frameCount = 0;
+    
+    // Wave animation path calculations
+    const svgPath = document.getElementById('svgWavePath');
+    const svgFill = document.getElementById('svgWaveFill');
+    function updateCoreWave() {
+      const points = [];
+      const waveHeight = 15;
+      const midY = 22;
+      const count = 12;
+      const segmentWidth = 248 / (count - 1);
+      
+      for (let i = 0; i < count; i++) {
+        const x = i * segmentWidth;
+        const offset = frameCount * 0.08 + i * 0.5;
+        const y = midY + Math.sin(offset) * waveHeight + Math.cos(offset * 0.5) * 5;
+        points.push({x, y});
+      }
+      
+      let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+      for (let i = 0; i < points.length - 1; i++) {
+        const p1 = points[i];
+        const p2 = points[i+1];
+        const xc = (p1.x + p2.x) / 2;
+        const yc = (p1.y + p2.y) / 2;
+        d += ` Q ${p1.x.toFixed(1)} ${p1.y.toFixed(1)}, ${xc.toFixed(1)} ${yc.toFixed(1)}`;
+      }
+      d += ` L ${points[points.length-1].x.toFixed(1)} ${points[points.length-1].y.toFixed(1)}`;
+      
+      svgPath.setAttribute('d', d);
+      
+      // Also update background fill
+      const dFill = d + ` L 248 45 L 0 45 Z`;
+      svgFill.setAttribute('d', dFill);
+    }
+
+    // Scrolling logs in diagnostic widget
+    const logConsole = document.getElementById('logConsole');
+    const diagnosticMessages = [
+      "DIAG: Syncing sector X-0479...",
+      "DIAG: Frame matrix translation OK.",
+      "DIAG: Checking vector distance variables...",
+      "DIAG: Quantum synchronization successful.",
+      "DIAG: Render elements inside viewport layout...",
+      "DIAG: Telemetry check: no leaks detected.",
+      "DIAG: Flag state: drawElementImage true.",
+      "DIAG: Glitch pulse detector normal."
+    ];
+    function appendDiagnosticLog() {
+      if (Math.random() < 0.05) {
+        const msg = diagnosticMessages[Math.floor(Math.random() * diagnosticMessages.length)];
+        const div = document.createElement('div');
+        div.className = "log-line";
+        div.textContent = `> ${msg}`;
+        if (Math.random() < 0.3) div.classList.add('log-green');
+        logConsole.appendChild(div);
+        if (logConsole.children.length > 5) {
+          logConsole.removeChild(logConsole.firstChild);
+        }
+      }
+    }
+
+    // Radar distance simulation
+    const radarRange = document.getElementById('radarRange');
+    function updateRadarRange() {
+      if (Math.random() < 0.1) {
+        const distance = 400 + Math.random() * 150;
+        radarRange.textContent = `${distance.toFixed(1)}km`;
+      }
+    }
+
+    // Neural Link sync bar and node states
+    const valSyncPercent = document.getElementById('valSyncPercent');
+    const syncPercentFill = document.getElementById('syncPercentFill');
+    const valEfficiency = document.getElementById('valEfficiency');
+    
+    const nodeA = document.getElementById('nodeA');
+    const nodeB = document.getElementById('nodeB');
+    const nodeC = document.getElementById('nodeC');
+    const nodeD = document.getElementById('nodeD');
+    
+    function updateNeuralWidget() {
+      // Small fluctuation
+      if (Math.random() < 0.08) {
+        const base = Math.floor(70 + Math.sin(frameCount * 0.02) * 15 + Math.random() * 10);
+        const capped = Math.min(100, Math.max(0, base));
+        valSyncPercent.textContent = `${capped}%`;
+        syncPercentFill.style.width = `${capped}%`;
+        
+        // Node state updates
+        nodeA.className = capped > 50 ? "neural-node active" : "neural-node";
+        nodeB.className = capped > 65 ? "neural-node active" : "neural-node";
+        nodeC.className = capped > 80 ? "neural-node active" : "neural-node";
+        nodeD.className = capped > 90 ? "neural-node active" : "neural-node";
+        
+        // Cognitive efficiency
+        const eff = 90 + Math.sin(frameCount * 0.01) * 8 + Math.random() * 2;
+        valEfficiency.textContent = `${eff.toFixed(1)}%`;
+      }
+    }
+
+    // Threat alert updates
+    const threatProgress = document.getElementById('threatProgress');
+    const alertFeed = document.getElementById('alertFeed');
+    const alertItems = [
+      { type: 'danger', tag: 'THREAT INTRUDE', desc: 'SECTOR WARNING' },
+      { type: 'warn', tag: 'PING DRIFT', desc: 'CDP PORT ATTEMPT' },
+      { type: 'info', tag: 'MATRIX ALIGN', desc: 'CALIBRATED' },
+      { type: 'info', tag: 'SECURITY PASS', desc: 'RESTORED' }
+    ];
+    function updateThreatWidget() {
+      // decryption depth progress
+      const progress = (Math.sin(frameCount * 0.005) * 5 + 10 + (frameCount * 0.01) % 80);
+      threatProgress.textContent = `${progress.toFixed(2)}%`;
+      
+      if (Math.random() < 0.015) {
+        const item = alertItems[Math.floor(Math.random() * alertItems.length)];
+        const div = document.createElement('div');
+        div.className = `alert-item alert-${item.type}`;
+        div.innerHTML = `<span>${item.tag}</span><span>${item.desc}</span>`;
+        alertFeed.appendChild(div);
+        if (alertFeed.children.length > 2) {
+          alertFeed.removeChild(alertFeed.firstChild);
+        }
+      }
+    }
+
+    // ----------------------------------------------------
+    // 3D HOLOGLOBE MATHEMATICAL ENGINE
+    // ----------------------------------------------------
+    const fov = 400; // Camera focal length
+    let orbitRadius = 260; // Orbit radius of the orbiting HTML cards
+    let globeRadius = 135; // Radius of the 3D globe in the center
+    
+    // Euler angles for camera rotation
+    let rotX = 0.5; // pitch
+    let rotY = 0.6; // yaw
+    let isDragging = false;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+    
+    // Inertia physics variables
+    let vx = 0; // pitch velocity
+    let vy = 0; // yaw velocity
+    const friction = 0.94;
+    let autoSpinEnabled = true;
+
+    // Globe configuration
+    let globeType = 0; // 0 = Full Wire Grid, 1 = Dense Longitudinal Rings, 2 = Tech Nodes Planet
+
+    // 3D Projection function
+    function project3D(x, y, z) {
+      // 3D coordinate rotation on X (pitch) and Y (yaw)
+      // Rotate around Y axis (yaw)
+      const cosY = Math.cos(rotY);
+      const sinY = Math.sin(rotY);
+      let x1 = x * cosY - z * sinY;
+      let z1 = x * sinY + z * cosY;
+
+      // Rotate around X axis (pitch)
+      const cosX = Math.cos(rotX);
+      const sinX = Math.sin(rotX);
+      let y2 = y * cosX - z1 * sinX;
+      let z2 = y * sinX + z1 * cosX;
+
+      const scale = fov / (fov + z2);
+      return {
+        x: x1 * scale + canvas.width / 2,
+        y: y2 * scale + canvas.height / 2,
+        scale: scale,
+        depth: z2 // for Z sorting
+      };
+    }
+
+    // Pre-calculated 3D Points for Globe representation
+    const globePoints = [];
+    // Generate sphere particles (latitudes & longitudes)
+    const latCount = 14;
+    const lonCount = 20;
+    for (let i = 0; i <= latCount; i++) {
+      const lat = (i / latCount) * Math.PI - Math.PI / 2; // -90deg to +90deg
+      for (let j = 0; j < lonCount; j++) {
+        const lon = (j / lonCount) * 2 * Math.PI; // 0 to 360deg
+        const x = Math.cos(lat) * Math.cos(lon);
+        const y = Math.sin(lat);
+        const z = Math.cos(lat) * Math.sin(lon);
+        globePoints.push({ x, y, z });
+      }
+    }
+
+    // 3D Starfield particles
+    const numStars = 100;
+    const stars = [];
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * 800 - 400,
+        y: Math.random() * 800 - 400,
+        z: Math.random() * 800 - 400,
+        size: Math.random() * 1.5 + 0.5
+      });
+    }
+
+    // ----------------------------------------------------
+    // POST-PROCESSING GLITCH & CHROMATIC ABERRATION STATE
+    // ----------------------------------------------------
+    let glitchActive = false;
+    let glitchFrames = 0;
+    const maxGlitchFrames = 12;
+
+    function triggerGlitchPulse() {
+      glitchActive = true;
+      glitchFrames = maxGlitchFrames;
+      
+      // Flash CSS backdrop color slightly
+      canvas.style.borderColor = "var(--neon-pink)";
+      canvas.style.boxShadow = "0 0 30px rgba(255, 0, 127, 0.4)";
+      
+      // Toast message
+      toastNotice.classList.add('show');
+      
+      // Core widget gets alarm status
+      document.getElementById('badgeCore').textContent = "INTERRUPT";
+      document.getElementById('badgeCore').style.color = "var(--neon-pink)";
+      document.getElementById('badgeCore').style.background = "rgba(255, 0, 127, 0.1)";
+
+      setTimeout(() => {
+        canvas.style.borderColor = "rgba(255,255,255,0.05)";
+        canvas.style.boxShadow = "0 40px 100px rgba(0,0,0,0.8)";
+        toastNotice.classList.remove('show');
+        document.getElementById('badgeCore').textContent = "STABLE";
+        document.getElementById('badgeCore').style.color = "var(--neon-blue)";
+        document.getElementById('badgeCore').style.background = "rgba(0, 242, 254, 0.15)";
+      }, 1500);
+    }
+
+    // Offscreen Canvas for Chromatic Aberration
+    const offCanvas = document.createElement('canvas');
+    offCanvas.width = 936;
+    offCanvas.height = 540;
+    const offCtx = offCanvas.getContext('2d');
+
+    // ----------------------------------------------------
+    // WIDGET PROJECTED PLACEMENT & INTERACTIVE HOVER MATRIX
+    // ----------------------------------------------------
+    const widgets = [
+      { id: 'widgetCore', el: widgetCore, angleOffset: 0, label: 'TACTICAL DIAGNOSTICS', color: 'var(--neon-blue)', hover: false },
+      { id: 'widgetRadar', el: widgetRadar, angleOffset: Math.PI / 2, label: 'SPATIAL SCANNER', color: 'var(--neon-green)', hover: false },
+      { id: 'widgetNeural', el: widgetNeural, angleOffset: Math.PI, label: 'NEURAL LINK SYNC', color: 'var(--neon-purple)', hover: false },
+      { id: 'widgetThreat', el: widgetThreat, angleOffset: 3 * Math.PI / 2, label: 'THREAT INTEL DECODE', color: 'var(--neon-pink)', hover: false }
+    ];
+
+    let hoverTarget = null;
+    let mousePos = { x: -1000, y: -1000 };
+
+    // Track mouse on canvas
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+      mousePos.x = mx;
+      mousePos.y = my;
+
+      if (isDragging) {
+        const dx = e.clientX - lastMouseX;
+        const dy = e.clientY - lastMouseY;
+        vy = dx * 0.005;
+        vx = dy * 0.005;
+        rotY += vy;
+        rotX += vx;
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+      }
+    });
+
+    canvas.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+      autoSpinEnabled = false;
+      document.getElementById('btnAutoSpin').classList.add('btn-secondary');
+      document.getElementById('btnAutoSpin').classList.remove('btn-pink');
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Raycasting click event handler
+    canvas.addEventListener('click', (e) => {
+      // Find if we clicked on any hovered widget
+      if (hoverTarget) {
+        triggerGlitchPulse();
+      }
+    });
+
+    // ----------------------------------------------------
+    // DRAWING PIPELINE
+    // ----------------------------------------------------
+
+    // Draws stars, grids, planet rings, and core sphere in 3D
+    function drawMainScene(context) {
+      context.fillStyle = '#010204';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Draw Starfield
+      context.fillStyle = 'rgba(255, 255, 255, 0.4)';
+      for (let i = 0; i < numStars; i++) {
+        const star = stars[i];
+        
+        // Rotate stars slightly in space to simulate slow galaxy spin
+        const cos = Math.cos(0.0003);
+        const sin = Math.sin(0.0003);
+        const rx = star.x * cos - star.z * sin;
+        const rz = star.x * sin + star.z * cos;
+        star.x = rx;
+        star.z = rz;
+
+        const proj = project3D(star.x, star.y, star.z);
+        if (proj.x >= 0 && proj.x <= canvas.width && proj.y >= 0 && proj.y <= canvas.height) {
+          context.beginPath();
+          context.arc(proj.x, proj.y, star.size * proj.scale, 0, Math.PI * 2);
+          context.fill();
+        }
+      }
+
+      // 2. Draw Floor Tech Grid
+      context.strokeStyle = 'rgba(0, 242, 254, 0.05)';
+      context.lineWidth = 1;
+      const floorY = 160;
+      for (let xCoord = -500; xCoord <= 500; xCoord += 100) {
+        const p1 = project3D(xCoord, floorY, -500);
+        const p2 = project3D(xCoord, floorY, 500);
+        context.beginPath();
+        context.moveTo(p1.x, p1.y);
+        context.lineTo(p2.x, p2.y);
+        context.stroke();
+      }
+      for (let zCoord = -500; zCoord <= 500; zCoord += 100) {
+        const p1 = project3D(-500, floorY, zCoord);
+        const p2 = project3D(500, floorY, zCoord);
+        context.beginPath();
+        context.moveTo(p1.x, p1.y);
+        context.lineTo(p2.x, p2.y);
+        context.stroke();
+      }
+
+      // 3. Draw Outer Orbit Ring (Widgets path)
+      context.strokeStyle = 'rgba(189, 0, 255, 0.07)';
+      context.lineWidth = 2.5;
+      context.beginPath();
+      for (let a = 0; a <= Math.PI * 2 + 0.1; a += 0.05) {
+        const px = orbitRadius * Math.cos(a);
+        const py = 0;
+        const pz = orbitRadius * Math.sin(a);
+        const proj = project3D(px, py, pz);
+        if (a === 0) context.moveTo(proj.x, proj.y);
+        else context.lineTo(proj.x, proj.y);
+      }
+      context.stroke();
+
+      // 4. Draw 3D Globe Sphere (rotating opposite to widget orbit)
+      const globeRotSpeed = -frameCount * 0.003;
+      const cosG = Math.cos(globeRotSpeed);
+      const sinG = Math.sin(globeRotSpeed);
+      
+      // Draw grid lines connecting points on the globe for tech look
+      if (globeType === 0) {
+        context.strokeStyle = 'rgba(5, 255, 192, 0.06)';
+        context.lineWidth = 1;
+        // Drawing Latitudes circles
+        for (let latIdx = 0; latIdx <= latCount; latIdx++) {
+          context.beginPath();
+          const lat = (latIdx / latCount) * Math.PI - Math.PI / 2;
+          for (let lonIdx = 0; lonIdx <= lonCount; lonIdx++) {
+            const lon = (lonIdx / lonCount) * 2 * Math.PI;
+            // Local spin
+            const lx = globeRadius * Math.cos(lat) * Math.cos(lon + globeRotSpeed);
+            const ly = globeRadius * Math.sin(lat);
+            const lz = globeRadius * Math.cos(lat) * Math.sin(lon + globeRotSpeed);
+            const proj = project3D(lx, ly, lz);
+            if (lonIdx === 0) context.moveTo(proj.x, proj.y);
+            else context.lineTo(proj.x, proj.y);
+          }
+          context.stroke();
+        }
+      }
+
+      // Draw globe points/dots
+      context.fillStyle = 'rgba(5, 255, 192, 0.45)';
+      globePoints.forEach(p => {
+        // Apply globe rotation around Y
+        const rx = p.x * cosG - p.z * sinG;
+        const rz = p.x * sinG + p.z * cosG;
+        
+        const gx = rx * globeRadius;
+        const gy = p.y * globeRadius;
+        const gz = rz * globeRadius;
+
+        const proj = project3D(gx, gy, gz);
+        
+        // Culling back side points (depth > 0 is closer, depth < 0 is behind)
+        if (proj.depth > -10) {
+          const dotSize = (proj.scale * 1.5) * (proj.depth > 0 ? 1.2 : 0.7);
+          context.beginPath();
+          context.arc(proj.x, proj.y, dotSize, 0, Math.PI * 2);
+          context.fill();
+        }
+      });
+
+      // 5. Draw Orbiting Satellites / Data Signals
+      const satAngle = frameCount * 0.015;
+      const sx = (globeRadius + 35) * Math.cos(satAngle);
+      const sy = (globeRadius + 35) * Math.sin(satAngle) * 0.3;
+      const sz = (globeRadius + 35) * Math.sin(satAngle);
+      const satProj = project3D(sx, sy, sz);
+      context.fillStyle = 'var(--neon-pink)';
+      context.shadowColor = 'var(--neon-pink)';
+      context.shadowBlur = 10;
+      context.beginPath();
+      context.arc(satProj.x, satProj.y, satProj.scale * 4, 0, Math.PI * 2);
+      context.fill();
+      context.shadowBlur = 0; // reset
+
+      // Satellite trace line
+      context.strokeStyle = 'rgba(255, 0, 127, 0.2)';
+      context.lineWidth = 1;
+      context.beginPath();
+      for (let a = 0; a < Math.PI * 2; a += 0.1) {
+        const px = (globeRadius + 35) * Math.cos(a);
+        const py = (globeRadius + 35) * Math.sin(a) * 0.3;
+        const pz = (globeRadius + 35) * Math.sin(a);
+        const proj = project3D(px, py, pz);
+        if (a === 0) context.moveTo(proj.x, proj.y);
+        else context.lineTo(proj.x, proj.y);
+      }
+      context.closePath();
+      context.stroke();
+
+      // 6. Draw central energy core glow
+      const coreProj = project3D(0, 0, 0);
+      const coreGlowSize = globeRadius * 0.45 * coreProj.scale;
+      const radialGlow = context.createRadialGradient(
+        coreProj.x, coreProj.y, 2,
+        coreProj.x, coreProj.y, coreGlowSize
+      );
+      radialGlow.addColorStop(0, 'rgba(5, 255, 192, 0.5)');
+      radialGlow.addColorStop(0.3, 'rgba(0, 242, 254, 0.3)');
+      radialGlow.addColorStop(1, 'rgba(189, 0, 255, 0)');
+      context.fillStyle = radialGlow;
+      context.beginPath();
+      context.arc(coreProj.x, coreProj.y, coreGlowSize, 0, Math.PI * 2);
+      context.fill();
+    }
+
+    // Static Fallback Widget drawing (renders beautifully if drawElementImage is missing)
+    function drawEmulatedWidget(context, w, x, y, scale, alpha) {
+      context.save();
+      context.translate(x, y);
+      context.scale(scale, scale);
+      context.globalAlpha = alpha;
+
+      // Glow border shadow
+      context.shadowColor = w.color;
+      context.shadowBlur = w.hover ? 25 : 12;
+
+      // Border container
+      context.fillStyle = 'rgba(6, 7, 18, 0.95)';
+      context.strokeStyle = w.color;
+      context.lineWidth = w.hover ? 3 : 1.5;
+      
+      context.beginPath();
+      context.roundRect ? context.roundRect(-140, -85, 280, 170, 12) : context.rect(-140, -85, 280, 170);
+      context.fill();
+      context.stroke();
+      context.shadowBlur = 0; // reset
+
+      // Draw header
+      context.fillStyle = w.color;
+      context.font = "bold 11px 'Orbitron'";
+      context.fillText(w.label, -120, -55);
+      
+      context.fillStyle = "rgba(255, 255, 255, 0.6)";
+      context.font = "9px 'JetBrains Mono'";
+      context.fillText("STABLE RUN", 90, -55);
+
+      // Divider line
+      context.strokeStyle = 'rgba(255,255,255,0.08)';
+      context.lineWidth = 1;
+      context.beginPath();
+      context.moveTo(-120, -42);
+      context.lineTo(120, -42);
+      context.stroke();
+
+      // Render some sci-fi elements dynamically
+      context.fillStyle = '#8da2bb';
+      context.font = "10px sans-serif";
+      context.fillText("PROJECTED COMPILER SYSTEM ACTIVE", -120, -22);
+      context.fillText(`COGNITIVE VECTOR RANGE: ${orbitRadius}M`, -120, -7);
+
+      // Progress bar simulation
+      context.fillStyle = 'rgba(255, 255, 255, 0.05)';
+      context.fillRect(-120, 10, 240, 8);
+      context.strokeStyle = 'rgba(255,255,255,0.1)';
+      context.strokeRect(-120, 10, 240, 8);
+
+      const fillPercent = 0.5 + Math.sin(frameCount * 0.01 + w.angleOffset) * 0.3;
+      context.fillStyle = w.color;
+      context.fillRect(-120, 10, 240 * fillPercent, 8);
+
+      // Sub-text indicator
+      context.fillStyle = '#ffffff';
+      context.font = "bold 9px 'JetBrains Mono'";
+      context.fillText(`SYNC: ${(fillPercent * 100).toFixed(0)}%`, -120, 32);
+      context.fillText("CANARY 150 OK", 60, 32);
+
+      context.restore();
+    }
+
+    // Main drawing function orchestrator
+    function draw() {
+      // Slow rotation velocity friction
+      if (!isDragging) {
+        rotY += vy;
+        rotX += vx;
+        vy *= friction;
+        vx *= friction;
+        
+        if (autoSpinEnabled) {
+          // Slow constant rotation
+          rotY += 0.004;
+        }
+      }
+
+      // Ensure Pitch stays within bounds to prevent flipping upside down
+      rotX = Math.max(-Math.PI / 2.2, Math.min(Math.PI / 2.2, rotX));
+
+      // 1. Calculate Orbiting Widget Positions
+      const orbitSpeed = frameCount * 0.007;
+      
+      widgets.forEach(w => {
+        const currentAngle = orbitSpeed + w.angleOffset;
+        
+        // Calculate orbit Y/Z projection based on pitch/yaw matrices
+        // Orbit is flat in local space: X = radius * cos, Y = 0, Z = radius * sin
+        const lx = orbitRadius * Math.cos(currentAngle);
+        const ly = -10; // offset slightly upward
+        const lz = orbitRadius * Math.sin(currentAngle);
+
+        w.proj = project3D(lx, ly, lz);
+        w.x3d = lx;
+        w.y3d = ly;
+        w.z3d = lz;
+      });
+
+      // Z-sorting (draw elements furthest away first)
+      // Depth sorting order: lowest depth (furthest z3d) -> highest depth (closest z3d)
+      const sortedWidgets = [...widgets].sort((a, b) => a.proj.depth - b.proj.depth);
+
+      // Reset hover targets
+      hoverTarget = null;
+
+      // 2. Perform drawing (using offscreen canvas first if doing chromatic aberration glitch)
+      const targetCtx = (glitchActive && frameCount % 2 === 0) ? offCtx : ctx;
+      
+      drawMainScene(targetCtx);
+
+      // Render widgets depth-sorted
+      sortedWidgets.forEach(w => {
+        const scale = w.proj.scale;
+        
+        // Bounding box calculations in 2D for hover raycasting
+        const wWidth = 280 * scale;
+        const wHeight = 170 * scale;
+        const leftX = w.proj.x - wWidth / 2;
+        const rightX = w.proj.x + wWidth / 2;
+        const topY = w.proj.y - wHeight / 2;
+        const bottomY = w.proj.y + wHeight / 2;
+
+        const isMouseOver = (
+          mousePos.x >= leftX && mousePos.x <= rightX &&
+          mousePos.y >= topY && mousePos.y <= bottomY
+        );
+
+        w.hover = isMouseOver;
+        if (isMouseOver) {
+          hoverTarget = w;
+          // Set canvas cursor
+          canvas.style.cursor = "pointer";
+        }
+
+        // Depth alpha calculations: further = transparent, closer = solid
+        const depthRatio = (w.proj.depth + orbitRadius) / (2 * orbitRadius); // ranges 0 to 1
+        const alpha = Math.max(0.2, depthRatio * 0.75 + 0.25); // 0.25 to 1.0
+        
+        // Calculate Depth of Field Blur based on distance from focal center
+        // Far widgets get blurred, near widgets stay extremely crisp
+        const focalZ = 50; // Focal depth plane
+        const distFromFocus = Math.abs(w.proj.depth - focalZ);
+        const blurAmount = Math.min(6, distFromFocus * 0.015);
+
+        targetCtx.save();
+        targetCtx.translate(w.proj.x, w.proj.y);
+        
+        // Interactive Scale: Hovered widget scales up slightly
+        const targetScale = w.hover ? scale * 1.12 : scale;
+        targetCtx.scale(targetScale, targetScale);
+
+        targetCtx.globalAlpha = alpha;
+
+        if (blurAmount > 0.8) {
+          targetCtx.filter = `blur(${blurAmount.toFixed(1)}px) brightness(${0.6 + depthRatio * 0.4})`;
+        } else {
+          targetCtx.filter = "none";
+        }
+
+        // Draw HUD overlay glow behind card
+        if (w.hover) {
+          const cardGlow = targetCtx.createRadialGradient(0, 0, 10, 0, 0, 180);
+          cardGlow.addColorStop(0, w.color.replace(')', ', 0.2)').replace('var', 'rgba'));
+          cardGlow.addColorStop(1, 'rgba(0,0,0,0)');
+          targetCtx.fillStyle = cardGlow;
+          targetCtx.beginPath();
+          targetCtx.arc(0, 0, 180, 0, Math.PI * 2);
+          targetCtx.fill();
+        }
+
+        if (supportsHtmlInCanvas) {
+          // Native experimental drawElementImage
+          // Draw widget centered on projection point
+          targetCtx.drawElementImage(w.el, -140, -85);
+        } else {
+          // Fallback rendering
+          targetCtx.restore(); // restore translation to call function properly
+          drawEmulatedWidget(targetCtx, w, w.proj.x, w.proj.y, targetScale, alpha);
+          targetCtx.save(); // dummy save to balance restore
+        }
+
+        targetCtx.restore();
+
+        // Front hologram scanning line overlay on the most in-focus hovered card
+        if (w.hover && depthRatio > 0.6) {
+          targetCtx.save();
+          targetCtx.translate(w.proj.x, w.proj.y);
+          targetCtx.scale(targetScale, targetScale);
+          
+          const scanY = Math.sin(Date.now() * 0.005) * 80; // -80 to 80
+          targetCtx.strokeStyle = w.color;
+          targetCtx.lineWidth = 2;
+          targetCtx.shadowColor = w.color;
+          targetCtx.shadowBlur = 10;
+          targetCtx.beginPath();
+          targetCtx.moveTo(-130, scanY);
+          targetCtx.lineTo(130, scanY);
+          targetCtx.stroke();
+          targetCtx.restore();
+        }
+      });
+
+      // Reset cursor to grab if not hovered
+      if (!hoverTarget && !isDragging) {
+        canvas.style.cursor = "grab";
+      } else if (isDragging) {
+        canvas.style.cursor = "grabbing";
+      }
+
+      // Draw overlay lens flare overlay grid (hologram lens simulation)
+      targetCtx.fillStyle = 'rgba(0, 242, 254, 0.015)';
+      targetCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Laser scan beam overlay running vertically across screen
+      const beamY = (frameCount * 1.5) % canvas.height;
+      targetCtx.fillStyle = 'rgba(0, 242, 254, 0.05)';
+      targetCtx.fillRect(0, beamY, canvas.width, 1);
+      targetCtx.fillStyle = 'rgba(255, 0, 127, 0.02)';
+      targetCtx.fillRect(0, (beamY + 150) % canvas.height, canvas.width, 2);
+
+      // 3. Chromatic Aberration post-processing split
+      if (glitchActive && frameCount % 2 === 0) {
+        glitchFrames--;
+        if (glitchFrames <= 0) {
+          glitchActive = false;
+        }
+
+        ctx.fillStyle = '#010204';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Perform RGB split: Draw Red, Green, Blue frames slightly shifted
+        ctx.save();
+        ctx.globalCompositeOperation = 'screen';
+
+        const shift = 4 + Math.random() * 6;
+
+        // Red frame
+        ctx.globalAlpha = 0.9;
+        ctx.drawImage(offCanvas, -shift, 0);
+        ctx.fillStyle = 'rgba(255, 0, 0, 0.15)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Green frame
+        ctx.globalAlpha = 0.95;
+        ctx.drawImage(offCanvas, 0, shift * 0.5);
+        ctx.fillStyle = 'rgba(0, 255, 0, 0.15)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Blue frame
+        ctx.globalAlpha = 0.9;
+        ctx.drawImage(offCanvas, shift, -shift * 0.5);
+        ctx.fillStyle = 'rgba(0, 0, 255, 0.15)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.restore();
+
+        // Horizontal coordinate offset tearing
+        if (Math.random() < 0.4) {
+          const sliceY = Math.random() * canvas.height;
+          const sliceHeight = 20 + Math.random() * 60;
+          const sliceOffset = Math.random() * 30 - 15;
+          ctx.drawImage(canvas, 0, sliceY, canvas.width, sliceHeight, sliceOffset, sliceY, canvas.width, sliceHeight);
+        }
+      }
+    }
+
+    // Paint loop coordinator
+    function paint() {
+      frameCount++;
+      
+      // Update DOM components
+      updateCoreWave();
+      appendDiagnosticLog();
+      updateRadarRange();
+      updateNeuralWidget();
+      updateThreatWidget();
+
+      // Trigger repaint inside Canary (onpaint callback) or draw locally
+      if (supportsHtmlInCanvas) {
+        canvas.onpaint = () => {
+          draw();
+        };
+        canvas.requestPaint();
+      } else {
+        draw();
+      }
+    }
+
+    // Animation Loop
+    function animLoop() {
+      paint();
+      requestAnimationFrame(animLoop);
+    }
+    
+    // Start animation loop
+    requestAnimationFrame(animLoop);
+
+    // ----------------------------------------------------
+    // CONTROL ACTIONS & BUTTON LISTENERS
+    // ----------------------------------------------------
+    document.getElementById('btnGlitchTrigger').addEventListener('click', () => {
+      triggerGlitchPulse();
+    });
+
+    document.getElementById('btnToggleGlobe').addEventListener('click', () => {
+      globeType = (globeType + 1) % 2;
+    });
+
+    const btnAutoSpin = document.getElementById('btnAutoSpin');
+    btnAutoSpin.addEventListener('click', () => {
+      autoSpinEnabled = !autoSpinEnabled;
+      if (autoSpinEnabled) {
+        btnAutoSpin.classList.remove('btn-secondary');
+        btnAutoSpin.classList.add('btn-pink');
+      } else {
+        btnAutoSpin.classList.remove('btn-pink');
+        btnAutoSpin.classList.add('btn-secondary');
+      }
+    });
+
+    document.getElementById('btnResetView').addEventListener('click', () => {
+      rotX = 0.5;
+      rotY = 0.6;
+      vx = 0;
+      vy = 0;
+      autoSpinEnabled = true;
+      btnAutoSpin.classList.remove('btn-secondary');
+      btnAutoSpin.classList.add('btn-pink');
+    });
+  </script>
+</body>
+</html>

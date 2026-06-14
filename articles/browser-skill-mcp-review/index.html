@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="zh-CN" data-ha-style="developer">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>浏览器自动化 Skill / MCP 可用性实测</title>
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0a0a;
+      --surface: #0a0a0a;
+      --surface-container-lowest: #0a0a0a;
+      --surface-container-low: #0d160d;
+      --surface-container: #102610;
+      --surface-container-high: #153315;
+      --primary: #33ff00;
+      --secondary: #ffb000;
+      --muted: #1f521f;
+      --accent: #33ff00;
+      --error: #ff3333;
+      --border: #1f521f;
+      --border-strong: #33ff00;
+      --fg-1: #33ff00;
+      --fg-2: #b7ff9a;
+      --fg-muted: #5a9f5a;
+      --on-primary: #050505;
+      --green: #33ff00;
+      --yellow: #ffb000;
+      --red: #ff3333;
+      --blue: #72d5ff;
+      --font-headline: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace;
+      --font-body: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, monospace;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 20px;
+      --space-2xl: 24px;
+      --space-3xl: 32px;
+      --space-4xl: 48px;
+      --space-5xl: 64px;
+      --radius-sm: 0;
+      --radius-md: 0;
+      --radius-lg: 0;
+      --radius-xl: 0;
+      --radius-2xl: 0;
+      --radius-pill: 0;
+      --shadow-sm: none;
+      --shadow-md: none;
+      --shadow-lg: none;
+      --shadow-accent: none;
+      --text-glow: 0 0 5px rgba(51, 255, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg-1);
+      font-family: var(--font-body);
+      line-height: 1.62;
+      letter-spacing: 0;
+      text-shadow: var(--text-glow);
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(51, 255, 0, 0.035),
+        rgba(51, 255, 0, 0.035) 1px,
+        transparent 1px,
+        transparent 5px
+      );
+      opacity: .32;
+      z-index: 99;
+    }
+
+    a { color: var(--blue); text-underline-offset: 4px; }
+    img { display: block; max-width: 100%; border: 1px solid var(--border); background: #050505; }
+    code, pre, button, input { font-family: var(--font-mono); }
+    button {
+      color: var(--fg-1);
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      padding: 9px 12px;
+      cursor: pointer;
+      min-height: 42px;
+      text-transform: uppercase;
+    }
+    button:hover, button:focus-visible {
+      background: var(--primary);
+      color: var(--on-primary);
+      outline: none;
+      text-shadow: none;
+    }
+
+    .dev-shell {
+      width: min(1240px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 72px;
+    }
+
+    .terminal-prompt {
+      border: 1px solid var(--border-strong);
+      background: #050805;
+      padding: var(--space-md) var(--space-lg);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      gap: var(--space-md);
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .prompt-line {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+
+    .host { color: var(--fg-2); }
+    .cmd { color: var(--primary); font-weight: 800; }
+    .terminal-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background: var(--primary);
+      animation: blink 1s steps(2, start) infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-grid {
+      min-height: calc(100vh - 95px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr);
+      gap: var(--space-lg);
+      padding: var(--space-lg) 0;
+      align-items: stretch;
+    }
+
+    .terminal-pane {
+      border: 1px solid var(--border);
+      background: var(--surface-container-lowest);
+      min-width: 0;
+    }
+
+    .terminal-pane.strong { border-color: var(--border-strong); background: #050805; }
+
+    .pane-title {
+      border-bottom: 1px solid var(--border);
+      padding: var(--space-sm) var(--space-md);
+      color: var(--fg-2);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: 13px;
+      background: rgba(51, 255, 0, .045);
+    }
+
+    .pane-body { padding: var(--space-lg); }
+
+    .finding-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-sm);
+      margin: var(--space-lg) 0;
+    }
+
+    .status-box {
+      border: 1px solid var(--border);
+      padding: var(--space-md);
+      background: #060906;
+      min-height: 112px;
+    }
+
+    .status-code {
+      display: inline-block;
+      font-weight: 800;
+      margin-bottom: var(--space-sm);
+    }
+    .ok { color: var(--green); }
+    .warn { color: var(--yellow); }
+    .err { color: var(--red); }
+    .hyp { color: var(--blue); }
+
+    h1, h2, h3 {
+      font-family: var(--font-headline);
+      line-height: 1.15;
+      margin: 0;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(32px, 5.3vw, 78px);
+      margin: var(--space-lg) 0 var(--space-lg);
+      max-width: 920px;
+    }
+    h2 { font-size: clamp(22px, 3vw, 36px); margin-bottom: var(--space-lg); }
+    h3 { font-size: 16px; color: var(--fg-2); margin-bottom: var(--space-sm); }
+    p { margin: 0 0 var(--space-md); color: var(--fg-2); }
+    .lead { font-size: clamp(16px, 2vw, 21px); color: var(--fg-2); max-width: 820px; }
+    .ascii-divider { color: var(--fg-muted); margin: var(--space-lg) 0; white-space: pre-wrap; }
+
+    .risk-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .risk-checklist li {
+      border-left: 3px solid var(--border-strong);
+      padding: var(--space-sm) 0 var(--space-sm) var(--space-md);
+      color: var(--fg-2);
+    }
+
+    .risk-checklist b { color: var(--fg-1); }
+
+    .hotspot-map {
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .tool-row {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr) 120px;
+      gap: var(--space-sm);
+      align-items: center;
+      border: 1px solid var(--border);
+      padding: var(--space-sm);
+      background: #050805;
+    }
+
+    .bar {
+      height: 18px;
+      border: 1px solid var(--border);
+      background: #020402;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--blue));
+    }
+
+    .workbench-grid {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+      margin-top: var(--space-xl);
+    }
+
+    .reader-rail {
+      position: sticky;
+      top: 76px;
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .reader-rail a, .tag {
+      border: 1px solid var(--border);
+      padding: var(--space-sm) var(--space-md);
+      color: var(--fg-2);
+      text-decoration: none;
+      background: #050805;
+    }
+
+    .reader-rail a:hover, .reader-rail a:focus-visible {
+      color: var(--on-primary);
+      background: var(--primary);
+      text-shadow: none;
+      outline: none;
+    }
+
+    .evidence-workbench {
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    section {
+      scroll-margin-top: 90px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .raw-artifact {
+      margin-top: var(--space-md);
+      border: 1px solid var(--border);
+      background: #020402;
+      overflow: auto;
+    }
+
+    pre {
+      margin: 0;
+      padding: var(--space-md);
+      color: var(--fg-2);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: 13px;
+      text-shadow: none;
+    }
+
+    .copy-handoff {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-top: var(--space-lg);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-lg);
+    }
+
+    figure {
+      margin: 0;
+      border: 1px solid var(--border);
+      background: #050805;
+    }
+
+    figcaption {
+      border-top: 1px solid var(--border);
+      padding: var(--space-sm) var(--space-md);
+      color: var(--fg-muted);
+      font-size: 13px;
+    }
+
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      vertical-align: top;
+      color: var(--fg-2);
+    }
+    th { color: var(--fg-1); background: rgba(51, 255, 0, .045); text-transform: uppercase; }
+
+    .search-line {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      border: 1px solid var(--border);
+      padding: var(--space-sm) var(--space-md);
+      background: #050805;
+      margin-bottom: var(--space-lg);
+    }
+    .search-line input {
+      flex: 1;
+      min-width: 160px;
+      background: transparent;
+      border: 0;
+      color: var(--fg-1);
+      outline: none;
+      font-size: 15px;
+    }
+
+    .hidden-by-filter { display: none !important; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .workbench-grid, .grid-2, .grid-3, .image-grid {
+        grid-template-columns: 1fr;
+      }
+      .reader-rail { position: static; }
+      .finding-bar { grid-template-columns: repeat(2, 1fr); }
+      .tool-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .dev-shell { width: min(100% - 18px, 1240px); }
+      .finding-bar { grid-template-columns: 1fr; }
+      .terminal-prompt { position: static; }
+      .pane-body { padding: var(--space-md); }
+      h1 { font-size: 30px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .terminal-cursor { animation: none; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="dev-shell">
+    <header class="terminal-prompt" aria-label="report prompt">
+      <div class="prompt-line">
+        <span class="host">codex@f-codex:~/browser-stack$</span>
+        <span class="cmd">scan --skills --mcp --evidence --keep-only-useful</span>
+        <span class="terminal-cursor" aria-hidden="true"></span>
+      </div>
+      <button type="button" data-copy="#handoff-text">[ COPY SUMMARY ]</button>
+    </header>
+
+    <div class="hero-grid">
+      <section class="terminal-pane strong" aria-labelledby="hero-title">
+        <div class="pane-title">
+          <span>+--- EXECUTIVE DECISION ---+</span>
+          <span>2026-05-27</span>
+        </div>
+        <div class="pane-body">
+          <p><span class="status-code ok">[OK]</span> 本轮目标：继续寻找并测试类似浏览器操控 / 爬虫 / 网页抽取方向的 Skill、插件、MCP，筛出值得保留的工具。</p>
+          <h1 id="hero-title">浏览器自动化 Skill / MCP 可用性实测</h1>
+          <p class="lead">一句话结论：现在本机最值得保留的是固定 Chrome + Node Playwright CDP + Playwright MCP + Google Chrome DevTools MCP + AnySearch；CDP Bridge 做补充；Crawl4AI Python 值得进独立 venv；canghe 暂时备用；Firecrawl / Browserbase 等云工具等凭证后再测。</p>
+          <div class="ascii-divider">=== keep stack =====================================================</div>
+          <ul class="risk-checklist">
+            <li><b>主流程：</b>固定 Chrome 9223 + Node Playwright connectOverCDP。</li>
+            <li><b>验收层：</b>Playwright MCP，用来打开页面、抓 snapshot、看 console、做截图。</li>
+            <li><b>资料层：</b>AnySearch，用来搜索和抽取公开网页正文。</li>
+            <li><b>备用层：</b>canghe-url-to-markdown，适合借固定 Chrome 转 Markdown，但当前中文输出有乱码风险。</li>
+            <li><b>新增实测：</b>Google `chrome-devtools-mcp` 已连固定 9223 跑通 navigate / evaluate / screenshot；Crawl4AI Python 已抓取本地页并生成 Markdown + 截图。</li>
+          </ul>
+        </div>
+      </section>
+
+      <aside class="terminal-pane">
+        <div class="pane-title">
+          <span>+--- STATUS LEDGER ---+</span>
+          <span>exit=0</span>
+        </div>
+        <div class="pane-body">
+          <div class="finding-bar">
+            <div class="status-box">
+              <span class="status-code ok">[OK]</span>
+              <h3>Playwright MCP</h3>
+              <p>HTTP 页面打开、snapshot、console、截图已通过。</p>
+            </div>
+            <div class="status-box">
+              <span class="status-code ok">[OK]</span>
+              <h3>AnySearch</h3>
+              <p>公开网页 extract 成 Markdown 已通过。</p>
+            </div>
+            <div class="status-box">
+              <span class="status-code warn">[WARN]</span>
+              <h3>canghe</h3>
+              <p>能跑，但中文 Markdown 输出存在乱码。</p>
+            </div>
+            <div class="status-box">
+              <span class="status-code hyp">[HYP]</span>
+              <h3>外部候选</h3>
+              <p>需下一轮安装和成本控制后测。</p>
+            </div>
+          </div>
+
+          <div class="hotspot-map" aria-label="tool score map">
+            <div class="tool-row"><b>fixed chrome + node pw</b><div class="bar"><span style="width: 96%"></span></div><span>[CORE]</span></div>
+            <div class="tool-row"><b>playwright mcp</b><div class="bar"><span style="width: 88%"></span></div><span>[KEEP]</span></div>
+            <div class="tool-row"><b>chrome devtools mcp</b><div class="bar"><span style="width: 86%"></span></div><span>[KEEP]</span></div>
+            <div class="tool-row"><b>anysearch</b><div class="bar"><span style="width: 78%"></span></div><span>[KEEP]</span></div>
+            <div class="tool-row"><b>crawl4ai python</b><div class="bar"><span style="width: 76%"></span></div><span>[VENV]</span></div>
+            <div class="tool-row"><b>cdp bridge</b><div class="bar"><span style="width: 72%"></span></div><span>[AUX]</span></div>
+            <div class="tool-row"><b>canghe url md</b><div class="bar"><span style="width: 58%"></span></div><span>[CHECK]</span></div>
+            <div class="tool-row"><b>apify skill</b><div class="bar"><span style="width: 45%"></span></div><span>[TOKEN]</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="workbench-grid">
+      <nav class="reader-rail" aria-label="report navigation">
+        <a href="#tested">已实测</a>
+        <a href="#screenshots">截图证据</a>
+        <a href="#matrix">横向矩阵</a>
+        <a href="#candidates">下一批候选</a>
+        <a href="#workflow">标准测试流程</a>
+        <a href="#handoff">交接摘要</a>
+      </nav>
+
+      <div class="evidence-workbench">
+        <section id="tested" class="terminal-pane" data-search-block>
+          <div class="pane-title">
+            <span>+--- TESTED LOCALLY ---+</span>
+            <span>evidence=commands+screenshot</span>
+          </div>
+          <div class="pane-body">
+            <div class="search-line">
+              <span>grep@tools:~$</span>
+              <input id="filterInput" type="search" placeholder="filter: playwright / anysearch / canghe / apify" aria-label="过滤工具条目">
+            </div>
+
+            <div class="grid-2">
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[OK] Playwright MCP</span><span>role=visual-check</span></div>
+                <div class="pane-body">
+                  <p>本轮新暴露出 `mcp__playwright__` 工具组，已实测打开本地 HTTP 页面、读取可访问性快照、抓 console、截图。它适合做“测评必须截图”的验收层。</p>
+                  <ul class="risk-checklist">
+                    <li><b>强项：</b>页面打开、点击、输入、snapshot、console、截图。</li>
+                    <li><b>限制：</b>直接打开 `file://` 会被拦，建议统一走 `python -m http.server` 暴露到本地 HTTP。</li>
+                    <li><b>保留建议：</b>保留。让新线程优先用它做 HTML 验收和截图。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[OK] AnySearch Skill</span><span>role=public-extract</span></div>
+                <div class="pane-body">
+                  <p>读取了 `anysearch` skill 并运行 `extract https://example.com`，能把公开网页转成 Markdown。适合前期搜资料、读公开页面、为文章测评补素材。</p>
+                  <ul class="risk-checklist">
+                    <li><b>强项：</b>公开网页正文抽取，输出轻，适合交给写作线程。</li>
+                    <li><b>限制：</b>不是浏览器操控层，不负责登录态页面点击。</li>
+                    <li><b>保留建议：</b>保留，作为搜索 / 抽取层。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[OK] Google Chrome DevTools MCP</span><span>role=official-cdp</span></div>
+                <div class="pane-body">
+                  <p>已用官方 MCP SDK 连接 `chrome-devtools-mcp@latest --browser-url=http://127.0.0.1:9223 --slim`，成功列出 `navigate / evaluate / screenshot`，并对本地报告页完成导航、执行 JS、截图。</p>
+                  <ul class="risk-checklist">
+                    <li><b>强项：</b>Google 官方维护，直接连固定 Chrome 9223，不需要扩展，适合 Antigravity / Gemini / Codex 等 MCP 客户端。</li>
+                    <li><b>限制：</b>`--slim` 只有 3 个工具；完整模式工具更多，但也更重。首次手写 stdio 探针会踩协议坑，建议用官方 SDK 或真实 MCP 客户端。</li>
+                    <li><b>保留建议：</b>保留，并把它列为 Playwright MCP 之外的官方 Chrome MCP 备选。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[OK] Crawl4AI Python</span><span>role=markdown+crawl</span></div>
+                <div class="pane-body">
+                  <p>已安装 `crawl4ai==0.8.6` 并运行 `crawl4ai-doctor`，健康检查通过；随后用 `AsyncWebCrawler` 抓取本地报告页，输出 Markdown 和截图。现在已建立专用 venv：`F:\codex\venvs\crawl4ai\Scripts\python.exe`，后续必须走这个入口。</p>
+                  <ul class="risk-checklist">
+                    <li><b>强项：</b>中文 Markdown 输出干净，比 canghe 当前乱码结果更可靠；适合公开页抽取、长文转 Markdown、截图留证。</li>
+                    <li><b>风险：</b>Crawl4AI 要 `lxml~=5.3`，但本机其他工具需要 `lxml>=6.0.0`；全局安装会互相打架。</li>
+                    <li><b>保留建议：</b>保留。使用 `F:\codex\venvs\crawl4ai\Scripts\python.exe`，不要再用全局 Python 跑 Crawl4AI。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[WARN] canghe-url-to-markdown</span><span>role=chrome-md</span></div>
+                <div class="pane-body">
+                  <p>已用固定 Chrome 抓取当前本地 HTML，并输出到 `C:\html\articles\browser-automation-lessons\canghe-capture.md`。流程能跑，但中文内容出现乱码，不能当无脑主力。</p>
+                  <ul class="risk-checklist">
+                    <li><b>强项：</b>能借固定 Chrome 访问页面后转 Markdown。</li>
+                    <li><b>风险：</b>中文编码需要复核，特别是公众号 / 知乎类长文。</li>
+                    <li><b>保留建议：</b>备用。每次输出必须抽样看中文。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[HYP] Bright Data MCP</span><span>role=discover</span></div>
+                <div class="pane-body">
+                  <p>已用 Bright Data MCP 做外部候选发现，找到了 Browserbase MCP、mcp-chrome、Crawl4AI MCP、Firecrawl MCP、Playwright MCP server 变体等方向。</p>
+                  <ul class="risk-checklist">
+                    <li><b>强项：</b>发现工具、补外部情报、查生态。</li>
+                    <li><b>限制：</b>不是本地 Chrome 主控工具。</li>
+                    <li><b>保留建议：</b>保留为发现层，不替代 Playwright。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[TOKEN] Apify Skill</span><span>role=actor-platform</span></div>
+                <div class="pane-body">
+                  <p>本机有 Apify competitor intelligence 相关 skill，已读规则但未直接跑 actor。原因是它涉及平台 token、额度、运行成本，必须单独做限额测试。</p>
+                  <ul class="risk-checklist">
+                    <li><b>强项：</b>成熟 Actor 生态，适合平台级抓取任务。</li>
+                    <li><b>风险：</b>成本、token、目标站合规边界。</li>
+                    <li><b>保留建议：</b>列入后续测评，先小样本、低额度。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[BLOCKED] Firecrawl / Browserbase</span><span>role=cloud-api</span></div>
+                <div class="pane-body">
+                  <p>已确认 `firecrawl-mcp@3.17.0` 和 `@browserbasehq/mcp@3.0.0` 的入口。当前本机没有 `FIRECRAWL_API_KEY / FIRECRAWL_API_URL / BROWSERBASE_API_KEY / BROWSERBASE_PROJECT_ID` 环境变量，因此不做伪实测。</p>
+                  <ul class="risk-checklist">
+                    <li><b>Firecrawl：</b>需要 API key 或自托管 URL；适合公开网页 scrape / crawl。</li>
+                    <li><b>Browserbase：</b>需要云账号和项目 ID；适合云浏览器 session，不替代本机固定 Chrome。</li>
+                    <li><b>保留建议：</b>等凭证齐了再小样本跑，先设预算和截图规则。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[WARN] OpenChrome MCP</span><span>role=port-mismatch</span></div>
+                <div class="pane-body">
+                  <p>`openchrome-mcp@1.12.5` 的 CLI 很完整，但 `doctor / navigate` 默认检查 9222；我们的固定 Chrome 是 9223，所以快捷命令直接失败。`serve -p 9223` 理论可接，但没有必要替代已跑通的官方 Chrome DevTools MCP。</p>
+                  <ul class="risk-checklist">
+                    <li><b>强项：</b>one-shot 命令多，适合脚本化浏览器动作。</li>
+                    <li><b>风险：</b>默认 9222 和本机固定 9223 不一致；还包含绕验证宣传，合规边界要收紧。</li>
+                    <li><b>保留建议：</b>暂不主推，后续只测 `serve -p 9223` 的普通自动化能力。</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="terminal-pane" data-search-block>
+                <div class="pane-title"><span>[CORE] Fixed Chrome + Node Playwright CDP</span><span>role=main</span></div>
+                <div class="pane-body">
+                  <p>之前已经反复证明，这是最稳的主流程：固定 Chrome 保留登录态，Node Playwright 通过 9223 连接真实 Chrome，兼顾自动化能力和可调试性。</p>
+                  <ul class="risk-checklist">
+                    <li><b>固定地址：</b>`http://127.0.0.1:9223`。</li>
+                    <li><b>固定 profile：</b>`C:\Users\64998\.opencli\chrome-profile`。</li>
+                    <li><b>保留建议：</b>继续作为所有新线程的默认上网 / 登录 / 抓取基座。</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="screenshots" class="terminal-pane">
+          <div class="pane-title">
+            <span>+--- SCREENSHOT EVIDENCE ---+</span>
+            <span>rule=测评必须截图</span>
+          </div>
+          <div class="pane-body">
+            <p><span class="status-code ok">[OK]</span> 这次也按规则保留截图。任何后续横评 / 测评 / 实测，都必须有截图证据，不只写“我测了”。</p>
+            <div class="image-grid">
+              <figure>
+                <img src="assets/playwright-mcp-page-check.png" alt="Playwright MCP 打开的浏览器经验教训页面截图">
+                <figcaption>Playwright MCP 验收截图：本地 HTTP 页面可打开、页面已加载、适合做视觉验收。</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/chrome-devtools-mcp-test.png" alt="Google Chrome DevTools MCP 连接固定 Chrome 后截图">
+                <figcaption>Google Chrome DevTools MCP 实测截图：通过 `--browser-url=http://127.0.0.1:9223 --slim` 连接固定 Chrome，完成 navigate / evaluate / screenshot。</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/crawl4ai-local-page.png" alt="Crawl4AI 抓取本地报告页截图">
+                <figcaption>Crawl4AI Python 实测截图：`AsyncWebCrawler` 抓取同一页，输出 Markdown 和截图，中文 Markdown 正常。</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/crawl4ai-venv-local-page.png" alt="Crawl4AI 专用 venv 抓取本地报告页截图">
+                <figcaption>Crawl4AI 专用 venv 复测截图：`F:\codex\venvs\crawl4ai\Scripts\python.exe` 可独立运行，避免全局 `lxml` 冲突。</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/browser-lessons-original.png" alt="浏览器操控经验教训原始 HTML 预览截图">
+                <figcaption>原始经验教训 HTML 预览，用作本轮测试目标页面。</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/rank-overview-light.png" alt="浏览器自动化工具排名概览图">
+                <figcaption>之前 Chrome-only 横评资产：工具排序概览。</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/workflow-layers-light.png" alt="浏览器自动化工作流分层图">
+                <figcaption>之前 Chrome-only 横评资产：工作流分层，说明主控层 / 桥接层 / 抽取层边界。</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section id="matrix" class="terminal-pane">
+          <div class="pane-title">
+            <span>+--- DECISION MATRIX ---+</span>
+            <span>scope=chrome+skills+mcp</span>
+          </div>
+          <div class="pane-body">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>工具</th>
+                    <th>定位</th>
+                    <th>本轮状态</th>
+                    <th>最适合任务</th>
+                    <th>注意事项</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>固定 Chrome + Node Playwright CDP</td>
+                    <td>主控层</td>
+                    <td><span class="status-code ok">[OK]</span> 已长期跑通</td>
+                    <td>登录态页面、复杂点击、发布、截图、JS 执行</td>
+                    <td>只连 9223；不要乱开临时 profile。</td>
+                  </tr>
+                  <tr>
+                    <td>Playwright MCP</td>
+                    <td>验收层</td>
+                    <td><span class="status-code ok">[OK]</span> 已实测</td>
+                    <td>HTML 验收、console、snapshot、截图</td>
+                    <td>`file://` 受限，改走本地 HTTP。</td>
+                  </tr>
+                  <tr>
+                    <td>Google Chrome DevTools MCP</td>
+                    <td>官方 CDP MCP</td>
+                    <td><span class="status-code ok">[OK]</span> 已连 9223 实测</td>
+                    <td>官方 MCP 客户端接入、导航、JS 执行、截图</td>
+                    <td>建议 `--browser-url=http://127.0.0.1:9223 --slim --no-usage-statistics` 起步。</td>
+                  </tr>
+                  <tr>
+                    <td>CDP Bridge MCP</td>
+                    <td>桥接层</td>
+                    <td><span class="status-code ok">[OK]</span> 之前补测通过</td>
+                    <td>扩展已在线时操控真实 Chrome session</td>
+                    <td>18765/18766 在线不等于扩展已注册 session。</td>
+                  </tr>
+                  <tr>
+                    <td>AnySearch</td>
+                    <td>资料抽取层</td>
+                    <td><span class="status-code ok">[OK]</span> 已实测</td>
+                    <td>公开网页搜索、正文转 Markdown</td>
+                    <td>不负责登录态浏览器交互。</td>
+                  </tr>
+                  <tr>
+                    <td>Crawl4AI Python</td>
+                    <td>网页抽取 / Markdown</td>
+                    <td><span class="status-code ok">[OK]</span> doctor + 本地页抓取通过</td>
+                    <td>公开页抽取、Markdown、截图、批量 crawl 基座</td>
+                    <td>固定用 `F:\codex\venvs\crawl4ai\Scripts\python.exe`；全局 `lxml` 已恢复 6.x。</td>
+                  </tr>
+                  <tr>
+                    <td>Crawl4AI MCP</td>
+                    <td>MCP 包装层</td>
+                    <td><span class="status-code warn">[WAIT]</span> 缺本地 server</td>
+                    <td>把 Crawl4AI Server 暴露给 MCP 客户端</td>
+                    <td>需要 Docker daemon 或手动启动 11235 Crawl4AI Server。</td>
+                  </tr>
+                  <tr>
+                    <td>canghe-url-to-markdown</td>
+                    <td>备用抽取层</td>
+                    <td><span class="status-code warn">[WARN]</span> 能跑但乱码</td>
+                    <td>固定 Chrome 访问后转 Markdown</td>
+                    <td>中文输出必须抽样检查。</td>
+                  </tr>
+                  <tr>
+                    <td>Bright Data MCP</td>
+                    <td>外部发现层</td>
+                    <td><span class="status-code ok">[OK]</span> discover 可用</td>
+                    <td>找新 MCP、查生态、做外部情报</td>
+                    <td>不要把它当本地浏览器控制器。</td>
+                  </tr>
+                  <tr>
+                    <td>Apify Skill</td>
+                    <td>平台 Actor 层</td>
+                    <td><span class="status-code hyp">[HYP]</span> 读规则未运行</td>
+                    <td>成熟平台 Actor、批量采集</td>
+                    <td>需要 token、成本和合规边界。</td>
+                  </tr>
+                  <tr>
+                    <td>Firecrawl MCP</td>
+                    <td>云 scrape / crawl</td>
+                    <td><span class="status-code warn">[WAIT]</span> 缺 API key 或自托管 URL</td>
+                    <td>公开网页 scrape、crawl、页面交互</td>
+                    <td>`firecrawl-mcp` 启动即要求 `FIRECRAWL_API_KEY` 或 `FIRECRAWL_API_URL`。</td>
+                  </tr>
+                  <tr>
+                    <td>Browserbase MCP</td>
+                    <td>云浏览器</td>
+                    <td><span class="status-code warn">[WAIT]</span> 缺云账号凭证</td>
+                    <td>云端浏览器 session、远程运行</td>
+                    <td>需要 `BROWSERBASE_API_KEY` 和 `BROWSERBASE_PROJECT_ID`。</td>
+                  </tr>
+                  <tr>
+                    <td>OpenChrome MCP</td>
+                    <td>真实 Chrome MCP 候选</td>
+                    <td><span class="status-code warn">[WARN]</span> 默认 9222 不合拍</td>
+                    <td>one-shot 浏览器动作、脚本化场景</td>
+                    <td>默认查 9222；本机固定 Chrome 是 9223，需显式 `serve -p 9223` 再测。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="candidates" class="terminal-pane">
+          <div class="pane-title">
+            <span>+--- NEXT CANDIDATES ---+</span>
+            <span>source=brightdata+local-inventory</span>
+          </div>
+          <div class="pane-body">
+            <div class="grid-3">
+              <article class="terminal-pane">
+                <div class="pane-title"><span>[WAIT] Crawl4AI MCP</span></div>
+                <div class="pane-body">
+                  <p>入口确认：`mcp-crawl4ai-ts@3.0.2`。阻塞原因：它需要正在运行的 Crawl4AI Server，默认 `http://localhost:11235`；本机 Docker daemon 当前没启动，11235 也没服务。</p>
+                </div>
+              </article>
+              <article class="terminal-pane">
+                <div class="pane-title"><span>[WAIT] Firecrawl MCP</span></div>
+                <div class="pane-body">
+                  <p>入口确认：`firecrawl-mcp@3.17.0`。启动时明确要求 `FIRECRAWL_API_KEY` 或 `FIRECRAWL_API_URL`，当前本机都没有。</p>
+                </div>
+              </article>
+              <article class="terminal-pane">
+                <div class="pane-title"><span>[NEXT] @pyrokine/mcp-chrome</span></div>
+                <div class="pane-body">
+                  <p>入口确认：`@pyrokine/mcp-chrome@2.0.2`。它有扩展模式和 CDP 模式；后续只测普通自动化能力，跳过 anti-detection / CAPTCHA 相关宣传。</p>
+                </div>
+              </article>
+              <article class="terminal-pane">
+                <div class="pane-title"><span>[WAIT] Browserbase MCP</span></div>
+                <div class="pane-body">
+                  <p>入口确认：`@browserbasehq/mcp@3.0.0`。需要 Browserbase 云账号和项目凭证；定位是云浏览器，不替代本机固定 Chrome。</p>
+                </div>
+              </article>
+              <article class="terminal-pane">
+                <div class="pane-title"><span>[KEEP] Google Chrome DevTools MCP</span></div>
+                <div class="pane-body">
+                  <p>已实测通过，优先级上升。它是 Google 官方 MCP，适合交给 Antigravity / Gemini / Codex 等支持 MCP 的新线程。</p>
+                </div>
+              </article>
+              <article class="terminal-pane">
+                <div class="pane-title"><span>[SKIP] 反验证码绕过类</span></div>
+                <div class="pane-body">
+                  <p>不测绕过 CAPTCHA / Cloudflare / 未授权访问。只做合规网页自动化、登录态自用、公开页面抽取。</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="workflow" class="terminal-pane">
+          <div class="pane-title">
+            <span>+--- STANDARD TEST PROTOCOL ---+</span>
+            <span>for=new-thread</span>
+          </div>
+          <div class="pane-body">
+            <p>以后别的线程测试同类工具，照这个标准走，结果才可比：</p>
+            <ol class="risk-checklist">
+              <li><b>确认工具入口：</b>skill 路径、MCP 名称、命令、端口、是否需要 token。</li>
+              <li><b>跑公开页：</b>先用 `https://example.com` 或公开文章页，确认基础访问和抽取。</li>
+              <li><b>跑本地 HTML：</b>用 `python -m http.server` 暴露 `C:\html`，避免 `file://` 限制。</li>
+              <li><b>执行 JS：</b>至少拿 `document.title`、`location.href`、正文前 500 字。</li>
+              <li><b>截图：</b>测评必须截图，保存到当前文章 `assets` 或同级目录。</li>
+              <li><b>看 console：</b>记录有没有 404、跨域、资源加载失败。</li>
+              <li><b>写结论：</b>必须说明“适合什么、不适合什么、是否保留、下一步怎么测”。</li>
+            </ol>
+            <div class="raw-artifact">
+<pre>pw@chrome:~$ node -e "const { chromium } = require('playwright'); /* connectOverCDP 9223 */"
+mcp@playwright:~$ browser_navigate http://127.0.0.1:4181/articles/...
+mcp@playwright:~$ browser_snapshot && browser_take_screenshot
+search@anysearch:~$ python anysearch_cli.py extract https://example.com
+md@canghe:~$ npx -y bun main.ts URL -o output.md
+report@html:~$ save C:\html\articles\browser-skill-mcp-review\index.html</pre>
+            </div>
+          </div>
+        </section>
+
+        <section id="handoff" class="terminal-pane">
+          <div class="pane-title">
+            <span>+--- COPYABLE HANDOFF ---+</span>
+            <span>paste=next-thread</span>
+          </div>
+          <div class="pane-body">
+            <p>给新线程的短交接：</p>
+            <div class="raw-artifact">
+<pre id="handoff-text">请继续浏览器自动化 / 爬虫工具横评，但范围限定为 Chrome、Skill、插件、MCP，不要再混入比特浏览器、AdsPower、MoreLogin。
+
+当前已验证基座：
+- 固定 Chrome：C:\Program Files\Google\Chrome\Application\chrome.exe
+- 固定 profile：C:\Users\64998\.opencli\chrome-profile
+- 固定 CDP：http://127.0.0.1:9223
+- Node Playwright 已可用，优先用 chromium.connectOverCDP('http://127.0.0.1:9223')
+
+本轮新增已测：
+- Playwright MCP：可打开本地 HTTP 页面、snapshot、console、截图；file:// 受限，改用 python -m http.server。
+- Google Chrome DevTools MCP：官方 ChromeDevTools 项，已用 `--browser-url=http://127.0.0.1:9223 --slim` 连固定 Chrome，跑通 navigate / evaluate / screenshot。
+- AnySearch：可抽取公开网页 Markdown，适合资料层。
+- Crawl4AI Python：`crawl4ai==0.8.6` 已实测通过，本地报告页抓取成功，输出 Markdown 和截图；专用 venv 已建好：`F:\codex\venvs\crawl4ai\Scripts\python.exe`。全局环境已把 `lxml` 恢复到 6.x，后续不要用全局 Python 跑 Crawl4AI。
+- canghe-url-to-markdown：能借固定 Chrome 转 Markdown，但中文输出有乱码风险。
+- Bright Data MCP：适合发现外部候选。
+- Apify skill：本机有，但需 token/额度/成本控制后再跑。
+- Firecrawl MCP / Browserbase MCP：入口已确认，但本机缺 API key/项目凭证，暂不伪实测。
+- Crawl4AI MCP：`mcp-crawl4ai-ts` 需要本地 Crawl4AI Server；当前 Docker daemon 未启动，11235 无服务。
+- OpenChrome MCP：CLI 可用但默认查 9222；本机固定 Chrome 是 9223，快捷命令失败，后续只测 `serve -p 9223`。
+
+一句话结论：
+现在本机最值得保留的是固定 Chrome + Node Playwright CDP + Playwright MCP + Google Chrome DevTools MCP + AnySearch；CDP Bridge 做补充；Crawl4AI Python 值得进独立 venv；canghe 暂时备用；Firecrawl / Browserbase 等云工具等凭证后再测。
+
+下一批优先测：
+1. 启动 Docker 后拉起 Crawl4AI Server，再测 mcp-crawl4ai-ts。
+2. 配好 Firecrawl / Browserbase 凭证后做小样本截图测评。
+3. 测 @pyrokine/mcp-chrome 的普通 CDP/扩展模式。
+4. OpenChrome 只测 serve -p 9223，不再用默认 9222 快捷命令下结论。
+5. 将 Google Chrome DevTools MCP 写入新线程默认 MCP 配置建议。
+
+硬规则：
+- 任何测评、横评、实测都必须截图。
+- 不测试绕过 CAPTCHA / Cloudflare / 未授权访问。
+- 每个工具必须给：截图、输入、输出、适合任务、不适合任务、是否保留。</pre>
+            </div>
+            <div class="copy-handoff">
+              <button type="button" data-copy="#handoff-text">[ COPY HANDOFF ]</button>
+              <button type="button" data-copy="#test-protocol">[ COPY TEST PROTOCOL ]</button>
+            </div>
+            <div class="raw-artifact">
+<pre id="test-protocol">标准测试流程：
+1. 启动或确认固定 Chrome 9223。
+2. 如果测 HTML，先用 python -m http.server --bind 127.0.0.1 --directory C:\html 4181。
+3. 工具打开同一公开 URL 和同一本地 URL。
+4. 抓 document.title、location.href、正文摘要。
+5. 截图保存。
+6. 读取 console 或错误日志。
+7. 写入横评表：定位、状态、优点、限制、是否保留。</pre>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const filterInput = document.querySelector('#filterInput');
+    if (filterInput) {
+      filterInput.addEventListener('input', () => {
+        const q = filterInput.value.trim().toLowerCase();
+        document.querySelectorAll('[data-search-block]').forEach((block) => {
+          if (block.id === 'tested') return;
+          const hit = block.textContent.toLowerCase().includes(q);
+          block.classList.toggle('hidden-by-filter', q && !hit);
+        });
+      });
+    }
+
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const target = document.querySelector(button.dataset.copy);
+        if (!target) return;
+        const text = target.innerText || target.textContent || '';
+        try {
+          await navigator.clipboard.writeText(text);
+          const old = button.textContent;
+          button.textContent = '[ COPIED ]';
+          setTimeout(() => { button.textContent = old; }, 1200);
+        } catch (error) {
+          button.textContent = '[ COPY FAILED ]';
+          setTimeout(() => { button.textContent = '[ COPY SUMMARY ]'; }, 1200);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

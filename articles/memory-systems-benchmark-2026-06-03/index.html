@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="zh-CN" data-ha-style="dashboard">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>四种记忆系统测评详报</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #a03b00;
+      --primary-container: #c94c00;
+      --primary-fixed: #ffdbcd;
+      --secondary-container: #5b5fa6;
+      --tertiary: #2f6f5e;
+      --amber: #846c3d;
+      --rust: #b46a2c;
+      --bg: #fff8f6;
+      --surface: #fff8f6;
+      --surface-container-lowest: #ffffff;
+      --surface-container-low: #fbf2ef;
+      --surface-container: #f5ece9;
+      --surface-container-high: #efe6e3;
+      --fg-1: #1e1b19;
+      --fg-2: #594138;
+      --fg-muted: #8d7166;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.16);
+      --green: #10b981;
+      --blue: #3b82f6;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --font-headline: 'Space Grotesk', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+      --font-body: 'Plus Jakarta Sans', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+      --font-mono: 'SF Mono', 'Menlo', ui-monospace, monospace;
+      --space-xs: 4px; --space-sm: 8px; --space-md: 12px; --space-lg: 16px;
+      --space-xl: 20px; --space-2xl: 24px; --space-3xl: 32px; --space-4xl: 48px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 2px rgba(30, 27, 25, 0.04);
+      --shadow-md: 0 4px 12px rgba(30, 27, 25, 0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #060B18;
+        --surface: #0B1426;
+        --surface-container-lowest: #101D35;
+        --surface-container-low: #101D35;
+        --surface-container: #162544;
+        --surface-container-high: #1c2d52;
+        --fg-1: #F8FAFC;
+        --fg-2: #CBD5E1;
+        --fg-muted: #94A3B8;
+        --border: rgba(255, 255, 255, 0.10);
+        --border-strong: rgba(255, 255, 255, 0.18);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg-1);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+    .ops-shell { min-height: 100vh; }
+    .command-bar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(220px, 360px) auto;
+      gap: var(--space-md);
+      align-items: center;
+      padding: var(--space-md) var(--space-xl);
+      background: color-mix(in srgb, var(--surface-container-lowest) 88%, transparent);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+    .command-bar > * { min-width: 0; }
+    .command-title strong { display: block; font-family: var(--font-headline); font-size: 18px; }
+    .command-title span { display: block; color: var(--fg-muted); font-size: 12px; }
+    .search-box {
+      min-height: 44px;
+      width: 100%;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      padding: 0 var(--space-lg);
+      background: var(--surface-container-lowest);
+      color: var(--fg-1);
+      font: 14px var(--font-body);
+    }
+    .filter-strip { display: flex; flex-wrap: wrap; gap: var(--space-sm); justify-content: flex-end; }
+    .filter-strip button {
+      min-height: 40px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface-container-low);
+      color: var(--fg-1);
+      padding: 0 var(--space-md);
+      cursor: pointer;
+    }
+    .filter-strip button.active { background: var(--fg-1); color: var(--surface-container-lowest); }
+    .hero-workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr);
+      min-height: calc(100vh - 72px);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-copy {
+      padding: clamp(24px, 5vw, 68px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-2xl);
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    h1, h2, h3 { font-family: var(--font-headline); letter-spacing: 0; margin: 0; }
+    h1 { font-size: clamp(34px, 6vw, 76px); line-height: .98; max-width: 920px; }
+    .lead { max-width: 860px; color: var(--fg-2); font-size: clamp(16px, 1.6vw, 20px); margin: 0; }
+    .hero-visual {
+      display: grid;
+      place-items: center;
+      padding: var(--space-3xl);
+      background: var(--surface-container-low);
+      border-left: 1px solid var(--border);
+    }
+    .hero-visual img { width: 100%; max-height: 72vh; object-fit: contain; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface-container-lowest); }
+    .inline-asset { width: 100%; height: auto; max-height: 72vh; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface-container-lowest); display: block; }
+    .kpi-rail {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(130px, 1fr));
+      border: 1px solid var(--border);
+      background: var(--surface-container-lowest);
+    }
+    .kpi {
+      padding: var(--space-lg);
+      border-right: 1px solid var(--border);
+      min-height: 98px;
+    }
+    .kpi:last-child { border-right: 0; }
+    .kpi span { display: block; color: var(--fg-muted); font-size: 12px; }
+    .kpi strong { display: block; margin-top: var(--space-sm); font-family: var(--font-mono); font-size: 28px; }
+    main { display: grid; gap: var(--space-4xl); padding: var(--space-4xl) clamp(16px, 4vw, 56px); }
+    .work-surface, .flag-queue, .data-grid, .system-panel, .visual-panel {
+      border: 1px solid var(--border);
+      background: var(--surface-container-lowest);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+    .section-head p { color: var(--fg-2); margin: var(--space-xs) 0 0; max-width: 780px; }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      gap: var(--space-lg);
+    }
+    .score-list { padding: var(--space-xl); display: grid; gap: var(--space-md); }
+    .score-row {
+      display: grid;
+      grid-template-columns: 160px 64px minmax(120px, 1fr);
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .score-row b { font-family: var(--font-headline); }
+    .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .bar { height: 12px; background: var(--surface-container); border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
+    .bar span { display: block; height: 100%; }
+    .radar-wrap { padding: var(--space-lg); display: grid; place-items: center; }
+    .radar { width: min(100%, 360px); }
+    .radar .rings polygon { fill: none; stroke: var(--border-strong); }
+    .radar .axes line { stroke: var(--border-strong); }
+    .radar .score-poly { fill: rgba(160, 59, 0, .22); stroke: var(--primary); stroke-width: 3; }
+    .radar text { font: 11px var(--font-mono); fill: var(--fg-2); }
+    .flag-queue { padding: var(--space-xl); }
+    .flag-list { display: grid; gap: var(--space-md); margin: 0; padding: 0; list-style: none; }
+    .flag-list li { border-left: 4px solid var(--yellow); padding: var(--space-md); background: var(--surface-container-low); }
+    .data-grid { overflow: hidden; min-width: 0; max-width: 100%; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: var(--space-md); border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+    th { font-size: 12px; color: var(--fg-muted); background: var(--surface-container-low); }
+    td span { display: block; color: var(--fg-muted); font-size: 12px; margin-top: 2px; }
+    .system-panel { padding: var(--space-xl); display: grid; gap: var(--space-xl); }
+    .system-panel header { display: flex; gap: var(--space-lg); align-items: center; }
+    .system-panel header p { margin: var(--space-xs) 0 0; color: var(--fg-2); }
+    .system-chip {
+      width: 58px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, var(--chip) 18%, var(--surface-container-lowest));
+      border: 3px solid var(--chip);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+    .score-pill { margin-left: auto; font-family: var(--font-mono); font-size: 28px; }
+    .system-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-lg); }
+    .system-grid h3 { font-size: 15px; margin-bottom: var(--space-sm); }
+    .system-grid ul { margin: 0; padding-left: 18px; color: var(--fg-2); }
+    .metric-list { margin: 0; display: grid; gap: var(--space-sm); }
+    .metric-list div { display: grid; grid-template-columns: 120px 1fr; gap: var(--space-md); }
+    .metric-list dt { color: var(--fg-muted); }
+    .metric-list dd { margin: 0; font-family: var(--font-mono); }
+    .validation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-sm); }
+    .validation-cell { border: 1px solid var(--border); padding: var(--space-md); background: var(--surface-container-low); border-radius: var(--radius-sm); }
+    .validation-cell.ok { border-left: 4px solid var(--green); }
+    .validation-cell.warn { border-left: 4px solid var(--yellow); }
+    .validation-cell b, .validation-cell span { display: block; }
+    .validation-cell span { color: var(--fg-muted); font-size: 12px; margin-top: 3px; }
+    .provenance { margin: 0; color: var(--fg-2); background: var(--surface-container-low); padding: var(--space-lg); border-left: 4px solid var(--blue); }
+    .visual-panel { padding: var(--space-lg); }
+    .visual-panel img { width: 100%; object-fit: contain; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-container-lowest); }
+    .evidence-wall { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-lg); }
+    .evidence-card { margin: 0; border: 1px solid var(--border); background: var(--surface-container-lowest); border-radius: var(--radius-sm); overflow: hidden; }
+    .evidence-card img { width: 100%; height: 220px; object-fit: contain; background: var(--surface-container-low); display: block; }
+    .evidence-card figcaption { padding: var(--space-md); font-size: 12px; color: var(--fg-2); border-top: 1px solid var(--border); word-break: break-word; }
+    .evidence-link { display: grid; min-height: 220px; place-items: center; padding: var(--space-lg); color: var(--fg-1); }
+    .appendix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-lg); }
+    .appendix-item { border: 1px solid var(--border); background: var(--surface-container-lowest); border-radius: var(--radius-sm); padding: var(--space-lg); }
+    .appendix-item code { display: block; color: var(--fg-2); word-break: break-all; overflow-wrap: anywhere; white-space: normal; margin-top: var(--space-sm); }
+    .hidden { display: none !important; }
+    :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+    @media (max-width: 980px) {
+      .command-bar { grid-template-columns: 1fr; }
+      .filter-strip { justify-content: flex-start; }
+      .hero-workspace, .overview-grid, .system-grid { grid-template-columns: 1fr; }
+      .hero-visual { border-left: 0; border-top: 1px solid var(--border); }
+      .kpi-rail { grid-template-columns: repeat(2, 1fr); }
+      .score-row { grid-template-columns: 1fr 64px; }
+      .score-row .bar { grid-column: 1 / -1; }
+      .data-grid { overflow-x: auto; }
+      table { min-width: 860px; }
+    }
+    @media (max-width: 560px) {
+      .kpi-rail { grid-template-columns: 1fr; }
+      .kpi { border-right: 0; border-bottom: 1px solid var(--border); }
+      main { padding: var(--space-2xl) var(--space-md); }
+      .hero-copy, .hero-visual { padding: var(--space-2xl) var(--space-md); }
+      .score-pill { font-size: 22px; }
+      .system-panel header { align-items: flex-start; flex-wrap: wrap; }
+      .data-grid { overflow-x: visible; }
+      table { min-width: 0; width: 100%; }
+      thead { display: none; }
+      tbody, tr, td { display: block; width: 100%; }
+      tr { border-bottom: 1px solid var(--border); padding: var(--space-sm) 0; }
+      td { border-bottom: 0; padding: var(--space-sm) var(--space-md); }
+      td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 2px;
+        color: var(--fg-muted);
+        font-size: 11px;
+        font-family: var(--font-mono);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ops-shell">
+    <nav class="command-bar">
+      <div class="command-title">
+        <strong>Memory Benchmark Console</strong>
+        <span>2026-06-03 · F:\codex\reports\memory-systems\benchmark-2026-06-03</span>
+      </div>
+      <label>
+        <span class="hidden">搜索系统、证据或 caveat</span>
+        <input id="searchBox" class="search-box" type="search" placeholder="搜索：GBrain / SQLite shim / Agnes / caveat">
+      </label>
+      <div class="filter-strip" role="group" aria-label="系统过滤">
+        <button class="active" data-filter="all">全部</button>
+        <button data-filter="gbrain">GBrain</button>
+        <button data-filter="letta">Letta</button>
+        <button data-filter="mem0">Mem0</button>
+        <button data-filter="openviking">OpenViking</button>
+      </div>
+    </nav>
+
+    <header class="hero-workspace">
+      <div class="hero-copy">
+        <div class="eyebrow">evidence-backed local evaluation</div>
+        <h1>四种记忆系统测评详报</h1>
+        <p class="lead">Mem0 / GBrain / OpenViking / Letta-MemGPT 在固定语料、维修手册全量 ingest、模型来源审计与 Harness 适配上的证据化比较</p>
+        <div class="kpi-rail">
+          <div class="kpi"><span>固定语料</span><strong>35</strong></div>
+          <div class="kpi"><span>原始查询</span><strong>14</strong></div>
+          <div class="kpi"><span>维修手册来源</span><strong>9</strong></div>
+          <div class="kpi"><span>最终主候选</span><strong>GBrain</strong></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="inline-asset" xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+  <defs>
+    <linearGradient id="paper" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff8f6"/>
+      <stop offset=".55" stop-color="#eef5ec"/>
+      <stop offset="1" stop-color="#f1e6dc"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#1e1b19" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="1400" height="760" fill="url(#paper)"/>
+  <g opacity=".25" fill="none" stroke-width="4">
+    <path d="M80 170 C250 80 380 230 560 130 S880 190 1040 110 S1260 130 1340 70" stroke="#2f6f5e"/>
+    <path d="M70 615 C230 520 410 660 610 555 S930 640 1110 500 S1280 540 1360 450" stroke="#b46a2c"/>
+  </g>
+  <g transform="translate(110 105)" filter="url(#shadow)">
+    <rect width="1180" height="520" rx="8" fill="#fffaf0" stroke="#1e1b19" stroke-width="2"/>
+    <line x1="0" y1="92" x2="1180" y2="92" stroke="#1e1b19" stroke-width="2"/>
+    <text x="48" y="58" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="30" font-weight="700" fill="#1e1b19">Four Memory Systems Benchmark</text>
+    <text x="48" y="145" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="18" fill="#594138">35-document corpus + 9-source repair manual ingest + model provenance audit</text>
+    <g transform="translate(74 210)">
+      <circle cx="95" cy="95" r="72" fill="#e6f2ee" stroke="#2f6f5e" stroke-width="9"/>
+      <circle cx="355" cy="95" r="72" fill="#ecebfa" stroke="#5b5fa6" stroke-width="9"/>
+      <circle cx="615" cy="95" r="72" fill="#f6e9df" stroke="#b46a2c" stroke-width="9"/>
+      <circle cx="875" cy="95" r="72" fill="#eee7d1" stroke="#846c3d" stroke-width="9"/>
+      <path d="M167 95 H283 M427 95 H543 M687 95 H803" stroke="#1e1b19" stroke-width="6" stroke-linecap="round"/>
+      <text x="95" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#1e1b19">GB</text>
+      <text x="355" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#1e1b19">LT</text>
+      <text x="615" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#1e1b19">M0</text>
+      <text x="875" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#1e1b19">OV</text>
+      <text x="95" y="198" text-anchor="middle" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" fill="#594138">GBrain</text>
+      <text x="355" y="198" text-anchor="middle" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" fill="#594138">Letta / MemGPT</text>
+      <text x="615" y="198" text-anchor="middle" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" fill="#594138">Mem0</text>
+      <text x="875" y="198" text-anchor="middle" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" fill="#594138">OpenViking</text>
+    </g>
+    <text x="48" y="464" font-family="Consolas, monospace" font-size="20" fill="#46554d">Result: primary adoption candidate = GBrain; highest fixed-corpus score = Letta shim.</text>
+  </g>
+</svg>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>总览结论</h2>
+            <p>Letta 的 shim lane 最高分不等于原生部署胜出；主线推荐以证据完整度、Harness 适配和后续工程风险综合判断。</p>
+          </div>
+        </div>
+        <div class="overview-grid">
+          <div class="work-surface score-list">
+            <div class="score-row" data-system="gbrain"><b>GBrain</b><span class="mono">81.00</span><div class="bar" aria-label="81.00 分"><span style="width:81.00%; background:#2f6f5e"></span></div></div><div class="score-row" data-system="letta"><b>Letta / MemGPT</b><span class="mono">89.00</span><div class="bar" aria-label="89.00 分"><span style="width:89.00%; background:#5b5fa6"></span></div></div><div class="score-row" data-system="mem0"><b>Mem0</b><span class="mono">85.91</span><div class="bar" aria-label="85.91 分"><span style="width:85.91%; background:#b46a2c"></span></div></div><div class="score-row" data-system="openviking"><b>OpenViking</b><span class="mono">76.25</span><div class="bar" aria-label="76.25 分"><span style="width:76.25%; background:#846c3d"></span></div></div>
+          </div>
+          <div class="work-surface radar-wrap">
+<svg class="radar" viewBox="0 0 300 300" role="img" aria-label="四系统总分雷达图">
+  <g class="rings"><polygon points="150.0,123.8 176.2,150.0 150.0,176.2 123.8,150.0"></polygon><polygon points="150.0,97.5 202.5,150.0 150.0,202.5 97.5,150.0"></polygon><polygon points="150.0,71.2 228.8,150.0 150.0,228.8 71.2,150.0"></polygon><polygon points="150.0,45.0 255.0,150.0 150.0,255.0 45.0,150.0"></polygon></g>
+  <g class="axes"><line x1="150" y1="150" x2="150.0" y2="45.0"></line><line x1="150" y1="150" x2="255.0" y2="150.0"></line><line x1="150" y1="150" x2="150.0" y2="255.0"></line><line x1="150" y1="150" x2="45.0" y2="150.0"></line></g>
+  <polygon class="score-poly" points="150.0,65.0 243.4,150.0 150.0,240.2 69.9,150.0"></polygon>
+  <g class="radar-labels"><text x="150.0" y="13.0" text-anchor="middle">GB 81.0</text><text x="287.0" y="150.0" text-anchor="middle">LT 89.0</text><text x="150.0" y="287.0" text-anchor="middle">M0 85.9</text><text x="13.0" y="150.0" text-anchor="middle">OV 76.2</text></g>
+</svg>
+</div>
+        </div>
+      </section>
+
+      <section class="flag-queue">
+        <div class="section-head">
+          <div>
+            <h2>硬 caveat</h2>
+            <p>这两条是报告的解释边界，任何后续集成都不应淡化。</p>
+          </div>
+        </div>
+        <ul class="flag-list"><li>Letta 是 in-process SQLite shim 完成态，不是原生 Letta REST/Postgres server 全链路跑完。</li><li>Mem0/OpenViking 的 repair-manual 实际主 lane 是 Agnes+OpenRouter；local / openrouter_only 有 repair-phase smoke 或 skip reason，不是三套独立 repair store。</li></ul>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>四系统比较表</h2>
+            <p>字段来自 result.json 和 superseding checkpoint；原始证据路径在附录保留。</p>
+          </div>
+        </div>
+        <div class="data-grid">
+          <table>
+            <thead><tr><th>系统</th><th>总分</th><th>条形图</th><th>sources</th><th>chunks / vectors</th><th>queries</th><th>实际 lane</th><th>结论</th></tr></thead>
+            <tbody>
+<tr data-system="gbrain">
+  <td data-label="系统"><b>GBrain</b><span>Primary Candidate</span></td>
+  <td data-label="总分" class="mono">81.00</td>
+  <td data-label="条形图"><div class="bar" aria-label="81.00 分"><span style="width:81.00%; background:#2f6f5e"></span></div></td>
+  <td data-label="sources">9</td>
+  <td data-label="chunks / vectors">37 / 37</td>
+  <td data-label="queries">87</td>
+  <td data-label="实际 lane">local primary + API provenance</td>
+  <td data-label="结论">最适合继续作为本机 Harness 的主候选知识/记忆底座。</td>
+</tr>
+<tr data-system="letta">
+  <td data-label="系统"><b>Letta / MemGPT</b><span>Qualified With Shim</span></td>
+  <td data-label="总分" class="mono">89.00</td>
+  <td data-label="条形图"><div class="bar" aria-label="89.00 分"><span style="width:89.00%; background:#5b5fa6"></span></div></td>
+  <td data-label="sources">9</td>
+  <td data-label="chunks / vectors">27 / 27</td>
+  <td data-label="queries">70</td>
+  <td data-label="实际 lane">local</td>
+  <td data-label="结论">固定语料得分最高，但只能作为 shim 完成态候选，不能当作原生 server 完成态。</td>
+</tr>
+<tr data-system="mem0">
+  <td data-label="系统"><b>Mem0</b><span>Practical Workflow Candidate</span></td>
+  <td data-label="总分" class="mono">85.91</td>
+  <td data-label="条形图"><div class="bar" aria-label="85.91 分"><span style="width:85.91%; background:#b46a2c"></span></div></td>
+  <td data-label="sources">9</td>
+  <td data-label="chunks / vectors">33 / 33</td>
+  <td data-label="queries">85</td>
+  <td data-label="实际 lane">agnes_openrouter</td>
+  <td data-label="结论">search + API synthesis 工作流很实用，适合轻量记忆工作流候选。</td>
+</tr>
+<tr data-system="openviking">
+  <td data-label="系统"><b>OpenViking</b><span>Specialist Tool</span></td>
+  <td data-label="总分" class="mono">76.25</td>
+  <td data-label="条形图"><div class="bar" aria-label="76.25 分"><span style="width:76.25%; background:#846c3d"></span></div></td>
+  <td data-label="sources">9</td>
+  <td data-label="chunks / vectors">27 / 27</td>
+  <td data-label="queries">85</td>
+  <td data-label="实际 lane">agnes_openrouter</td>
+  <td data-label="结论">适合作为资源浏览/可解释检索工具，不宜直接升为主记忆底座。</td>
+</tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>逐系统详评</h2>
+            <p>每个系统单独列出证据读数、优势、限制、验证层和模型来源说明。</p>
+          </div>
+        </div>
+        <div class="systems-stack">
+<section class="system-panel row-detail" id="gbrain" data-system="gbrain">
+  <header>
+    <span class="system-chip" style="--chip:#2f6f5e">GB</span>
+    <div>
+      <h2>GBrain</h2>
+      <p>最适合继续作为本机 Harness 的主候选知识/记忆底座。</p>
+    </div>
+    <strong class="score-pill">81.00</strong>
+  </header>
+  <div class="system-grid">
+    <div>
+      <h3>证据读数</h3>
+      <dl class="metric-list">
+        <div><dt>顶层状态</dt><dd>completed_after_repair</dd></div>
+        <div><dt>repair 状态</dt><dd>completed</dd></div>
+        <div><dt>LM / Vector</dt><dd>True / True</dd></div>
+        <div><dt>sources</dt><dd>9（manifest 9）</dd></div>
+        <div><dt>chunks / vectors</dt><dd>37 / 37</dd></div>
+        <div><dt>repair queries</dt><dd>87</dd></div>
+      </dl>
+    </div>
+    <div>
+      <h3>优势</h3>
+      <ul><li>repair-manual 阶段证据最完整，local、OpenRouter-only、Agnes+OpenRouter 三类来源都有 ingest/vector/provenance 记录。</li><li>与本地 Harness 的资料组织、checkpoint、repair manual 和角色边界最贴近。</li><li>exact、semantic、negative、boundary 等关键验证层全部过阈值。</li></ul>
+    </div>
+    <div>
+      <h3>限制</h3>
+      <ul><li>原始基准阶段应用了 benchmark-gated embedding dimension patch。</li><li>GBrain native think 仍有 Anthropic gate；Agnes synthesis 是外部 smoke/辅助证据，不是原生 GBrain think 完整链路。</li><li>原始 14-query 中 citation/timeline/synthesis 的表现弱于 exact/update/conflict retrieval。</li></ul>
+    </div>
+  </div>
+  <div class="validation-grid"><div class="validation-cell ok"><b>必需查询 JSON</b><span>8 / 8 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>精确锚点</b><span>12 / 12 · 阈值 10</span></div>
+<div class="validation-cell ok"><b>语义改写</b><span>10 / 10 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>流程综合</b><span>8 / 8 · 阈值 6</span></div>
+<div class="validation-cell ok"><b>跨章节比较</b><span>6 / 6 · 阈值 5</span></div>
+<div class="validation-cell ok"><b>负控安全</b><span>8 / 8 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>随机覆盖</b><span>15 / 30 · 阈值 12</span></div>
+<div class="validation-cell ok"><b>边界回归</b><span>3 / 3 · 阈值 3</span></div></div>
+  <p class="provenance"><b>模型来源：</b>三类 repair-phase lane 都留下 ingest/vector/provenance 证据；local 是主验证 lane，API synthesis/provenance 补足 LMization gate。</p>
+</section>
+<section class="system-panel row-detail" id="letta" data-system="letta">
+  <header>
+    <span class="system-chip" style="--chip:#5b5fa6">LT</span>
+    <div>
+      <h2>Letta / MemGPT</h2>
+      <p>固定语料得分最高，但只能作为 shim 完成态候选，不能当作原生 server 完成态。</p>
+    </div>
+    <strong class="score-pill">89.00</strong>
+  </header>
+  <div class="system-grid">
+    <div>
+      <h3>证据读数</h3>
+      <dl class="metric-list">
+        <div><dt>顶层状态</dt><dd>completed_with_sqlite_shim</dd></div>
+        <div><dt>repair 状态</dt><dd>completed</dd></div>
+        <div><dt>LM / Vector</dt><dd>True / True</dd></div>
+        <div><dt>sources</dt><dd>9（manifest 9）</dd></div>
+        <div><dt>chunks / vectors</dt><dd>27 / 27</dd></div>
+        <div><dt>repair queries</dt><dd>70</dd></div>
+      </dl>
+    </div>
+    <div>
+      <h3>优势</h3>
+      <ul><li>14-query 固定语料总分最高，并有 delete、restart、source_passages 证据。</li><li>repair-manual 阶段用 in-process SQLite shim 完成 lmization、vectorization、retrieval validation。</li><li>零外部模型/API 成本，工程上可复现为本地验证 lane。</li></ul>
+    </div>
+    <div>
+      <h3>限制</h3>
+      <ul><li>不是原生 Letta REST/Postgres server 跑完；生产化接入仍需单独验证。</li><li>embedding 使用 deterministic hash embedding，不能直接等同于真实语义 embedding 线上表现。</li><li>OpenRouter-only 和 Agnes+OpenRouter 在 repair phase 是 skip reason，不是实际参与 lane。</li></ul>
+    </div>
+  </div>
+  <div class="validation-grid"><div class="validation-cell ok"><b>用户提供查询</b><span>8 / 8 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>精确锚点</b><span>12 / 12 · 阈值 10</span></div>
+<div class="validation-cell ok"><b>语义改写</b><span>9 / 10 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>流程综合</b><span>8 / 8 · 阈值 6</span></div>
+<div class="validation-cell ok"><b>跨章节比较</b><span>6 / 6 · 阈值 5</span></div>
+<div class="validation-cell ok"><b>负控安全</b><span>8 / 8 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>随机覆盖</b><span>15 / 15 · 阈值 12</span></div>
+<div class="validation-cell ok"><b>边界回归</b><span>3 / 3 · 阈值 3</span></div></div>
+  <p class="provenance"><b>模型来源：</b>Repair manual phase used the local in-process Letta SQLite shim with deterministic hash embeddings; OpenRouter-only and Agnes+OpenRouter lanes were not used for this phase.</p>
+</section>
+<section class="system-panel row-detail" id="mem0" data-system="mem0">
+  <header>
+    <span class="system-chip" style="--chip:#b46a2c">M0</span>
+    <div>
+      <h2>Mem0</h2>
+      <p>search + API synthesis 工作流很实用，适合轻量记忆工作流候选。</p>
+    </div>
+    <strong class="score-pill">85.91</strong>
+  </header>
+  <div class="system-grid">
+    <div>
+      <h3>证据读数</h3>
+      <dl class="metric-list">
+        <div><dt>顶层状态</dt><dd>completed</dd></div>
+        <div><dt>repair 状态</dt><dd>completed</dd></div>
+        <div><dt>LM / Vector</dt><dd>True / True</dd></div>
+        <div><dt>sources</dt><dd>9（manifest 9）</dd></div>
+        <div><dt>chunks / vectors</dt><dd>33 / 33</dd></div>
+        <div><dt>repair queries</dt><dd>85</dd></div>
+      </dl>
+    </div>
+    <div>
+      <h3>优势</h3>
+      <ul><li>Agnes+OpenRouter lane 得分强，negative safety 在 repair closeout 后达到 8/8。</li><li>add/search/update/delete 的工作流直观，适合快速落地小型 agent memory。</li><li>repair-manual 9 源、33 chunks、33 vectors、85 查询，完成度扎实。</li></ul>
+    </div>
+    <div>
+      <h3>限制</h3>
+      <ul><li>Mem0 原生 search 不是完整 answer engine；评测使用 Mem0 retrieval + lane LLM synthesis。</li><li>repair-manual 实际主 lane 是 Agnes+OpenRouter；local/openrouter_only 有 smoke 或说明，但不是三套独立 repair store。</li><li>restart persistence 和 citation/source reliability 仍弱于最佳候选。</li></ul>
+    </div>
+  </div>
+  <div class="validation-grid"><div class="validation-cell warn"><b>用户提供维修查询</b><span>1 / 1 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>精确锚点</b><span>12 / 12 · 阈值 10</span></div>
+<div class="validation-cell ok"><b>语义改写</b><span>10 / 10 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>流程综合</b><span>8 / 8 · 阈值 6</span></div>
+<div class="validation-cell ok"><b>跨章节比较</b><span>6 / 6 · 阈值 5</span></div>
+<div class="validation-cell ok"><b>负控安全</b><span>8 / 8 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>随机覆盖</b><span>15 / 30 · 阈值 12</span></div>
+<div class="validation-cell ok"><b>边界回归</b><span>3 / 3 · 阈值 3</span></div></div>
+  <p class="provenance"><b>模型来源：</b>实际 repair lane 为 Agnes+OpenRouter；local/openrouter_only 有 smoke 或 skip reason，不是独立 repair store。</p>
+</section>
+<section class="system-panel row-detail" id="openviking" data-system="openviking">
+  <header>
+    <span class="system-chip" style="--chip:#846c3d">OV</span>
+    <div>
+      <h2>OpenViking</h2>
+      <p>适合作为资源浏览/可解释检索工具，不宜直接升为主记忆底座。</p>
+    </div>
+    <strong class="score-pill">76.25</strong>
+  </header>
+  <div class="system-grid">
+    <div>
+      <h3>证据读数</h3>
+      <dl class="metric-list">
+        <div><dt>顶层状态</dt><dd>completed</dd></div>
+        <div><dt>repair 状态</dt><dd>completed</dd></div>
+        <div><dt>LM / Vector</dt><dd>True / True</dd></div>
+        <div><dt>sources</dt><dd>9（manifest 9）</dd></div>
+        <div><dt>chunks / vectors</dt><dd>27 / 27</dd></div>
+        <div><dt>repair queries</dt><dd>85</dd></div>
+      </dl>
+    </div>
+    <div>
+      <h3>优势</h3>
+      <ul><li>OpenViking 的资源、scope、collection 形态利于可解释检索和证据墙。</li><li>repair closeout 后 negative safety 提升到 8/8，provided repair queries 达到 8/8。</li><li>API lane 在 exact、semantic、conflict、negative 等层面有可靠证据。</li></ul>
+    </div>
+    <div>
+      <h3>限制</h3>
+      <ul><li>local lane 不稳定，部分查询只记录 retrieval 或 skip/smoke。</li><li>delete、citation、multi-document synthesis 仍有明显短板。</li><li>repair-manual 实际主 lane 是 Agnes+OpenRouter；local/openrouter_only 不是独立 repair store。</li></ul>
+    </div>
+  </div>
+  <div class="validation-grid"><div class="validation-cell ok"><b>用户提供维修查询</b><span>8 / 8 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>精确锚点</b><span>12 / 12 · 阈值 10</span></div>
+<div class="validation-cell ok"><b>语义改写</b><span>10 / 10 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>流程综合</b><span>7 / 8 · 阈值 6</span></div>
+<div class="validation-cell ok"><b>跨章节比较</b><span>6 / 6 · 阈值 5</span></div>
+<div class="validation-cell ok"><b>负控安全</b><span>8 / 8 · 阈值 8</span></div>
+<div class="validation-cell ok"><b>随机覆盖</b><span>26 / 30 · 阈值 12</span></div>
+<div class="validation-cell ok"><b>边界回归</b><span>3 / 3 · 阈值 3</span></div></div>
+  <p class="provenance"><b>模型来源：</b>实际 repair lane 为 Agnes+OpenRouter；OpenRouter-only 有 fresh smoke，本地 lane 未作为独立 repair store。</p>
+</section></div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>模型来源审计</h2>
+            <p>provider 是模型层，不是 memory-system 参赛者；本表标明 repair 阶段实际参与的 lane。</p>
+          </div>
+        </div>
+        <div class="data-grid">
+          <table>
+            <thead><tr><th>系统</th><th>实际 repair lane</th><th>embedding / vectorization</th><th>维度</th><th>说明</th></tr></thead>
+            <tbody>
+<tr data-system="gbrain">
+  <td data-label="系统"><b>GBrain</b></td>
+  <td data-label="实际 repair lane">local primary + API provenance</td>
+  <td data-label="embedding / vectorization">ollama:qwen3-embedding:0.6b (primary local validation lane); OpenRouter lanes separately recorded in model_provenance</td>
+  <td data-label="维度">1024</td>
+  <td data-label="说明">三类 repair-phase lane 都留下 ingest/vector/provenance 证据；local 是主验证 lane，API synthesis/provenance 补足 LMization gate。</td>
+</tr>
+<tr data-system="letta">
+  <td data-label="系统"><b>Letta / MemGPT</b></td>
+  <td data-label="实际 repair lane">local</td>
+  <td data-label="embedding / vectorization">repair-manual-hash-embedding</td>
+  <td data-label="维度">256</td>
+  <td data-label="说明">Repair manual phase used the local in-process Letta SQLite shim with deterministic hash embeddings; OpenRouter-only and Agnes+OpenRouter lanes were not used for this phase.</td>
+</tr>
+<tr data-system="mem0">
+  <td data-label="系统"><b>Mem0</b></td>
+  <td data-label="实际 repair lane">agnes_openrouter</td>
+  <td data-label="embedding / vectorization">nvidia/llama-nemotron-embed-vl-1b-v2:free</td>
+  <td data-label="维度">2048</td>
+  <td data-label="说明">实际 repair lane 为 Agnes+OpenRouter；local/openrouter_only 有 smoke 或 skip reason，不是独立 repair store。</td>
+</tr>
+<tr data-system="openviking">
+  <td data-label="系统"><b>OpenViking</b></td>
+  <td data-label="实际 repair lane">agnes_openrouter</td>
+  <td data-label="embedding / vectorization">nvidia/llama-nemotron-embed-vl-1b-v2:free</td>
+  <td data-label="维度">2048</td>
+  <td data-label="说明">实际 repair lane 为 Agnes+OpenRouter；OpenRouter-only 有 fresh smoke，本地 lane 未作为独立 repair store。</td>
+</tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>架构与数据流</h2>
+            <p>同源输入、分离 runtime、分离向量库、统一证据输出，是这次比较能够成立的基础。</p>
+          </div>
+        </div>
+        <div class="visual-panel"><svg class="inline-asset" xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720">
+  <rect width="1400" height="720" fill="#fff8f6"/>
+  <style>
+    text{font-family:Arial,'Microsoft YaHei',sans-serif;fill:#1e1b19}
+    .box{fill:#fffaf0;stroke:#1e1b19;stroke-width:2}
+    .muted{fill:#594138;font-size:18px}
+    .title{font-size:26px;font-weight:700}
+    .mono{font-family:Consolas,monospace;font-size:18px}
+    .arrow{fill:none;stroke:#1e1b19;stroke-width:3;marker-end:url(#m)}
+  </style>
+  <defs><marker id="m" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#1e1b19"/></marker></defs>
+  <text x="70" y="64" class="title">Benchmark Evidence Architecture</text>
+  <text x="70" y="98" class="muted">同一语料、分离 runtime、分离向量库、统一结果 schema；provider 是模型层，不是 contestant。</text>
+  <g transform="translate(70 150)">
+    <rect class="box" x="0" y="0" width="260" height="118" rx="8"/>
+    <text x="24" y="42" class="title">Fixed Corpus</text>
+    <text x="24" y="78" class="mono">35 docs / 14 queries</text>
+  </g>
+  <g transform="translate(410 138)">
+    <rect class="box" x="0" y="0" width="300" height="144" rx="8"/>
+    <text x="24" y="42" class="title">Repair Manual Phase</text>
+    <text x="24" y="78" class="mono">9 sources</text>
+    <text x="24" y="108" class="mono">70-87 validation queries</text>
+  </g>
+  <g transform="translate(790 88)">
+    <rect class="box" x="0" y="0" width="290" height="110" rx="8" fill="#e6f2ee"/>
+    <text x="24" y="42" class="title">Local Lane</text>
+    <text x="24" y="78" class="mono">Ollama / shim / CPU-GPU policy</text>
+    <rect class="box" x="0" y="142" width="290" height="110" rx="8" fill="#eef0ff"/>
+    <text x="24" y="184" class="title">OpenRouter Lane</text>
+    <text x="24" y="220" class="mono">chat + embedding provider</text>
+    <rect class="box" x="0" y="284" width="290" height="110" rx="8" fill="#f6e9df"/>
+    <text x="24" y="326" class="title">Agnes + OpenRouter</text>
+    <text x="24" y="362" class="mono">LLM + embedding split</text>
+  </g>
+  <g transform="translate(1155 150)">
+    <rect class="box" x="0" y="0" width="260" height="118" rx="8"/>
+    <text x="24" y="42" class="title">Report Outputs</text>
+    <text x="24" y="78" class="mono">JSON / MD / HTML</text>
+  </g>
+  <g transform="translate(90 470)">
+    <rect class="box" x="0" y="0" width="260" height="92" rx="8" fill="#e6f2ee"/>
+    <text x="24" y="38" class="title">GBrain</text><text x="24" y="68" class="mono">primary candidate</text>
+    <rect class="box" x="310" y="0" width="260" height="92" rx="8" fill="#ecebfa"/>
+    <text x="334" y="38" class="title">Letta</text><text x="334" y="68" class="mono">SQLite shim caveat</text>
+    <rect class="box" x="620" y="0" width="260" height="92" rx="8" fill="#f6e9df"/>
+    <text x="644" y="38" class="title">Mem0</text><text x="644" y="68" class="mono">Agnes+OpenRouter lane</text>
+    <rect class="box" x="930" y="0" width="260" height="92" rx="8" fill="#eee7d1"/>
+    <text x="954" y="38" class="title">OpenViking</text><text x="954" y="68" class="mono">specialist tool</text>
+  </g>
+  <path class="arrow" d="M330 209 H410"/>
+  <path class="arrow" d="M710 210 H790"/>
+  <path class="arrow" d="M1080 210 H1155"/>
+  <path class="arrow" d="M710 210 C730 465 870 516 1090 516"/>
+</svg></div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>截图与证据墙</h2>
+            <p>PNG 来自 worker 证据截图；HTML/TXT 证据保留为可打开附件。</p>
+          </div>
+        </div>
+        <div class="evidence-wall"><figure class="evidence-card" data-system="gbrain"><img src="assets/evidence/gbrain/gbrain-01-version.png" alt="GBrain · gbrain-01-version.png"><figcaption>GBrain · gbrain-01-version.png</figcaption></figure>
+<figure class="evidence-card" data-system="gbrain"><img src="assets/evidence/gbrain/gbrain-02-import.png" alt="GBrain · gbrain-02-import.png"><figcaption>GBrain · gbrain-02-import.png</figcaption></figure>
+<figure class="evidence-card" data-system="gbrain"><img src="assets/evidence/gbrain/gbrain-03-query-delete.png" alt="GBrain · gbrain-03-query-delete.png"><figcaption>GBrain · gbrain-03-query-delete.png</figcaption></figure>
+<figure class="evidence-card" data-system="gbrain"><img src="assets/evidence/gbrain/gbrain-04-api-lanes.png" alt="GBrain · gbrain-04-api-lanes.png"><figcaption>GBrain · gbrain-04-api-lanes.png</figcaption></figure>
+<figure class="evidence-card" data-system="gbrain"><img src="assets/evidence/gbrain/gbrain-04-failure.png" alt="GBrain · gbrain-04-failure.png"><figcaption>GBrain · gbrain-04-failure.png</figcaption></figure>
+<figure class="evidence-card" data-system="gbrain"><a class="evidence-link" href="assets/evidence/gbrain/gbrain-repair-manual-phase-cli-evidence.txt" target="_blank" rel="noreferrer">打开 TXT 证据</a><figcaption>GBrain · gbrain-repair-manual-phase-cli-evidence.txt</figcaption></figure>
+<figure class="evidence-card" data-system="letta"><img src="assets/evidence/letta/letta-01-version.png" alt="Letta / MemGPT · letta-01-version.png"><figcaption>Letta / MemGPT · letta-01-version.png</figcaption></figure>
+<figure class="evidence-card" data-system="letta"><img src="assets/evidence/letta/letta-02-server-blocked.png" alt="Letta / MemGPT · letta-02-server-blocked.png"><figcaption>Letta / MemGPT · letta-02-server-blocked.png</figcaption></figure>
+<figure class="evidence-card" data-system="letta"><img src="assets/evidence/letta/letta-03-provider-lanes.png" alt="Letta / MemGPT · letta-03-provider-lanes.png"><figcaption>Letta / MemGPT · letta-03-provider-lanes.png</figcaption></figure>
+<figure class="evidence-card" data-system="letta"><a class="evidence-link" href="assets/evidence/letta/letta-04-sqlite-shim-benchmark.html" target="_blank" rel="noreferrer">打开 HTML 证据</a><figcaption>Letta / MemGPT · letta-04-sqlite-shim-benchmark.html</figcaption></figure>
+<figure class="evidence-card" data-system="letta"><a class="evidence-link" href="assets/evidence/letta/letta-05-repair-manual-ingest.html" target="_blank" rel="noreferrer">打开 HTML 证据</a><figcaption>Letta / MemGPT · letta-05-repair-manual-ingest.html</figcaption></figure>
+<figure class="evidence-card" data-system="mem0"><img src="assets/evidence/mem0/mem0-01-version.png" alt="Mem0 · mem0-01-version.png"><figcaption>Mem0 · mem0-01-version.png</figcaption></figure>
+<figure class="evidence-card" data-system="mem0"><img src="assets/evidence/mem0/mem0-02-import.png" alt="Mem0 · mem0-02-import.png"><figcaption>Mem0 · mem0-02-import.png</figcaption></figure>
+<figure class="evidence-card" data-system="mem0"><img src="assets/evidence/mem0/mem0-03-query-results.png" alt="Mem0 · mem0-03-query-results.png"><figcaption>Mem0 · mem0-03-query-results.png</figcaption></figure>
+<figure class="evidence-card" data-system="mem0"><img src="assets/evidence/mem0/mem0-04-limitations.png" alt="Mem0 · mem0-04-limitations.png"><figcaption>Mem0 · mem0-04-limitations.png</figcaption></figure>
+<figure class="evidence-card" data-system="mem0"><img src="assets/evidence/mem0/mem0-05-persistence.png" alt="Mem0 · mem0-05-persistence.png"><figcaption>Mem0 · mem0-05-persistence.png</figcaption></figure>
+<figure class="evidence-card" data-system="mem0"><img src="assets/evidence/mem0/mem0-06-repair-manual-ingest.png" alt="Mem0 · mem0-06-repair-manual-ingest.png"><figcaption>Mem0 · mem0-06-repair-manual-ingest.png</figcaption></figure>
+<figure class="evidence-card" data-system="mem0"><img src="assets/evidence/mem0/mem0-07-repair-model-provenance.png" alt="Mem0 · mem0-07-repair-model-provenance.png"><figcaption>Mem0 · mem0-07-repair-model-provenance.png</figcaption></figure>
+<figure class="evidence-card" data-system="openviking"><img src="assets/evidence/openviking/openviking-01-local_cpu.png" alt="OpenViking · openviking-01-local_cpu.png"><figcaption>OpenViking · openviking-01-local_cpu.png</figcaption></figure>
+<figure class="evidence-card" data-system="openviking"><img src="assets/evidence/openviking/openviking-02-openrouter_only.png" alt="OpenViking · openviking-02-openrouter_only.png"><figcaption>OpenViking · openviking-02-openrouter_only.png</figcaption></figure>
+<figure class="evidence-card" data-system="openviking"><img src="assets/evidence/openviking/openviking-03-agnes_openrouter.png" alt="OpenViking · openviking-03-agnes_openrouter.png"><figcaption>OpenViking · openviking-03-agnes_openrouter.png</figcaption></figure>
+<figure class="evidence-card" data-system="openviking"><img src="assets/evidence/openviking/openviking-04-repair-manual-ingest-phase.png" alt="OpenViking · openviking-04-repair-manual-ingest-phase.png"><figcaption>OpenViking · openviking-04-repair-manual-ingest-phase.png</figcaption></figure></div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>证据附录</h2>
+            <p>所有结论都应能回到原始 result、source manifest 或截图路径。</p>
+          </div>
+        </div>
+        <div class="appendix-grid">
+          <div class="appendix-item" data-system="gbrain"><h3>GBrain</h3><code>F:\codex\reports\memory-systems\benchmark-2026-06-03\results\gbrain\result.json</code><code>F:/codex/reports/memory-systems/benchmark-2026-06-03/results/gbrain/raw-logs/repair-manual-phase/source-manifest.json</code></div><div class="appendix-item" data-system="letta"><h3>Letta / MemGPT</h3><code>F:\codex\reports\memory-systems\benchmark-2026-06-03\results\letta\result.json</code><code>F:\codex\reports\memory-systems\benchmark-2026-06-03\results\letta\raw-logs\repair-manual-source-manifest.json</code></div><div class="appendix-item" data-system="mem0"><h3>Mem0</h3><code>F:\codex\reports\memory-systems\benchmark-2026-06-03\results\mem0\result.json</code><code>F:\codex\reports\memory-systems\benchmark-2026-06-03\results\mem0\raw-logs\repair-manual-source-manifest.json</code></div><div class="appendix-item" data-system="openviking"><h3>OpenViking</h3><code>F:\codex\reports\memory-systems\benchmark-2026-06-03\results\openviking\result.json</code><code>F:/codex/reports/memory-systems/benchmark-2026-06-03/results/openviking/raw-logs/repair-manual-source-manifest.json</code></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    const searchBox = document.getElementById('searchBox');
+    const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+    const items = Array.from(document.querySelectorAll('[data-system]'));
+    let active = 'all';
+    function applyFilters() {
+      const query = searchBox.value.trim().toLowerCase();
+      items.forEach((item) => {
+        const system = item.dataset.system;
+        const matchesSystem = active === 'all' || system === active;
+        const matchesText = !query || item.textContent.toLowerCase().includes(query);
+        item.classList.toggle('hidden', !(matchesSystem && matchesText));
+      });
+    }
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        active = button.dataset.filter;
+        buttons.forEach((b) => b.classList.toggle('active', b === button));
+        applyFilters();
+      });
+    });
+    searchBox.addEventListener('input', applyFilters);
+  </script>
+</body>
+</html>

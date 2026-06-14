@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML 工作流：从图文长文到多平台发布</title>
+  <meta name="description" content="一套面向 Codex 多线程协作的 HTML 成品生产线：C:\\html 落盘、图文长文、localhost 验收、公众号/飞书/知乎平台封装和经验沉淀。">
+  <style>
+    :root {
+      --bg: #f7f3ea;
+      --paper: #fffdf7;
+      --paper-soft: #f0f6f2;
+      --ink: #172429;
+      --muted: #68757d;
+      --line: #d9cfbf;
+      --accent: #1f5f58;
+      --accent-2: #b35b34;
+      --accent-3: #2d5f91;
+      --code: #142429;
+      --max: 1080px;
+      color-scheme: light;
+      font-family: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(31, 95, 88, .12), rgba(31, 95, 88, 0) 420px),
+        radial-gradient(circle at 12% 0%, rgba(179, 91, 52, .12), rgba(179, 91, 52, 0) 320px),
+        var(--bg);
+      letter-spacing: 0;
+    }
+
+    a {
+      color: var(--accent-3);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 58px 24px 34px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(340px, .88fr);
+      gap: 34px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--accent);
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 860px;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      margin: 24px 0 0;
+      max-width: 760px;
+      color: #39484f;
+      font-size: 20px;
+      line-height: 1.82;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .meta span {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 247, .82);
+      padding: 8px 10px;
+      border-radius: 4px;
+    }
+
+    .hero-card {
+      margin: 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 48px rgba(23, 36, 41, .11);
+      padding: 16px;
+    }
+
+    .hero-card img {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    figcaption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .toc-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 247, .84);
+    }
+
+    .toc {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 15px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 8px 11px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 44px 24px 88px;
+    }
+
+    section { margin: 0 0 78px; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 24px;
+      align-items: baseline;
+      border-top: 2px solid var(--accent-2);
+      padding-top: 18px;
+      margin-bottom: 24px;
+    }
+
+    .num {
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 26px 0 12px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    p {
+      margin: 14px 0;
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .lead {
+      font-size: 20px;
+      line-height: 1.85;
+      color: #2e3d44;
+    }
+
+    .quote {
+      margin: 30px 0;
+      padding: 28px;
+      background: var(--code);
+      color: #f7f2e8;
+    }
+
+    .quote p {
+      margin: 0;
+      color: inherit;
+      font-family: Georgia, "Times New Roman", "SimSun", serif;
+      font-size: 25px;
+      line-height: 1.55;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 26px 0;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 18px;
+      min-height: 132px;
+    }
+
+    .stat b {
+      display: block;
+      color: var(--accent);
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 247, .88);
+      padding: 18px;
+    }
+
+    .card b {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.78;
+    }
+
+    .figure {
+      margin: 26px 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: 0 14px 34px rgba(23, 36, 41, .08);
+    }
+
+    .figure img {
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    pre {
+      margin: 16px 0;
+      padding: 16px;
+      overflow-x: auto;
+      max-width: 100%;
+      background: var(--code);
+      color: #e9f2ee;
+      border-radius: 4px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    code {
+      font-family: "Cascadia Mono", "Consolas", "SFMono-Regular", monospace;
+      font-size: .94em;
+    }
+
+    p code,
+    li code {
+      color: #0e5149;
+      background: rgba(31, 95, 88, .10);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr) 190px;
+      gap: 14px;
+      align-items: start;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      padding: 16px;
+    }
+
+    .step strong {
+      color: var(--accent-2);
+      font-size: 15px;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.75;
+      color: #405056;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      background: var(--paper-soft);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      justify-self: start;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 22px 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 13px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--accent);
+      background: #eef5f1;
+      font-size: 13px;
+    }
+
+    .callout {
+      border-left: 5px solid var(--accent);
+      background: rgba(31, 95, 88, .10);
+      padding: 18px 20px;
+      margin: 26px 0;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .check {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 14px 16px;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .check b {
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 42px;
+      }
+
+      .section-head,
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .stats,
+      .cards,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      table,
+      thead,
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+      }
+
+      thead { display: none; }
+
+      tr {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 0;
+      }
+
+      td {
+        border: 0;
+        padding: 8px 14px;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        color: var(--accent);
+        font-weight: 800;
+        font-size: 12px;
+        margin-bottom: 3px;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-x: hidden;
+      }
+
+      pre code {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      main { padding-inline: 18px; }
+      .hero { padding-inline: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">HTML Workflow / Codex 多线程成品规范</p>
+      <h1>HTML 工作流：从图文长文到多平台发布</h1>
+      <p class="dek">这是一套给所有线程复用的 HTML 生产线：先做高质量母版，再做平台发布包，所有产物统一落盘、统一验收、统一交接。</p>
+      <div class="meta">
+        <span>固定总仓库：C:\html</span>
+        <span>母版：articles\&lt;slug&gt;\index.html</span>
+        <span>验收：localhost + 桌面/手机</span>
+      </div>
+    </div>
+    <figure class="hero-card">
+      <img src="assets/workflow-pipeline.png" alt="HTML 文章生产线流程图">
+      <figcaption>这张图是整套流程的骨架：材料、母版、验收、平台封装和长期记忆必须连在一起。</figcaption>
+    </figure>
+  </header>
+
+  <nav class="toc-band" aria-label="文章目录">
+    <div class="toc">
+      <a href="#principle">总原则</a>
+      <a href="#directory">目录规范</a>
+      <a href="#skills">Skill 组合</a>
+      <a href="#content">内容结构</a>
+      <a href="#images">图片规则</a>
+      <a href="#validation">验收</a>
+      <a href="#platform">平台封装</a>
+      <a href="#handoff">交接</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="principle">
+      <div class="section-head">
+        <div class="num">01 / principle</div>
+        <h2>HTML 不是网页草稿，而是内容母版</h2>
+      </div>
+      <p class="lead">以后所有专门文章都先做成 HTML 母版。母版负责完整表达：结构、节奏、图文关系、证据截图、视觉层次和交接口令。公众号、飞书、知乎、小红书都不是直接复制母版，而是从母版降级成各自能稳定承受的版本。</p>
+      <div class="quote">
+        <p>一句话：HTML 是母版，localhost 是验收线，publish 是平台版，C:\html 是总仓库。</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>1</b><span>个 HTML 母版，保留完整排版。</span></div>
+        <div class="stat"><b>3+</b><span>类平台发布包，按能力降级。</span></div>
+        <div class="stat"><b>4</b><span>类关键资产：图片、封面、截图、验收记录。</span></div>
+        <div class="stat"><b>0</b><span>容忍项：坏图、乱码、横向溢出。</span></div>
+      </div>
+    </section>
+
+    <section id="directory">
+      <div class="section-head">
+        <div class="num">02 / directory</div>
+        <h2>固定落盘：所有成品进入 C:\html</h2>
+      </div>
+      <p>目录固定以后，别的线程不用猜文件在哪里，平台大师也不用到处找图片。每篇文章一个独立子目录，所有素材跟着文章走。</p>
+      <figure class="figure">
+        <img src="assets/directory-standard.png" alt="C:\html 成品目录规范图">
+        <figcaption>目录规范的重点是“独立”和“可迁移”：不要把多篇文章的图混在一个全局 assets 里。</figcaption>
+      </figure>
+      <pre><code>C:\html\articles\&lt;slug&gt;\index.html
+C:\html\articles\&lt;slug&gt;\assets\...
+C:\html\articles\&lt;slug&gt;\publish\...
+C:\html\articles\&lt;slug&gt;\imgs\...</code></pre>
+      <div class="callout">
+        <p>新增成品后必须更新 <code>C:\html\README.md</code>。这不是仪式感，是让其他线程能直接接手的索引。</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head">
+        <div class="num">03 / skill stack</div>
+        <h2>Skill 组合：不是一个工具包打天下</h2>
+      </div>
+      <p>HTML 文章通常不是单一 skill 能做好的。我的默认组合是：用 <code>html-anything</code> 做成品化，用 <code>article-magazine</code> 做长文阅读版式，用 <code>html-visual</code> 做信息图和视觉化模块，缺关键图时用 image2。</p>
+      <div class="cards">
+        <div class="card"><b>html-anything</b><p>把复杂材料、报告、目录、网页内容转成可浏览的 HTML 成品。</p></div>
+        <div class="card"><b>article-magazine</b><p>负责长文版式、阅读节奏、标题层级和文章感。</p></div>
+        <div class="card"><b>html-visual</b><p>负责对比矩阵、流程图、决策图、数据卡片等视觉化表达。</p></div>
+        <div class="card"><b>image2 / gpt-image-2</b><p>缺主题图时生成，但必须和内容直接相关。</p></div>
+        <div class="card"><b>浏览器验收</b><p>用 localhost 和截图检查真实显示，不靠想象过关。</p></div>
+        <div class="card"><b>agentmemory</b><p>把路径、口令、踩坑经验和工具状态沉淀给未来线程。</p></div>
+      </div>
+    </section>
+
+    <section id="content">
+      <div class="section-head">
+        <div class="num">04 / structure</div>
+        <h2>内容结构：先给结论，再给证据</h2>
+      </div>
+      <p>测评、工具介绍、技术解释、平台发布经验，默认都遵守一个顺序：先让读者知道结论，再让他看到方法和证据，最后给出可执行的口令。</p>
+      <div class="timeline">
+        <div class="step"><strong>首屏结论</strong><p>这东西到底好不好用、适合谁、风险在哪里。</p><span class="tag">读者判断</span></div>
+        <div class="step"><strong>背景痛点</strong><p>为什么要做这篇，解决什么具体问题。</p><span class="tag">建立语境</span></div>
+        <div class="step"><strong>测试方法</strong><p>测试环境、工具版本、样本和复现路径。</p><span class="tag">可信度</span></div>
+        <div class="step"><strong>结果对比</strong><p>成功、失败、边界，用表格或卡片表达。</p><span class="tag">可扫描</span></div>
+        <div class="step"><strong>截图证据</strong><p>真实截图、真实输出、真实文件路径。</p><span class="tag">不空口</span></div>
+        <div class="step"><strong>交接口令</strong><p>给其他 Agent 可以直接复制执行的指令。</p><span class="tag">可复用</span></div>
+      </div>
+    </section>
+
+    <section id="images">
+      <div class="section-head">
+        <div class="num">05 / images</div>
+        <h2>图片规则：图要服务内容，不要只负责好看</h2>
+      </div>
+      <p>图文并茂不是配几张气氛图。文章里的每张图都要承载一个明确功能：总览、证据、对比、流程、目录或平台差异。</p>
+      <table>
+        <thead><tr><th>图片类型</th><th>用途</th><th>注意事项</th></tr></thead>
+        <tbody>
+          <tr><td data-label="图片类型">真实截图</td><td data-label="用途">证明工具、页面、结果真实存在</td><td data-label="注意事项">优先使用，不随意裁剪关键区域</td></tr>
+          <tr><td data-label="图片类型">信息图</td><td data-label="用途">压缩流程、目录、平台规则</td><td data-label="注意事项">一张图只表达一个结论</td></tr>
+          <tr><td data-label="图片类型">封面图</td><td data-label="用途">公众号/社媒首图和分享卡片</td><td data-label="注意事项">单独生成尺寸，不混用正文图</td></tr>
+          <tr><td data-label="图片类型">生成图</td><td data-label="用途">缺关键视觉时补主题图</td><td data-label="注意事项">必须贴合主题，不能只当装饰</td></tr>
+        </tbody>
+      </table>
+      <pre><code>.figure-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}</code></pre>
+      <p>历史教训很明确：不要把多张信息图横向并排，不要用 <code>object-fit: cover</code> 裁剪中文信息图，不要把深色信息图硬塞进浅色文章。</p>
+    </section>
+
+    <section id="validation">
+      <div class="section-head">
+        <div class="num">06 / validation</div>
+        <h2>验收：file:// 不算完成</h2>
+      </div>
+      <p>带本地图片的 HTML 必须用 localhost 验收。浏览器真实渲染能暴露路径错误、图片坏链、移动端横向滚动、代码块撑破页面和中文乱码。</p>
+      <pre><code>cd C:\html
+python -m http.server 4174 --bind 127.0.0.1
+
+http://127.0.0.1:4174/articles/&lt;slug&gt;/index.html</code></pre>
+      <div class="checklist">
+        <div class="check"><b>HTTP 200</b><br>页面能通过本地服务打开。</div>
+        <div class="check"><b>无乱码</b><br>没有连续问号乱码，标题和正文中文正常。</div>
+        <div class="check"><b>图片全加载</b><br>所有 <code>naturalWidth</code> 都大于 0。</div>
+        <div class="check"><b>无横向溢出</b><br>桌面和 390px 手机宽度都不能横滚。</div>
+        <div class="check"><b>关键区截图</b><br>首屏、图片区、表格区、移动端都要看。</div>
+        <div class="check"><b>README 更新</b><br>新增文章必须登记到总目录。</div>
+      </div>
+    </section>
+
+    <section id="platform">
+      <div class="section-head">
+        <div class="num">07 / platform</div>
+        <h2>平台封装：不是复制 HTML，而是稳定降级</h2>
+      </div>
+      <p>公众号、飞书、知乎、小红书对 HTML 的支持完全不同。母版可以精致，发布版必须稳。真正的目标不是“所有平台看起来完全一样”，而是“每个平台都能舒服阅读，不丢关键证据”。</p>
+      <figure class="figure">
+        <img src="assets/platform-packaging.png" alt="公众号、飞书、知乎、小红书平台封装决策图">
+        <figcaption>平台封装的核心判断：平台能承受什么，就交付什么。不要把网页能力强行塞进平台编辑器。</figcaption>
+      </figure>
+      <table>
+        <thead><tr><th>平台</th><th>保留什么</th><th>降级什么</th></tr></thead>
+        <tbody>
+          <tr><td data-label="平台">公众号</td><td data-label="保留什么">标题、段落、单列图片、封面、核心卡片</td><td data-label="降级什么">JS、复杂 grid、表格、SVG、canvas</td></tr>
+          <tr><td data-label="平台">飞书</td><td data-label="保留什么">文档结构、表格、图片、视频附件</td><td data-label="降级什么">CSS、Chart.js、网页交互、主题切换</td></tr>
+          <tr><td data-label="平台">知乎</td><td data-label="保留什么">逻辑、论证、图片、引用</td><td data-label="降级什么">复杂排版和装饰性布局</td></tr>
+          <tr><td data-label="平台">小红书/社媒</td><td data-label="保留什么">结论和视觉卡片</td><td data-label="降级什么">长文结构，改成多张高 DPI 图片</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="handoff">
+      <div class="section-head">
+        <div class="num">08 / handoff</div>
+        <h2>给其他线程的最短交接口令</h2>
+      </div>
+      <p>其他线程不需要重新理解整套系统，给它们一段固定口令就够了。</p>
+      <pre><code>HTML 成品统一落盘到 C:\html\articles\&lt;slug&gt;\index.html。
+图片放 C:\html\articles\&lt;slug&gt;\assets\。
+完成后启动 C:\html 的 4174 本地服务验收。
+不要只用 file://。
+检查桌面、手机、图片区、表格区。
+有平台发布需求时另做 publish 版，不要直接拿 index.html 发平台。</code></pre>
+      <div class="callout">
+        <p>如果是公众号：表格改卡片，图片单列，CSS 内联，复杂交互转 PNG。 如果是飞书：保留结构，不保留 CSS；图表转表格或截图，视频做附件。</p>
+      </div>
+      <footer>
+        本文即为 HTML 工作流母版示例，落盘于 C:\html\articles\html-workflow-guide\index.html。后续平台发布版可从该母版继续生成。
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

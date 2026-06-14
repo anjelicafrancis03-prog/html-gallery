@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+  <defs>
+    <linearGradient id="paper" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff8f6"/>
+      <stop offset=".55" stop-color="#eef5ec"/>
+      <stop offset="1" stop-color="#f1e6dc"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#1e1b19" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="1400" height="760" fill="url(#paper)"/>
+  <g opacity=".25" fill="none" stroke-width="4">
+    <path d="M80 170 C250 80 380 230 560 130 S880 190 1040 110 S1260 130 1340 70" stroke="#2f6f5e"/>
+    <path d="M70 615 C230 520 410 660 610 555 S930 640 1110 500 S1280 540 1360 450" stroke="#b46a2c"/>
+  </g>
+  <g transform="translate(110 105)" filter="url(#shadow)">
+    <rect width="1180" height="520" rx="8" fill="#fffaf0" stroke="#1e1b19" stroke-width="2"/>
+    <line x1="0" y1="92" x2="1180" y2="92" stroke="#1e1b19" stroke-width="2"/>
+    <text x="48" y="58" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="30" font-weight="700" fill="#1e1b19">Four Memory Systems Benchmark</text>
+    <text x="48" y="145" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="18" fill="#594138">35-document corpus + 9-source repair manual ingest + model provenance audit</text>
+    <g transform="translate(74 210)">
+      <circle cx="95" cy="95" r="72" fill="#e6f2ee" stroke="#2f6f5e" stroke-width="9"/>
+      <circle cx="355" cy="95" r="72" fill="#ecebfa" stroke="#5b5fa6" stroke-width="9"/>
+      <circle cx="615" cy="95" r="72" fill="#f6e9df" stroke="#b46a2c" stroke-width="9"/>
+      <circle cx="875" cy="95" r="72" fill="#eee7d1" stroke="#846c3d" stroke-width="9"/>
+      <path d="M167 95 H283 M427 95 H543 M687 95 H803" stroke="#1e1b19" stroke-width="6" stroke-linecap="round"/>
+      <text x="95" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#1e1b19">GB</text>
+      <text x="355" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#1e1b19">LT</text>
+      <text x="615" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#1e1b19">M0</text>
+      <text x="875" y="106" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#1e1b19">OV</text>
+      <text x="95" y="198" text-anchor="middle" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" fill="#594138">GBrain</text>
+      <text x="355" y="198" text-anchor="middle" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" fill="#594138">Letta / MemGPT</text>
+      <text x="615" y="198" text-anchor="middle" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" fill="#594138">Mem0</text>
+      <text x="875" y="198" text-anchor="middle" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" fill="#594138">OpenViking</text>
+    </g>
+    <text x="48" y="464" font-family="Consolas, monospace" font-size="20" fill="#46554d">Result: primary adoption candidate = GBrain; highest fixed-corpus score = Letta shim.</text>
+  </g>
+</svg>

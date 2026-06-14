@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canary 3D Hologram Carousel</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+    :root {
+      --neon-pink: #ff007f;
+      --neon-blue: #00f2fe;
+      --neon-green: #05ffc0;
+      --neon-purple: #bd00ff;
+      --bg-dark: #04050d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    /* Ambient background lights */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(189, 0, 255, 0.08) 0%, transparent 60%);
+      top: -300px;
+      left: -200px;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(5, 255, 192, 0.06) 0%, transparent 60%);
+      bottom: -300px;
+      right: -200px;
+      pointer-events: none;
+    }
+
+    main {
+      z-index: 10;
+      text-align: center;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, var(--neon-blue), var(--neon-purple), var(--neon-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #8da2bb;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* Stage Canvas Wrapper */
+    .stage-container {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(8, 9, 21, 0.85);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(15px);
+      display: inline-block;
+    }
+
+    canvas {
+      display: block;
+      background: #010206;
+      border-radius: 10px;
+      width: 860px;
+      height: 500px;
+    }
+
+    /* Target DOM Elements for HTML-in-Canvas */
+    .cyber-widgets-wrap {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+    }
+
+    /* Common Widget style */
+    .cyber-widget {
+      width: 260px;
+      height: 160px;
+      background: rgba(10, 12, 28, 0.95);
+      border-radius: 10px;
+      padding: 16px;
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .widget-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    .widget-badge {
+      font-size: 8px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    /* Widget A (Status - Blue) */
+    .status-widget {
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.3), inset 0 0 10px rgba(0, 242, 254, 0.15);
+    }
+    .status-widget .widget-title { color: var(--neon-blue); }
+    .status-widget .widget-badge { background: rgba(0, 242, 254, 0.15); color: var(--neon-blue); }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .status-lbl { color: #8da2bb; }
+    .status-val { font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+    .pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon-green);
+      box-shadow: 0 0 8px var(--neon-green);
+      animation: pulse 1s infinite alternate;
+    }
+
+    /* Widget B (Neural - Purple) */
+    .neural-widget {
+      border: 2px solid var(--neon-purple);
+      box-shadow: 0 0 15px rgba(189, 0, 255, 0.3), inset 0 0 10px rgba(189, 0, 255, 0.15);
+    }
+    .neural-widget .widget-title { color: var(--neon-purple); }
+    .neural-widget .widget-badge { background: rgba(189, 0, 255, 0.15); color: var(--neon-purple); }
+
+    .speed-gauge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .gauge-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 3px solid rgba(189, 0, 255, 0.2);
+      border-top-color: var(--neon-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      animation: rotate-gauge 3s linear infinite;
+    }
+    .gauge-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* Widget C (Control - Green) */
+    .control-widget {
+      border: 2px solid var(--neon-green);
+      box-shadow: 0 0 15px rgba(5, 255, 192, 0.3), inset 0 0 10px rgba(5, 255, 192, 0.15);
+    }
+    .control-widget .widget-title { color: var(--neon-green); }
+    .control-widget .widget-badge { background: rgba(5, 255, 192, 0.15); color: var(--neon-green); }
+
+    .progress-bar-wrap {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      height: 6px;
+      width: 100%;
+      margin: 12px 0 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 78%;
+      background: linear-gradient(to right, var(--neon-green), var(--neon-blue));
+      box-shadow: 0 0 8px var(--neon-green);
+    }
+    .knobs-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .knob {
+      flex-grow: 1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      padding: 4px;
+      font-size: 10px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .knob.active {
+      border-color: var(--neon-green);
+      color: #ffffff;
+      background: rgba(5, 255, 192, 0.05);
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.5; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+
+    @keyframes rotate-gauge {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Controls Group */
+    .controls {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .btn {
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-purple {
+      background: var(--neon-purple);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
+    }
+    .btn-purple:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(189, 0, 255, 0.6);
+    }
+
+    .btn-green {
+      background: var(--neon-green);
+      color: var(--bg-dark);
+      box-shadow: 0 0 15px rgba(5, 255, 192, 0.4);
+    }
+    .btn-green:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(5, 255, 192, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .api-status {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--neon-green);
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <h1>CANARY 3D PROJECTION CAROUSEL</h1>
+    <div class="subtitle">HTML-in-Canvas Multi-Widget Orbit & Depth-of-Field Engine</div>
+
+    <div class="stage-container">
+      <canvas id="stage" width="860" height="500" layoutsubtree>
+        <!-- The Widgets we want to project in 3D -->
+        <div class="cyber-widgets-wrap">
+          <!-- Widget A -->
+          <div class="cyber-widget status-widget" id="widgetA">
+            <div class="widget-header">
+              <span class="widget-title">DIAGNOSTICS PANEL</span>
+              <span class="widget-badge">SYSTEM OK</span>
+            </div>
+            <div class="status-row">
+              <span class="status-lbl">Canary CDP Server</span>
+              <span class="status-val text-success">CONNECTED</span>
+            </div>
+            <div class="status-row">
+              <span class="status-lbl">CDP Debug Port</span>
+              <span class="status-val">9344</span>
+            </div>
+            <div class="status-row">
+              <span class="status-lbl">Flag Status</span>
+              <span class="status-val" style="color: var(--neon-blue);">ACTIVE</span>
+            </div>
+            <div class="status-row">
+              <span class="status-lbl">System Safety Locks</span>
+              <span class="status-val"><span class="pulse-dot"></span> SECURE</span>
+            </div>
+          </div>
+
+          <!-- Widget B -->
+          <div class="cyber-widget neural-widget" id="widgetB">
+            <div class="widget-header">
+              <span class="widget-title">NEURAL COGNITION</span>
+              <span class="widget-badge">ACTIVE FLOW</span>
+            </div>
+            <div class="speed-gauge">
+              <div class="gauge-circle">150Hz</div>
+              <div class="gauge-details">
+                <span class="status-lbl">Token Yield</span>
+                <span class="status-val" style="color: var(--neon-purple);">98.4% Efficiency</span>
+                <span class="status-lbl" style="margin-top: 4px;">Memory Cache</span>
+                <span class="status-val">LanceDB Hybrid</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Widget C -->
+          <div class="cyber-widget control-widget" id="widgetC">
+            <div class="widget-header">
+              <span class="widget-title">CONTROL DIAL REGISTRY</span>
+              <span class="widget-badge">RUNNING</span>
+            </div>
+            <div class="status-row" style="margin-bottom: 0;">
+              <span class="status-lbl">Voucher Pass Compile</span>
+              <span class="status-val">78% Complete</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill"></div>
+            </div>
+            <div class="knobs-row">
+              <span class="knob active">CDP_9344</span>
+              <span class="knob">LOCK_OFF</span>
+              <span class="knob">VERIFY_PASS</span>
+            </div>
+          </div>
+        </div>
+      </canvas>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-purple" id="btnToggleOrbit">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        调整轨道倾角
+      </button>
+      <button class="btn btn-green" id="btnToggleSpeed">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        切换旋转速度 (2x)
+      </button>
+      <button class="btn btn-secondary" id="btnReset">重置星区</button>
+    </div>
+
+    <div class="api-status" id="apiStatus">检测 API 中...</div>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('stage');
+    const ctx = canvas.getContext('2d');
+    const apiStatus = document.getElementById('apiStatus');
+
+    const widgetA = document.getElementById('widgetA');
+    const widgetB = document.getElementById('widgetB');
+    const widgetC = document.getElementById('widgetC');
+
+    // Detect HTML-in-Canvas Support
+    const supportsHtmlInCanvas = 
+      typeof HTMLCanvasElement.prototype.requestPaint === 'function' &&
+      typeof CanvasRenderingContext2D.prototype.drawElementImage === 'function';
+
+    if (supportsHtmlInCanvas) {
+      apiStatus.textContent = "API STATUS: [OK] HTML-in-Canvas drawElementImage is fully supported!";
+      apiStatus.style.color = "var(--neon-green)";
+    } else {
+      apiStatus.textContent = "API STATUS: [FALLBACK] drawElementImage unavailable. Emulating via static fallback.";
+      apiStatus.style.color = "#ff3b30";
+    }
+
+    // 3D Matrix Projection Maths
+    const fov = 350; // Focal length
+    let orbitRadius = 240;
+    let orbitTiltY = 40; // Tilt angle in degrees
+    let rotationSpeed = 0.012;
+    let theta = 0;
+
+    // 3D Starfield background
+    const numStars = 150;
+    const stars = [];
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * 800 - 400,
+        y: Math.random() * 800 - 400,
+        z: Math.random() * 800,
+        size: Math.random() * 1.5 + 0.5
+      });
+    }
+
+    function project3D(x, y, z) {
+      const scale = fov / (fov + z);
+      return {
+        x: x * scale + canvas.width / 2,
+        y: y * scale + canvas.height / 2,
+        scale: scale,
+        depth: z
+      };
+    }
+
+    // Draw background 3D Stars
+    function drawStars() {
+      ctx.fillStyle = '#010206';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      for (let i = 0; i < numStars; i++) {
+        const star = stars[i];
+        
+        // Rotate stars slightly in space
+        const cos = Math.cos(0.001);
+        const sin = Math.sin(0.001);
+        const rx = star.x * cos - star.z * sin;
+        const rz = star.x * sin + star.z * cos;
+        star.x = rx;
+        star.z = rz;
+
+        // Move stars forward
+        star.z -= 0.8;
+        if (star.z <= -fov) {
+          star.z = 800;
+        }
+
+        const proj = project3D(star.x, star.y, star.z);
+        if (proj.x >= 0 && proj.x <= canvas.width && proj.y >= 0 && proj.y <= canvas.height) {
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, star.size * proj.scale, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Draw Grid Floor Accent in 3D Perspective
+      ctx.strokeStyle = 'rgba(0, 242, 254, 0.03)';
+      ctx.lineWidth = 1;
+      const floorY = 150;
+      for (let z = 50; z < 800; z += 50) {
+        const p1 = project3D(-400, floorY, z);
+        const p2 = project3D(400, floorY, z);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+    }
+
+    // Static Fallback Widget drawing (for standard browsers)
+    function drawFallbackWidget(label, color, x, y, scale, alpha, glowColor) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(scale, scale);
+      ctx.globalAlpha = alpha;
+
+      // Glow shadow
+      ctx.shadowColor = glowColor;
+      ctx.shadowBlur = 15;
+
+      // Box
+      ctx.fillStyle = 'rgba(10, 12, 28, 0.95)';
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(-130, -80, 260, 160, 10) : ctx.rect(-130, -80, 260, 160);
+      ctx.fill();
+      ctx.stroke();
+      ctx.shadowBlur = 0; // reset
+
+      // Text header
+      ctx.fillStyle = color;
+      ctx.font = 'bold 11px sans-serif';
+      ctx.fillText(label + ' [FALLBACK]', -110, -50);
+
+      // Simple details
+      ctx.fillStyle = '#8da2bb';
+      ctx.font = '9px sans-serif';
+      ctx.fillText('EMULATED PREVIEW', -110, -20);
+      ctx.fillText('This browser does not support', -110, 0);
+      ctx.fillText('drawElementImage() natively.', -110, 15);
+
+      ctx.fillStyle = color;
+      ctx.font = 'bold 9px sans-serif';
+      ctx.fillText('CANARY v150 REQUIRED', -110, 45);
+
+      ctx.restore();
+    }
+
+    // Main 3D render loop
+    function renderLoop() {
+      theta += rotationSpeed;
+
+      // Compute 3D Orbit Coordinates for the three widgets
+      // Orbiting around Y axis: X = R*cos(a), Y = R*sin(a)*sin(tilt), Z = R*sin(a)*cos(tilt)
+      const radTilt = orbitTiltY * Math.PI / 180;
+
+      const widgets = [
+        { id: 'widgetA', el: widgetA, angle: theta, label: 'DIAGNOSTICS PANEL', color: 'var(--neon-blue)', glow: 'rgba(0,242,254,0.4)' },
+        { id: 'widgetB', el: widgetB, angle: theta + (2 * Math.PI / 3), label: 'NEURAL COGNITION', color: 'var(--neon-purple)', glow: 'rgba(189,0,255,0.4)' },
+        { id: 'widgetC', el: widgetC, angle: theta + (4 * Math.PI / 3), label: 'CONTROL DIAL REGISTRY', color: 'var(--neon-green)', glow: 'rgba(5,255,192,0.4)' }
+      ];
+
+      // Calculate positions
+      widgets.forEach(w => {
+        const x3d = orbitRadius * Math.cos(w.angle);
+        const y3d = orbitRadius * Math.sin(w.angle) * Math.sin(radTilt);
+        const z3d = orbitRadius * Math.sin(w.angle) * Math.cos(radTilt);
+        
+        w.proj = project3D(x3d, y3d, z3d);
+        w.x3d = x3d;
+        w.y3d = y3d;
+        w.z3d = z3d;
+      });
+
+      // Depth Sorting (Z-sort: Draw back elements first, z3d ranges from -R to +R)
+      // High z3d means closer to camera (drawn last), low z3d means far away (drawn first)
+      widgets.sort((a, b) => a.z3d - b.z3d);
+
+      if (supportsHtmlInCanvas) {
+        // Native Canary drawing mode
+        canvas.onpaint = () => {
+          drawStars();
+
+          // Draw connector orbits in 3D
+          ctx.strokeStyle = 'rgba(0, 242, 254, 0.08)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          for (let a = 0; a < Math.PI * 2; a += 0.1) {
+            const px = orbitRadius * Math.cos(a);
+            const py = orbitRadius * Math.sin(a) * Math.sin(radTilt);
+            const pz = orbitRadius * Math.sin(a) * Math.cos(radTilt);
+            const proj = project3D(px, py, pz);
+            if (a === 0) ctx.moveTo(proj.x, proj.y);
+            else ctx.lineTo(proj.x, proj.y);
+          }
+          ctx.closePath();
+          ctx.stroke();
+
+          // Render the depth-sorted widgets
+          widgets.forEach(w => {
+            ctx.save();
+            ctx.translate(w.proj.x, w.proj.y);
+            ctx.scale(w.proj.scale, w.proj.scale);
+
+            // Compute depth alpha: Closer (z3d > 0) -> alpha 1.0, Farther (z3d < 0) -> alpha 0.4
+            // z3d ranges from -orbitRadius to +orbitRadius
+            const depthRatio = (w.z3d + orbitRadius) / (2 * orbitRadius); // 0 to 1
+            const alpha = depthRatio * 0.65 + 0.35; // 0.35 to 1.0
+            ctx.globalAlpha = alpha;
+
+            // Apply Depth of Field Blur based on distance (farther elements are blurred)
+            const blurAmount = Math.max(0, (1 - depthRatio) * 4); // 0 to 4px blur
+            if (blurAmount > 0.5) {
+              ctx.filter = `blur(${blurAmount.toFixed(1)}px) brightness(${depthRatio * 0.4 + 0.6})`;
+            } else {
+              ctx.filter = "none";
+            }
+
+            // Draw element directly from DOM
+            ctx.drawElementImage(w.el, -130, -80);
+            ctx.restore();
+
+            // Holographic laser scanline overlay (only on front-most card for effect)
+            if (depthRatio > 0.8) {
+              ctx.save();
+              ctx.translate(w.proj.x, w.proj.y);
+              ctx.scale(w.proj.scale, w.proj.scale);
+              
+              const scanY = Math.sin(Date.now() * 0.003) * 75; // -75 to 75
+              ctx.strokeStyle = w.color;
+              ctx.lineWidth = 1.5;
+              ctx.shadowColor = w.color;
+              ctx.shadowBlur = 8;
+              ctx.beginPath();
+              ctx.moveTo(-120, scanY);
+              ctx.lineTo(120, scanY);
+              ctx.stroke();
+              ctx.restore();
+            }
+          });
+        };
+
+        // Trigger repaint inside Canary
+        canvas.requestPaint();
+      } else {
+        // Fallback drawing mode
+        drawStars();
+        widgets.forEach(w => {
+          const depthRatio = (w.z3d + orbitRadius) / (2 * orbitRadius);
+          const alpha = depthRatio * 0.65 + 0.35;
+          drawFallbackWidget(w.label, w.color, w.proj.x, w.proj.y, w.proj.scale, alpha, w.glow);
+        });
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    // Start rendering loop
+    requestAnimationFrame(renderLoop);
+
+    // Event Listeners
+    document.getElementById('btnToggleOrbit').addEventListener('click', () => {
+      orbitTiltY = orbitTiltY === 40 ? 15 : orbitTiltY === 15 ? 75 : 40;
+    });
+
+    document.getElementById('btnToggleSpeed').addEventListener('click', () => {
+      rotationSpeed = rotationSpeed === 0.012 ? 0.024 : rotationSpeed === 0.024 ? 0.004 : 0.012;
+    });
+
+    document.getElementById('btnReset').addEventListener('click', () => {
+      orbitTiltY = 40;
+      rotationSpeed = 0.012;
+      theta = 0;
+    });
+  </script>
+</body>
+</html>

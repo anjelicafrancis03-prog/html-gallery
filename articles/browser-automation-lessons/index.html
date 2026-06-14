@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="zh-CN" data-ha-style="document">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>浏览器操控与爬虫工具经验教训总结</title>
+  <link rel="icon" href="data:," />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f1e8;
+      --paper: #fffdf8;
+      --ink: #1e2420;
+      --muted: #6f6658;
+      --line: #ded2bf;
+      --accent: #8c5a2d;
+      --accent-2: #2e7667;
+      --good: #26765a;
+      --warn: #9b7421;
+      --danger: #b55340;
+      --code: #18201d;
+      --code-ink: #e9f4ed;
+      --shadow: 0 24px 70px rgba(70, 53, 28, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(140, 90, 45, .14), transparent 32rem),
+        radial-gradient(circle at top right, rgba(46, 118, 103, .11), transparent 28rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei UI", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.8;
+      letter-spacing: 0;
+    }
+
+    a { color: var(--accent-2); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+    img { max-width: 100%; display: block; }
+
+    .page {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 34px 0 76px;
+    }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
+      gap: 28px;
+      align-items: end;
+      padding: 42px 0 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .14em;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1, h2, h3 {
+      font-family: "Noto Serif SC", "Songti SC", SimSun, Georgia, serif;
+      line-height: 1.16;
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 78px);
+      max-width: 860px;
+      font-weight: 900;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 8px 22px rgba(70, 53, 28, .07);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #fff8ea;
+      border-color: transparent;
+    }
+
+    .brief {
+      background: color-mix(in srgb, var(--paper) 94%, transparent);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .brief h2 {
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .brief-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .brief-list strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .section {
+      margin-top: 58px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+      gap: 22px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section h2 {
+      font-size: clamp(30px, 4vw, 46px);
+    }
+
+    .section-note {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .article-card,
+    .callout,
+    .figure-card,
+    .handoff {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .article-card {
+      padding: clamp(22px, 4vw, 42px);
+    }
+
+    .article-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .article-card strong { color: var(--ink); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .tool-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fffaf1;
+      min-height: 180px;
+    }
+
+    .tool-card h3 {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0 10px;
+      background: rgba(46, 118, 103, .12);
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .tool-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .figure-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .figure-card {
+      overflow: hidden;
+    }
+
+    .figure-card img {
+      width: 100%;
+      background: #efe6d7;
+    }
+
+    figcaption {
+      padding: 14px 18px 16px;
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .matrix {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      min-width: 920px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    th {
+      background: #efe6d7;
+      color: var(--ink);
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .good { color: var(--good); font-weight: 900; }
+    .warn { color: var(--warn); font-weight: 900; }
+    .danger { color: var(--danger); font-weight: 900; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 190px;
+    }
+
+    .step .num {
+      color: var(--accent);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .step h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .callout {
+      padding: 22px;
+      border-left: 5px solid var(--accent);
+      color: var(--muted);
+    }
+
+    .callout strong { color: var(--ink); }
+
+    pre {
+      margin: 16px 0 0;
+      padding: 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      background: var(--code);
+      color: var(--code-ink);
+      line-height: 1.55;
+      font-size: 13px;
+    }
+
+    code {
+      font-family: "Cascadia Code", Consolas, monospace;
+    }
+
+    .handoff {
+      padding: 24px;
+    }
+
+    .footer {
+      margin-top: 56px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .section-head,
+      .grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 28px;
+      }
+
+      .brief {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Browser Automation Field Notes</div>
+        <h1>浏览器操控与爬虫工具经验教训总结</h1>
+        <p class="lead">一句话结论：现在本机最值得保留的是固定 Chrome + Node Playwright CDP + Playwright MCP + AnySearch；CDP Bridge 做补充；canghe 暂时备用；外部下一批重点测 Crawl4AI MCP / Firecrawl MCP / Browserbase MCP / mcp-chrome。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#core">看核心结论</a>
+          <a class="btn" href="#tools">看工具分工</a>
+          <a class="btn" href="#handoff">复制交接稿</a>
+        </div>
+      </div>
+      <aside class="brief">
+        <h2>一句话判断</h2>
+        <ul class="brief-list">
+          <li><strong>浏览器根基</strong>固定 Chrome 登录态 + CDP 9223，不要乱换 Profile。</li>
+          <li><strong>主脚本层</strong>Node Playwright `connectOverCDP`，可复现、可截图、可维护。</li>
+          <li><strong>测评硬规则</strong>测评、横评、实测、benchmark 必须截图。</li>
+          <li><strong>服务器选择</strong>纯网页先用 Cloudflare Pages，别急着买 VPS。</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section" id="core">
+      <div class="section-head">
+        <h2>核心结论</h2>
+        <p class="section-note">真正稳定的工作流，不是一次命令成功，而是能被别人接手、能复现、能留证据、能解释失败原因。</p>
+      </div>
+      <div class="article-card">
+        <p><strong>第一条：</strong>不要把“能打开网页”“能连端口”“能跑一次脚本”误认为已经形成稳定工作流。长期能用的东西必须有固定入口、验证命令、截图证据、失败判断和交接文档。</p>
+        <p><strong>第二条：</strong>浏览器自动化的根是固定 Chrome。当前固定登录态 profile 是 `C:\Users\64998\.opencli\chrome-profile`，固定 CDP 是 `http://127.0.0.1:9223`。不要用普通 Chrome、临时 profile 或 Profile 1 替代。</p>
+        <p><strong>第三条：</strong>`9223` 通，只说明 Chrome 原生 CDP 通，不说明插件、点击、CDP Bridge 都通。真实验收必须看完整链路。</p>
+        <p><strong>第四条：</strong>所有测评、横评、实测、benchmark 必须截图。截图不是装饰，是证据。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>三张图讲清楚工具分层</h2>
+        <p class="section-note">这些图来自之前的 Chrome-only 横评，适合直接给新线程做视觉索引。</p>
+      </div>
+      <div class="figure-grid">
+        <figure class="figure-card">
+          <img src="assets/rank-overview-light.png" alt="浏览器操控工具排序总览" />
+          <figcaption><strong>图 1.</strong> 工具排序总览：Playwright 做生产线，CDP Bridge 做真实 tab 桥，OpenCLI 做快操作。</figcaption>
+        </figure>
+        <figure class="figure-card">
+          <img src="assets/workflow-layers-light.png" alt="浏览器操控工作流分层" />
+          <figcaption><strong>图 2.</strong> 工作流分层：固定 Chrome 是基座，上层工具按任务性质分工。</figcaption>
+        </figure>
+        <figure class="figure-card">
+          <img src="assets/decision-map-light.png" alt="浏览器操控工具选择地图" />
+          <figcaption><strong>图 3.</strong> 决策地图：先判断是长期脚本、真实 tab 接管、快速操作，还是底层排障。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="tools">
+      <div class="section-head">
+        <h2>工具定位</h2>
+        <p class="section-note">工具不是越多越好，关键是别混用职责。</p>
+      </div>
+      <div class="grid">
+        <article class="tool-card"><span class="tag">主生产线</span><h3>Playwright CDP</h3><p>用 `chromium.connectOverCDP('http://127.0.0.1:9223')` 连接固定 Chrome，负责长流程、截图、上传、等待、DOM/HTML/文本提取。</p></article>
+        <article class="tool-card"><span class="tag">真实 tab 桥</span><h3>CDP Bridge</h3><p>`18765/18766` 负责读当前真实标签页、执行 JS、截图。sessions 空不一定坏，可能只是扩展还没重连。</p></article>
+        <article class="tool-card"><span class="tag">快刀</span><h3>OpenCLI</h3><p>适合快开、快查、快抽。不要把它当成复杂数据生产线。</p></article>
+        <article class="tool-card"><span class="tag">探索层</span><h3>playwright-cli</h3><p>找 selector、试流程、看 iframe，再把结论沉淀到正式 Playwright 脚本。</p></article>
+        <article class="tool-card"><span class="tag">排障层</span><h3>raw CDP</h3><p>用于 `/json/version`、`Runtime.evaluate`、`Page.captureScreenshot` 等底层验证，不适合多人长期维护。</p></article>
+        <article class="tool-card"><span class="tag">辅助</span><h3>Codex Chrome 插件</h3><p>可做交互辅助，但不当主爬虫。插件可用不等于 CDP Bridge 可用。</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>测过和核查过的候选工具</h2>
+        <p class="section-note">宣传文案只能当线索，必须安装、跑最小例子、截图、记录版本和失败点。</p>
+      </div>
+      <div class="matrix">
+        <table>
+          <thead>
+            <tr>
+              <th>工具</th>
+              <th>状态</th>
+              <th>结论</th>
+              <th>风险</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Scrapegraph-ai</strong></td>
+              <td class="warn">可研究</td>
+              <td>AI 语义抽取思路有价值，但成本、速度、稳定性必须实测。</td>
+              <td>Token 成本、动态页、结果可重复性。</td>
+            </tr>
+            <tr>
+              <td><strong>rust-clawer</strong></td>
+              <td class="warn">待测</td>
+              <td>文章存在，但公开仓库不可访问，不能正式推荐。</td>
+              <td>无源码、无可复现安装、无截图实测。</td>
+            </tr>
+            <tr>
+              <td><strong>CloakBrowser</strong></td>
+              <td class="good">已装最小测试</td>
+              <td>`cloakbrowser 0.3.30` 能打开 `example.com` 并截图，使用自带 Chromium。</td>
+              <td>高风险 anti-detect 工具，只做合规普通页面自动化评测。</td>
+            </tr>
+            <tr>
+              <td><strong>BeautifulSoup / Regex / Trafilatura / Readability</strong></td>
+              <td class="good">基础工具</td>
+              <td>它们是内容抽取工具，不是 MCP，也不是浏览器操控工具。</td>
+              <td>适合静态页和正文抽取，不适合复杂登录态浏览器任务。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>本轮新增可用 Skill / MCP</h2>
+        <p class="section-note">这次又补测了一批更接近“浏览器操控/网页抽取”的能力，下面这些可以进入后续横评。</p>
+      </div>
+      <div class="matrix">
+        <table>
+          <thead>
+            <tr>
+              <th>名称</th>
+              <th>类型</th>
+              <th>本轮实测</th>
+              <th>适合场景</th>
+              <th>结论</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Playwright MCP</strong></td>
+              <td>MCP</td>
+              <td>已打开本地 HTTP 页面，成功导出 snapshot、console、full-page screenshot。默认禁止 `file://`，需用本地 HTTP。</td>
+              <td>网页验证、UI 测试、截图、DOM 可访问性快照、表单操作。</td>
+              <td class="good">强烈建议保留，作为 Codex 内直接可用的浏览器 MCP。</td>
+            </tr>
+            <tr>
+              <td><strong>AnySearch</strong></td>
+              <td>Skill / CLI</td>
+              <td>`extract https://example.com` 成功返回 Markdown。</td>
+              <td>搜索、事实核查、公开 URL 正文抽取。</td>
+              <td class="good">建议保留，适合作为搜索和 URL extract 层。</td>
+            </tr>
+            <tr>
+              <td><strong>canghe-url-to-markdown</strong></td>
+              <td>Skill / Chrome CDP</td>
+              <td>成功抓取本地 HTML 并保存 Markdown；但中文页面输出出现 mojibake。</td>
+              <td>网页转 Markdown、登录态页面等待后抓取。</td>
+              <td class="warn">可用但中文编码要复核；适合进入“待优化”列表。</td>
+            </tr>
+            <tr>
+              <td><strong>Bright Data MCP</strong></td>
+              <td>MCP</td>
+              <td>`discover` 成功搜索浏览器自动化 MCP 候选。</td>
+              <td>外部工具发现、搜索补充、市场调研。</td>
+              <td class="good">适合作为联网发现层，不替代实际浏览器操控。</td>
+            </tr>
+            <tr>
+              <td><strong>Apify skill</strong></td>
+              <td>Skill / Cloud Actor</td>
+              <td>本轮只读了技能说明，未跑 Actor；需要 APIFY_TOKEN 和成本控制。</td>
+              <td>云端规模化采集、平台 Actor、并发、代理、调度。</td>
+              <td class="warn">值得保留，但必须设结果上限和成本警戒。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>安全边界</h2>
+        <p class="section-note">能不能做和该不该做是两件事。工具越强，边界越要清楚。</p>
+      </div>
+      <div class="callout">
+        <strong>明确不做：</strong>绕过 CAPTCHA、绕过 Cloudflare / Turnstile / reCAPTCHA、未授权访问、泄露 cookies/token/websocket URL、把明文 key 写进记忆或文档。
+        <pre><code>明文密钥只放：
+.env
+工具配置文件
+Windows Credential Manager
+
+记忆里只写：
+工具名
+用途
+路径
+登录状态
+以后不要再问用户</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>服务器与网页部署经验</h2>
+        <p class="section-note">纯网页不要先买 VPS。先把部署问题做简单，再考虑服务器。</p>
+      </div>
+      <div class="steps">
+        <article class="step"><div class="num">01</div><h3>Cloudflare Pages</h3><p>纯静态网页、HTML 专题页、前端 App 的首选。免费、快、少维护。</p></article>
+        <article class="step"><div class="num">02</div><h3>Cloudflare Workers</h3><p>小 API、表单、webhook、轻量代理优先用它，别急着买 VPS。</p></article>
+        <article class="step"><div class="num">03</div><h3>Oracle Always Free</h3><p>真要 Linux VPS，优先试 Oracle 免费机，但注册和容量可能麻烦。</p></article>
+        <article class="step"><div class="num">04</div><h3>Google e2-micro</h3><p>Google Cloud 免费 VPS 是 e2-micro，小测试够用，不是强力 2 核。</p></article>
+      </div>
+      <div class="callout" style="margin-top:16px">
+        <strong>不建议某鱼 9.9 云账号：</strong>容易遇到账号找回、IP 脏、NAT 限制、平台违规、跑路和无售后。纯网页更应该用 Cloudflare Pages。
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>以后做工具评测的固定顺序</h2>
+        <p class="section-note">不要只看 README，也不要只看一次命令成功。</p>
+      </div>
+      <div class="article-card">
+        <pre><code>1. 查真实性
+2. 安装
+3. 跑最小例子
+4. 截图
+5. 记录版本和路径
+6. 说明适合场景
+7. 说明风险和边界
+8. 写入交接/记忆</code></pre>
+      </div>
+    </section>
+
+    <section class="section" id="handoff">
+      <div class="section-head">
+        <h2>给别的线程的最短交接稿</h2>
+        <p class="section-note">复制这段给新线程，就能让它先站在正确的地基上。</p>
+      </div>
+      <div class="handoff">
+        <pre><code>请先读取并遵守：
+F:\codex\docs\browser-automation-handoff-2026-05-26.md
+F:\codex\docs\browser-crawler-tool-inventory.md
+F:\codex\docs\thread-operation-protocols.md
+
+默认基座是固定 Chrome：
+C:\Users\64998\.opencli\chrome-profile
+http://127.0.0.1:9223
+
+优先 Node Playwright connectOverCDP。
+CDP Bridge 读当前真实 tab、执行 JS、截图。
+OpenCLI 做快速 open/state/find/extract。
+playwright-cli 做 selector 和流程探索。
+raw CDP 只做底层排障。
+Codex Chrome 插件只做交互辅助，不当主爬虫生产线。
+
+验收前必须跑：
+& 'F:\codex\tools\verify-codex-fixed-chrome.ps1' -RestartIfMissingExtension
+
+测评、横评、实测、benchmark 必须截图，并报告截图路径。
+不要打开普通 Chrome、临时 profile、Profile 1 来替代固定 Chrome。
+不要清 cookies、不要移动登录态、不要泄露 token/cookie/websocket URL。
+禁止把 CAPTCHA、Cloudflare、Turnstile、reCAPTCHA 或未授权访问绕过作为测试目标。</code></pre>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>本页由本地 Codex 工作区经验总结生成。输出目录：<code>C:\html\articles\browser-automation-lessons\index.html</code>。配图来自既有浏览器工具横评素材。</p>
+    </footer>
+  </main>
+</body>
+</html>

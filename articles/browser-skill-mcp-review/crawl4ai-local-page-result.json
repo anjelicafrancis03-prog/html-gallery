@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "status_code": 200,
+  "url": "http://127.0.0.1:4181/articles/browser-skill-mcp-review/index.html",
+  "title": "浏览器自动化 Skill / MCP 可用性实测",
+  "markdown_length": 7438,
+  "markdown_preview": "codex@f-codex:~/browser-stack$ scan --skills --mcp --evidence --keep-only-useful\n[ COPY SUMMARY ]\n+--- EXECUTIVE DECISION ---+ 2026-05-27\n[OK] 本轮目标：继续寻找并测试类似浏览器操控 / 爬虫 / 网页抽取方向的 Skill、插件、MCP，筛出值得保留的工具。\n# 浏览器自动化 Skill / MCP 可用性实测\n一句话结论：现在本机最值得保留的是固定 Chrome + Node Playwright CDP + Playwright MCP + AnySearch；CDP Bridge 做补充；canghe 暂时备用；外部下一批重点测 Crawl4AI MCP / Firecrawl MCP / Browserbase MCP / mcp-chrome。\n=== keep stack =====================================================\n  * **主流程：** 固定 Chrome 9223 + Node Playwright connectOverCDP。\n  * **验收层：** Playwright MCP，用来打开页面、抓 snapshot、看 console、做截图。\n  * **资料层：** AnySearch，用来搜索和抽取公开网页正文。\n  * **备用层：** canghe-url-to-markdown，适合借固定 Chrome 转 Markdown，但当前中文输出有乱码风险。\n  * **候选层：** Crawl4AI MCP、Firecrawl MCP、Browserbase MCP、mcp-chrome，进入下一轮实测。\n\n\n+--- STATUS LE",
+  "screenshot_path": "C:\\html\\articles\\browser-skill-mcp-review\\assets\\crawl4ai-local-page.png",
+  "error_message": ""
+}

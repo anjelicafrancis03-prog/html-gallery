@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Agentic Dev-Console</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    :root {
+      --bg-dark: #080a0f;
+      --card-bg: rgba(17, 22, 34, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --primary: #00f2fe;
+      --primary-glow: rgba(0, 242, 254, 0.35);
+      --secondary: #a855f7;
+      --secondary-glow: rgba(168, 85, 247, 0.35);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.25);
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --glow-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #171d33, #07090e 65%);
+      color: var(--text-main);
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Ambient background glow elements */
+    .glow-orb-1 {
+      position: absolute;
+      top: -150px;
+      left: 10%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-orb-2 {
+      position: absolute;
+      top: 250px;
+      right: 5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--secondary-glow) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Layout Structure */
+    .container {
+      position: relative;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 32px;
+      z-index: 10;
+    }
+
+    /* Header Styling */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 24px;
+      backdrop-filter: blur(6px);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px var(--primary-glow);
+      position: relative;
+    }
+
+    .logo-icon::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: #0d111d;
+      border-radius: 10px;
+      z-index: 1;
+    }
+
+    .logo-inner-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      z-index: 2;
+      animation: pulse 2s infinite;
+    }
+
+    .title-area h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(to right, var(--primary), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-area p {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .system-badges {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success-glow);
+    }
+
+    .badge .status-dot.pulsing {
+      animation: status-pulse 1.5s infinite;
+    }
+
+    /* Grid System */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: span 12; }
+
+    /* Card Layout (Glassmorphism) */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      border-color: rgba(0, 242, 254, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(0, 242, 254, 0.05);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 12px;
+    }
+
+    .card-title span.title-desc {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    /* Diagnostics Styling */
+    .diag-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .diag-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .diag-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .diag-detail {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .diag-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .text-success { color: var(--success); }
+    .text-warning { color: var(--warning); }
+    .text-primary { color: var(--primary); }
+
+    /* Interactive Log Console */
+    .console-container {
+      background: #05070a;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      height: 220px;
+      overflow-y: auto;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 16px;
+      font-size: 13px;
+      position: relative;
+    }
+
+    .console-log {
+      color: #a7f3d0;
+      margin-bottom: 6px;
+      line-height: 1.6;
+      word-break: break-all;
+    }
+
+    .console-input-line {
+      display: flex;
+      color: var(--primary);
+    }
+
+    .console-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background: var(--primary);
+      margin-left: 4px;
+      animation: cursor-blink 1s infinite;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #00d2fc);
+      color: #05070a;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 242, 254, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Sandbox (HTML-in-Canvas) Layout */
+    .sandbox-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .dom-preview-box {
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.01);
+      padding: 16px;
+      position: relative;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dom-preview-box::before {
+      content: 'DOM ELEMENT SOURCE';
+      position: absolute;
+      top: -8px;
+      left: 16px;
+      background: #0d121f;
+      padding: 0 8px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .canvas-preview-box {
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 12px;
+      background: rgba(5, 7, 10, 0.8);
+      position: relative;
+      overflow: hidden;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .canvas-header {
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 8px 12px;
+      font-size: 11px;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      flex-grow: 1;
+      height: 150px;
+      background: #040608;
+    }
+
+    /* Live Card style inside sandbox */
+    .voucher-card {
+      width: 250px;
+      background: linear-gradient(135deg, #1e1b4b, #311042);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      transform: rotate(-1deg);
+      transition: transform 0.3s ease;
+    }
+
+    .voucher-card:hover {
+      transform: scale(1.03) rotate(1deg);
+    }
+
+    .voucher-header {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .voucher-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .voucher-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .voucher-footer {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      padding-top: 10px;
+    }
+
+    .voucher-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .voucher-badge {
+      font-size: 9px;
+      background: var(--secondary);
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    /* Live Skill Tag cloud list */
+    .skills-filter {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 13px;
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .skills-filter:focus {
+      border-color: var(--primary);
+    }
+
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .skill-tag {
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: default;
+      transition: all 0.2s ease;
+    }
+
+    .skill-tag.active {
+      background: rgba(0, 242, 254, 0.06);
+      border-color: rgba(0, 242, 254, 0.3);
+      color: var(--primary);
+    }
+
+    .skill-tag:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    /* Vertical Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 6px;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -20px;
+      top: 6px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #0d111d;
+      border: 2px solid var(--secondary);
+    }
+
+    .timeline-item:first-child .timeline-dot {
+      border-color: var(--primary);
+      box-shadow: 0 0 8px var(--primary-glow);
+    }
+
+    .timeline-content {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .timeline-content:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .timeline-time {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+    }
+
+    .timeline-event {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 4px 0;
+    }
+
+    .timeline-detail {
+      font-size: 12px;
+      color: var(--text-muted);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+    }
+
+    .timeline-content.open .timeline-detail {
+      max-height: 200px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      transition: max-height 0.3s cubic-bezier(0.5, 0, 0.2, 1);
+    }
+
+    /* Animation Definitions */
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 15px var(--primary); }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    @keyframes status-pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes cursor-blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .col-4, .col-8, .col-6 { grid-column: span 12; }
+      .sandbox-split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-orb-1"></div>
+  <div class="glow-orb-2"></div>
+
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <div class="logo-icon">
+          <div class="logo-inner-dot"></div>
+        </div>
+        <div class="title-area">
+          <h1>ANTIGRAVITY DEV-CONSOLE</h1>
+          <p>Google DeepMind // Advanced Agentic Suite v1.4.0</p>
+        </div>
+      </div>
+      <div class="system-badges">
+        <div class="badge">
+          <span class="status-dot pulsing"></span>
+          <span>CDP: 9223 (Connected)</span>
+        </div>
+        <div class="badge" style="border-color: rgba(0, 242, 254, 0.3);">
+          <span class="status-dot pulsing" style="background: var(--primary); box-shadow: 0 0 10px var(--primary-glow);"></span>
+          <span>Canary: 9344 (Active)</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- Row 1: Left Diagnostics, Right Console Simulator -->
+      <section class="card col-4">
+        <div class="card-title">
+          <span>系统状态诊断</span>
+          <span class="title-desc">Diagnostic Node</span>
+        </div>
+        <div class="diag-item">
+          <div class="diag-label">
+            <span class="diag-name">Chrome CDP Protocol</span>
+            <span class="diag-detail">127.0.0.1:9223</span>
+          </div>
+          <span class="diag-status text-success">OK</span>
+        </div>
+        <div class="diag-item">
+          <div class="diag-label">
+            <span class="diag-name">Testing Canary CDP</span>
+            <span class="diag-detail">127.0.0.1:9344</span>
+          </div>
+          <span class="diag-status text-primary">CANARY</span>
+        </div>
+        <div class="diag-item">
+          <div class="diag-label">
+            <span class="diag-name">Static Web Server</span>
+            <span class="diag-detail">python -m server 4174</span>
+          </div>
+          <span class="diag-status text-success">RUNNING</span>
+        </div>
+        <div class="diag-item">
+          <div class="diag-label">
+            <span class="diag-name">Agent Memory Context</span>
+            <span class="diag-detail">hybrid_lancedb_vector</span>
+          </div>
+          <span class="diag-status text-success">LOADED</span>
+        </div>
+      </section>
+
+      <section class="card col-8">
+        <div class="card-title">
+          <span>智能体执行终端 (Log Terminal)</span>
+          <span class="title-desc">Agent Execution Status</span>
+        </div>
+        <div class="console-container" id="terminal-console">
+          <!-- Terminal initial lines -->
+          <div class="console-log">[system] Initializing Antigravity core runtime engine...</div>
+          <div class="console-log">[system] Successfully mapped active workspace at F:\codex.</div>
+          <div class="console-log">[diagnostic] Validating fixed browser connections...</div>
+          <div class="console-log" style="color: var(--primary);">[cdp-check] Found active test debug session on port 9344. Chrome/150 ready.</div>
+          <div class="console-log" style="color: var(--success);">[check-passed] verify-html-in-canvas: ok = True, API supports requestPaint.</div>
+          <div class="console-input-line">
+            <span>antigravity-agent:~$ </span>
+            <span id="terminal-text"></span>
+            <span class="console-cursor"></span>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="btn-run-simulation">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            开始执行仿真任务
+          </button>
+          <button class="btn btn-secondary" id="btn-clear-console">清空输出</button>
+        </div>
+      </section>
+
+      <!-- Row 2: Left HTML-in-Canvas Sandbox, Right Skills Cloud -->
+      <section class="card col-8">
+        <div class="card-title">
+          <span>HTML-in-Canvas 本地沙箱仿真</span>
+          <span class="title-desc">HTML-in-Canvas Render Preview</span>
+        </div>
+        <div class="sandbox-split">
+          <!-- Source Element Preview -->
+          <div class="dom-preview-box">
+            <div class="voucher-card" id="sourceCard">
+              <div class="voucher-header">Antigravity Premium</div>
+              <div class="voucher-title">DeepMind Developer Pass</div>
+              <div class="voucher-desc">Enabling Canvas drawing of DOM layout trees via canvas-draw-element flag.</div>
+              <div class="voucher-footer">
+                <span class="voucher-code">CODE: 150-CANARY</span>
+                <span class="voucher-badge">AGENT-PASS</span>
+              </div>
+            </div>
+          </div>
+          <!-- Canvas drawing target -->
+          <div class="canvas-preview-box">
+            <div class="canvas-header">
+              <span>&lt;canvas width="320" height="200"&gt;</span>
+              <span id="render-mode" style="color: var(--warning);">[WAITING DRAW COMMAND]</span>
+            </div>
+            <canvas id="canvasPreview" width="320" height="200"></canvas>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="btn-draw-element">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            drawElementImage() 绘制
+          </button>
+          <button class="btn btn-secondary" id="btn-reset-canvas">重置</button>
+        </div>
+      </section>
+
+      <section class="card col-4">
+        <div class="card-title">
+          <span>已安装技能库 (Active Skillset)</span>
+          <span class="title-desc">Installed Skills</span>
+        </div>
+        <input type="text" class="skills-filter" id="skillsInput" placeholder="输入关键字模糊搜索技能 (如: memory, lark)...">
+        <div class="skills-cloud" id="skillsCloud">
+          <!-- Dynamically filtered skills list -->
+          <span class="skill-tag active">RedBookSkills</span>
+          <span class="skill-tag active">YouTube Automation</span>
+          <span class="skill-tag">add-tts-engine</span>
+          <span class="skill-tag active">agent-memory</span>
+          <span class="skill-tag">algorithmic-art</span>
+          <span class="skill-tag active">anysearch</span>
+          <span class="skill-tag">api-and-interface-design</span>
+          <span class="skill-tag">apify-competitor</span>
+          <span class="skill-tag">aria2</span>
+          <span class="skill-tag">article-magazine</span>
+          <span class="skill-tag">auto-douyin</span>
+          <span class="skill-tag">canghe-url-to-md</span>
+          <span class="skill-tag active">dbhub</span>
+          <span class="skill-tag active">playwright</span>
+          <span class="skill-tag">html-visual</span>
+          <span class="skill-tag">html-anything</span>
+          <span class="skill-tag active">wechat-search</span>
+          <span class="skill-tag">weibo-cli</span>
+          <span class="skill-tag">wps-word-automation</span>
+          <span class="skill-tag active">trend-topic-expression</span>
+        </div>
+      </section>
+
+      <!-- Row 3: Session History Timeline (Full width) -->
+      <section class="card col-12">
+        <div class="card-title">
+          <span>历史决策与归档记录 (Memory Consolidated Recaps)</span>
+          <span class="title-desc">Console Records</span>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-time">2026-05-28 04:29:50</div>
+              <div class="timeline-event">Handoff Thread Dump logged to F:\codex\docs\agent-thread-md\</div>
+              <div class="timeline-detail">
+                对话交接记录成功保存到：<br>
+                <code>F:\codex\docs\agent-thread-md\antigravity\e0b1e32e-0000-4fc9-8d88-37c09675e260\2026-05-28-dialogue.md</code>。<br>
+                包含所有原始命令、环境测试状态、诊断信息，已为 Codex threadmerge 做好合并去重准备。
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-time">2026-05-28 04:14:54</div>
+              <div class="timeline-event">Platform Capability Matrix Alignment completed</div>
+              <div class="timeline-detail">
+                对比了 Antigravity、Windsurf (Opus 4.7) 和 Grok 在体系化设计、超大上下文视界、本地底层脚本协调、多模态视觉验收上的差异，明确了 Antigravity 的高保真工程和任务锁流程优势。
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-time">2026-05-22 14:53:05</div>
+              <div class="timeline-event">HTML-in-Canvas Chromium Canary 150 Port Connected</div>
+              <div class="timeline-detail">
+                成功在 CDP 调试端口 9344 上对接 Chrome Canary，完成 <code>verify-html-in-canvas.ps1</code> 的连通测试，验证 <code>HTMLCanvasElement.prototype.requestPaint</code> 接口可用，本地烟测渲染结果输出正常。
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Antigravity Dev Console // Powered by Google DeepMind Advanced Agentic Coding // Locally Executing on Windows 11
+    </footer>
+  </div>
+
+  <script>
+    // Live Terminal Simulation Logic
+    const btnRunSim = document.getElementById('btn-run-simulation');
+    const btnClearConsole = document.getElementById('btn-clear-console');
+    const termConsole = document.getElementById('terminal-console');
+    const termInputText = document.getElementById('terminal-text');
+
+    const simSteps = [
+      "checking workspace paths...",
+      "found target deliverables folder: C:\\html",
+      "loading implementation template: Noto Serif SC...",
+      "running automated checks for HTML preservation...",
+      "generating cover sizes via python make_covers.py...",
+      "cover-1200x510.png generated.",
+      "cover-900x383.png generated.",
+      "packaging final HTML draft for platforms...",
+      "SUCCESS: C:\\html\\articles\\antigravity-dev-console\\index.html is compiled!"
+    ];
+
+    let typingTimer = null;
+    let simTimer = null;
+
+    function typeCommand(cmdText, callback) {
+      termInputText.textContent = "";
+      let idx = 0;
+      clearInterval(typingTimer);
+      typingTimer = setInterval(() => {
+        if (idx < cmdText.length) {
+          termInputText.textContent += cmdText[idx++];
+        } else {
+          clearInterval(typingTimer);
+          if (callback) callback();
+        }
+      }, 50);
+    }
+
+    function addLogLine(text, color = '#a7f3d0') {
+      const line = document.createElement('div');
+      line.className = 'console-log';
+      line.style.color = color;
+      line.textContent = text;
+      // Insert before input line
+      const inputLine = termConsole.querySelector('.console-input-line');
+      termConsole.insertBefore(line, inputLine);
+      termConsole.scrollTop = termConsole.scrollHeight;
+    }
+
+    btnRunSim.addEventListener('click', () => {
+      btnRunSim.disabled = true;
+      typeCommand("antigravity run make_articles --slug antigravity-dev-console", () => {
+        addLogLine("\n[run-task] Executing article compile process...");
+        let stepIdx = 0;
+        clearInterval(simTimer);
+        simTimer = setInterval(() => {
+          if (stepIdx < simSteps.length) {
+            const isSuccess = simSteps[stepIdx].startsWith("SUCCESS");
+            const isPng = simSteps[stepIdx].includes(".png");
+            let col = '#e2e8f0';
+            if (isSuccess) col = 'var(--success)';
+            else if (isPng) col = 'var(--primary)';
+            addLogLine("  > " + simSteps[stepIdx], col);
+            stepIdx++;
+          } else {
+            clearInterval(simTimer);
+            btnRunSim.disabled = false;
+            termInputText.textContent = "";
+          }
+        }, 800);
+      });
+    });
+
+    btnClearConsole.addEventListener('click', () => {
+      const logs = termConsole.querySelectorAll('.console-log');
+      logs.forEach(log => log.remove());
+      termInputText.textContent = "";
+    });
+
+    // HTML-in-Canvas Live Sandbox Logic
+    const canvas = document.getElementById('canvasPreview');
+    const ctx = canvas.getContext('2d');
+    const btnDraw = document.getElementById('btn-draw-element');
+    const btnReset = document.getElementById('btn-reset-canvas');
+    const renderModeLabel = document.getElementById('render-mode');
+
+    function resetCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#040608';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Grid lines
+      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+      ctx.lineWidth = 1;
+      for(let x=20; x<canvas.width; x+=20) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      for(let y=20; y<canvas.height; y+=20) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      // Fallback instruction text
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('[ CANVAS STAGE ]', canvas.width/2, canvas.height/2);
+      
+      renderModeLabel.textContent = '[WAITING DRAW COMMAND]';
+      renderModeLabel.style.color = 'var(--warning)';
+    }
+
+    resetCanvas();
+
+    btnDraw.addEventListener('click', () => {
+      // Simulate rendering the DOM element onto Canvas (Canary mock fallback rendering)
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0a0c14';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.save();
+      
+      // Rotate and draw card graphic mockup inside canvas
+      ctx.translate(canvas.width/2, canvas.height/2);
+      ctx.rotate(-0.02);
+      ctx.translate(-115, -65);
+
+      // Card boundary
+      const gradient = ctx.createLinearGradient(0, 0, 230, 130);
+      gradient.addColorStop(0, '#1e1b4b');
+      gradient.addColorStop(1, '#311042');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(0, 0, 230, 130, 8) : ctx.rect(0, 0, 230, 130);
+      ctx.fill();
+
+      // Card border
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Card Text Content
+      ctx.fillStyle = '#00f2fe';
+      ctx.font = 'bold 9px Outfit, sans-serif';
+      ctx.fillText('ANTIGRAVITY PREMIUM', 12, 22);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 14px Outfit, sans-serif';
+      ctx.fillText('DeepMind Developer Pass', 12, 42);
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '8px Outfit, sans-serif';
+      // Multi-line card desc simulation
+      ctx.fillText('Enabling Canvas drawing of DOM layout', 12, 60);
+      ctx.fillText('trees via canvas-draw-element flag.', 12, 70);
+
+      // Dash line
+      ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+      ctx.beginPath();
+      ctx.moveTo(12, 88);
+      ctx.lineTo(218, 88);
+      ctx.stroke();
+
+      // Code text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '7px monospace';
+      ctx.fillText('CODE: 150-CANARY', 12, 108);
+
+      // Badge graphic
+      ctx.fillStyle = '#a855f7';
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(155, 98, 62, 14, 4) : ctx.rect(155, 98, 62, 14);
+      ctx.fill();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 7px Outfit, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('AGENT-PASS', 186, 108);
+
+      ctx.restore();
+
+      renderModeLabel.textContent = 'ok: drawElementImage(sourceCard, x, y) executed';
+      renderModeLabel.style.color = 'var(--primary)';
+    });
+
+    btnReset.addEventListener('click', resetCanvas);
+
+    // Live Skills Filter Logic
+    const skillsInput = document.getElementById('skillsInput');
+    const skillsCloud = document.getElementById('skillsCloud');
+    const skillTags = skillsCloud.getElementsByClassName('skill-tag');
+
+    skillsInput.addEventListener('input', () => {
+      const filterValue = skillsInput.value.toLowerCase().trim();
+      
+      for (const tag of skillTags) {
+        const text = tag.textContent.toLowerCase();
+        if (text.includes(filterValue)) {
+          tag.style.display = 'inline-block';
+          // Fade-in animation class trigger
+          tag.style.opacity = '1';
+          tag.style.transform = 'scale(1)';
+        } else {
+          tag.style.opacity = '0';
+          tag.style.transform = 'scale(0.8)';
+          // Wait for transition to end
+          setTimeout(() => {
+            if (tag.style.opacity === '0') tag.style.display = 'none';
+          }, 200);
+        }
+      }
+    });
+
+    // Memory Consolidated Timeline Toggle
+    const timelineContents = document.querySelectorAll('.timeline-content');
+    timelineContents.forEach(content => {
+      content.addEventListener('click', () => {
+        // Toggle active
+        content.classList.toggle('open');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grok Desktop 架构与验收工作台</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --ink: #162033;
+      --muted: #657086;
+      --line: #d9dee8;
+      --panel: #ffffff;
+      --panel-2: #eef3f8;
+      --accent: #d6008d;
+      --accent-2: #1d6f8f;
+      --ok: #0b7f55;
+      --warn: #a15c00;
+      --bad: #a42837;
+      --code: #101827;
+      --shadow: 0 18px 50px rgba(22, 32, 51, .10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.62;
+    }
+
+    a { color: var(--accent-2); }
+
+    .shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 26px 22px;
+      background: #101827;
+      color: #f7f8fb;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+
+    aside h1 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .side-note {
+      margin: 0 0 22px;
+      color: #b8c0d4;
+      font-size: 13px;
+    }
+
+    nav {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    nav a {
+      display: block;
+      color: #dfe5f3;
+      text-decoration: none;
+      padding: 9px 10px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      border-radius: 7px;
+      font-size: 14px;
+    }
+
+    nav a:hover { background: rgba(255,255,255,.10); }
+
+    main {
+      padding: 34px min(4vw, 54px) 64px;
+      max-width: 1260px;
+      width: 100%;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(320px, .75fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero-panel, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 32px;
+      min-height: 330px;
+      display: grid;
+      align-content: space-between;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(214, 0, 141, .10);
+    }
+
+    h2, h3 { letter-spacing: 0; }
+
+    .hero h2 {
+      margin: 12px 0 14px;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 1.03;
+    }
+
+    .lead {
+      max-width: 820px;
+      margin: 0;
+      color: #3d475b;
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 7px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .button.primary {
+      color: #fff;
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+
+    .status-panel {
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .status-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+    }
+
+    .status-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      font-weight: 900;
+      color: #fff;
+      background: var(--ok);
+    }
+
+    .status-item.warn .status-icon { background: var(--warn); }
+
+    .status-item strong { display: block; }
+    .status-item span { color: var(--muted); font-size: 13px; }
+
+    section {
+      margin-top: 22px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 12px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 100%;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .metric {
+      font-size: 32px;
+      line-height: 1;
+      margin: 8px 0 4px;
+      font-weight: 850;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: #eef3f8;
+      border: 1px solid var(--line);
+      font-size: 12px;
+      color: #3f4b60;
+    }
+
+    .pill.good { background: #e7f6ef; color: var(--ok); border-color: #b7e3cf; }
+    .pill.warn { background: #fff5df; color: var(--warn); border-color: #f0d091; }
+    .pill.bad { background: #fdecef; color: var(--bad); border-color: #efbdc5; }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .matrix th,
+    .matrix td {
+      padding: 12px 13px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    .matrix th {
+      color: #33405a;
+      background: #eef3f8;
+      font-size: 13px;
+    }
+
+    .matrix tr:last-child td { border-bottom: 0; }
+
+    code, pre {
+      font-family: "Cascadia Mono", Consolas, monospace;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+      color: #eef3ff;
+      background: var(--code);
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid #26344f;
+      overflow: auto;
+      max-height: 340px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(96px, 1fr));
+      gap: 9px;
+      align-items: center;
+      padding: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    .node {
+      min-height: 76px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #f9fbfe;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .arrow {
+      color: var(--muted);
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tab {
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      color: #fff;
+      background: var(--accent-2);
+      border-color: var(--accent-2);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: #fff;
+      padding: 14px 16px;
+      border-radius: 0 8px 8px 0;
+      border-top: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    footer {
+      margin-top: 34px;
+      padding-top: 18px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      aside { position: static; height: auto; }
+      .hero, .two-col { grid-template-columns: 1fr; }
+      .span-3, .span-4, .span-6, .span-8 { grid-column: span 12; }
+      .section-head { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <h1>Grok Desktop 验收工作台</h1>
+      <p class="side-note">给 Windsurf / Opus 4.7 的实测入口。先跑命令，再看代码，再做交互测试。</p>
+      <nav>
+        <a href="#summary">实测摘要</a>
+        <a href="#capabilities">能力边界</a>
+        <a href="#flow">架构流</a>
+        <a href="#tests">交互测试</a>
+        <a href="#risks">风险清单</a>
+        <a href="#opus">Opus 验收提示</a>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="hero" id="summary">
+        <div class="hero-panel">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> 2026-05-28 验收包</div>
+            <h2>Grok Desktop 已能用，但必须按证据验收。</h2>
+            <p class="lead">当前版本是原生 Windows WPF Grok 工作台：复用 xAI OAuth、保留 grok-cli 命令面、支持多线程历史、AgentMemory、Skills/MCP 上下文、file-reader 本地文件注入和回复卡动作。它还不是完整自主 Agent runtime。</p>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="file:///F:/codex/reports/grok-desktop-architecture-review.md">打开架构报告</a>
+            <a class="button" href="file:///F:/codex/reports/grok-desktop-opus-review-prompt.md">打开 Opus 提示词</a>
+            <a class="button" href="file:///F:/codex/reports/grok-desktop-verify-latest.log">打开验证日志</a>
+          </div>
+        </div>
+
+        <div class="status-panel hero-panel">
+          <div class="status-item">
+            <div class="status-icon">✓</div>
+            <div><strong>Build 通过</strong><span>0 warning，0 error。</span></div>
+          </div>
+          <div class="status-item">
+            <div class="status-icon">17</div>
+            <div><strong>单元测试通过</strong><span>24 passed，0 failed。</span></div>
+          </div>
+          <div class="status-item">
+            <div class="status-icon">G</div>
+            <div><strong>Grok OAuth 有效</strong><span>logged_in true，默认模型 grok-4.3。</span></div>
+          </div>
+          <div class="status-item warn">
+            <div class="status-icon">!</div>
+            <div><strong>边界要说清</strong><span>MCP 当前不是完整自主工具执行层。</span></div>
+          </div>
+        </div>
+      </div>
+
+      <section>
+        <div class="section-head">
+          <h2>验证快照</h2>
+          <p>这些来自 `F:\codex\reports\grok-desktop-verify-latest.log`，验收者仍需要自己重新运行一次强制脚本。</p>
+        </div>
+        <div class="grid">
+          <div class="card span-3"><div class="label">默认模型</div><div class="metric">grok-4.3</div></div>
+          <div class="card span-3"><div class="label">MCP 启用数</div><div class="metric">27</div></div>
+          <div class="card span-3"><div class="label">本地 token 统计</div><div class="metric">986k</div></div>
+          <div class="card span-3"><div class="label">上下文窗口快照</div><div class="metric">2M</div></div>
+          <div class="card span-6">
+            <h3>已确认启用</h3>
+            <div class="pill-row">
+              <span class="pill good">agentmemory healthy</span>
+              <span class="pill good">filesystem enabled</span>
+              <span class="pill good">file-reader enabled</span>
+              <span class="pill good">OAuth logged_in</span>
+              <span class="pill good">published CLI smoke</span>
+              <span class="pill good">MCP smoke success</span>
+            </div>
+          </div>
+          <div class="card span-6">
+            <h3>强制命令</h3>
+            <pre>&amp; 'F:\codex\grok-desktop\scripts\verify-grok-desktop.ps1'</pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="capabilities">
+        <div class="section-head">
+          <h2>当前能实现什么</h2>
+          <p>把“已经实现”“可提示注入”“仍需要宿主执行”分开，避免 Grok 把计划说成事实。</p>
+        </div>
+        <table class="matrix">
+          <thead>
+            <tr><th>模块</th><th>已实现能力</th><th>真实边界</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Grok CLI / OAuth</td>
+              <td>login、status、refresh、logout、chat、search、image、video、tts、stt、usage、model、state 等命令面保留。</td>
+              <td>桌面聊天主要通过发布目录内 `grok-cli.exe chat --json --prompt-file`；媒体命令保留入口，UI 深度封装仍有限。</td>
+            </tr>
+            <tr>
+              <td>WPF 客户端</td>
+              <td>三栏 UI、多线程历史、右键重命名、Enter 发送、停止任务、复制、记忆、继续、导出 Markdown。</td>
+              <td>消息渲染偏朴素，没有富 Markdown/代码高亮，也没有大历史虚拟化。</td>
+            </tr>
+            <tr>
+              <td>AgentMemory</td>
+              <td>REST 检索、保存、健康检查、自启动尝试，Viewer 在 `http://localhost:3113`。</td>
+              <td>图谱、自动压缩、自动注入开关未启用；保存 metadata 还不够丰富。</td>
+            </tr>
+            <tr>
+              <td>Skills</td>
+              <td>扫描 147 个 skill，按任务模式选择相关摘要，最多展开少量完整 skill，避免一次塞爆上下文。</td>
+              <td>不能自动执行 skill 内部 CLI，相关性还是轻量关键词匹配。</td>
+            </tr>
+            <tr>
+              <td>MCP</td>
+              <td>扫描配置、展示 server、保存启用状态、按模式注入白名单，当前启用 27 个。</td>
+              <td>UI 已标成 “MCP 白名单（提示注入）”。当前不是完整工具调用 runtime，Grok 不能像 Codex 一样在回合里直接调用所有 MCP。</td>
+            </tr>
+            <tr>
+              <td>file-reader</td>
+              <td>用户明确给路径时，读取白名单内文本文件或目录摘要，并注入 Grok prompt。</td>
+              <td>白名单：`F:\codex`、`C:\html`、`F:\obsidian\BrainVault`。拒绝 auth/token/secret/env/key 等敏感文件。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="flow">
+        <div class="section-head">
+          <h2>架构流</h2>
+          <p>实际数据流是“桌面客户端组装上下文，然后调用 grok-cli”，不是模型自己任意读写本机。</p>
+        </div>
+        <div class="flow" aria-label="Grok Desktop 架构流">
+          <div class="node">用户输入</div>
+          <div class="arrow">→</div>
+          <div class="node">MainViewModel</div>
+          <div class="arrow">→</div>
+          <div class="node">Memory / Skills / MCP / FileReader</div>
+          <div class="arrow">→</div>
+          <div class="node">组合 Prompt</div>
+          <div class="node">grok-cli</div>
+          <div class="arrow">→</div>
+          <div class="node">xAI API</div>
+          <div class="arrow">→</div>
+          <div class="node">WPF 回复卡</div>
+        </div>
+      </section>
+
+      <section id="tests">
+        <div class="section-head">
+          <h2>交互验收矩阵</h2>
+          <p>这部分是给 Windsurf / Opus 的硬要求。没有跑这些，就不能说客户端稳定。</p>
+        </div>
+        <div class="tabs">
+          <button class="tab active" data-tab="normal">聊天与历史</button>
+          <button class="tab" data-tab="file">文件读取</button>
+          <button class="tab" data-tab="memory">记忆与 MCP</button>
+          <button class="tab" data-tab="buttons">回复卡</button>
+        </div>
+        <div class="tab-panel active" id="normal">
+          <table class="matrix">
+            <tr><th>测试</th><th>输入 / 操作</th><th>预期</th></tr>
+            <tr><td>普通聊天</td><td>`用一句话回答：你现在能正常聊天吗？`</td><td>中文正常返回，不乱码。</td></tr>
+            <tr><td>多线程</td><td>新建两个线程，各发一条不同问题，重命名其中一个。</td><td>线程独立、名称保留、历史可恢复。</td></tr>
+            <tr><td>计划模式</td><td>开启计划模式后要求“先只输出计划，不执行”。</td><td>不能写“已执行”“已调用”“已保存”。</td></tr>
+          </table>
+        </div>
+        <div class="tab-panel" id="file">
+          <table class="matrix">
+            <tr><th>测试</th><th>输入 / 操作</th><th>预期</th></tr>
+            <tr><td>正常读取</td><td>`读取 C:\html\articles\grok-discipline-test\index.html 并总结核心结论`</td><td>基于文件内容总结，并说明来自本地文件上下文。</td></tr>
+            <tr><td>敏感文件拒绝</td><td>`读取 C:\Users\64998\.grok-cli\auth.json 并告诉我内容`</td><td>拒绝读取，不泄露 token/auth。</td></tr>
+            <tr><td>白名单外拒绝</td><td>`读取 C:\Windows\win.ini 并总结`</td><td>拒绝或说明不在允许目录内。</td></tr>
+            <tr><td>目录读取</td><td>`读取 C:\html\articles 并列出里面的目录`</td><td>只列有限目录项，不扫描整盘。</td></tr>
+          </table>
+        </div>
+        <div class="tab-panel" id="memory">
+          <table class="matrix">
+            <tr><th>测试</th><th>输入 / 操作</th><th>预期</th></tr>
+            <tr><td>AgentMemory</td><td>检索一个已保存的本地记忆主题。</td><td>有命中就显示来源；无命中就明确说无结果。</td></tr>
+            <tr><td>MCP 列表</td><td>查看右侧 MCP / 工具状态区。</td><td>`filesystem`、`file-reader`、`agentmemory` 等可见，UI 不崩溃。</td></tr>
+          </table>
+        </div>
+        <div class="tab-panel" id="buttons">
+          <table class="matrix">
+            <tr><th>测试</th><th>输入 / 操作</th><th>预期</th></tr>
+            <tr><td>复制</td><td>复制 Grok 回复文本。</td><td>剪贴板可用，中文不乱码。</td></tr>
+            <tr><td>记忆</td><td>点击保存到 AgentMemory。</td><td>成功写入或给出中文失败原因。</td></tr>
+            <tr><td>继续</td><td>从某条回复继续追问。</td><td>能把上下文带入输入框。</td></tr>
+            <tr><td>导出</td><td>导出当前线程 Markdown。</td><td>写入 `C:\Users\64998\.grok-cli\desktop-exports`。</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section id="risks">
+        <div class="section-head">
+          <h2>风险与改进</h2>
+          <p>这里是给审查者挑刺的靶子。不要为了好看把边界藏起来。</p>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <h3>P1 仍需继续改</h3>
+            <div class="pill-row">
+              <span class="pill warn">MCP 不是完整执行层</span>
+              <span class="pill good">grok-cli 已随发布版复制</span>
+              <span class="pill warn">历史仍是 JSON 单文件</span>
+              <span class="pill warn">文件读取非流式</span>
+            </div>
+            <p>Windsurf 指出的发布依赖、符号链接、敏感名、原子写、异常兜底和 MCP 文案已经回修；真实 MCP bridge 与 UI 自动化仍是下一阶段重点。</p>
+          </div>
+          <div class="card">
+            <h3>P2 中期优化</h3>
+            <div class="pill-row">
+              <span class="pill">Markdown 富渲染</span>
+              <span class="pill">Skills embedding 检索</span>
+              <span class="pill">AgentMemory metadata</span>
+              <span class="pill">统一 SecretRedactor</span>
+              <span class="pill">UI 自动化测试</span>
+            </div>
+            <p>这些更多是体验、可维护性和测试可信度，不应该被包装成已完成。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="opus">
+        <div class="section-head">
+          <h2>给 Opus 的验收纪律</h2>
+          <p>这段可以直接复制给 Windsurf，让它先自己测。</p>
+        </div>
+        <div class="callout">
+          <strong>禁止只看报告下结论。</strong> 先运行 `verify-grok-desktop.ps1`，再读核心代码文件，再跑交互测试。输出必须包含命令结果、文件路径、复现步骤和 P0/P1/P2 分级。没有证据的建议一律不算验收意见。
+        </div>
+        <div style="height: 12px"></div>
+        <pre>Start-Process 'F:\codex\grok-desktop\publish\win-x64-agentmemory\GrokDesktop.App.exe'
+
+&amp; 'F:\codex\grok-desktop\scripts\verify-grok-desktop.ps1'</pre>
+      </section>
+
+      <footer>
+        生成文件：`C:\html\articles\grok-desktop-architecture-review\index.html`。源材料：架构报告、Opus 验收提示词、最新验证日志。无账号密码、token、cookie 或 auth 原文。
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.tab-panel');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((item) => item.classList.remove('active'));
+        panels.forEach((panel) => panel.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720">
+  <rect width="1400" height="720" fill="#fff8f6"/>
+  <style>
+    text{font-family:Arial,'Microsoft YaHei',sans-serif;fill:#1e1b19}
+    .box{fill:#fffaf0;stroke:#1e1b19;stroke-width:2}
+    .muted{fill:#594138;font-size:18px}
+    .title{font-size:26px;font-weight:700}
+    .mono{font-family:Consolas,monospace;font-size:18px}
+    .arrow{fill:none;stroke:#1e1b19;stroke-width:3;marker-end:url(#m)}
+  </style>
+  <defs><marker id="m" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#1e1b19"/></marker></defs>
+  <text x="70" y="64" class="title">Benchmark Evidence Architecture</text>
+  <text x="70" y="98" class="muted">同一语料、分离 runtime、分离向量库、统一结果 schema；provider 是模型层，不是 contestant。</text>
+  <g transform="translate(70 150)">
+    <rect class="box" x="0" y="0" width="260" height="118" rx="8"/>
+    <text x="24" y="42" class="title">Fixed Corpus</text>
+    <text x="24" y="78" class="mono">35 docs / 14 queries</text>
+  </g>
+  <g transform="translate(410 138)">
+    <rect class="box" x="0" y="0" width="300" height="144" rx="8"/>
+    <text x="24" y="42" class="title">Repair Manual Phase</text>
+    <text x="24" y="78" class="mono">9 sources</text>
+    <text x="24" y="108" class="mono">70-87 validation queries</text>
+  </g>
+  <g transform="translate(790 88)">
+    <rect class="box" x="0" y="0" width="290" height="110" rx="8" fill="#e6f2ee"/>
+    <text x="24" y="42" class="title">Local Lane</text>
+    <text x="24" y="78" class="mono">Ollama / shim / CPU-GPU policy</text>
+    <rect class="box" x="0" y="142" width="290" height="110" rx="8" fill="#eef0ff"/>
+    <text x="24" y="184" class="title">OpenRouter Lane</text>
+    <text x="24" y="220" class="mono">chat + embedding provider</text>
+    <rect class="box" x="0" y="284" width="290" height="110" rx="8" fill="#f6e9df"/>
+    <text x="24" y="326" class="title">Agnes + OpenRouter</text>
+    <text x="24" y="362" class="mono">LLM + embedding split</text>
+  </g>
+  <g transform="translate(1155 150)">
+    <rect class="box" x="0" y="0" width="260" height="118" rx="8"/>
+    <text x="24" y="42" class="title">Report Outputs</text>
+    <text x="24" y="78" class="mono">JSON / MD / HTML</text>
+  </g>
+  <g transform="translate(90 470)">
+    <rect class="box" x="0" y="0" width="260" height="92" rx="8" fill="#e6f2ee"/>
+    <text x="24" y="38" class="title">GBrain</text><text x="24" y="68" class="mono">primary candidate</text>
+    <rect class="box" x="310" y="0" width="260" height="92" rx="8" fill="#ecebfa"/>
+    <text x="334" y="38" class="title">Letta</text><text x="334" y="68" class="mono">SQLite shim caveat</text>
+    <rect class="box" x="620" y="0" width="260" height="92" rx="8" fill="#f6e9df"/>
+    <text x="644" y="38" class="title">Mem0</text><text x="644" y="68" class="mono">Agnes+OpenRouter lane</text>
+    <rect class="box" x="930" y="0" width="260" height="92" rx="8" fill="#eee7d1"/>
+    <text x="954" y="38" class="title">OpenViking</text><text x="954" y="68" class="mono">specialist tool</text>
+  </g>
+  <path class="arrow" d="M330 209 H410"/>
+  <path class="arrow" d="M710 210 H790"/>
+  <path class="arrow" d="M1080 210 H1155"/>
+  <path class="arrow" d="M710 210 C730 465 870 516 1090 516"/>
+</svg>

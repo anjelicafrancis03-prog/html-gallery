@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN" data-ha-style="document">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>浏览器自动化经验教训总结</title>
+  <link rel="icon" href="data:," />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fff8f6;
+      --surface: #ffffff;
+      --paper: #fffdfa;
+      --ink: #1e1b19;
+      --muted: #594138;
+      --soft: #8d7166;
+      --line: rgba(0, 0, 0, .1);
+      --accent: #a03b00;
+      --accent-2: #17695a;
+      --code: #101815;
+      --code-ink: #e6ffe3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei UI", "Noto Sans SC", system-ui, sans-serif;
+      line-height: 1.75;
+      letter-spacing: 0;
+    }
+    .shell {
+      width: min(980px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 34px 0 70px;
+    }
+    header {
+      min-height: 58vh;
+      display: grid;
+      align-content: center;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 34px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: Georgia, "Noto Serif SC", SimSun, serif;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 1.08;
+      margin: 0 0 20px;
+      letter-spacing: 0;
+    }
+    .lead {
+      font-size: clamp(18px, 2.3vw, 24px);
+      color: var(--muted);
+      max-width: 800px;
+      margin: 0;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .nav a {
+      color: var(--accent-2);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 8px 12px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .nav a:focus-visible, .nav a:hover {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: clamp(18px, 3vw, 30px);
+      margin: 18px 0;
+      scroll-margin-top: 20px;
+    }
+    h2 {
+      font-family: Georgia, "Noto Serif SC", SimSun, serif;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.2;
+      margin: 0 0 14px;
+    }
+    h3 {
+      font-size: 18px;
+      margin: 24px 0 8px;
+      color: var(--ink);
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    ul, ol { margin: 0; padding-left: 22px; color: var(--muted); }
+    li { margin: 8px 0; }
+    code {
+      background: #f5ece9;
+      color: var(--accent);
+      padding: 2px 5px;
+      font-family: Consolas, "SF Mono", monospace;
+    }
+    pre {
+      background: var(--code);
+      color: var(--code-ink);
+      padding: 16px;
+      overflow: auto;
+      border: 1px solid #224137;
+      font-family: Consolas, "SF Mono", monospace;
+      line-height: 1.5;
+    }
+    .stack {
+      border-left: 4px solid var(--accent);
+      background: #fff3ee;
+      padding: 18px;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      padding: 16px;
+      background: #fff;
+    }
+    .card b { color: var(--accent); }
+    footer {
+      margin-top: 30px;
+      color: var(--soft);
+      font-size: 14px;
+    }
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: 1fr; }
+      header { min-height: auto; padding: 38px 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="eyebrow">Browser Automation Notes / 2026-05-28</div>
+      <h1>浏览器自动化经验教训总结</h1>
+      <p class="lead">以后浏览器自动化别到处换工具，主线固定为“固定 Chrome 9223 + Node Playwright CDP”，MCP 和抽取工具只做分层补充，所有测评必须截图留证。</p>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#lessons">经验教训</a>
+        <a href="#stack">最终保留栈</a>
+        <a href="#types">分类口径</a>
+      </nav>
+    </header>
+
+    <section id="lessons">
+      <h2>最重要经验教训</h2>
+      <h3>1. 固定 Chrome 是根</h3>
+      <p><code>http://127.0.0.1:9223</code> 和 <code>C:\Users\64998\.opencli\chrome-profile</code> 是核心资产。登录态、真实页面、发布流程、复杂点击，都优先走这个。</p>
+
+      <h3>2. Playwright CDP 是主力 API</h3>
+      <p>真正稳定干活的是 Node Playwright API：</p>
+      <pre><code>const { chromium } = require('playwright');
+const browser = await chromium.connectOverCDP('http://127.0.0.1:9223');</code></pre>
+      <p>它适合长流程、截图、上传、DOM 抽取、JS 执行。</p>
+
+      <h3>3. MCP 要分层</h3>
+      <ul>
+        <li><code>Playwright MCP</code>：页面验收、snapshot、console、截图。</li>
+        <li><code>Google Chrome DevTools MCP</code>：官方 Chrome MCP，已连 9223 跑通。</li>
+        <li><code>CDP Bridge</code>：补充真实 tab 桥接，但别当唯一主线。</li>
+        <li><code>AnySearch</code>：公开网页搜索 / 正文抽取。</li>
+        <li><code>Crawl4AI Python</code>：网页转 Markdown / 截图，必须用专用 venv。</li>
+      </ul>
+
+      <h3>4. 不要被端口骗</h3>
+      <p><code>9223</code> 通，只说明 Chrome CDP 通；<code>18765/18766</code> 通，只说明 CDP Bridge 服务在，不代表扩展 session 已注册。OpenChrome 默认看 <code>9222</code>，和我们固定 <code>9223</code> 不一致。</p>
+
+      <h3>5. 测评必须截图</h3>
+      <p>以后所有“测评、横评、实测、benchmark”都必须有截图。没截图就只能算“口头跑过”，不能进结论。</p>
+
+      <h3>6. 本地 HTML 走 HTTP</h3>
+      <pre><code>python -m http.server 4181 --bind 127.0.0.1 --directory C:\html</code></pre>
+
+      <h3>7. Crawl4AI 不能装全局</h3>
+      <p>它依赖 <code>lxml~=5.3</code>，会和本机其他工具冲突。专用入口：</p>
+      <pre><code>F:\codex\venvs\crawl4ai\Scripts\python.exe</code></pre>
+
+      <h3>8. 云工具没凭证不要伪测</h3>
+      <p>Firecrawl、Browserbase、Apify 这类需要 key / 项目 ID / 额度。没凭证就只能标记“入口确认，待凭证实测”。</p>
+
+      <h3>9. 不碰绕验证码和未授权访问</h3>
+      <p>反爬、验证码、Cloudflare 绕过类宣传只能做风险识别，不做实操绕过。</p>
+
+      <h3>10. 交接必须落盘</h3>
+      <p>关键结论、截图、命令、路径都要写进 HTML 或 handoff。当前主报告在 <code>C:\html\articles\browser-skill-mcp-review\index.html</code>。</p>
+    </section>
+
+    <section id="stack">
+      <h2>最终保留栈</h2>
+      <div class="stack">固定 Chrome + Node Playwright CDP + Playwright MCP + Google Chrome DevTools MCP + AnySearch；CDP Bridge 做补充；Crawl4AI Python 进专用 venv；canghe 备用。</div>
+    </section>
+
+    <section id="webctl">
+      <h2>已落地的长期入口</h2>
+      <p>已经按“API 核心 → CLI → MCP”的结构落地 <code>webctl</code>：</p>
+      <pre><code>F:\codex\webctl</code></pre>
+      <p>常用命令：</p>
+      <pre><code>node F:\codex\webctl\src\cli.js start-chrome
+node F:\codex\webctl\src\cli.js status
+node F:\codex\webctl\src\cli.js registry
+node F:\codex\webctl\src\cli.js screenshot C:\html\webctl-test.png --url https://example.com</code></pre>
+      <p>MCP 入口：</p>
+      <pre><code>{
+  "mcpServers": {
+    "webctl-mcp": {
+      "command": "node",
+      "args": ["F:\\codex\\webctl\\src\\mcp.js"],
+      "env": {
+        "WEBCTL_CDP_URL": "http://127.0.0.1:9223"
+      }
+    }
+  }
+}</code></pre>
+      <p>模块化规则：新工具先加到 <code>F:\codex\webctl\src\registry.js</code>，有截图和最小样本后再提升为 <code>keep</code>。</p>
+      <p>定期巡检：已创建每周一 09:30 的 <code>webctl 工具栈巡检</code> 自动化，只检查版本和候选，不自动安装、不写密钥。</p>
+    </section>
+
+    <section id="types">
+      <h2>分类口径</h2>
+      <div class="grid">
+        <div class="card"><b>Playwright CDP</b><p>API，不是 MCP，也不是 CLI。</p></div>
+        <div class="card"><b>Playwright MCP</b><p>MCP，是 Agent 调用的工具层。</p></div>
+        <div class="card"><b>Google Chrome DevTools MCP</b><p>MCP，是官方 Chrome DevTools 工具层。</p></div>
+        <div class="card"><b>playwright-cli / openchrome</b><p>CLI，适合临时探路或一次性命令。</p></div>
+      </div>
+      <p style="margin-top:16px">主线口径：固定 Chrome 9223 是浏览器底座；Playwright CDP API 是主力操控方式；MCP 是给 Agent 用的工具接口；CLI 是辅助探路。</p>
+    </section>
+
+    <footer>落盘位置：C:\html\articles\browser-automation-summary</footer>
+  </main>
+</body>
+</html>

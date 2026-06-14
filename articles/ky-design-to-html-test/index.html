@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KY Design to HTML Local Test</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      --ink: #2e3c38;
+      --muted: #68706d;
+      --line: #e7e8e4;
+      --green: #477e54;
+      --green-dark: #326640;
+      --stage-w: 1080;
+      --stage-h: 733;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #eceeed;
+      color: var(--ink);
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .preview-shell {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #f4f5f3;
+      overflow: hidden;
+    }
+
+    .scale-frame {
+      position: relative;
+    }
+
+    .design-stage {
+      position: relative;
+      width: 1080px;
+      height: 733px;
+      transform: scale(var(--scale, 1));
+      transform-origin: top left;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 58% 47%, rgba(217, 222, 213, .48), transparent 24%),
+        radial-gradient(circle at 15% 80%, rgba(236, 238, 232, .9), transparent 30%),
+        linear-gradient(180deg, #f8f9f7 0%, #f5f6f3 56%, #eff1ed 100%);
+    }
+
+    .topbar {
+      position: absolute;
+      inset: 0 18px auto 24px;
+      height: 48px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      z-index: 3;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: #0c0e0d;
+      letter-spacing: 0;
+      font-size: 18px;
+    }
+
+    .mark {
+      width: 35px;
+      aspect-ratio: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 2px;
+      transform: rotate(45deg);
+    }
+
+    .mark span {
+      background: #050605;
+    }
+
+    .mark span:nth-child(2),
+    .mark span:nth-child(4),
+    .mark span:nth-child(6),
+    .mark span:nth-child(8) {
+      opacity: 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(18px, 3.3vw, 42px);
+      color: #5e6260;
+      font-size: 14px;
+      font-weight: 560;
+      white-space: nowrap;
+    }
+
+    .nav .language {
+      color: #111;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-small {
+      height: 42px;
+      padding: 0 24px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .82);
+      color: #4f5451;
+      font-size: 14px;
+      font-weight: 620;
+      box-shadow: 0 5px 15px rgba(34, 40, 36, .04);
+    }
+
+    .btn-small.dark {
+      background: #030403;
+      color: #fff;
+      border-color: #030403;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, .14);
+    }
+
+    .hero {
+      position: absolute;
+      left: 50%;
+      top: 91px;
+      width: min(760px, 74%);
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .pill {
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px;
+      margin-bottom: 14px;
+      border: 1px solid #e0e3dd;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .68);
+      color: #53605a;
+      font-size: 13px;
+      font-weight: 680;
+      box-shadow: 0 5px 16px rgba(41, 46, 42, .05);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: 56px;
+      line-height: .98;
+      font-weight: 520;
+      letter-spacing: 0;
+      color: #33423e;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 18px 0 0;
+      color: #636b68;
+      font-size: 18px;
+      line-height: 1.42;
+      font-weight: 520;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .cta {
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 0;
+      font-size: 16px;
+      font-weight: 680;
+      box-shadow: 0 8px 18px rgba(47, 72, 57, .12);
+      white-space: nowrap;
+    }
+
+    .cta.primary {
+      color: #fff;
+      min-width: 194px;
+      background: linear-gradient(180deg, #51895c, #3f794d);
+    }
+
+    .cta.secondary {
+      color: #4f5552;
+      min-width: 164px;
+      background: rgba(255, 255, 255, .76);
+    }
+
+    .icon-round {
+      width: 26px;
+      height: 26px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .25);
+      color: inherit;
+      font-size: 14px;
+    }
+
+    .cta.secondary .icon-round {
+      background: #eff1ed;
+      color: #1e2522;
+    }
+
+    .bird {
+      position: absolute;
+      width: 13px;
+      height: 8px;
+      border-top: 2px solid rgba(62, 72, 68, .7);
+      border-radius: 50%;
+      transform: rotate(20deg);
+      opacity: .68;
+      z-index: 1;
+    }
+
+    .bird::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: -2px;
+      width: 10px;
+      height: 7px;
+      border-top: 2px solid rgba(62, 72, 68, .7);
+      border-radius: 50%;
+      transform: rotate(-45deg);
+    }
+
+    .b1 { left: 14%; top: 31%; }
+    .b2 { left: 17%; top: 44%; transform: scale(.75) rotate(18deg); }
+    .b3 { right: 18%; top: 33%; transform: scale(.68) rotate(12deg); }
+    .b4 { right: 12%; top: 30%; transform: scale(.55) rotate(-8deg); opacity: .38; }
+
+    .forest {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 51%;
+      object-fit: cover;
+      object-position: bottom center;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="preview-shell">
+    <div class="scale-frame">
+    <main class="design-stage" aria-label="Renewable power landing page recreation">
+      <header class="topbar">
+        <div class="brand">
+          <div class="mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+          </div>
+          <span>LGPSM</span>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <span class="language">◎ En</span>
+          <span>Renewables</span>
+          <span>Strategies</span>
+          <span>Photovoltaic</span>
+          <span>Wind Systems</span>
+          <span>Packages</span>
+        </nav>
+        <div class="actions">
+          <button class="btn-small" type="button">Sign In</button>
+          <button class="btn-small dark" type="button">Clean Energy</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="pill">☀ → 🌎 Delivering power innovate → 🌱</div>
+        <h1>Renewable Power For Tomorrow, Infinite Clean Solutions</h1>
+        <p class="subtitle">Sustainable Energy Platform. Engineering, deploying, and servicing solar arrays for homes, businesses, and large-scale operations worldwide.</p>
+        <div class="cta-row">
+          <button class="cta primary" type="button">
+            <span>⊄</span>
+            <span>Explore Options</span>
+            <span class="icon-round">▶</span>
+          </button>
+          <button class="cta secondary" type="button">
+            <span>Start Network</span>
+            <span class="icon-round">➜</span>
+          </button>
+        </div>
+      </section>
+
+      <span class="bird b1"></span>
+      <span class="bird b2"></span>
+      <span class="bird b3"></span>
+      <span class="bird b4"></span>
+      <img class="forest" src="assets/forest-asset.png" alt="">
+    </main>
+    </div>
+  </div>
+  <script>
+    const designWidth = 1080;
+    const designHeight = 733;
+    const frame = document.querySelector(".scale-frame");
+
+    function fitCanvas() {
+      const scale = Math.min(1, innerWidth / designWidth, innerHeight / designHeight);
+      frame.style.width = `${designWidth * scale}px`;
+      frame.style.height = `${designHeight * scale}px`;
+      document.documentElement.style.setProperty("--scale", scale);
+    }
+
+    addEventListener("resize", fitCanvas);
+    fitCanvas();
+  </script>
+</body>
+</html>

@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>5视觉工作流：从文件到可交付 HTML Artifact</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23246bfe'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' font-family='Arial' font-weight='700' fill='white'%3E5%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --ink: #18202a;
+      --muted: #5d6875;
+      --line: #dfe5ec;
+      --soft: #f4f7fa;
+      --paper: #ffffff;
+      --blue: #246bfe;
+      --green: #0f8b6f;
+      --orange: #e57c23;
+      --red: #d94a4a;
+      --shadow: 0 12px 34px rgba(24, 32, 42, 0.08);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #eef3f7;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 22px;
+      border-right: 1px solid var(--line);
+      background: #fbfcfd;
+      overflow: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--blue);
+      font-weight: 900;
+    }
+
+    nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 9px 10px;
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      background: #edf3ff;
+      color: var(--blue);
+    }
+
+    .side-note {
+      margin-top: 28px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main {
+      padding: 34px;
+    }
+
+    .hero {
+      min-height: 360px;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+      gap: 28px;
+      align-items: center;
+      padding-bottom: 34px;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    h1 {
+      margin: 10px 0 16px;
+      max-width: 920px;
+      font-size: clamp(38px, 5vw, 74px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-panel {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--soft);
+    }
+
+    .metric b {
+      display: block;
+      font-size: 25px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    section {
+      padding: 42px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .step, .rule, .boundary, .asset-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 8px 24px rgba(24, 32, 42, 0.05);
+    }
+
+    .step {
+      padding: 18px;
+      min-height: 210px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--blue);
+      font-weight: 800;
+    }
+
+    .save .step-number { background: var(--green); }
+    .review .step-number { background: var(--orange); }
+    .share .step-number { background: var(--blue); }
+
+    .checklist {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .checklist li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 8px;
+      align-items: start;
+      color: var(--muted);
+    }
+
+    .checklist li::before {
+      content: "";
+      width: 15px;
+      height: 15px;
+      margin-top: 5px;
+      border: 2px solid var(--green);
+      border-radius: 4px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .rules {
+      display: grid;
+      gap: 12px;
+    }
+
+    .rule {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 8px 1fr;
+      gap: 12px;
+    }
+
+    .rule::before {
+      content: "";
+      display: block;
+      border-radius: 99px;
+      background: var(--blue);
+    }
+
+    .rule.green::before { background: var(--green); }
+    .rule.orange::before { background: var(--orange); }
+    .rule.red::before { background: var(--red); }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .asset-card {
+      overflow: hidden;
+    }
+
+    .asset-card figure {
+      margin: 0;
+    }
+
+    .asset-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #f7f9fb;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .asset-card figcaption {
+      padding: 12px 14px 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .asset-card figcaption strong {
+      display: block;
+      color: var(--ink);
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: 0 8px 24px rgba(24, 32, 42, 0.05);
+    }
+
+    .matrix th,
+    .matrix td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    .matrix th {
+      color: #344154;
+      background: #f7f9fb;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .matrix tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 9px;
+      border-radius: 99px;
+      background: #eaf1ff;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pill.green { background: #e8f7f2; color: var(--green); }
+    .pill.orange { background: #fff2e7; color: var(--orange); }
+    .pill.red { background: #ffeded; color: var(--red); }
+
+    .quote {
+      padding: 22px;
+      border-left: 5px solid var(--blue);
+      background: white;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 20px;
+      font-weight: 750;
+      box-shadow: var(--shadow);
+    }
+
+    .footer {
+      padding: 28px 0 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      background: #edf2f7;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 980px) {
+      .shell {
+        display: block;
+      }
+
+      aside {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      main {
+        padding: 22px;
+      }
+
+      .hero,
+      .split,
+      .grid-3,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 560px) {
+      main {
+        padding: 16px;
+      }
+
+      aside {
+        padding: 18px;
+      }
+
+      nav {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .matrix,
+      .matrix thead,
+      .matrix tbody,
+      .matrix tr,
+      .matrix th,
+      .matrix td {
+        display: block;
+      }
+
+      .matrix {
+        border: 0;
+        box-shadow: none;
+        background: transparent;
+      }
+
+      .matrix thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+      }
+
+      .matrix tr {
+        margin-bottom: 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: white;
+        box-shadow: 0 8px 24px rgba(24, 32, 42, 0.05);
+        overflow: hidden;
+      }
+
+      .matrix td {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 12px;
+      }
+
+      .matrix td:last-child {
+        border-bottom: 0;
+      }
+
+      .matrix td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 4px;
+        color: #6a7480;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="brand">
+        <div class="mark">5</div>
+        <div>
+          <div>App HTML Visual</div>
+          <small>Codex Sites workflow brief</small>
+        </div>
+      </div>
+      <nav aria-label="页面导航">
+        <a href="#frame">工作框架</a>
+        <a href="#flow">Save / Review / Share</a>
+        <a href="#rules">可吸收规则</a>
+        <a href="#assets">图片证据</a>
+        <a href="#matrix">协作边界</a>
+        <a href="#docs">文档建议</a>
+      </nav>
+      <div class="side-note">
+        基于本地已下载公众号文章与 7 张图片整理。没有重新下载、发布、修改登录态或读取凭证。
+      </div>
+    </aside>
+
+    <main>
+      <header class="hero" id="frame">
+        <div>
+          <div class="eyebrow">5视觉工作流程</div>
+          <h1>从文件，到可交付的 HTML Artifact</h1>
+          <p class="lead">
+            这页把《一句话建站？Codex 新功能 Sites 简直太香了！》里的启发，转成 App HTML Visual 可执行流程：不是只生成页面，而是把工作成果变成有人能打开、能检查、能复用、能交给下一个人的浏览器载体。
+          </p>
+        </div>
+        <div class="hero-panel" aria-label="证据摘要">
+          <h2>本轮证据</h2>
+          <div class="metric-grid">
+            <div class="metric"><b>1</b><span>preserved Markdown</span></div>
+            <div class="metric"><b>7</b><span>local images preserved</span></div>
+            <div class="metric"><b>0</b><span>fidelity warnings</span></div>
+            <div class="metric"><b>2556</b><span>visible text chars</span></div>
+          </div>
+        </div>
+      </header>
+
+      <section id="flow">
+        <h2>核心流程：Save / Review / Share</h2>
+        <p>Sites 的价值不是“生成网页”四个字，而是把交付链路补上。5视觉应该把这个拆成三个可验收阶段。</p>
+        <div class="grid-3">
+          <article class="step save">
+            <div class="step-number">1</div>
+            <h3>Save：落盘成版本</h3>
+            <p>先把当前工作成果保存为版本化 HTML/app artifact。它必须有源文件、资产目录、可复现路径和明确用途。</p>
+            <ul class="checklist">
+              <li>主文件：<code>index.html</code></li>
+              <li>本地资产：<code>assets/</code></li>
+              <li>来源与报告路径可追溯</li>
+            </ul>
+          </article>
+          <article class="step review">
+            <div class="step-number">2</div>
+            <h3>Review：视觉验收</h3>
+            <p>HTML 存在不等于完成。必须确认内容、图片、布局、移动端、交互和状态都能被真实用户看懂。</p>
+            <ul class="checklist">
+              <li>localhost 预览，而不只看 file://</li>
+              <li>桌面与移动端截图</li>
+              <li>图片不缺、不裁、不糊</li>
+            </ul>
+          </article>
+          <article class="step share">
+            <div class="step-number">3</div>
+            <h3>Share：交给下一个人</h3>
+            <p>交付时说明访问路径、目标受众、权限范围和剩余边界。发布、权限、后台配置不由 5视觉默认越权处理。</p>
+            <ul class="checklist">
+              <li>本地路径或预览 URL</li>
+              <li>谁能看、谁要审</li>
+              <li>是否需要 1总控或 4公众号接手</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="rules">
+        <div class="split">
+          <div>
+            <h2>可直接吸收的规则</h2>
+            <p>这些规则可以进入 5视觉 日常工作方式，用来判断一个 HTML artifact 是不是已经能交付。</p>
+          </div>
+          <div class="rules">
+            <div class="rule green"><div><h3>交付对象优先</h3><p>先问“谁要打开它、用它做什么”，再决定是文章、报告、仪表盘、内部工具还是公众号包。</p></div></div>
+            <div class="rule"><div><h3>从当前成果转页面</h3><p>优先把已有 Markdown、报告、数据、图片、项目变成浏览器表面，而不是重新发明一个 landing page。</p></div></div>
+            <div class="rule orange"><div><h3>状态型 UI 要额外验收</h3><p>表单、筛选、上传、保存、权限、刷新后的状态，不能按纯静态文章验收。</p></div></div>
+            <div class="rule"><div><h3>产品截图是证据</h3><p>保留原始截图、尺寸、caption 和出处。不要把信息图裁成统一比例，也不要用泛化插画替掉真实 UI。</p></div></div>
+            <div class="rule red"><div><h3>HTML 文件存在不是完成</h3><p>完成标准至少包括路径、资产、截图、预览方式、受众、边界和下一步。</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="assets">
+        <h2>图片证据如何进入 HTML 工作流</h2>
+        <p>这篇文章里的图片大多是产品截图和仪表盘，正好提醒我们：信息密度高的截图必须单列、原比例、可读、可追溯。</p>
+        <div class="gallery">
+          <article class="asset-card">
+            <figure>
+              <img src="assets/000.png" alt="OpenAI Sites 官方公告截图" />
+              <figcaption><strong>来源截图</strong>保留公告上下文、发布时间和原始产品表达。</figcaption>
+            </figure>
+          </article>
+          <article class="asset-card">
+            <figure>
+              <img src="assets/001.png" alt="@Sites 命令输入界面" />
+              <figcaption><strong>入口截图</strong>说明 Sites 是 Codex 工作流里的命令，不是独立建站器。</figcaption>
+            </figure>
+          </article>
+          <article class="asset-card">
+            <figure>
+              <img src="assets/002.png" alt="财务预测仪表盘示例" />
+              <figcaption><strong>财务仪表盘</strong>图表、表格、侧边参数共同构成可操作页面。</figcaption>
+            </figure>
+          </article>
+          <article class="asset-card">
+            <figure>
+              <img src="assets/003.png" alt="活动运营仪表盘示例" />
+              <figcaption><strong>活动运营页</strong>适合学习多面板、地图、优先级和漏斗的组织方式。</figcaption>
+            </figure>
+          </article>
+          <article class="asset-card">
+            <figure>
+              <img src="assets/004.png" alt="发布准备度看板示例" />
+              <figcaption><strong>发布准备度</strong>时间线、风险栏、进度表形成内部协作型 UI。</figcaption>
+            </figure>
+          </article>
+          <article class="asset-card">
+            <figure>
+              <img src="assets/005.png" alt="Codex Persona Share Over Time 图表" />
+              <figcaption><strong>图表证据</strong>小尺寸图表也要保留可读比例，不能强行裁剪。</figcaption>
+            </figure>
+          </article>
+        </div>
+      </section>
+
+      <section id="matrix">
+        <h2>边界矩阵</h2>
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th>事项</th>
+              <th>5视觉可做</th>
+              <th>需要协作</th>
+              <th>停止点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="事项"><span class="pill green">HTML artifact</span></td>
+              <td data-label="5视觉可做">生成页面、整理资产、做视觉验收、给预览 URL。</td>
+              <td data-label="需要协作">复杂 app 逻辑交给代码/app owner。</td>
+              <td data-label="停止点">不把本地 HTML 直接等同生产部署。</td>
+            </tr>
+            <tr>
+              <td data-label="事项"><span class="pill">Sites 规则</span></td>
+              <td data-label="5视觉可做">吸收交付理念和视觉 QA 规则。</td>
+              <td data-label="需要协作">1总控/8搜索验证官方文档后才能固化为产品流程。</td>
+              <td data-label="停止点">不把公众号文章说法写成事实政策。</td>
+            </tr>
+            <tr>
+              <td data-label="事项"><span class="pill orange">公众号来源</span></td>
+              <td data-label="5视觉可做">读取本地 Markdown、图片，分析视觉规则。</td>
+              <td data-label="需要协作">4公众号负责下载保真、草稿、封面、发布验收。</td>
+              <td data-label="停止点">不重新下载，不发布，不改登录态。</td>
+            </tr>
+            <tr>
+              <td data-label="事项"><span class="pill red">权限与部署</span></td>
+              <td data-label="5视觉可做">在报告中说明目标受众和访问范围。</td>
+              <td data-label="需要协作">部署、权限、密钥、环境变量需明确授权和对应 owner。</td>
+              <td data-label="停止点">不配置 secret，不改 workspace 权限。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="docs">
+        <h2>建议沉淀到文档，但先不直接改</h2>
+        <div class="grid-3">
+          <article class="boundary">
+            <div style="padding:18px">
+              <h3>app-ui-skill-workflow.md</h3>
+              <p>增加 Share/Deploy Readiness：受众、访问范围、Save/Review/Share、状态型 UI 验收。</p>
+            </div>
+          </article>
+          <article class="boundary">
+            <div style="padding:18px">
+              <h3>HTML文章母版工作流.md</h3>
+              <p>强调 HTML 文件存在不等于完成；dashboard 截图和信息图必须保留原比例。</p>
+            </div>
+          </article>
+          <article class="boundary">
+            <div style="padding:18px">
+              <h3>C:\html\README.md</h3>
+              <p>增加 Sites-like artifact handoff：母版、assets、evidence、预览、部署边界。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="quote">
+          5视觉的完成标准：一个 visual artifact 不是“页面生成了”就结束，而是它的受众、访问路径、资产、截图、验收状态和下一步都已经明确。
+        </div>
+      </section>
+
+      <div class="footer">
+        Source report: <code>F:\codex\reports\visual-reality-reviews\2026-06-06-codex-sites-wechat-article-review.md</code><br />
+        Local source article: <code>F:\codex\output\wechat-single-articles\20260606-Gp1GkhT5Gs3xwmJnTxYQ9g</code>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

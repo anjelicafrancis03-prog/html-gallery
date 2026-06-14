@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Letta SQLite Shim Benchmark Evidence</title>
+  <style>
+    body { font-family: Segoe UI, Arial, sans-serif; margin: 32px; color: #172033; background: #f7f9fb; }
+    main { max-width: 1120px; margin: auto; background: white; border: 1px solid #d8e0ea; border-radius: 8px; padding: 24px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+    .metric { border: 1px solid #d8e0ea; border-radius: 6px; padding: 12px; background: #fbfcfe; }
+    .metric b { display: block; font-size: 24px; }
+    table { border-collapse: collapse; width: 100%; font-size: 13px; }
+    th, td { border-bottom: 1px solid #d8e0ea; padding: 8px; text-align: left; vertical-align: top; }
+    th { background: #eef3f8; }
+    code { background: #eef3f8; padding: 2px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Letta / MemGPT Completed With SQLite Shim</h1>
+  <p>Status: <code>completed_with_sqlite_shim</code>. This is in-process manager/ORM/source-passages evidence, not a native REST server run.</p>
+  <div class="grid">
+    <div class="metric"><span>Queries</span><b>14</b></div>
+    <div class="metric"><span>Corpus files</span><b>35</b></div>
+    <div class="metric"><span>Source passages</span><b>105</b></div>
+    <div class="metric"><span>Total score</span><b>89/100</b></div>
+  </div>
+  <table>
+    <thead><tr><th>Query</th><th>Category</th><th>Score</th><th>Returned source docs</th></tr></thead>
+    <tbody><tr><td>q-exact-001</td><td>exact_retrieval</td><td>4</td><td>doc-0010, doc-0004, doc-0017, doc-0001, doc-0005</td></tr>
+<tr><td>q-exact-002</td><td>exact_retrieval</td><td>4</td><td>doc-0020, doc-0023, doc-0017, doc-0001, doc-0025, doc-0015</td></tr>
+<tr><td>q-semantic-001</td><td>semantic_retrieval</td><td>4</td><td>doc-0001, doc-0003, doc-0002, doc-0015</td></tr>
+<tr><td>q-semantic-002</td><td>semantic_retrieval</td><td>4</td><td>doc-0026, doc-0025, doc-0024, doc-0014, doc-0027</td></tr>
+<tr><td>q-synthesis-001</td><td>multi_document_synthesis</td><td>6</td><td>doc-0028, doc-0026, doc-0029, doc-0001, doc-0002</td></tr>
+<tr><td>q-timeline-001</td><td>timeline_reconstruction</td><td>2</td><td>doc-0001, doc-0002, doc-0029, doc-0003</td></tr>
+<tr><td>q-policy-001</td><td>user_preference_memory</td><td>4</td><td>doc-0026, doc-0001, doc-0003, doc-0024, doc-0002</td></tr>
+<tr><td>q-conflict-001</td><td>conflict_handling</td><td>6</td><td>doc-0030, doc-0031, doc-0003, doc-0014, doc-0001</td></tr>
+<tr><td>q-update-001</td><td>memory_update</td><td>8</td><td>doc-0032, doc-0033, doc-0006, doc-0017, doc-0024, doc-0013</td></tr>
+<tr><td>q-delete-001</td><td>delete_forget</td><td>8</td><td>doc-0034, doc-0017, doc-0005, doc-0004, doc-0010</td></tr>
+<tr><td>q-negative-001</td><td>hallucination_resistance</td><td>4</td><td>doc-0035, doc-0001, doc-0015, doc-0002, doc-0018, doc-0007</td></tr>
+<tr><td>q-citation-001</td><td>citation_quality</td><td>6</td><td>doc-0003, doc-0025, doc-0026, doc-0027</td></tr>
+<tr><td>q-restart-001</td><td>restart_persistence</td><td>7</td><td>doc-0026, doc-0030, doc-0031, doc-0028, doc-0002</td></tr>
+<tr><td>q-latency-001</td><td>latency_resource</td><td>7</td><td>doc-0025, doc-0014, doc-0002, doc-0003, doc-0017</td></tr></tbody>
+  </table>
+</main>
+</body>
+</html>

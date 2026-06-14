@@ -1,0 +1,11 @@
+GBrain repair manual phase CLI evidence
+Status: completed
+Sources: 9 files, 107371 bytes, 2256 lines
+Local lane: pages=9 chunks=37 embedded=37 model=ollama:qwen3-embedding:0.6b 1024d store=F:/codex/runtime/memory-benchmark/gbrain/repair-manual-phase-local-20260603-1025-v2/.gbrain/brain.pglite
+OpenRouter lane: pages=9 chunks=37 embedded=37 model=nvidia/llama-nemotron-embed-vl-1b-v2:free 2048d store=F:/codex/runtime/memory-benchmark/gbrain/repair-manual-phase-openrouter-only-20260603-1025/.gbrain/brain.pglite
+Agnes+OpenRouter lane: pages=9 chunks=37 embedded=37 vector model=OpenRouter nvidia/llama-nemotron-embed-vl-1b-v2:free 2048d LM=Agnes agnes-2.0-flash store=F:/codex/runtime/memory-benchmark/gbrain/repair-manual-phase-agnes-openrouter-20260603-1025/.gbrain/brain.pglite
+Validation queries: 85 local GBrain retrieval queries + 2 lane RAG provenance queries
+Layer summary: {"boundary_regression": {"total": 3, "passed": 3, "pass_rate": 1.0}, "cross_section": {"total": 6, "passed": 6, "pass_rate": 1.0}, "exact_anchor": {"total": 12, "passed": 12, "pass_rate": 1.0}, "negative_safety": {"total": 8, "passed": 8, "pass_rate": 1.0}, "procedural_synthesis": {"total": 8, "passed": 8, "pass_rate": 1.0}, "random_coverage": {"total": 30, "passed": 25, "pass_rate": 0.833}, "required_query_json": {"total": 8, "passed": 8, "pass_rate": 1.0}, "semantic": {"total": 10, "passed": 10, "pass_rate": 1.0}}
+Random heading coverage: 15/15
+Secret scan: passed
+Result JSON: F:/codex/reports/memory-systems/benchmark-2026-06-03/results/gbrain/result.json

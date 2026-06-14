@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canary Hologram: Cyberpunk Flight Ticket</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+    :root {
+      --neon-pink: #ff007f;
+      --neon-blue: #00f2fe;
+      --neon-green: #05ffc0;
+      --bg-dark: #060813;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    /* Ambient background glow */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 0, 127, 0.1) 0%, transparent 60%);
+      top: -200px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.1) 0%, transparent 60%);
+      bottom: -200px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    main {
+      z-index: 10;
+      text-align: center;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #8da2bb;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    /* Stage Canvas Wrapper */
+    .stage-container {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(10, 12, 28, 0.8);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      display: inline-block;
+    }
+
+    canvas {
+      display: block;
+      background: #020308;
+      border-radius: 8px;
+      width: 800px;
+      height: 480px;
+    }
+
+    /* Target DOM Element for HTML-in-Canvas */
+    .cyber-ticket-wrap {
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
+    }
+
+    .cyber-ticket {
+      width: 360px;
+      height: 180px;
+      background: rgba(12, 16, 35, 0.95);
+      border: 2px solid var(--neon-blue);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4), inset 0 0 15px rgba(0, 242, 254, 0.2);
+      color: #ffffff;
+      font-family: 'Rajdhani', sans-serif;
+      position: relative;
+    }
+
+    .ticket-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .ticket-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--neon-blue);
+    }
+
+    .ticket-class {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--neon-pink);
+      border: 1px solid var(--neon-pink);
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 8px rgba(255, 0, 127, 0.2);
+    }
+
+    .ticket-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .station {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .station.right {
+      align-items: flex-end;
+    }
+
+    .station-code {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .station-name {
+      font-size: 10px;
+      color: #8da2bb;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .flight-route {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding: 0 16px;
+    }
+
+    .route-line {
+      width: 100%;
+      height: 1px;
+      background: rgba(0, 242, 254, 0.3);
+      position: relative;
+    }
+
+    .route-line::before {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon-blue);
+      left: 0;
+      top: -2px;
+    }
+
+    .route-line::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon-pink);
+      right: 0;
+      top: -2px;
+    }
+
+    .route-icon {
+      font-size: 12px;
+      color: var(--neon-green);
+      margin-top: -6px;
+      z-index: 5;
+      animation: pulse 1s infinite alternate;
+    }
+
+    .route-no {
+      font-size: 10px;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-green);
+      margin-top: 6px;
+    }
+
+    .ticket-footer {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      right: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .passenger-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .info-label {
+      font-size: 9px;
+      color: #8da2bb;
+      text-transform: uppercase;
+    }
+
+    .info-value {
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .barcode-area {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .barcode {
+      width: 120px;
+      height: 24px;
+      background: repeating-linear-gradient(90deg, 
+        #ffffff, #ffffff 2px, 
+        transparent 2px, transparent 5px, 
+        #ffffff 5px, #ffffff 7px,
+        transparent 7px, transparent 9px
+      );
+      opacity: 0.8;
+    }
+
+    .barcode-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 8px;
+      color: var(--neon-blue);
+      letter-spacing: 1px;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.6; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Controls */
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-pink {
+      background: var(--neon-pink);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+    }
+
+    .btn-pink:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+    }
+
+    .btn-blue {
+      background: var(--neon-blue);
+      color: var(--bg-dark);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    }
+
+    .btn-blue:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .api-status {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--neon-green);
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <h1>CANARY HOLOGRAM: Cyberpunk Flight</h1>
+    <div class="subtitle">HTML-in-Canvas Perspective Projection Simulation</div>
+
+    <div class="stage-container">
+      <canvas id="stage" width="800" height="480" layoutsubtree>
+        <!-- The ticket element we want to render -->
+        <div class="cyber-ticket-wrap">
+          <div class="cyber-ticket" id="cyberTicket">
+            <div class="ticket-header">
+              <span class="ticket-logo">NEO-TOKYO LINER</span>
+              <span class="ticket-class">FIRST CLASS</span>
+            </div>
+            <div class="ticket-body">
+              <div class="station">
+                <span class="station-code">TYO</span>
+                <span class="station-name">Neo-Tokyo</span>
+              </div>
+              <div class="flight-route">
+                <span class="route-icon">▲</span>
+                <div class="route-line"></div>
+                <span class="route-no">NT-2049</span>
+              </div>
+              <div class="station right">
+                <span class="station-code">SEL</span>
+                <span class="station-name">Neo-Seoul</span>
+              </div>
+            </div>
+            <div class="ticket-footer">
+              <div class="passenger-info">
+                <span class="info-label">PASSENGER NAME</span>
+                <span class="info-value">D.DEEPMIND / DEVEL</span>
+              </div>
+              <div class="barcode-area">
+                <div class="barcode"></div>
+                <span class="barcode-val">C-150-CANARY-DRAW</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </canvas>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-pink" id="btnToggleEffect">切换全息投影 stack</button>
+      <button class="btn btn-blue" id="btnToggleSpeed">切换星空漂移速度</button>
+      <button class="btn btn-secondary" id="btnReset">重置视图</button>
+    </div>
+
+    <div class="api-status" id="apiStatus">检测 API 中...</div>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('stage');
+    const ctx = canvas.getContext('2d');
+    const ticket = document.getElementById('cyberTicket');
+    const apiStatus = document.getElementById('apiStatus');
+
+    // Detect HTML-in-Canvas Support
+    const supportsHtmlInCanvas = 
+      typeof HTMLCanvasElement.prototype.requestPaint === 'function' &&
+      typeof CanvasRenderingContext2D.prototype.drawElementImage === 'function';
+
+    if (supportsHtmlInCanvas) {
+      apiStatus.textContent = "API STATUS: [OK] HTML-in-Canvas drawElementImage is fully supported!";
+      apiStatus.style.color = "var(--neon-green)";
+    } else {
+      apiStatus.textContent = "API STATUS: [FALLBACK] drawElementImage unavailable. Emulating via static fallback.";
+      apiStatus.style.color = "#ff3b30";
+    }
+
+    // Space Particles Starfield
+    const stars = [];
+    const numStars = 120;
+    let speedMult = 1.0;
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 0.5,
+        speed: Math.random() * 1.5 + 0.2,
+        color: Math.random() > 0.8 ? 'var(--neon-pink)' : Math.random() > 0.8 ? 'var(--neon-blue)' : '#ffffff'
+      });
+    }
+
+    function drawStars() {
+      ctx.fillStyle = '#020308';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < numStars; i++) {
+        const star = stars[i];
+        ctx.fillStyle = star.color;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Move stars
+        star.x -= star.speed * speedMult;
+        if (star.x < 0) {
+          star.x = canvas.width;
+          star.y = Math.random() * canvas.height;
+        }
+      }
+
+      // Draw Grid Line Accents
+      ctx.strokeStyle = 'rgba(0, 242, 254, 0.04)';
+      ctx.lineWidth = 1;
+      for (let x = 40; x < canvas.width; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+    }
+
+    // Animation & Hologram variables
+    let time = 0;
+    let effectMode = "holo-stack"; // "holo-stack" or "single"
+
+    // Emulated Card Fallback Drawing
+    function drawFallbackCard(x, y, alpha, scale, rotAngle) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotAngle);
+      ctx.scale(scale, scale);
+      ctx.globalAlpha = alpha;
+
+      // Card Back Glow
+      ctx.shadowColor = 'var(--neon-blue)';
+      ctx.shadowBlur = 15;
+      
+      // Card Frame
+      ctx.fillStyle = 'rgba(12, 16, 35, 0.95)';
+      ctx.strokeStyle = 'var(--neon-blue)';
+      ctx.lineWidth = 2;
+      
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(-180, -90, 360, 180, 12) : ctx.rect(-180, -90, 360, 180);
+      ctx.fill();
+      ctx.stroke();
+      ctx.shadowBlur = 0; // reset shadow
+
+      // Header Text
+      ctx.fillStyle = 'var(--neon-blue)';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.fillText('NEO-TOKYO LINER [EMU]', -160, -65);
+
+      ctx.strokeStyle = 'rgba(0, 242, 254, 0.2)';
+      ctx.beginPath();
+      ctx.moveTo(-160, -50);
+      ctx.lineTo(160, -50);
+      ctx.stroke();
+
+      // Destination Code
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 26px sans-serif';
+      ctx.fillText('TYO', -160, -10);
+      ctx.fillText('SEL', 105, -10);
+
+      // Route lines
+      ctx.strokeStyle = 'rgba(0, 242, 254, 0.3)';
+      ctx.beginPath();
+      ctx.moveTo(-80, -18);
+      ctx.lineTo(80, -18);
+      ctx.stroke();
+
+      ctx.fillStyle = 'var(--neon-green)';
+      ctx.font = '9px sans-serif';
+      ctx.fillText('NT-2049', -18, 0);
+
+      // Footer Passenger text
+      ctx.fillStyle = '#8da2bb';
+      ctx.font = '9px sans-serif';
+      ctx.fillText('PASSENGER NAME', -160, 45);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.fillText('D.DEEPMIND / DEVEL', -160, 60);
+
+      // Barcode lines
+      ctx.fillStyle = '#ffffff';
+      ctx.globalAlpha = alpha * 0.7;
+      ctx.fillRect(60, 40, 100, 18);
+
+      ctx.restore();
+    }
+
+    // Main Render Loop
+    function render() {
+      time += 0.02;
+      drawStars();
+
+      // Hologram Center position
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+
+      // Calculate dynamic rotation angles and offsets
+      const hoverOffset = Math.sin(time) * 12;
+      const hoverAngle = Math.cos(time * 0.8) * 0.06;
+
+      if (supportsHtmlInCanvas) {
+        // Run Native Canary drawing
+        canvas.onpaint = () => {
+          drawStars();
+
+          if (effectMode === "holo-stack") {
+            // Draw Stack Layer 1 (Back, lowest opacity)
+            ctx.save();
+            ctx.translate(cx - 40, cy - 30 + hoverOffset * 0.5);
+            ctx.rotate(hoverAngle * 0.7 - 0.1);
+            ctx.scale(0.85, 0.85);
+            ctx.globalAlpha = 0.25;
+            ctx.filter = "hue-rotate(45deg) blur(2px)";
+            ctx.drawElementImage(ticket, -180, -90);
+            ctx.restore();
+
+            // Draw Stack Layer 2 (Middle, pink glow shift)
+            ctx.save();
+            ctx.translate(cx + 20, cy + 10 - hoverOffset * 0.3);
+            ctx.rotate(-hoverAngle * 0.5 + 0.05);
+            ctx.scale(0.92, 0.92);
+            ctx.globalAlpha = 0.45;
+            ctx.filter = "hue-rotate(180deg)";
+            ctx.drawElementImage(ticket, -180, -90);
+            ctx.restore();
+          }
+
+          // Draw Stack Layer 3 (Front, Main Active Ticket)
+          ctx.save();
+          ctx.translate(cx, cy + hoverOffset);
+          ctx.rotate(hoverAngle);
+          ctx.scale(1.0, 1.0);
+          ctx.globalAlpha = 1.0;
+          ctx.filter = "none";
+          ctx.drawElementImage(ticket, -180, -90);
+          ctx.restore();
+        };
+
+        // Trigger repaint inside Canary
+        canvas.requestPaint();
+      } else {
+        // Fallback execution inside standard browsers
+        if (effectMode === "holo-stack") {
+          drawFallbackCard(cx - 40, cy - 30 + hoverOffset * 0.5, 0.25, 0.85, hoverAngle * 0.7 - 0.1);
+          drawFallbackCard(cx + 20, cy + 10 - hoverOffset * 0.3, 0.45, 0.92, -hoverAngle * 0.5 + 0.05);
+        }
+        drawFallbackCard(cx, cy + hoverOffset, 1.0, 1.0, hoverAngle);
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    // Start Loop
+    requestAnimationFrame(render);
+
+    // Event Listeners
+    document.getElementById('btnToggleEffect').addEventListener('click', () => {
+      effectMode = effectMode === "holo-stack" ? "single" : "holo-stack";
+    });
+
+    document.getElementById('btnToggleSpeed').addEventListener('click', () => {
+      speedMult = speedMult === 1.0 ? 5.0 : speedMult === 5.0 ? 0.2 : 1.0;
+    });
+
+    document.getElementById('btnReset').addEventListener('click', () => {
+      effectMode = "holo-stack";
+      speedMult = 1.0;
+      time = 0;
+    });
+  </script>
+</body>
+</html>
